@@ -5,7 +5,7 @@ import {
   motion,
   useInView,
   AnimatePresence,
-} from "motion/react";
+} from "framer-motion";
 import {
   ChevronDown,
   MapPin,

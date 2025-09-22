@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, ReactNode } from 'react'
-import { motion, useMotionValue, useTransform, useSpring } from 'motion/react'
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 
 interface HoverLiftProps {
   children: ReactNode

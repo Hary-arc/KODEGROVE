@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, ReactNode } from 'react'
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react'
 import { ImageWithFallback } from '../figma/ImageWithFallback'
 

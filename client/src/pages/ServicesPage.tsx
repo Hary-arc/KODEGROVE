@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'motion/react'
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion'
 import { Button } from '../components/ui/button'
 import { Card, CardContent } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'

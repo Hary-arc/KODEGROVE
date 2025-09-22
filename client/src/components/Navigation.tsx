@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Sparkles, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCurrentRoute, navigateTo } from "./Router";

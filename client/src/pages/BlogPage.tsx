@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { blogPosts, featuredPosts, blogCategories, BlogPost, BlogCategory, getPostBySlug } from '../data/blog'
 import { Search, Calendar, Clock, ArrowRight, Filter, X } from 'lucide-react'
 import { ImageWithFallback } from '../components/figma/ImageWithFallback'

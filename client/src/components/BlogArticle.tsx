@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { BlogPost, getRelatedPosts } from '../data/blog'
 import { 
   ArrowLeft, 

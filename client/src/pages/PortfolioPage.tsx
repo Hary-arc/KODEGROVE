@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { ScrollReveal, StaggeredReveal, Parallax } from '../components/animations/ScrollReveal'
 import { HoverLift, AnimatedIcon, Typewriter, FloatingElement } from '../components/animations/MicroInteractions'
 import { PortfolioSection } from '../components/PortfolioSection'

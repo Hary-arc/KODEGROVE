@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "motion/react";
+import { motion, useInView } from "framer-motion";
 import { useAnimation } from "framer-motion";
 import {
   ArrowRight,

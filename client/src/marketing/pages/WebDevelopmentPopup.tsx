@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { Code, Zap, Target, CheckCircle, ArrowRight, Globe, Smartphone, Database } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 

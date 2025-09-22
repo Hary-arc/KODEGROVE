@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef } from 'react'
-import { motion, useInView } from 'motion/react'
+import { motion, useInView } from 'framer-motion'
 import { Building2, Briefcase, Globe, TrendingUp, Users, Award, Star, ArrowUpRight } from 'lucide-react'
 
 const industries = [

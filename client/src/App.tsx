@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigation } from './components/Navigation'
 import { Router } from './components/Router'
 import { UniversalFloatingNav } from './components/UniversalFloatingNav'

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useAnimation, useInView } from "motion/react";
+import { motion, useAnimation, useInView } from "framer-motion";
 import { Users, Star } from "lucide-react";
 import { testimonials } from "../data/testimonials";
 

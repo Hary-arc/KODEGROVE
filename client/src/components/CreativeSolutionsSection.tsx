@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { motion, useInView } from 'motion/react'
+import { motion, useInView } from 'framer-motion'
 import { 
   CheckCircle, 
   Play, 

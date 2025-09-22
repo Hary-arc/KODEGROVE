@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Notification } from '../data/dashboard'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'

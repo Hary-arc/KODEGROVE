@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback, useRef } from 'react'
-import { useMotionValue, useTransform } from 'motion/react'
+import { useMotionValue, useTransform } from 'framer-motion'
 
 // Performance-aware animation hook
 export function usePerformantAnimation() {

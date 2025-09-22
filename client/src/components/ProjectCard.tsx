@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { Project, getStatusColor, getPriorityColor, formatCurrency, formatDate } from '../data/dashboard'
 import { Progress } from './ui/progress'
 import { Badge } from './ui/badge'

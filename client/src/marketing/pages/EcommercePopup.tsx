@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { ShoppingCart, CreditCard, BarChart3, Users, Zap, Shield, CheckCircle, ArrowRight, TrendingUp } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 
