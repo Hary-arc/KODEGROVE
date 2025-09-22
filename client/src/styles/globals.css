@@ -201,6 +201,76 @@ html {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced dropdown animations */
+@keyframes serviceDropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9) rotateX(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes serviceItemSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes serviceIconFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(2deg);
+  }
+}
+
+.service-dropdown-enter {
+  animation: serviceDropdownSlide 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.service-item-enter {
+  animation: serviceItemSlide 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.service-icon-float {
+  animation: serviceIconFloat 2s ease-in-out infinite;
+}
+
+/* Enhanced navigation hover effects */
+.nav-item-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.nav-item-hover:hover::before {
+  left: 100%;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

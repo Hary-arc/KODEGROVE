@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useReducedMotion } from 'framer-motion'
+import { useReducedMotion, useScroll, useTransform, MotionValue } from 'framer-motion'
+import { RefObject } from 'react'
 
 // Performance-optimized animation hook
 export const usePerformantAnimation = (options: any = {}) => {
@@ -58,24 +59,27 @@ export const usePerformantAnimation = (options: any = {}) => {
 }
 
 // useScrollAnimation - alias for useScrollTrigger with scroll position
-export const useScrollAnimation = (options = {}) => {
-  const [scrollY, setScrollY] = useState(0)
-  const [scrollDirection, setScrollDirection] = useState('down')
-  const lastScrollY = useRef(0)
+export function useScrollAnimation(ref?: RefObject<HTMLElement>) {
+  const { scrollY, scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  })
 
-  useEffect(() => {
-    const updateScrollY = () => {
-      const currentScrollY = window.scrollY
-      setScrollDirection(currentScrollY > lastScrollY.current ? 'down' : 'up')
-      lastScrollY.current = currentScrollY
-      setScrollY(currentScrollY)
-    }
+  const y = useTransform(scrollY, [0, 1000], [0, -500])
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0])
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.95, 0.9])
 
-    window.addEventListener('scroll', updateScrollY, { passive: true })
-    return () => window.removeEventListener('scroll', updateScrollY)
-  }, [])
+  return {
+    scrollY,
+    scrollYProgress,
+    y,
+    opacity,
+    scale
+  }
+}
 
-  return { scrollY, scrollDirection }
+export function useParallax(value: MotionValue<number>, distance: number) {
+  return useTransform(value, [0, 1], [-distance, distance])
 }
 
 // useViewportAnimation - optimized viewport detection hook

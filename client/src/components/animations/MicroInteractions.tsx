@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { ReactNode } from 'react'
 
 // Custom hook for mouse parallax effect
 export const useMouseParallax = (strength = 0.5) => {
@@ -323,6 +324,99 @@ export const Pulse = ({
   )
 }
 
+// Hover Lift Animation Component
+export function HoverLift({ 
+  children, 
+  className = '',
+  lift = 8 
+}: { 
+  children: ReactNode
+  className?: string
+  lift?: number
+}) {
+  return (
+    <motion.div
+      className={className}
+      whileHover={{ 
+        y: -lift,
+        transition: { type: "spring", stiffness: 400, damping: 25 }
+      }}
+      whileTap={{ scale: 0.98 }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// Scale Animation Component
+export function ScaleOnHover({ 
+  children, 
+  className = '',
+  scale = 1.05 
+}: { 
+  children: ReactNode
+  className?: string
+  scale?: number
+}) {
+  return (
+    <motion.div
+      className={className}
+      whileHover={{ 
+        scale,
+        transition: { type: "spring", stiffness: 300, damping: 20 }
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// Magnetic Effect Component
+export function MagneticEffect({ 
+  children, 
+  className = '',
+  strength = 20 
+}: { 
+  children: ReactNode
+  className?: string
+  strength?: number
+}) {
+  return (
+    <motion.div
+      className={className}
+      whileHover={{
+        scale: 1.05,
+        transition: { type: "spring", stiffness: 400, damping: 25 }
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// Rotate Animation Component
+export function RotateOnHover({ 
+  children, 
+  className = '',
+  rotation = 10 
+}: { 
+  children: ReactNode
+  className?: string
+  rotation?: number
+}) {
+  return (
+    <motion.div
+      className={className}
+      whileHover={{ 
+        rotate: rotation,
+        transition: { type: "spring", stiffness: 300, damping: 20 }
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 export default {
   useMouseParallax,
   useMagneticHover,
@@ -331,5 +425,12 @@ export default {
   RippleButton,
   TiltCard,
   Pulse,
-  HoverLift
+  HoverLift,
+  MagneticHover,
+  AnimatedIcon,
+  Typewriter,
+  FloatingElement,
+  ScaleOnHover,
+  MagneticEffect,
+  RotateOnHover
 }
