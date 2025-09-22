@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ReactNode } from 'react'
@@ -77,13 +78,34 @@ export const MagneticButton = ({
   )
 }
 
-// HoverLift component - simple hover effect
-export const HoverLift = ({ children, className = "", liftHeight = 10 }) => {
+// HoverLift component - single declaration
+export const HoverLift = ({ 
+  children, 
+  className = '', 
+  liftHeight = 10, 
+  lift = 8,
+  liftDistance = 10,
+  scale = 1.02 
+}: { 
+  children: ReactNode
+  className?: string
+  liftHeight?: number
+  lift?: number
+  liftDistance?: number
+  scale?: number
+}) => {
+  // Use the highest priority prop for lift distance
+  const finalLift = liftDistance || liftHeight || lift
+  
   return (
     <motion.div
       className={className}
-      whileHover={{ y: -liftHeight, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      whileHover={{ 
+        y: -finalLift,
+        scale: scale,
+        transition: { type: "spring", stiffness: 300, damping: 30 }
+      }}
+      whileTap={{ scale: 0.98 }}
     >
       {children}
     </motion.div>
@@ -324,30 +346,6 @@ export const Pulse = ({
   )
 }
 
-// Hover Lift Animation Component
-export function HoverLift({ 
-  children, 
-  className = '',
-  lift = 8 
-}: { 
-  children: ReactNode
-  className?: string
-  lift?: number
-}) {
-  return (
-    <motion.div
-      className={className}
-      whileHover={{ 
-        y: -lift,
-        transition: { type: "spring", stiffness: 400, damping: 25 }
-      }}
-      whileTap={{ scale: 0.98 }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
 // Scale Animation Component
 export function ScaleOnHover({ 
   children, 
@@ -415,22 +413,4 @@ export function RotateOnHover({
       {children}
     </motion.div>
   )
-}
-
-export default {
-  useMouseParallax,
-  useMagneticHover,
-  MagneticButton,
-  ParallaxCard,
-  RippleButton,
-  TiltCard,
-  Pulse,
-  HoverLift,
-  MagneticHover,
-  AnimatedIcon,
-  Typewriter,
-  FloatingElement,
-  ScaleOnHover,
-  MagneticEffect,
-  RotateOnHover
 }
