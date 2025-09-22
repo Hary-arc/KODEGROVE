@@ -19,9 +19,21 @@ export const register = async (req: Request, res: Response) => {
       });
     }
 
+    // Trim inputs
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim().toLowerCase();
+    
+    // Validate name
+    if (trimmedName.length < 2) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name must be at least 2 characters long'
+      });
+    }
+
     // Validate email format
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (!emailRegex.test(email)) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmedEmail)) {
       return res.status(400).json({
         success: false,
         message: 'Please provide a valid email address'
@@ -32,16 +44,16 @@ export const register = async (req: Request, res: Response) => {
     if (password.length < 6) {
       return res.status(400).json({
         success: false,
-        message: 'Password must be at least 6 characters'
+        message: 'Password must be at least 6 characters long'
       });
     }
 
     // Check if user exists
-    const existingUser = await userStore.findOne(user => user.email === email);
+    const existingUser = await userStore.findOne(user => user.email === trimmedEmail);
     if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: 'User already exists'
+        message: 'User with this email already exists'
       });
     }
 
@@ -51,8 +63,8 @@ export const register = async (req: Request, res: Response) => {
 
     // Create user
     const user = await userStore.create({
-      name,
-      email,
+      name: trimmedName,
+      email: trimmedEmail,
       password: hashedPassword,
       role: 'user',
       createdAt: new Date().toISOString()
@@ -83,8 +95,10 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
+    const trimmedEmail = email.trim().toLowerCase();
+
     // Check for user
-    const user = await userStore.findOne(user => user.email === email);
+    const user = await userStore.findOne(user => user.email === trimmedEmail);
     if (!user) {
       return res.status(401).json({
         success: false,

@@ -35,7 +35,7 @@ export function AuthPage() {
             password: formData.password 
           }
 
-      const response = await fetch(`http://localhost:5001${endpoint}`, {
+      const response = await fetch(`/api/auth${endpoint.replace('/api/auth', '')}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,15 +45,21 @@ export function AuthPage() {
 
       const data = await response.json()
 
-      if (data.success) {
+      if (response.ok && data.success) {
         // Store token in localStorage
         if (data.token) {
           localStorage.setItem('auth-token', data.token)
           localStorage.setItem('user-data', JSON.stringify(data.user))
         }
         
+        // Dispatch auth change event
+        window.dispatchEvent(new Event('auth-changed'))
+        
         // Navigate to dashboard
-        window.location.hash = '/dashboard'
+        setTimeout(() => {
+          window.location.hash = '/dashboard'
+          window.location.reload()
+        }, 100)
       } else {
         alert(data.message || 'Authentication failed')
       }

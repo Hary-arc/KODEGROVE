@@ -1,4 +1,3 @@
-
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 
@@ -103,14 +102,14 @@ export const useScrollTrigger = (callback: any, dependencies: any[] = [], option
       if (rafId.current) {
         cancelAnimationFrame(rafId.current)
       }
-      
+
       rafId.current = requestAnimationFrame(() => {
         throttledCallback(window.scrollY)
       })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
       if (rafId.current) {
@@ -129,14 +128,14 @@ export const useOptimizedResize = (callback: any, dependencies: any[] = []) => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current)
       }
-      
+
       timeoutRef.current = setTimeout(() => {
         callback()
       }, 150) // Debounce resize events
     }
 
     window.addEventListener('resize', handleResize, { passive: true })
-    
+
     return () => {
       window.removeEventListener('resize', handleResize)
       if (timeoutRef.current) {

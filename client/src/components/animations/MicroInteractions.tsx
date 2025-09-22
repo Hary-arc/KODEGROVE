@@ -44,20 +44,20 @@ export const useMagneticHover = (strength = 0.3) => {
     y.set(0)
   }, [x, y])
 
-  return { 
-    x: springX, 
-    y: springY, 
-    onMouseMove: handleMouseMove, 
-    onMouseLeave: handleMouseLeave 
+  return {
+    x: springX,
+    y: springY,
+    onMouseMove: handleMouseMove,
+    onMouseLeave: handleMouseLeave
   }
 }
 
 // Magnetic button component
-export const MagneticButton = ({ 
-  children, 
-  className = "", 
+export const MagneticButton = ({
+  children,
+  className = "",
   strength = 0.3,
-  ...props 
+  ...props
 }) => {
   const { x, y, onMouseMove, onMouseLeave } = useMagneticHover(strength)
 
@@ -170,22 +170,21 @@ export const FloatingElement = ({ children, className = "", amplitude = 10, dura
 }
 
 // Parallax card component
-export const ParallaxCard = ({ 
-  children, 
+export const ParallaxCard = ({
+  children,
   className = "",
   strength = 0.1
 }) => {
-  const { position, elementRef } = useMouseParallax(strength)
+  const { mouseX, mouseY } = useMouseParallax(strength);
 
   return (
     <motion.div
       className={`relative ${className}`}
-      ref={elementRef as any}
-      style={{ 
-        x: position.x, 
-        y: position.y,
-        rotateX: position.y * 0.1,
-        rotateY: position.x * 0.1
+      style={{
+        x: mouseX,
+        y: mouseY,
+        rotateX: useTransform(mouseY, y => y * 0.1),
+        rotateY: useTransform(mouseX, x => x * -0.1)
       }}
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -196,11 +195,11 @@ export const ParallaxCard = ({
 }
 
 // Ripple effect component
-export const RippleButton = ({ 
-  children, 
+export const RippleButton = ({
+  children,
   className = "",
   rippleColor = "rgba(255, 255, 255, 0.6)",
-  ...props 
+  ...props
 }) => {
   const [ripples, setRipples] = useState<Array<{x: number, y: number, size: number, id: number}>>([])
 
@@ -254,8 +253,8 @@ export const RippleButton = ({
 }
 
 // Tilt card component
-export const TiltCard = ({ 
-  children, 
+export const TiltCard = ({
+  children,
   className = "",
   tiltStrength = 10
 }) => {
@@ -296,11 +295,11 @@ export const TiltCard = ({
 }
 
 // Pulse component
-export const Pulse = ({ 
-  children, 
-  scale = 1.05, 
+export const Pulse = ({
+  children,
+  scale = 1.05,
   duration = 2,
-  className = "" 
+  className = ""
 }: {
   children: React.ReactNode
   scale?: number
@@ -327,14 +326,10 @@ export const Pulse = ({
 export default {
   useMouseParallax,
   useMagneticHover,
-  HoverLift,
-  MagneticHover,
-  AnimatedIcon,
-  Typewriter,
-  FloatingElement,
   MagneticButton,
   ParallaxCard,
   RippleButton,
   TiltCard,
-  Pulse
+  Pulse,
+  HoverLift
 }

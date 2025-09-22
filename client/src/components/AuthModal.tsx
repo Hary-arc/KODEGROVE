@@ -55,7 +55,7 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
         ? { email: formData.email, password: formData.password }
         : { name: formData.name, email: formData.email, password: formData.password }
 
-      const response = await fetch(`http://localhost:5001${endpoint}`, {
+      const response = await fetch(`/api/auth${endpoint.replace('/api/auth', '')}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
 
       const data = await response.json()
 
-      if (data.success) {
+      if (response.ok && data.success) {
         // Store auth data
         localStorage.setItem('auth-token', data.token)
         localStorage.setItem('user-data', JSON.stringify(data.user))
