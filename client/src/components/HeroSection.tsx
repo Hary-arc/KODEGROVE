@@ -3,8 +3,8 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import React from 'react'
-// Assuming Button component is here
-import { Eye, ArrowRight, Sparkles } from 'lucide-react' // Assuming these icons are here
+// Button component imported from UI components
+import { Eye, ArrowRight, Sparkles } from 'lucide-react'
 
 
 export function HeroSection() {

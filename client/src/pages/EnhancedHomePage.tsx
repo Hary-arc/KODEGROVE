@@ -69,6 +69,8 @@ import ClientsIndustriesSection from "../components/home-sections/ClientsIndustr
 import CMSPlatformSection from "../components/home-sections/CMSPlatformSection";
 import DesignProcessSection from "../components/home-sections/DesignProcessSection";
 import DigitalTrendsSection from "../components/home-sections/DigitalTrendsSection";
+import CustomWebDesignPricingSection from "../components/home-sections/CustomWebDesignPricingSection";
+import FeaturedWebsiteRedesignsSection from "../components/home-sections/FeaturedWebsiteRedesignsSection";
 export function EnhancedHomePage() {
   const heroRef = useRef(null);
   const statsRef = useRef(null);
@@ -651,6 +653,12 @@ export function EnhancedHomePage() {
 
       {/* CMS Platform Section */}
       <CMSPlatformSection />
+
+      {/* Custom Web Design Pricing Section */}
+      <CustomWebDesignPricingSection />
+
+      {/* Featured Website Redesigns Section */}
+      <FeaturedWebsiteRedesignsSection />
       
       <DigitalTrendsSection/>
       {/* Enhanced Testimonials with Right-to-Left Animation */}
