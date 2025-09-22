@@ -132,7 +132,7 @@ const findAvailablePort = async (startPort: number): Promise<number> => {
 // Start server
 const startServer = async () => {
   try {
-    const preferredPort = parseInt(process.env.PORT || '3001', 10);
+    const preferredPort = parseInt(process.env.PORT || '5001', 10);
     const port = await findAvailablePort(preferredPort);
 
     if (port !== preferredPort) {
