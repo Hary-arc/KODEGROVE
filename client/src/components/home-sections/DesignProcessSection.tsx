@@ -62,12 +62,7 @@ export default function DesignProcessSection() {
           start: `center center`,
           end: `+=${totalScroll}px`,
           pin: wrapper,
-          scrub: 0.5,
-          snap: {
-            snapTo: 1 / (panels.length - cardsPerView),
-            duration: { min: 0.2, max: 0.4 },
-            inertia: false,
-          },
+          scrub: 1,
           markers: false,
         },
       });
