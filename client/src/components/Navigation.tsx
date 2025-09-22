@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Sparkles, User } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, User, Menu, X, LogOut, Settings, BarChart3 } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCurrentRoute, navigateTo } from "./Router";
 import { AuthModal } from "./AuthModal";
+import { authUtils } from "../utils/auth";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const currentRoute = useCurrentRoute();
 
   useEffect(() => {
@@ -19,6 +22,27 @@ export function Navigation() {
     window.addEventListener("scroll", handleScroll);
     return () =>
       window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Check authentication status and load user data
+    if (authUtils.isAuthenticated()) {
+      const userData = authUtils.getUser();
+      setUser(userData);
+    }
+
+    // Listen for authentication changes
+    const handleAuthChange = () => {
+      if (authUtils.isAuthenticated()) {
+        const userData = authUtils.getUser();
+        setUser(userData);
+      } else {
+        setUser(null);
+      }
+    };
+
+    window.addEventListener('auth-changed', handleAuthChange);
+    return () => window.removeEventListener('auth-changed', handleAuthChange);
   }, []);
 
   const navigationItems = [
@@ -35,12 +59,24 @@ export function Navigation() {
 
   const handleNavigation = (path: string) => {
     navigateTo(path);
+    setIsProfileMenuOpen(false);
   };
 
   const isActive = (path: string) =>
     path === "/"
       ? currentRoute === "/" || currentRoute === ""
       : currentRoute === path;
+
+  const handleLogout = () => {
+    authUtils.logout();
+    setUser(null);
+    setIsProfileMenuOpen(false);
+    window.dispatchEvent(new Event('auth-changed'));
+  };
+
+  const handleProfileMenuToggle = () => {
+    setIsProfileMenuOpen(!isProfileMenuOpen);
+  };
 
   return (
     <header
@@ -144,16 +180,95 @@ export function Navigation() {
                 <Sparkles className="w-3 h-3 mr-1" />
                 Start
               </Button>
-              <AuthModal>
-                <Button
-                  size="sm"
-                  className="flex items-center px-4 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50 group text-xs"
-                  aria-label="Login"
-                >
-                  <User className="w-3 h-3 mr-1 transition-transform group-hover:rotate-6" />
-                  Login
-                </Button>
-              </AuthModal>
+              
+              {user ? (
+                <div className="relative">
+                  <Button
+                    onClick={handleProfileMenuToggle}
+                    size="sm"
+                    className="flex items-center px-3 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 text-xs"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center mr-1">
+                      <span className="text-white text-xs font-bold">
+                        {user.name.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                    {isProfileMenuOpen ? (
+                      <X className="w-3 h-3 ml-1" />
+                    ) : (
+                      <Menu className="w-3 h-3 ml-1" />
+                    )}
+                  </Button>
+
+                  <AnimatePresence>
+                    {isProfileMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute right-0 top-full mt-2 w-56 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl z-50"
+                      >
+                        <div className="mb-3">
+                          <div className="flex items-center space-x-2 mb-2">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
+                              <span className="text-white text-sm font-bold">
+                                {user.name.charAt(0).toUpperCase()}
+                              </span>
+                            </div>
+                            <div>
+                              <p className="text-white font-semibold text-sm">{user.name}</p>
+                              <p className="text-gray-400 text-xs truncate">{user.email}</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-1">
+                          <Button
+                            onClick={() => handleNavigation("/dashboard")}
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start text-left hover:bg-white/10 text-sm"
+                          >
+                            <BarChart3 className="w-3 h-3 mr-2" />
+                            Dashboard
+                          </Button>
+                          <Button
+                            onClick={() => handleNavigation("/settings")}
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start text-left hover:bg-white/10 text-sm"
+                          >
+                            <Settings className="w-3 h-3 mr-2" />
+                            Settings
+                          </Button>
+                          <div className="border-t border-white/10 my-1"></div>
+                          <Button
+                            onClick={handleLogout}
+                            variant="ghost"
+                            size="sm"
+                            className="w-full justify-start text-left hover:bg-red-500/10 text-red-400 hover:text-red-300 text-sm"
+                          >
+                            <LogOut className="w-3 h-3 mr-2" />
+                            Sign Out
+                          </Button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <AuthModal>
+                  <Button
+                    size="sm"
+                    className="flex items-center px-4 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50 group text-xs"
+                    aria-label="Login"
+                  >
+                    <User className="w-3 h-3 mr-1 transition-transform group-hover:rotate-6" />
+                    Login
+                  </Button>
+                </AuthModal>
+              )}
             </div>
           </div>
 
@@ -167,16 +282,93 @@ export function Navigation() {
               <Sparkles className="w-4 h-4 mr-2" />
               Get Started
             </Button>
-            <AuthModal>
-              <Button
-                size="sm"
-                className="flex items-center px-6 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50 group"
-                aria-label="Login"
-              >
-                <User className="w-4 h-4 mr-2 -mt-0.5 transition-transform group-hover:rotate-6" />
-                Login
-              </Button>
-            </AuthModal>
+            
+            {user ? (
+              <div className="relative">
+                <Button
+                  onClick={handleProfileMenuToggle}
+                  size="sm"
+                  className="flex items-center px-4 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center mr-2">
+                    <span className="text-white text-sm font-bold">
+                      {user.name.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  <span className="hidden sm:block">{user.name.split(' ')[0]}</span>
+                  {isProfileMenuOpen ? (
+                    <X className="w-4 h-4 ml-2" />
+                  ) : (
+                    <Menu className="w-4 h-4 ml-2" />
+                  )}
+                </Button>
+
+                <AnimatePresence>
+                  {isProfileMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute right-0 top-full mt-2 w-64 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-2xl z-50"
+                    >
+                      <div className="mb-4">
+                        <div className="flex items-center space-x-3 mb-2">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
+                            <span className="text-white text-lg font-bold">
+                              {user.name.charAt(0).toUpperCase()}
+                            </span>
+                          </div>
+                          <div>
+                            <p className="text-white font-semibold">{user.name}</p>
+                            <p className="text-gray-400 text-sm">{user.email}</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Button
+                          onClick={() => handleNavigation("/dashboard")}
+                          variant="ghost"
+                          className="w-full justify-start text-left hover:bg-white/10"
+                        >
+                          <BarChart3 className="w-4 h-4 mr-3" />
+                          Dashboard
+                        </Button>
+                        <Button
+                          onClick={() => handleNavigation("/settings")}
+                          variant="ghost"
+                          className="w-full justify-start text-left hover:bg-white/10"
+                        >
+                          <Settings className="w-4 h-4 mr-3" />
+                          Settings
+                        </Button>
+                        <div className="border-t border-white/10 my-2"></div>
+                        <Button
+                          onClick={handleLogout}
+                          variant="ghost"
+                          className="w-full justify-start text-left hover:bg-red-500/10 text-red-400 hover:text-red-300"
+                        >
+                          <LogOut className="w-4 h-4 mr-3" />
+                          Sign Out
+                        </Button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <AuthModal>
+                <Button
+                  size="sm"
+                  className="flex items-center px-6 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50 group"
+                  aria-label="Login"
+                >
+                  <User className="w-4 h-4 mr-2 -mt-0.5 transition-transform group-hover:rotate-6" />
+                  Login
+                </Button>
+              </AuthModal>
+            )}
           </div>
         </div>
 

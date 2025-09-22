@@ -49,7 +49,7 @@ export function DashboardPage() {
   useEffect(() => {
     // Check if user is authenticated
     if (!authUtils.isAuthenticated()) {
-      window.location.hash = '/auth'
+      window.location.hash = '/'
       return
     }
 
@@ -60,7 +60,9 @@ export function DashboardPage() {
         ...mockUser,
         name: userData.name,
         email: userData.email,
-        id: userData.id
+        id: userData.id,
+        role: userData.role || 'user',
+        createdAt: userData.createdAt || new Date().toISOString()
       })
     }
   }, [])
@@ -122,7 +124,7 @@ export function DashboardPage() {
                     year: 'numeric', 
                     month: 'long', 
                     day: 'numeric' 
-                  })}
+                  })} • Member since {new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </p>
               </div>
             </div>
@@ -137,7 +139,15 @@ export function DashboardPage() {
                 <Settings className="w-4 h-4" />
               </Button>
 
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-gray-400 hover:text-white"
+                onClick={() => {
+                  authUtils.logout()
+                  window.dispatchEvent(new Event('auth-changed'))
+                }}
+              >
                 <LogOut className="w-4 h-4" />
               </Button>
             </div>

@@ -36,7 +36,8 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  
+  const [message, setMessage] = useState('') // Added message state
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -46,6 +47,7 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setMessage('') // Clear previous messages
 
     try {
       const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register'
@@ -64,27 +66,27 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
       const data = await response.json()
 
       if (data.success) {
-        // Store token in localStorage
-        if (data.token) {
-          localStorage.setItem('auth-token', data.token)
-          localStorage.setItem('user-data', JSON.stringify(data.user))
-        }
-        
-        if (isLogin) {
-          onLogin?.(formData.email, formData.password)
-        } else {
-          onSignup?.(formData.name, formData.email, formData.password)
-        }
+        // Store auth data
+        localStorage.setItem('auth-token', data.token)
+        localStorage.setItem('user-data', JSON.stringify(data.user))
 
         setIsOpen(false)
+        setIsLogin(true)
+        setFormData({ name: '', email: '', password: '' })
+        setMessage('')
+
+        // Dispatch auth change event to update navigation
+        window.dispatchEvent(new Event('auth-changed'))
+
+        // Redirect to dashboard
         window.location.hash = '/dashboard'
       } else {
         console.error('Auth error:', data.message)
-        alert(data.message || 'Authentication failed')
+        setMessage(data.message || 'Authentication failed') // Set error message
       }
     } catch (error) {
       console.error('Network error:', error)
-      alert('Network error. Please try again.')
+      setMessage('Network error. Please try again.') // Set network error message
     } finally {
       setIsLoading(false)
     }
@@ -99,7 +101,7 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      
+
       <DialogContent className="sm:max-w-md bg-slate-900/95 backdrop-blur-sm border border-white/10">
         <DialogHeader className="text-center">
           <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">
@@ -203,6 +205,12 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
               >
                 Forgot password?
               </button>
+            </div>
+          )}
+
+          {message && (
+            <div className={`text-center text-sm ${message.startsWith('Error') || message.startsWith('Network') ? 'text-red-500' : 'text-green-500'}`}>
+              {message}
             </div>
           )}
 
