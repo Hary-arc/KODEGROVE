@@ -161,12 +161,25 @@ export default function App() {
                   className="flex items-center space-x-3 mb-8 group"
                 >
                   <div className="relative">
-                    <div className="w-12 h-12 gradient-electric rounded-xl flex items-center justify-center relative overflow-hidden">
-                      <span className="font-outfit text-white font-bold text-xl relative z-10">C</span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-pulse-glow"></div>
+                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 via-violet-600 to-purple-700 rounded-full flex items-center justify-center relative overflow-hidden shadow-lg shadow-purple-500/25">
+                      <svg 
+                        className="w-7 h-7 text-white relative z-10" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="1.5"
+                      >
+                        <path d="M12 2L8 8l4 6 4-6-4-6z" />
+                        <path d="M8 8l-2 3 2 3" />
+                        <path d="M16 8l2 3-2 3" />
+                        <path d="M6 14l-2 2 2 2" />
+                        <path d="M18 14l2 2-2 2" />
+                        <path d="M12 14v8" />
+                      </svg>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 group-hover:animate-pulse-glow"></div>
                     </div>
                   </div>
-                  <span className="font-outfit text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  <span className="font-outfit text-3xl font-bold bg-gradient-to-r from-white via-purple-200 to-violet-300 bg-clip-text text-transparent">
                     {siteConfig.name}
                   </span>
                 </button>
