@@ -2,32 +2,25 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 // Custom hook for mouse parallax effect
-function useMouseParallax(strength = 0.1) {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-  const elementRef = useRef<HTMLElement>(null)
+export const useMouseParallax = (strength = 0.5) => {
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!elementRef.current) return
+      const { clientX, clientY } = e
+      const { innerWidth, innerHeight } = window
 
-      const rect = elementRef.current.getBoundingClientRect()
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
-
-      const deltaX = (e.clientX - centerX) * strength
-      const deltaY = (e.clientY - centerY) * strength
-
-      setPosition({ x: deltaX, y: deltaY })
+      mouseX.set((clientX - innerWidth / 2) * strength)
+      mouseY.set((clientY - innerHeight / 2) * strength)
     }
 
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [strength])
+  }, [mouseX, mouseY, strength])
 
-  return { position, elementRef }
+  return { mouseX, mouseY }
 }
-
-export { useMouseParallax }
 
 // Custom hook for magnetic hover effect
 export const useMagneticHover = (strength = 0.3) => {
@@ -302,6 +295,35 @@ export const TiltCard = ({
   )
 }
 
+// Pulse component
+export const Pulse = ({ 
+  children, 
+  scale = 1.05, 
+  duration = 2,
+  className = "" 
+}: {
+  children: React.ReactNode
+  scale?: number
+  duration?: number
+  className?: string
+}) => {
+  return (
+    <motion.div
+      className={className}
+      animate={{
+        scale: [1, scale, 1],
+      }}
+      transition={{
+        duration,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 export default {
   useMouseParallax,
   useMagneticHover,
@@ -313,5 +335,6 @@ export default {
   MagneticButton,
   ParallaxCard,
   RippleButton,
-  TiltCard
+  TiltCard,
+  Pulse
 }

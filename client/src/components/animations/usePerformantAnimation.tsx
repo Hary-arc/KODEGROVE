@@ -59,8 +59,24 @@ export const usePerformantAnimation = (options: any = {}) => {
 }
 
 // useScrollAnimation - alias for useScrollTrigger with scroll position
-export const useScrollAnimation = (callback, dependencies = [], options = {}) => {
-  return useScrollTrigger(callback, dependencies, options)
+export const useScrollAnimation = (options = {}) => {
+  const [scrollY, setScrollY] = useState(0)
+  const [scrollDirection, setScrollDirection] = useState('down')
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    const updateScrollY = () => {
+      const currentScrollY = window.scrollY
+      setScrollDirection(currentScrollY > lastScrollY.current ? 'down' : 'up')
+      lastScrollY.current = currentScrollY
+      setScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', updateScrollY, { passive: true })
+    return () => window.removeEventListener('scroll', updateScrollY)
+  }, [])
+
+  return { scrollY, scrollDirection }
 }
 
 // useViewportAnimation - optimized viewport detection hook
