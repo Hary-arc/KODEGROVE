@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, User, Menu, X, LogOut, Settings, BarChart3 } from "lucide-react";
+import { Sparkles, User, Menu, X, LogOut, Settings, BarChart3, ChevronDown, Globe, Smartphone, ShoppingCart, Database, Palette, Code } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCurrentRoute, navigateTo } from "./Router";
 import { AuthModal } from "./AuthModal";
@@ -11,6 +11,7 @@ import { authUtils } from "../utils/auth";
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [user, setUser] = useState(null);
   const currentRoute = useCurrentRoute();
 
@@ -19,9 +20,19 @@ export function Navigation() {
       setScrolled(window.scrollY > 50);
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest('.services-dropdown')) {
+        setIsServicesDropdownOpen(false);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () =>
+    document.addEventListener("click", handleClickOutside);
+    return () => {
       window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
   useEffect(() => {
@@ -47,11 +58,19 @@ export function Navigation() {
 
   const navigationItems = [
     { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
     { name: "Portfolio", path: "/portfolio" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
     { name: "Careers", path: "/careers" },
+  ];
+
+  const serviceItems = [
+    { name: "Web Development", path: "/services#web-design", icon: Globe, description: "Custom websites & web apps" },
+    { name: "Mobile Apps", path: "/services#mobile-development", icon: Smartphone, description: "iOS & Android applications" },
+    { name: "E-Commerce", path: "/services#ecommerce", icon: ShoppingCart, description: "Online stores & marketplaces" },
+    { name: "Backend Systems", path: "/services#backend", icon: Database, description: "APIs & cloud infrastructure" },
+    { name: "UI/UX Design", path: "/services#design", icon: Palette, description: "User interface & experience" },
+    { name: "Custom Software", path: "/services#development", icon: Code, description: "Tailored software solutions" },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] =
@@ -60,6 +79,7 @@ export function Navigation() {
   const handleNavigation = (path: string) => {
     navigateTo(path);
     setIsProfileMenuOpen(false);
+    setIsServicesDropdownOpen(false);
   };
 
   const isActive = (path: string) =>
@@ -167,6 +187,77 @@ export function Navigation() {
                     )}
                   </motion.button>
                 ))}
+                
+                {/* Services Dropdown */}
+                <div className="relative services-dropdown">
+                  <motion.button
+                    onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+                    className={`relative flex items-center space-x-1 text-sm font-medium transition-colors duration-300 focus:outline-none ${
+                      currentRoute === "/services"
+                        ? "text-white"
+                        : "text-gray-300 hover:text-white"
+                    }`}
+                    whileHover={{ y: -1 }}
+                  >
+                    <span>Services</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isServicesDropdownOpen ? 'rotate-180' : ''}`} />
+                    {currentRoute === "/services" && (
+                      <motion.div
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 gradient-electric rounded-full"
+                        layoutId="activeTab"
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {isServicesDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-full left-0 mt-2 w-80 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-2xl z-50"
+                      >
+                        <div className="space-y-2">
+                          {serviceItems.map((service) => (
+                            <motion.button
+                              key={service.path}
+                              onClick={() => handleNavigation(service.path)}
+                              className="w-full flex items-center space-x-3 p-3 rounded-xl hover:bg-white/10 transition-colors duration-200 group text-left"
+                              whileHover={{ x: 5 }}
+                            >
+                              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center">
+                                <service.icon className="w-5 h-5 text-white" />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="text-white font-medium group-hover:text-cyan-400 transition-colors">
+                                  {service.name}
+                                </h4>
+                                <p className="text-gray-400 text-xs">
+                                  {service.description}
+                                </p>
+                              </div>
+                            </motion.button>
+                          ))}
+                        </div>
+                        
+                        <div className="mt-4 pt-3 border-t border-white/10">
+                          <Button
+                            onClick={() => handleNavigation("/services")}
+                            className="w-full gradient-electric hover:shadow-lg hover:shadow-purple-500/25 text-white rounded-xl font-semibold transition-all duration-300"
+                          >
+                            View All Services
+                          </Button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </nav>
             </div>
 
@@ -419,6 +510,35 @@ export function Navigation() {
                   )}
                 </motion.button>
               ))}
+              
+              {/* Mobile Services Button */}
+              <motion.button
+                onClick={() => handleNavigation("/services")}
+                className={`relative px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 focus:outline-none ${
+                  currentRoute === "/services"
+                    ? "text-white bg-gradient-to-r from-purple-600 to-cyan-600 shadow-lg"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
+                }`}
+                whileHover={{ y: -1, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navigationItems.length * 0.05 + 0.2 }}
+              >
+                Services
+                {currentRoute === "/services" && (
+                  <motion.div
+                    className="absolute inset-0 rounded-xl gradient-electric opacity-90"
+                    layoutId="mobileActiveTab"
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 30,
+                    }}
+                    style={{ zIndex: -1 }}
+                  />
+                )}
+              </motion.button>
             </div>
           </motion.nav>
         </div>
