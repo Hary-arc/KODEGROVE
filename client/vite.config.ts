@@ -11,7 +11,7 @@
       open: false,
       proxy: {
         '/api': {
-          target: 'http://localhost:3001',
+          target: 'http://localhost:5001',
           changeOrigin: true,
           secure: false
         }
