@@ -1,12 +1,12 @@
 
 {
-  "name": "KodeGrove - Where Smart Code Grows",
-  "short_name": "KodeGrove",
+  "name": "CodeFlow - Digital Experiences That Mesmerize",
+  "short_name": "CodeFlow",
   "description": "Professional web development and digital marketing services",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a1a2e",
-  "theme_color": "#7c3aed",
+  "background_color": "#0f172a",
+  "theme_color": "#8b5cf6",
   "orientation": "portrait-primary",
   "categories": ["business", "productivity"],
   "lang": "en-US",

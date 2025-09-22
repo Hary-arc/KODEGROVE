@@ -1,12 +1,12 @@
 // Site-wide configuration and content
 
 export const siteConfig = {
-  name: 'KodeGrove',
-  tagline: 'Where Smart Code Grows',
-  description: 'Cultivating innovative digital solutions that flourish and evolve. Where technology meets nature\'s wisdom.',
-  url: 'https://kodegrove.dev',
+  name: 'CodeFlow',
+  tagline: 'Digital Mastery Unleashed',
+  description: 'Crafting digital experiences that mesmerize and transform. Where innovation meets elegance.',
+  url: 'https://codeflow.dev',
   contact: {
-    email: 'hello@kodegrove.dev',
+    email: 'hello@codeflow.dev',
     phone: '+1 (555) 123-4567',
     address: 'San Francisco, CA'
   },
