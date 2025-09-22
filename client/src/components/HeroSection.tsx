@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import React from 'react'
-import { Button } from '@/components/ui/button' // Assuming Button component is here
+// Assuming Button component is here
 import { Eye, ArrowRight, Sparkles } from 'lucide-react' // Assuming these icons are here
 
 
