@@ -1,165 +1,164 @@
-'use client'
 
-import { useState, useRef, useEffect, ReactNode } from 'react'
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
+import React, { useState, useEffect, useCallback } from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
-interface HoverLiftProps {
-  children: ReactNode
-  liftDistance?: number
-  scale?: number
-  className?: string
-}
-
-export function HoverLift({ 
-  children, 
-  liftDistance = 8, 
-  scale = 1.02, 
-  className 
-}: HoverLiftProps) {
-  return (
-    <motion.div
-      className={className}
-      whileHover={{ 
-        y: -liftDistance, 
-        scale,
-        transition: { 
-          type: "spring", 
-          stiffness: 300, 
-          damping: 20 
-        }
-      }}
-      whileTap={{ scale: 0.98 }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-interface MagneticHoverProps {
-  children: ReactNode
-  strength?: number
-  className?: string
-}
-
-export function MagneticHover({ 
-  children, 
-  strength = 0.3, 
-  className 
-}: MagneticHoverProps) {
-  const ref = useRef<HTMLDivElement>(null)
+// Custom hook for mouse parallax effect
+export const useMouseParallax = (strength = 0.1) => {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
+  
+  const springX = useSpring(x, { stiffness: 300, damping: 30 })
+  const springY = useSpring(y, { stiffness: 300, damping: 30 })
 
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 })
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 })
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return
-    
-    const rect = ref.current.getBoundingClientRect()
+  const updateMousePosition = useCallback((e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
     
-    const distanceX = e.clientX - centerX
-    const distanceY = e.clientY - centerY
-    
-    x.set(distanceX * strength)
-    y.set(distanceY * strength)
-  }
+    x.set((e.clientX - centerX) * strength)
+    y.set((e.clientY - centerY) * strength)
+  }, [x, y, strength])
 
-  const handleMouseLeave = () => {
+  const resetPosition = useCallback(() => {
     x.set(0)
     y.set(0)
+  }, [x, y])
+
+  return { springX, springY, updateMousePosition, resetPosition }
+}
+
+// Custom hook for magnetic hover effect
+export const useMagneticHover = (strength = 0.3) => {
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  
+  const springX = useSpring(x, { stiffness: 400, damping: 40 })
+  const springY = useSpring(y, { stiffness: 400, damping: 40 })
+
+  const handleMouseMove = useCallback((e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    
+    x.set((e.clientX - centerX) * strength)
+    y.set((e.clientY - centerY) * strength)
+  }, [x, y, strength])
+
+  const handleMouseLeave = useCallback(() => {
+    x.set(0)
+    y.set(0)
+  }, [x, y])
+
+  return { 
+    x: springX, 
+    y: springY, 
+    onMouseMove: handleMouseMove, 
+    onMouseLeave: handleMouseLeave 
   }
+}
+
+// Magnetic button component
+export const MagneticButton = ({ 
+  children, 
+  className = "", 
+  strength = 0.3,
+  ...props 
+}) => {
+  const { x, y, onMouseMove, onMouseLeave } = useMagneticHover(strength)
+
+  return (
+    <motion.button
+      className={`relative ${className}`}
+      style={{ x, y }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      {...props}
+    >
+      {children}
+    </motion.button>
+  )
+}
+
+// Parallax card component
+export const ParallaxCard = ({ 
+  children, 
+  className = "",
+  strength = 0.1
+}) => {
+  const { springX, springY, updateMousePosition, resetPosition } = useMouseParallax(strength)
 
   return (
     <motion.div
-      ref={ref}
-      style={{ x: mouseXSpring, y: mouseYSpring }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={className}
+      className={`relative ${className}`}
+      style={{ 
+        x: springX, 
+        y: springY,
+        rotateX: useTransform(springY, [-50, 50], [5, -5]),
+        rotateY: useTransform(springX, [-50, 50], [-5, 5])
+      }}
+      onMouseMove={updateMousePosition}
+      onMouseLeave={resetPosition}
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       {children}
     </motion.div>
   )
 }
 
-interface RippleButtonProps {
-  children: ReactNode
-  onClick?: () => void
-  className?: string
-  variant?: 'primary' | 'outline' | 'ghost'
-  disabled?: boolean
-}
-
-export function RippleButton({ 
+// Ripple effect component
+export const RippleButton = ({ 
   children, 
-  onClick, 
-  className = "", 
-  variant = 'primary',
-  disabled = false
-}: RippleButtonProps) {
-  const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([])
-  const rippleCounter = useRef(0)
+  className = "",
+  rippleColor = "rgba(255, 255, 255, 0.6)",
+  ...props 
+}) => {
+  const [ripples, setRipples] = useState([])
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (disabled) return
-
+  const createRipple = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const size = Math.max(rect.width, rect.height)
     const x = e.clientX - rect.left - size / 2
     const y = e.clientY - rect.top - size / 2
-
+    
     const newRipple = {
-      id: rippleCounter.current++,
       x,
-      y
+      y,
+      size,
+      id: Date.now()
     }
 
     setRipples(prev => [...prev, newRipple])
 
-    // Remove ripple after animation
     setTimeout(() => {
       setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id))
     }, 600)
-
-    onClick?.()
-  }
-
-  const baseClasses = "relative overflow-hidden transition-all duration-300"
-  const variantClasses = {
-    primary: "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white",
-    outline: "border-2 border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white",
-    ghost: "text-purple-500 hover:bg-purple-500/10"
   }
 
   return (
     <motion.button
-      className={`${baseClasses} ${variantClasses[variant]} ${className}`}
-      onClick={handleClick}
-      disabled={disabled}
+      className={`relative overflow-hidden ${className}`}
+      onMouseDown={createRipple}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
+      {...props}
     >
       {children}
-      
-      {/* Ripple effects */}
       {ripples.map(ripple => (
         <motion.span
           key={ripple.id}
-          className="absolute bg-white/30 rounded-full pointer-events-none"
+          className="absolute rounded-full pointer-events-none"
           style={{
             left: ripple.x,
             top: ripple.y,
-            width: 0,
-            height: 0
+            width: ripple.size,
+            height: ripple.size,
+            backgroundColor: rippleColor
           }}
-          animate={{
-            width: 300,
-            height: 300,
-            opacity: [0.6, 0]
-          }}
+          initial={{ scale: 0, opacity: 1 }}
+          animate={{ scale: 2, opacity: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         />
       ))}
@@ -167,175 +166,53 @@ export function RippleButton({
   )
 }
 
-interface AnimatedIconProps {
-  children: ReactNode
-  hoverScale?: number
-  hoverRotation?: number
-  className?: string
-}
-
-export function AnimatedIcon({ 
+// Tilt card component
+export const TiltCard = ({ 
   children, 
-  hoverScale = 1.2, 
-  hoverRotation = 0,
-  className 
-}: AnimatedIconProps) {
+  className = "",
+  tiltStrength = 10
+}) => {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    
+    setTilt({
+      x: ((y - centerY) / centerY) * tiltStrength,
+      y: ((x - centerX) / centerX) * -tiltStrength
+    })
+  }
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 })
+  }
+
   return (
     <motion.div
-      className={className}
-      whileHover={{ 
-        scale: hoverScale, 
-        rotate: hoverRotation,
-        transition: { type: "spring", stiffness: 300, damping: 20 }
+      className={`relative ${className}`}
+      style={{
+        rotateX: tilt.x,
+        rotateY: tilt.y,
+        transformStyle: "preserve-3d"
       }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       {children}
     </motion.div>
   )
 }
 
-interface TypewriterProps {
-  text: string
-  speed?: number
-  className?: string
-  onComplete?: () => void
-}
-
-export function Typewriter({ 
-  text, 
-  speed = 50, 
-  className,
-  onComplete 
-}: TypewriterProps) {
-  const [displayText, setDisplayText] = useState('')
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex])
-        setCurrentIndex(prev => prev + 1)
-      }, speed)
-
-      return () => clearTimeout(timeout)
-    } else if (onComplete) {
-      onComplete()
-    }
-  }, [currentIndex, text, speed, onComplete])
-
-  return (
-    <span className={className}>
-      {displayText}
-      <motion.span
-        className="inline-block w-0.5 h-6 bg-current ml-1"
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
-      />
-    </span>
-  )
-}
-
-interface FloatingElementProps {
-  children: ReactNode
-  intensity?: number
-  className?: string
-}
-
-export function FloatingElement({ 
-  children, 
-  intensity = 1, 
-  className 
-}: FloatingElementProps) {
-  return (
-    <motion.div
-      className={className}
-      animate={{
-        y: [0, -10 * intensity, 0],
-        x: [0, 5 * intensity, 0, -5 * intensity, 0],
-        rotate: [0, 2 * intensity, 0, -2 * intensity, 0]
-      }}
-      transition={{
-        duration: 4 + Math.random() * 2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-interface PulseProps {
-  children: ReactNode
-  scale?: number
-  className?: string
-}
-
-export function Pulse({ children, scale = 1.05, className }: PulseProps) {
-  return (
-    <motion.div
-      className={className}
-      animate={{ scale: [1, scale, 1] }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-// Hook for mouse parallax effect
-export function useMouseParallax(strength = 0.02) {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e
-      const { innerWidth, innerHeight } = window
-      
-      const xPct = (clientX - innerWidth / 2) / (innerWidth / 2)
-      const yPct = (clientY - innerHeight / 2) / (innerHeight / 2)
-      
-      x.set(xPct * strength * 100)
-      y.set(yPct * strength * 100)
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [x, y, strength])
-
-  return { x, y }
-}
-
-// Performance-optimized hover effect
-export function OptimizedHover({ 
-  children, 
-  className 
-}: { 
-  children: ReactNode
-  className?: string 
-}) {
-  return (
-    <motion.div
-      className={className}
-      whileHover="hover"
-      variants={{
-        hover: {
-          scale: 1.05,
-          y: -8,
-          transition: {
-            type: "spring",
-            stiffness: 400,
-            damping: 25
-          }
-        }
-      }}
-    >
-      {children}
-    </motion.div>
-  )
+export default {
+  useMouseParallax,
+  useMagneticHover,
+  MagneticButton,
+  ParallaxCard,
+  RippleButton,
+  TiltCard
 }

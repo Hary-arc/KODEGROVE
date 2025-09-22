@@ -45,11 +45,15 @@ export default function App() {
     // Preload critical resources
     performanceMonitor.preloadCriticalResources()
     
-    // Register service worker with faster registration
-    if ('serviceWorker' in navigator && 'production' === import.meta.env.MODE) {
+    // Register service worker with better error handling
+    if ('serviceWorker' in navigator && import.meta.env.PROD) {
       navigator.serviceWorker.register('/sw.js', { scope: '/' })
-        .then(() => console.log('SW registered'))
-        .catch(() => console.log('SW registration failed'))
+        .then((registration) => {
+          console.log('SW registered successfully:', registration.scope)
+        })
+        .catch((error) => {
+          console.warn('SW registration failed:', error)
+        })
     }
     
     // Optimize initial render
@@ -126,8 +130,8 @@ export default function App() {
       )}
 
       <div className="min-h-screen bg-slate-950 text-white relative overflow-x-hidden">
-        {/* Optimized Background with will-change */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none will-change-transform">
+        {/* Optimized Background with will-change and proper positioning */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none will-change-transform" style={{ position: 'relative' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
           <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-float will-change-transform"></div>
           <div 
@@ -140,8 +144,8 @@ export default function App() {
         {/* Navigation */}
         <Navigation />
 
-        {/* Router - Main Content */}
-        <main className="relative z-10">
+        {/* Router - Main Content with proper positioning */}
+        <main className="relative z-10" style={{ position: 'relative' }}>
           <Router routes={routes} defaultRoute="/" />
         </main>
 

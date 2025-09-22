@@ -1,7 +1,9 @@
+
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { randomUUID } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,14 +20,21 @@ export class DataStore<T extends { id: string }> {
     try {
       await fs.access(this.filePath);
     } catch {
+      // Ensure directory exists
+      await fs.mkdir(DATA_DIR, { recursive: true });
       await fs.writeFile(this.filePath, '[]');
     }
   }
 
   async findAll(): Promise<T[]> {
     await this.ensureFile();
-    const data = await fs.readFile(this.filePath, 'utf-8');
-    return JSON.parse(data);
+    try {
+      const data = await fs.readFile(this.filePath, 'utf-8');
+      return JSON.parse(data) || [];
+    } catch (error) {
+      console.error(`Error reading ${this.filePath}:`, error);
+      return [];
+    }
   }
 
   async findById(id: string): Promise<T | null> {
@@ -38,11 +47,11 @@ export class DataStore<T extends { id: string }> {
     return items.find(predicate) || null;
   }
 
-  async create(item: Omit<T, 'id'>): Promise<T> {
+  async create(item: Omit<T, 'id'> | T): Promise<T> {
     const items = await this.findAll();
     const newItem = {
       ...item,
-      id: Math.random().toString(36).substr(2, 9)
+      id: 'id' in item && item.id ? item.id : randomUUID()
     } as T;
     
     items.push(newItem);
