@@ -1,4 +1,3 @@
-
 'use client'
 
 import React, { useEffect, useState, Suspense } from 'react'
@@ -41,10 +40,10 @@ export default function App() {
   useEffect(() => {
     const performanceMonitor = PerformanceMonitor.getInstance()
     performanceMonitor.mark('app-start')
-    
+
     // Preload critical resources
     performanceMonitor.preloadCriticalResources()
-    
+
     // Register service worker with better error handling
     if ('serviceWorker' in navigator && import.meta.env.PROD) {
       navigator.serviceWorker.register('/sw.js', { scope: '/' })
@@ -55,12 +54,12 @@ export default function App() {
           console.warn('SW registration failed:', error)
         })
     }
-    
+
     // Optimize initial render
     const initializeApp = () => {
       document.documentElement.style.scrollBehavior = 'smooth'
       document.body.style.overflow = 'hidden'
-      
+
       // Faster loading with requestIdleCallback
       const callback = () => {
         setIsLoaded(true)
@@ -118,10 +117,10 @@ export default function App() {
         canonicalUrl={siteConfig.url}
         schemaData={generateWebsiteSchema(siteConfig)}
       />
-      
+
       {/* Critical CSS */}
       <CriticalCSS />
-      
+
       {/* Optimized Loading Screen */}
       {!isLoaded && (
         <div className="loading-screen">
@@ -155,11 +154,11 @@ export default function App() {
         {/* Optimized Footer */}
         <footer className="relative z-10 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 border-t border-white/10">
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          
+
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
               {/* Brand */}
-              <div className="lg:col-span-2">
+              <div>
                 <button
                   onClick={() => window.location.hash = '/'}
                   className="flex items-center space-x-3 mb-8 group"

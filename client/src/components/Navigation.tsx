@@ -74,35 +74,23 @@ export function Navigation() {
                   scale: { duration: 0.3 }
                 }}
               >
-                <div className="w-full h-full bg-gradient-to-br from-purple-500 via-violet-600 to-purple-700 rounded-full flex items-center justify-center relative shadow-lg shadow-purple-500/25">
-                  {/* Tree/Code Icon */}
-                  <svg 
-                    className="w-7 h-7 text-white relative z-10" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="1.5"
-                  >
-                    <path d="M12 2L8 8l4 6 4-6-4-6z" />
-                    <path d="M8 8l-2 3 2 3" />
-                    <path d="M16 8l2 3-2 3" />
-                    <path d="M6 14l-2 2 2 2" />
-                    <path d="M18 14l2 2-2 2" />
-                    <path d="M12 14v8" />
-                  </svg>
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-full"
-                    animate={{ 
-                      rotate: [0, 360],
-                      scale: [1, 1.2, 1]
-                    }}
-                    transition={{ 
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-                </div>
+                <img 
+                  src="/logo.png" 
+                  alt="KodeGrove Logo" 
+                  className="w-full h-full object-cover rounded-full shadow-lg shadow-purple-500/25"
+                />
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full"
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ 
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
               </motion.div>
               <motion.span 
                 className="font-outfit text-2xl font-bold bg-gradient-to-r from-white via-purple-200 to-violet-300 bg-clip-text text-transparent"
