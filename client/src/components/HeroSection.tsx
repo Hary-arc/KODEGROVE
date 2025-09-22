@@ -2,27 +2,22 @@
 
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import { Button } from './ui/button'
-import { Sparkles, ArrowRight, Play, Pause, Volume2, VolumeX } from 'lucide-react'
-import { ImageWithFallback } from './figma/ImageWithFallback'
+import React from 'react'
+
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const isInView = useInView(containerRef, { once: true })
   
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isMuted, setIsMuted] = useState(true)
-  const [progress, setProgress] = useState(0)
+  
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   })
   
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
   // Client logos data
@@ -151,38 +146,7 @@ export function HeroSection() {
     }
   }, [])
 
-  // Video controls
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause()
-      } else {
-        videoRef.current.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
-  }
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted
-      setIsMuted(!isMuted)
-    }
-  }
-
-  const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      const progress = (videoRef.current.currentTime / videoRef.current.duration) * 100
-      setProgress(progress)
-    }
-  }
-
-  const scrollToContact = () => {
-    const element = document.querySelector('#contact')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
+  
 
   const scrollToPortfolio = () => {
     const element = document.querySelector('#portfolio')
@@ -192,7 +156,8 @@ export function HeroSection() {
   }
 
   return (
-    <section id="home" ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" ref={containerRef} className="relative flex items-center justify-center overflow-hidden">
+
       {/* Animated Canvas Background */}
       <canvas
         ref={canvasRef}
@@ -206,12 +171,6 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(6,182,212,0.15),transparent_50%)]" />
 
       <div className="relative z-10 w-full">
-        {/* Hero Content */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh]">
-          </div>
-          </div>
-
         {/* Client Logo Marquee */}
         <motion.div
           className="mt-32 pb-16"
