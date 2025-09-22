@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import jwt, { Secret, SignOptions } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 interface IUser {
   id: string;
@@ -23,11 +23,11 @@ export class User implements IUser, IUserMethods {
   role: 'user' | 'admin';
   createdAt: string;
 
-  constructor(data: Partial<Omit<IUser, 'id'>>) {
-    this.id = crypto.randomUUID();
-    this.name = data.name || '';
-    this.email = data.email || '';
-    this.password = data.password || '';
+  constructor(data: Partial<IUser> & { name: string; email: string; password: string }) {
+    this.id = data.id || crypto.randomUUID();
+    this.name = data.name;
+    this.email = data.email;
+    this.password = data.password;
     this.role = data.role || 'user';
     this.createdAt = data.createdAt || new Date().toISOString();
   }

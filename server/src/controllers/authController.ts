@@ -11,6 +11,31 @@ export const register = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
 
+    // Validate required fields
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide name, email and password'
+      });
+    }
+
+    // Validate email format
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide a valid email address'
+      });
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: 'Password must be at least 6 characters'
+      });
+    }
+
     // Check if user exists
     const existingUser = await userStore.findOne(user => user.email === email);
     if (existingUser) {
@@ -35,9 +60,10 @@ export const register = async (req: Request, res: Response) => {
 
     sendTokenResponse(user, 201, res);
   } catch (err: any) {
-    res.status(400).json({
+    console.error('Registration error:', err);
+    res.status(500).json({
       success: false,
-      message: err.message
+      message: 'Server error during registration'
     });
   }
 };
@@ -47,6 +73,11 @@ export const register = async (req: Request, res: Response) => {
 // @access  Public
 export const login = async (req: Request, res: Response) => {
   try {
+    // Add CORS headers
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
     const { email, password } = req.body;
 
     // Validate email & password
@@ -77,9 +108,10 @@ export const login = async (req: Request, res: Response) => {
 
     sendTokenResponse(user, 200, res);
   } catch (err: any) {
-    res.status(400).json({
+    console.error('Login error:', err);
+    res.status(500).json({
       success: false,
-      message: err.message
+      message: 'Server error during login'
     });
   }
 };

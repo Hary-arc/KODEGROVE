@@ -47,20 +47,47 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
     e.preventDefault()
     setIsLoading(true)
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    try {
+      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register'
+      const payload = isLogin 
+        ? { email: formData.email, password: formData.password }
+        : { name: formData.name, email: formData.email, password: formData.password }
 
-    if (isLogin) {
-      onLogin?.(formData.email, formData.password)
-    } else {
-      onSignup?.(formData.name, formData.email, formData.password)
+      const response = await fetch(`http://localhost:5001${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        // Store token in localStorage
+        if (data.token) {
+          localStorage.setItem('auth-token', data.token)
+          localStorage.setItem('user-data', JSON.stringify(data.user))
+        }
+        
+        if (isLogin) {
+          onLogin?.(formData.email, formData.password)
+        } else {
+          onSignup?.(formData.name, formData.email, formData.password)
+        }
+
+        setIsOpen(false)
+        window.location.hash = '/dashboard'
+      } else {
+        console.error('Auth error:', data.message)
+        alert(data.message || 'Authentication failed')
+      }
+    } catch (error) {
+      console.error('Network error:', error)
+      alert('Network error. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
-
-    setIsLoading(false)
-    setIsOpen(false)
-    
-    // Navigate to dashboard in real app
-    window.location.hash = '/dashboard'
   }
 
   const handleInputChange = (field: string, value: string) => {

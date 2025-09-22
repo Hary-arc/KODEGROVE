@@ -36,9 +36,12 @@ app.use(helmet({
   },
 }));
 app.use(compression());
+// CORS configuration
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? ['https://your-domain.com'] : true,
-  credentials: true
+  origin: ['http://localhost:5000', 'http://127.0.0.1:5000', 'https://ce3721d0-885c-4979-8b87-c92e0126127c-00-2k7ldw75pi8fu.sisko.replit.dev'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(morgan('combined'));
 app.use(express.json({ limit: '10mb' }));
@@ -54,12 +57,12 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   } else {
     res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour
   }
-  
+
   // Performance headers
   res.setHeader('X-DNS-Prefetch-Control', 'on');
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  
+
   next();
 });
 
@@ -97,11 +100,11 @@ app.get('/', (req: Request, res: Response) => {
 // Function to find an available port
 const findAvailablePort = async (startPort: number): Promise<number> => {
   const net = await import('net');
-  
+
   return new Promise((resolve, reject) => {
     const server = net.createServer();
     server.unref();
-    
+
     server.on('error', (err: NodeJS.ErrnoException) => {
       if (err.code === 'EADDRINUSE') {
         server.close(() => resolve(findAvailablePort(startPort + 1)));
@@ -121,7 +124,7 @@ const startServer = async () => {
   try {
     const preferredPort = parseInt(process.env.PORT || '3001', 10);
     const port = await findAvailablePort(preferredPort);
-    
+
     if (port !== preferredPort) {
       console.warn(`Port ${preferredPort} was in use, using port ${port} instead`);
     }

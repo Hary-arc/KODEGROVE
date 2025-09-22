@@ -25,11 +25,44 @@ export function AuthPage() {
     e.preventDefault()
     setIsLoading(true)
     
-    // Simulate authentication
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsLoading(false)
-    // Handle success/error states here
+    try {
+      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register'
+      const payload = isLogin 
+        ? { email: formData.email, password: formData.password }
+        : { 
+            name: `${formData.firstName} ${formData.lastName}`.trim(),
+            email: formData.email, 
+            password: formData.password 
+          }
+
+      const response = await fetch(`http://localhost:5001${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        // Store token in localStorage
+        if (data.token) {
+          localStorage.setItem('auth-token', data.token)
+          localStorage.setItem('user-data', JSON.stringify(data.user))
+        }
+        
+        // Navigate to dashboard
+        window.location.hash = '/dashboard'
+      } else {
+        alert(data.message || 'Authentication failed')
+      }
+    } catch (error) {
+      console.error('Auth error:', error)
+      alert('Network error. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleInputChange = (field: string, value: string) => {

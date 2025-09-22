@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   mockUser, 
   mockProjects, 
@@ -35,11 +35,36 @@ import {
   Crown,
   ExternalLink
 } from 'lucide-react'
+import { authUtils } from '../utils/auth'
 
 export function DashboardPage() {
+  const [activeTab, setActiveTab] = useState('overview')
+  const [user, setUser] = useState(mockUser)
+  const [projects] = useState(mockProjects)
   const [notifications, setNotifications] = useState(mockNotifications)
-  const [user] = useState(mockUser)
+  const [invoices] = useState(mockInvoices)
+  const [tickets] = useState(mockSupportTickets)
   const [currentTime, setCurrentTime] = useState(new Date())
+
+  useEffect(() => {
+    // Check if user is authenticated
+    if (!authUtils.isAuthenticated()) {
+      window.location.hash = '/auth'
+      return
+    }
+
+    // Get user data from localStorage
+    const userData = authUtils.getUser()
+    if (userData) {
+      setUser({
+        ...mockUser,
+        name: userData.name,
+        email: userData.email,
+        id: userData.id
+      })
+    }
+  }, [])
+
 
   // Update time every minute
   useEffect(() => {
@@ -107,11 +132,11 @@ export function DashboardPage() {
                 <Crown className="w-4 h-4 text-yellow-400" />
                 <span className="text-sm font-medium text-white">{user.tier}</span>
               </div>
-              
+
               <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
                 <Settings className="w-4 h-4" />
               </Button>
-              
+
               <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
                 <LogOut className="w-4 h-4" />
               </Button>
@@ -174,7 +199,7 @@ export function DashboardPage() {
                   View All <ExternalLink className="w-4 h-4 ml-2" />
                 </Button>
               </div>
-              
+
               <div className="grid gap-6">
                 {activeProjects.map((project, index) => (
                   <ProjectCard key={project.id} project={project} index={index} />
@@ -197,7 +222,7 @@ export function DashboardPage() {
                   <MessageCircle className="w-6 h-6 mb-2 text-purple-400" />
                   <span>Contact Support</span>
                 </Button>
-                
+
                 <Button 
                   className="h-20 glass border border-white/10 hover:border-green-500/50 hover:bg-green-500/10 flex-col"
                   variant="ghost"
@@ -205,7 +230,7 @@ export function DashboardPage() {
                   <Download className="w-6 h-6 mb-2 text-green-400" />
                   <span>Download Reports</span>
                 </Button>
-                
+
                 <Button 
                   className="h-20 glass border border-white/10 hover:border-blue-500/50 hover:bg-blue-500/10 flex-col"
                   variant="ghost"
@@ -246,7 +271,7 @@ export function DashboardPage() {
                     View All
                   </Button>
                 </div>
-                
+
                 <div className="space-y-3">
                   {recentInvoices.map((invoice) => (
                     <div key={invoice.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors duration-200">
@@ -283,7 +308,7 @@ export function DashboardPage() {
                     <MessageCircle className="w-4 h-4" />
                   </Button>
                 </div>
-                
+
                 <div className="space-y-3">
                   {openTickets.map((ticket) => (
                     <div key={ticket.id} className="p-3 rounded-lg hover:bg-white/5 transition-colors duration-200">
@@ -319,7 +344,7 @@ export function DashboardPage() {
                   <Shield className="w-6 h-6 text-green-400" />
                   <h3 className="text-xl font-semibold text-white">Account Health</h3>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -328,7 +353,7 @@ export function DashboardPage() {
                     </div>
                     <Progress value={95} className="h-2" />
                   </div>
-                  
+
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-400">Payment Status</span>
@@ -336,7 +361,7 @@ export function DashboardPage() {
                     </div>
                     <Progress value={100} className="h-2" />
                   </div>
-                  
+
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-400">Response Time</span>
