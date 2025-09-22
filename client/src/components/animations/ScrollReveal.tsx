@@ -1,15 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import { motion, useInView, useAnimation } from 'framer-motion'
 
 // Custom hook for scroll reveal animations
-export const useScrollReveal = (threshold = 0.1, once = true) => {
+function useScrollReveal(threshold = 0.1, once = true) {
+  const controls = useAnimation()
   const ref = useRef(null)
   const isInView = useInView(ref, { 
     once, 
     threshold,
     margin: "-10% 0px -10% 0px"
   })
-  const controls = useAnimation()
 
   useEffect(() => {
     if (isInView) {
@@ -21,6 +21,8 @@ export const useScrollReveal = (threshold = 0.1, once = true) => {
 
   return { ref, isInView, controls }
 }
+
+export { useScrollReveal }
 
 // ScrollReveal component
 export const ScrollReveal = ({ 

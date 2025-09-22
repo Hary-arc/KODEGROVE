@@ -79,7 +79,10 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
         window.dispatchEvent(new Event('auth-changed'))
 
         // Redirect to dashboard
-        window.location.hash = '/dashboard'
+        setTimeout(() => {
+          window.location.hash = '/dashboard'
+          window.location.reload()
+        }, 100)
       } else {
         console.error('Auth error:', data.message)
         setMessage(data.message || 'Authentication failed') // Set error message

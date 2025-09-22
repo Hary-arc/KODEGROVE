@@ -1,37 +1,39 @@
-
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 // Custom hook for mouse parallax effect
-export const useMouseParallax = (strength = 0.1) => {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  
-  const springX = useSpring(x, { stiffness: 300, damping: 30 })
-  const springY = useSpring(y, { stiffness: 300, damping: 30 })
+function useMouseParallax(strength = 0.1) {
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const elementRef = useRef<HTMLElement>(null)
 
-  const updateMousePosition = useCallback((e) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    
-    x.set((e.clientX - centerX) * strength)
-    y.set((e.clientY - centerY) * strength)
-  }, [x, y, strength])
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!elementRef.current) return
 
-  const resetPosition = useCallback(() => {
-    x.set(0)
-    y.set(0)
-  }, [x, y])
+      const rect = elementRef.current.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
 
-  return { springX, springY, updateMousePosition, resetPosition }
+      const deltaX = (e.clientX - centerX) * strength
+      const deltaY = (e.clientY - centerY) * strength
+
+      setPosition({ x: deltaX, y: deltaY })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [strength])
+
+  return { position, elementRef }
 }
+
+export { useMouseParallax }
 
 // Custom hook for magnetic hover effect
 export const useMagneticHover = (strength = 0.3) => {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-  
+
   const springX = useSpring(x, { stiffness: 400, damping: 40 })
   const springY = useSpring(y, { stiffness: 400, damping: 40 })
 
@@ -39,7 +41,7 @@ export const useMagneticHover = (strength = 0.3) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
-    
+
     x.set((e.clientX - centerX) * strength)
     y.set((e.clientY - centerY) * strength)
   }, [x, y, strength])
@@ -122,7 +124,7 @@ export const RippleButton = ({
     const size = Math.max(rect.width, rect.height)
     const x = e.clientX - rect.left - size / 2
     const y = e.clientY - rect.top - size / 2
-    
+
     const newRipple = {
       x,
       y,
@@ -180,7 +182,7 @@ export const TiltCard = ({
     const y = e.clientY - rect.top
     const centerX = rect.width / 2
     const centerY = rect.height / 2
-    
+
     setTilt({
       x: ((y - centerY) / centerY) * tiltStrength,
       y: ((x - centerX) / centerX) * -tiltStrength

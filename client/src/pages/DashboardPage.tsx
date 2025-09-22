@@ -61,7 +61,9 @@ export function DashboardPage() {
         name: userData.name,
         email: userData.email,
         id: userData.id,
-        role: userData.role || 'user',
+        role: userData.role || 'Premium',
+        tier: 'Premium',
+        avatar: userData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}&background=8b5cf6&color=fff`,
         createdAt: userData.createdAt || new Date().toISOString()
       })
     }
@@ -111,8 +113,18 @@ export function DashboardPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                <User className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center overflow-hidden">
+                {user.avatar ? (
+                  <img 
+                    src={user.avatar} 
+                    alt={user.name} 
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-white text-lg font-bold">
+                    {user.name.charAt(0).toUpperCase()}
+                  </span>
+                )}
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">

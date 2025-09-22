@@ -106,7 +106,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
               
               {/* Icon */}
               <div className={`${item.bgColor} w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <IconComponent className={`w-6 h-6 bg-gradient-to-r ${item.color} bg-clip-text text-transparent`} />
+                <IconComponent className="w-6 h-6 text-purple-400" />
               </div>
               
               {/* Content */}

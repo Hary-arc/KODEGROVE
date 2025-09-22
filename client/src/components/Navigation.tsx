@@ -180,7 +180,7 @@ export function Navigation() {
                 <Sparkles className="w-3 h-3 mr-1" />
                 Start
               </Button>
-              
+
               {user ? (
                 <div className="relative">
                   <Button
@@ -222,7 +222,7 @@ export function Navigation() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="space-y-1">
                           <Button
                             onClick={() => handleNavigation("/dashboard")}
@@ -244,7 +244,11 @@ export function Navigation() {
                           </Button>
                           <div className="border-t border-white/10 my-1"></div>
                           <Button
-                            onClick={handleLogout}
+                            onClick={() => {
+                              authUtils.logout()
+                              window.dispatchEvent(new Event('auth-changed'))
+                              window.location.reload()
+                            }}
                             variant="ghost"
                             size="sm"
                             className="w-full justify-start text-left hover:bg-red-500/10 text-red-400 hover:text-red-300 text-sm"
@@ -282,7 +286,7 @@ export function Navigation() {
               <Sparkles className="w-4 h-4 mr-2" />
               Get Started
             </Button>
-            
+
             {user ? (
               <div className="relative">
                 <Button
@@ -325,7 +329,7 @@ export function Navigation() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="space-y-2">
                         <Button
                           onClick={() => handleNavigation("/dashboard")}
@@ -345,7 +349,11 @@ export function Navigation() {
                         </Button>
                         <div className="border-t border-white/10 my-2"></div>
                         <Button
-                          onClick={handleLogout}
+                          onClick={() => {
+                            authUtils.logout()
+                            window.dispatchEvent(new Event('auth-changed'))
+                            window.location.reload()
+                          }}
                           variant="ghost"
                           className="w-full justify-start text-left hover:bg-red-500/10 text-red-400 hover:text-red-300"
                         >
