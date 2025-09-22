@@ -71,6 +71,7 @@ import DesignProcessSection from "../components/home-sections/DesignProcessSecti
 import DigitalTrendsSection from "../components/home-sections/DigitalTrendsSection";
 import CustomWebDesignPricingSection from "../components/home-sections/CustomWebDesignPricingSection";
 import FeaturedWebsiteRedesignsSection from "../components/home-sections/FeaturedWebsiteRedesignsSection";
+import React from "react";
 export function EnhancedHomePage() {
   const heroRef = useRef(null);
   const statsRef = useRef(null);
