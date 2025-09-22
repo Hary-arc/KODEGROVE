@@ -1,0 +1,15 @@
+
+User-agent: *
+Allow: /
+
+# Block admin and internal pages
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /*?*
+
+# Important pages
+Sitemap: https://your-domain.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

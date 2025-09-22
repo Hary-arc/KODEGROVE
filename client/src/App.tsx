@@ -1,6 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
+import { PerformanceMonitor } from './utils/performance'
+import { SEOHead, generateWebsiteSchema, generateOrganizationSchema } from './components/SEOHead'
+import { CriticalCSS } from './components/CriticalCSS'
 import { Navigation } from './components/Navigation'
 import { Router } from './components/Router'
 import { UniversalFloatingNav } from './components/UniversalFloatingNav'
@@ -22,6 +25,18 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home')
 
   useEffect(() => {
+    // Performance monitoring
+    const performanceMonitor = PerformanceMonitor.getInstance()
+    performanceMonitor.mark('app-start')
+    performanceMonitor.preloadCriticalResources()
+    
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('SW registered'))
+        .catch(() => console.log('SW registration failed'))
+    }
+    
     // Smooth scrolling
     document.documentElement.style.scrollBehavior = 'smooth'
     
@@ -32,6 +47,9 @@ export default function App() {
     const timer = setTimeout(() => {
       setIsLoaded(true)
       document.body.style.overflow = 'auto'
+      performanceMonitor.mark('app-loaded')
+      performanceMonitor.measure('app-load-time', 'app-start', 'app-loaded')
+      performanceMonitor.reportMetrics()
     }, 1000)
 
     // Track current page for floating nav context
@@ -65,6 +83,18 @@ export default function App() {
 
   return (
     <>
+      {/* SEO Head */}
+      <SEOHead
+        title={`${siteConfig.name} - ${siteConfig.tagline}`}
+        description={siteConfig.description}
+        keywords={['web development', 'digital agency', 'react', 'typescript', 'design']}
+        canonicalUrl={siteConfig.url}
+        schemaData={generateWebsiteSchema(siteConfig)}
+      />
+      
+      {/* Critical CSS */}
+      <CriticalCSS />
+      
       {/* Loading Screen */}
       {!isLoaded && (
         <div className="fixed inset-0 z-50 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">

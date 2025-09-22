@@ -2,6 +2,8 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import compression from 'compression';
+import helmet from 'helmet';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -21,11 +23,45 @@ const app: Express = express();
 const dataDir = path.join(__dirname, '..', 'data', 'storage');
 fs.mkdir(dataDir, { recursive: true }).catch(console.error);
 
-// Middleware
-app.use(cors());
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Security and Performance Middleware
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https:", "blob:"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+    },
+  },
+}));
+app.use(compression());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' ? ['https://your-domain.com'] : true,
+  credentials: true
+}));
+app.use(morgan('combined'));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Performance headers
+app.use((req: Request, res: Response, next: NextFunction) => {
+  // Cache headers for static assets
+  if (req.url.match(/\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2)$/)) {
+    res.setHeader('Cache-Control', 'public, max-age=31536000'); // 1 year
+  } else if (req.url.startsWith('/api/')) {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  } else {
+    res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour
+  }
+  
+  // Performance headers
+  res.setHeader('X-DNS-Prefetch-Control', 'on');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  
+  next();
+});
 
 // Routes (to be imported)
 // app.use('/api/auth', authRoutes);
