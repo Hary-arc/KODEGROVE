@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { userStore } from '../models';
+import { Request, Response, NextFunction } from 'express';
+import { User, userStore } from '../models/index.js';
 
 export interface AuthRequest extends Request {
-  user?: any;
+  user: User;
 }
 
 // Protect routes

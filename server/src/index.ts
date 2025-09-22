@@ -2,7 +2,6 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import compression from 'compression';
 import helmet from 'helmet';
 import fs from 'fs/promises';
 import path from 'path';
@@ -15,6 +14,14 @@ const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
+
+// Set default environment variables for development
+if (!process.env.JWT_SECRET) {
+  process.env.JWT_SECRET = 'your-super-secret-jwt-key-change-in-production';
+}
+if (!process.env.JWT_EXPIRE) {
+  process.env.JWT_EXPIRE = '30d';
+}
 
 // Create Express app
 const app: Express = express();
@@ -35,7 +42,6 @@ app.use(helmet({
     },
   },
 }));
-app.use(compression());
 // CORS configuration
 app.use(cors({
   origin: ['http://localhost:5000', 'http://127.0.0.1:5000', 'https://ce3721d0-885c-4979-8b87-c92e0126127c-00-2k7ldw75pi8fu.sisko.replit.dev'],
@@ -66,11 +72,15 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-// Routes (to be imported)
-// app.use('/api/auth', authRoutes);
-// app.use('/api/blog', blogRoutes);
-// app.use('/api/portfolio', portfolioRoutes);
-// app.use('/api/services', servicesRoutes);
+// Import routes
+import authRoutes from './routes/authRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
+import serviceRoutes from './routes/serviceRoutes.js';
+
+// Register routes
+app.use('/api/auth', authRoutes);
+app.use('/api/blog', blogRoutes);
+app.use('/api/services', serviceRoutes);
 
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
