@@ -43,5 +43,5 @@ externalPort = 3001
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["npx", "concurrently", "npx serve -s client/build -l 5000", "npm run start --workspace=server"]
+run = ["npm", "start"]
 build = ["npm", "run", "build"]
