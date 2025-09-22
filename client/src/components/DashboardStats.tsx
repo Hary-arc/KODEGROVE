@@ -12,6 +12,7 @@ import {
   Target,
   Award
 } from 'lucide-react'
+import React from 'react'
 
 interface DashboardStatsProps {
   stats: ClientStats
