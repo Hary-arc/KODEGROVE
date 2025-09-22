@@ -73,11 +73,6 @@ export const register = async (req: Request, res: Response) => {
 // @access  Public
 export const login = async (req: Request, res: Response) => {
   try {
-    // Add CORS headers
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
     const { email, password } = req.body;
 
     // Validate email & password

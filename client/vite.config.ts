@@ -77,6 +77,6 @@ import { defineConfig } from 'vite';
         }
       },
       chunkSizeWarningLimit: 1000,
-      minify: 'terser'
+      minify: 'esbuild'
     },
   });
