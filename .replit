@@ -23,7 +23,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx concurrently \"cd client && npx vite --host 0.0.0.0 --port 5000\" \"cd server && npx tsx watch src/index.ts\""
+args = "npm run dev"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
@@ -36,6 +36,10 @@ externalPort = 80
 [[ports]]
 localPort = 5001
 externalPort = 3000
+
+[[ports]]
+localPort = 38027
+externalPort = 3001
 
 [deployment]
 deploymentTarget = "autoscale"

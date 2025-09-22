@@ -7,7 +7,6 @@ function useScrollReveal(threshold = 0.1, once = true) {
   const ref = useRef(null)
   const isInView = useInView(ref, { 
     once, 
-    threshold,
     margin: "-10% 0px -10% 0px"
   })
 
@@ -68,6 +67,36 @@ export const ScrollReveal = ({
   )
 }
 
+// Placeholder for StaggeredReveal that will be defined later
+let StaggeredReveal: any
+
+// Parallax effect component
+export const Parallax = ({ children, className = "", speed = 0.5 }) => {
+  const { ref, isInView } = useScrollReveal()
+  const [offset, setOffset] = React.useState(0)
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (isInView) {
+        setOffset(window.scrollY * speed)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isInView, speed])
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      style={{ transform: `translateY(${offset}px)` }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 // Stagger container for multiple reveal elements
 export const StaggerReveal = ({ 
   children, 
@@ -121,4 +150,14 @@ export const StaggerReveal = ({
   )
 }
 
-export default ScrollReveal
+// Now define StaggeredReveal as alias
+StaggeredReveal = StaggerReveal
+export { StaggeredReveal }
+
+export default {
+  ScrollReveal,
+  StaggerReveal,
+  StaggeredReveal,
+  Parallax,
+  useScrollReveal
+}

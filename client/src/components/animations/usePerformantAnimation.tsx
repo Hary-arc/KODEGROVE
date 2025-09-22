@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from 'framer-motion'
 
 // Performance-optimized animation hook
-export const usePerformantAnimation = (options = {}) => {
+export const usePerformantAnimation = (options: any = {}) => {
   const {
     threshold = 0.1,
     rootMargin = '50px',
@@ -14,7 +14,7 @@ export const usePerformantAnimation = (options = {}) => {
   const [isVisible, setIsVisible] = useState(false)
   const [hasTriggered, setHasTriggered] = useState(false)
   const elementRef = useRef(null)
-  const observerRef = useRef(null)
+  const observerRef = useRef<IntersectionObserver | null>(null)
   const shouldReduceMotion = useReducedMotion()
 
   const handleIntersection = useCallback((entries) => {
@@ -58,11 +58,21 @@ export const usePerformantAnimation = (options = {}) => {
   }
 }
 
+// useScrollAnimation - alias for useScrollTrigger with scroll position
+export const useScrollAnimation = (callback, dependencies = [], options = {}) => {
+  return useScrollTrigger(callback, dependencies, options)
+}
+
+// useViewportAnimation - optimized viewport detection hook
+export const useViewportAnimation = (options = {}) => {
+  return usePerformantAnimation(options)
+}
+
 // Optimized scroll-triggered animation hook
-export const useScrollTrigger = (callback, dependencies = [], options = {}) => {
+export const useScrollTrigger = (callback: any, dependencies: any[] = [], options: any = {}) => {
   const { throttle = 16 } = options // 60fps
   const lastCallTime = useRef(0)
-  const rafId = useRef(null)
+  const rafId = useRef<number | null>(null)
 
   const throttledCallback = useCallback((...args) => {
     const now = Date.now()
@@ -95,8 +105,8 @@ export const useScrollTrigger = (callback, dependencies = [], options = {}) => {
 }
 
 // Optimized resize hook
-export const useOptimizedResize = (callback, dependencies = []) => {
-  const timeoutRef = useRef(null)
+export const useOptimizedResize = (callback: any, dependencies: any[] = []) => {
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const handleResize = () => {
@@ -122,6 +132,8 @@ export const useOptimizedResize = (callback, dependencies = []) => {
 
 export default {
   usePerformantAnimation,
+  useScrollAnimation,
+  useViewportAnimation,
   useScrollTrigger,
   useOptimizedResize
 }

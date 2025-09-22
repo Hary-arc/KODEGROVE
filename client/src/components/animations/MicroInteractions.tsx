@@ -83,25 +83,117 @@ export const MagneticButton = ({
   )
 }
 
+// HoverLift component - simple hover effect
+export const HoverLift = ({ children, className = "", liftHeight = 10 }) => {
+  return (
+    <motion.div
+      className={className}
+      whileHover={{ y: -liftHeight, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// MagneticHover component
+export const MagneticHover = ({ children, className = "", strength = 0.3 }) => {
+  const { x, y, onMouseMove, onMouseLeave } = useMagneticHover(strength)
+
+  return (
+    <motion.div
+      className={className}
+      style={{ x, y }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// AnimatedIcon component
+export const AnimatedIcon = ({ children, className = "", ...props }) => {
+  return (
+    <motion.div
+      className={className}
+      whileHover={{ scale: 1.1, rotate: 5 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// Typewriter effect component
+export const Typewriter = ({ text, className = "", speed = 100 }) => {
+  const [displayText, setDisplayText] = React.useState("")
+  const [currentIndex, setCurrentIndex] = React.useState(0)
+
+  React.useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + text[currentIndex])
+        setCurrentIndex(prev => prev + 1)
+      }, speed)
+      return () => clearTimeout(timeout)
+    }
+  }, [currentIndex, text, speed])
+
+  return (
+    <span className={className}>
+      {displayText}
+      {currentIndex < text.length && (
+        <motion.span
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.8, repeat: Infinity }}
+        >
+          |
+        </motion.span>
+      )}
+    </span>
+  )
+}
+
+// FloatingElement component
+export const FloatingElement = ({ children, className = "", amplitude = 10, duration = 3 }) => {
+  return (
+    <motion.div
+      className={className}
+      animate={{
+        y: [-amplitude, amplitude, -amplitude],
+      }}
+      transition={{
+        duration,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 // Parallax card component
 export const ParallaxCard = ({ 
   children, 
   className = "",
   strength = 0.1
 }) => {
-  const { springX, springY, updateMousePosition, resetPosition } = useMouseParallax(strength)
+  const { position, elementRef } = useMouseParallax(strength)
 
   return (
     <motion.div
       className={`relative ${className}`}
+      ref={elementRef as any}
       style={{ 
-        x: springX, 
-        y: springY,
-        rotateX: useTransform(springY, [-50, 50], [5, -5]),
-        rotateY: useTransform(springX, [-50, 50], [-5, 5])
+        x: position.x, 
+        y: position.y,
+        rotateX: position.y * 0.1,
+        rotateY: position.x * 0.1
       }}
-      onMouseMove={updateMousePosition}
-      onMouseLeave={resetPosition}
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
@@ -117,7 +209,7 @@ export const RippleButton = ({
   rippleColor = "rgba(255, 255, 255, 0.6)",
   ...props 
 }) => {
-  const [ripples, setRipples] = useState([])
+  const [ripples, setRipples] = useState<Array<{x: number, y: number, size: number, id: number}>>([])
 
   const createRipple = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -213,6 +305,11 @@ export const TiltCard = ({
 export default {
   useMouseParallax,
   useMagneticHover,
+  HoverLift,
+  MagneticHover,
+  AnimatedIcon,
+  Typewriter,
+  FloatingElement,
   MagneticButton,
   ParallaxCard,
   RippleButton,
