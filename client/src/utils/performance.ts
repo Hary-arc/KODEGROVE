@@ -3,6 +3,7 @@
 export class PerformanceMonitor {
   private static instance: PerformanceMonitor
   private metrics: Map<string, number> = new Map()
+  private observer: PerformanceObserver | null = null
 
   static getInstance(): PerformanceMonitor {
     if (!PerformanceMonitor.instance) {
@@ -90,14 +91,81 @@ export class PerformanceMonitor {
   preloadCriticalResources(): void {
     const criticalResources = [
       { href: '/api/health', as: 'fetch' },
-      // Add more critical resources
+      { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap', as: 'style' },
+      { href: '/src/index.css', as: 'style' }
     ]
 
     criticalResources.forEach(({ href, as }) => {
+      try {
+        const link = document.createElement('link')
+        link.rel = 'preload'
+        link.href = href
+        link.as = as
+        if (as === 'style') {
+          link.onload = () => {
+            link.rel = 'stylesheet'
+          }
+        }
+        document.head.appendChild(link)
+      } catch (error) {
+        console.warn('Failed to preload resource:', href, error)
+      }
+    })
+
+    // Preload critical images
+    this.preloadImages([
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80'
+    ])
+  }
+
+  // Preload critical images
+  private preloadImages(urls: string[]): void {
+    urls.forEach(url => {
+      const img = new Image()
+      img.src = url
+    })
+  }
+
+  // Initialize performance optimizations
+  init(): void {
+    // Enable passive event listeners where possible
+    this.setupPassiveListeners()
+    
+    // Optimize font loading
+    this.optimizeFontLoading()
+    
+    // Setup resource hints
+    this.setupResourceHints()
+  }
+
+  private setupPassiveListeners(): void {
+    const events = ['scroll', 'touchstart', 'touchmove', 'wheel']
+    events.forEach(event => {
+      document.addEventListener(event, () => {}, { passive: true })
+    })
+  }
+
+  private optimizeFontLoading(): void {
+    if ('fonts' in document) {
+      document.fonts.ready.then(() => {
+        console.log('Fonts loaded')
+      })
+    }
+  }
+
+  private setupResourceHints(): void {
+    const hints = [
+      { rel: 'dns-prefetch', href: '//fonts.googleapis.com' },
+      { rel: 'dns-prefetch', href: '//images.unsplash.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true }
+    ]
+
+    hints.forEach(({ rel, href, crossorigin }) => {
       const link = document.createElement('link')
-      link.rel = 'preload'
+      link.rel = rel
       link.href = href
-      link.as = as
+      if (crossorigin) link.crossOrigin = 'anonymous'
       document.head.appendChild(link)
     })
   }

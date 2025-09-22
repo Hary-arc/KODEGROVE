@@ -1,89 +1,112 @@
+
 'use client'
 
 import React, { useEffect, useState, Suspense } from 'react'
 import { PerformanceMonitor } from './utils/performance'
-import { SEOHead, generateWebsiteSchema, generateOrganizationSchema } from './components/SEOHead'
+import { SEOHead, generateWebsiteSchema } from './components/SEOHead'
 import { CriticalCSS } from './components/CriticalCSS'
 import { Navigation } from './components/Navigation'
 import { Router } from './components/Router'
 import { UniversalFloatingNav } from './components/UniversalFloatingNav'
 import { siteConfig, navigation, footerLinks } from './data/site-config'
 
-// Import page components
-import { EnhancedHomePage } from './pages/EnhancedHomePage'
-import { AboutPage } from './pages/AboutPage'
-import { PortfolioPage } from './pages/PortfolioPage'
-import { ServicesPage } from './pages/ServicesPage'
-import { PricingPage } from './pages/PricingPage'
-import { BlogPage } from './pages/BlogPage'
-import { ContactPage } from './pages/ContactPage'
-import { CareersPage } from './pages/CareersPage'
-import { DashboardPage } from './pages/DashboardPage'
+// Lazy load page components for better performance
+const EnhancedHomePage = React.lazy(() => import('./pages/EnhancedHomePage').then(module => ({ default: module.EnhancedHomePage })))
+const AboutPage = React.lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
+const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage').then(module => ({ default: module.PortfolioPage })))
+const ServicesPage = React.lazy(() => import('./pages/ServicesPage').then(module => ({ default: module.ServicesPage })))
+const PricingPage = React.lazy(() => import('./pages/PricingPage').then(module => ({ default: module.PricingPage })))
+const BlogPage = React.lazy(() => import('./pages/BlogPage').then(module => ({ default: module.BlogPage })))
+const ContactPage = React.lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
+const CareersPage = React.lazy(() => import('./pages/CareersPage').then(module => ({ default: module.CareersPage })))
+const DashboardPage = React.lazy(() => import('./pages/DashboardPage').then(module => ({ default: module.DashboardPage })))
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="relative">
+      <div className="w-16 h-16 border-4 border-transparent border-t-white/60 border-r-white/60 rounded-full animate-spin"></div>
+      <div 
+        className="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-purple-400 border-l-purple-400 rounded-full animate-spin" 
+        style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}
+      ></div>
+    </div>
+  </div>
+)
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [currentPage, setCurrentPage] = useState('home')
 
   useEffect(() => {
-    // Performance monitoring
     const performanceMonitor = PerformanceMonitor.getInstance()
     performanceMonitor.mark('app-start')
+    
+    // Preload critical resources
     performanceMonitor.preloadCriticalResources()
     
-    // Register service worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js')
+    // Register service worker with faster registration
+    if ('serviceWorker' in navigator && 'production' === import.meta.env.MODE) {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' })
         .then(() => console.log('SW registered'))
         .catch(() => console.log('SW registration failed'))
     }
     
-    // Smooth scrolling
-    document.documentElement.style.scrollBehavior = 'smooth'
-    
-    // Performance optimizations
-    document.body.style.overflow = 'hidden'
-    
-    // Loading animation
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-      document.body.style.overflow = 'auto'
-      performanceMonitor.mark('app-loaded')
-      performanceMonitor.measure('app-load-time', 'app-start', 'app-loaded')
-      performanceMonitor.reportMetrics()
-    }, 1000)
+    // Optimize initial render
+    const initializeApp = () => {
+      document.documentElement.style.scrollBehavior = 'smooth'
+      document.body.style.overflow = 'hidden'
+      
+      // Faster loading with requestIdleCallback
+      const callback = () => {
+        setIsLoaded(true)
+        document.body.style.overflow = 'auto'
+        performanceMonitor.mark('app-loaded')
+        performanceMonitor.measure('app-load-time', 'app-start', 'app-loaded')
+        performanceMonitor.reportMetrics()
+      }
 
-    // Track current page for floating nav context
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(callback, { timeout: 800 })
+      } else {
+        setTimeout(callback, 600)
+      }
+    }
+
+    // Defer non-critical initialization
+    requestAnimationFrame(initializeApp)
+
+    // Optimized hash change handler
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1) || '/'
       const pageName = hash === '/' ? 'home' : hash.split('/')[1] || hash.replace('/', '')
       setCurrentPage(pageName)
     }
 
-    window.addEventListener('hashchange', handleHashChange)
-    handleHashChange() // Set initial page
+    window.addEventListener('hashchange', handleHashChange, { passive: true })
+    handleHashChange()
 
     return () => {
-      clearTimeout(timer)
       window.removeEventListener('hashchange', handleHashChange)
     }
   }, [])
 
-  // Define routes
+  // Define routes with lazy loading
   const routes = [
-    { path: '/', component: <EnhancedHomePage /> },
-    { path: '/about', component: <AboutPage /> },
-    { path: '/portfolio', component: <PortfolioPage /> },
-    { path: '/services', component: <ServicesPage /> },
-    { path: '/pricing', component: <PricingPage /> },
-    { path: '/blog', component: <BlogPage /> },
-    { path: '/contact', component: <ContactPage /> },
-    { path: '/careers', component: <CareersPage /> },
-    { path: '/dashboard', component: <DashboardPage /> }
+    { path: '/', component: <Suspense fallback={<PageLoader />}><EnhancedHomePage /></Suspense> },
+    { path: '/about', component: <Suspense fallback={<PageLoader />}><AboutPage /></Suspense> },
+    { path: '/portfolio', component: <Suspense fallback={<PageLoader />}><PortfolioPage /></Suspense> },
+    { path: '/services', component: <Suspense fallback={<PageLoader />}><ServicesPage /></Suspense> },
+    { path: '/pricing', component: <Suspense fallback={<PageLoader />}><PricingPage /></Suspense> },
+    { path: '/blog', component: <Suspense fallback={<PageLoader />}><BlogPage /></Suspense> },
+    { path: '/contact', component: <Suspense fallback={<PageLoader />}><ContactPage /></Suspense> },
+    { path: '/careers', component: <Suspense fallback={<PageLoader />}><CareersPage /></Suspense> },
+    { path: '/dashboard', component: <Suspense fallback={<PageLoader />}><DashboardPage /></Suspense> }
   ]
 
   return (
     <>
-      {/* SEO Head */}
+      {/* SEO Head with performance optimization */}
       <SEOHead
         title={`${siteConfig.name} - ${siteConfig.tagline}`}
         description={siteConfig.description}
@@ -95,41 +118,23 @@ export default function App() {
       {/* Critical CSS */}
       <CriticalCSS />
       
-      {/* Loading Screen */}
+      {/* Optimized Loading Screen */}
       {!isLoaded && (
-        <div className="fixed inset-0 z-50 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-          <div className="relative">
-            <div className="w-20 h-20 border-4 border-transparent border-t-white/60 border-r-white/60 rounded-full animate-spin"></div>
-            <div 
-              className="absolute inset-0 w-20 h-20 border-4 border-transparent border-b-purple-400 border-l-purple-400 rounded-full animate-spin" 
-              style={{ 
-                animationDirection: 'reverse', 
-                animationDuration: '1.5s' 
-              }}
-            ></div>
-          </div>
+        <div className="loading-screen">
+          <div className="loading-spinner"></div>
         </div>
       )}
 
       <div className="min-h-screen bg-slate-950 text-white relative overflow-x-hidden">
-        {/* Animated Background */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          {/* Primary gradient */}
+        {/* Optimized Background with will-change */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none will-change-transform">
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
-          
-          {/* Floating orbs */}
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-float will-change-transform"></div>
           <div 
-            className="absolute top-3/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float" 
+            className="absolute top-3/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float will-change-transform" 
             style={{ animationDelay: '2s' }}
           ></div>
-          <div 
-            className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl animate-float" 
-            style={{ animationDelay: '4s' }}
-          ></div>
-          
-          {/* Grid pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] will-change-transform"></div>
         </div>
 
         {/* Navigation */}
@@ -140,10 +145,10 @@ export default function App() {
           <Router routes={routes} defaultRoute="/" />
         </main>
 
-        {/* Universal Floating Navigation */}
+        {/* Conditionally render floating nav */}
         {isLoaded && <UniversalFloatingNav currentPage={currentPage} />}
 
-        {/* Premium Footer */}
+        {/* Optimized Footer */}
         <footer className="relative z-10 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 border-t border-white/10">
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
           
@@ -174,7 +179,7 @@ export default function App() {
                     { name: 'Twitter', icon: 'tw' },
                     { name: 'GitHub', icon: 'gh' },
                     { name: 'Dribbble', icon: 'dr' }
-                  ].map((social, index) => (
+                  ].map((social) => (
                     <button
                       key={social.name}
                       className="relative w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-300 hover:text-white transition-all duration-300 group magnetic optimized overflow-hidden"

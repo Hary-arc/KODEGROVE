@@ -528,6 +528,77 @@
 }
 
 @layer utilities {
+  /* Performance optimizations */
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Critical performance styles */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  /* Optimize animations */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Loading optimizations */
+  .loading-screen {
+    contain: layout style paint;
+  }
+
+  .loading-spinner {
+    contain: layout style paint;
+  }
+
+  /* Font display optimization */
+  @font-face {
+    font-family: 'Inter';
+    font-display: swap;
+  }
+
+  /* Image optimization */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  picture {
+    display: block;
+  }
+
+  /* Layout shifts prevention */
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+
   .\@container\/card-header {
     container: card-header / inline-size;
   }
@@ -4730,11 +4801,11 @@
     }
   }
 
-  .group-data-\[disabled\=true\]\:pointer-events-none:is(:where(.group)[data-disabled="true"] *) {
+  .group-data-\[disabled\]\:pointer-events-none:is(:where(.group)[data-disabled="true"] *) {
     pointer-events: none;
   }
 
-  .group-data-\[disabled\=true\]\:opacity-50:is(:where(.group)[data-disabled="true"] *) {
+  .group-data-\[disabled\]\:opacity-50:is(:where(.group)[data-disabled="true"] *) {
     opacity: .5;
   }
 
@@ -6891,7 +6962,6 @@ html {
   font-size: var(--font-size);
 }
 
-
 .font-outfit {
   font-family: Outfit, sans-serif;
 }
@@ -7324,7 +7394,7 @@ body.scroll-lock {
   }
 }
 
-.slide-in-up {
+.animate-slide-in-up {
   animation: .8s ease-out slideInUp;
 }
 
@@ -7416,7 +7486,7 @@ body.scroll-lock {
 }
 
 .prose ul {
-  margin-bottom: 1.5rem;
+  margin-bottom:1.5rem;
   padding-left: 1.5rem;
 }
 
