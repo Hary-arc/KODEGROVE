@@ -1,0 +1,135 @@
+import { Request, Response } from 'express';
+import bcrypt from 'bcryptjs';
+import jwt, { Secret, SignOptions } from 'jsonwebtoken';
+import { User, userStore } from '../models';
+import { AuthRequest } from '../middleware/auth';
+
+// @desc    Register user
+// @route   POST /api/auth/register
+// @access  Public
+export const register = async (req: Request, res: Response) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // Check if user exists
+    const existingUser = await userStore.findOne(user => user.email === email);
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: 'User already exists'
+      });
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create user
+    const user = await userStore.create({
+      name,
+      email,
+      password: hashedPassword,
+      role: 'user',
+      createdAt: new Date().toISOString()
+    });
+
+    sendTokenResponse(user, 201, res);
+  } catch (err: any) {
+    res.status(400).json({
+      success: false,
+      message: err.message
+    });
+  }
+};
+
+// @desc    Login user
+// @route   POST /api/auth/login
+// @access  Public
+export const login = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate email & password
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide an email and password'
+      });
+    }
+
+    // Check for user
+    const user = await userStore.findOne(user => user.email === email);
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+    }
+
+    // Check if password matches
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid credentials'
+      });
+    }
+
+    sendTokenResponse(user, 200, res);
+  } catch (err: any) {
+    res.status(400).json({
+      success: false,
+      message: err.message
+    });
+  }
+};
+
+// @desc    Get current logged in user
+// @route   GET /api/auth/me
+// @access  Private
+export const getMe = async (req: AuthRequest, res: Response) => {
+  try {
+    const user = await userStore.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    const { password, ...userWithoutPassword } = user;
+    res.status(200).json({
+      success: true,
+      data: userWithoutPassword
+    });
+  } catch (err: any) {
+    res.status(400).json({
+      success: false,
+      message: err.message
+    });
+  }
+};
+
+// Get token from user, create cookie and send response
+const sendTokenResponse = (user: User, statusCode: number, res: Response) => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is required');
+  }
+
+  // Create token
+  const token = jwt.sign(
+    { id: user.id },
+    process.env.JWT_SECRET as jwt.Secret,
+    { 
+      expiresIn: (process.env.JWT_EXPIRE || '30d') as jwt.SignOptions['expiresIn']
+    }
+  );
+
+  const { password, ...userWithoutPassword } = user;
+
+  res.status(statusCode).json({
+    success: true,
+    token,
+    user: userWithoutPassword
+  });
+};
