@@ -95,13 +95,13 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000))
-    
+
     setIsSubmitting(false)
     setIsSubmitted(true)
-    
+
     // Reset form after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false)
@@ -123,7 +123,7 @@ export function ContactSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-purple-950/20 to-slate-950" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(139,92,246,0.15),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(6,182,212,0.15),transparent_50%)]" />
-      
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
         <motion.div
@@ -141,7 +141,7 @@ export function ContactSection() {
             <MessageCircle className="w-5 h-5 text-cyan-400" />
             <span className="font-medium text-gray-200">Let's Connect</span>
           </motion.div>
-          
+
           <h2 className="font-outfit text-5xl lg:text-6xl font-bold mb-8 leading-tight">
             <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Ready to Create
@@ -151,7 +151,7 @@ export function ContactSection() {
               Something Mesmerizing?
             </span>
           </h2>
-          
+
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Let's transform your vision into a hypnotic digital experience that captivates users 
             and revolutionizes your business. The magic starts here.
@@ -169,7 +169,7 @@ export function ContactSection() {
             {/* Contact Methods */}
             <div>
               <h3 className="font-outfit text-2xl font-bold text-white mb-8">Get in Touch</h3>
-              
+
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div
@@ -184,7 +184,7 @@ export function ContactSection() {
                         <info.icon className="w-6 h-6 text-white relative z-10" />
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                       </div>
-                      
+
                       <div className="flex-1">
                         <h4 className="font-semibold text-white mb-1">{info.title}</h4>
                         <p className="text-lg text-cyan-400 font-medium mb-1">{info.info}</p>
@@ -206,7 +206,7 @@ export function ContactSection() {
               transition={{ duration: 1, delay: 0.7 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5" />
-              
+
               <div className="relative z-10">
                 <div className="flex items-center space-x-3 mb-6">
                   <div className="w-12 h-12 gradient-electric rounded-xl flex items-center justify-center">
@@ -257,7 +257,7 @@ export function ContactSection() {
           >
             <Card className="glass border border-white/10 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5" />
-              
+
               <CardContent className="p-10 relative z-10">
                 {!isSubmitted ? (
                   <>
@@ -287,7 +287,7 @@ export function ContactSection() {
                             placeholder="John Doe"
                           />
                         </div>
-                        
+
                         <div className="space-y-2">
                           <Label htmlFor="email" className="text-white font-medium">Email Address *</Label>
                           <Input
@@ -335,7 +335,7 @@ export function ContactSection() {
                             ))}
                           </select>
                         </div>
-                        
+
                         <div className="space-y-2">
                           <Label htmlFor="budget" className="text-white font-medium">Project Budget</Label>
                           <select
@@ -390,28 +390,32 @@ export function ContactSection() {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white py-4 h-16 text-lg font-semibold rounded-2xl transition-all duration-300 relative overflow-hidden group"
+                        className="w-full gradient-electric text-white font-semibold py-4 text-lg relative overflow-hidden group"
                       >
-                        <span className="relative z-10 flex items-center justify-center space-x-2">
-                          {isSubmitting ? (
-                            <>
-                              <motion.div
-                                className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                              />
-                              <span>Casting Digital Spell...</span>
-                            </>
-                          ) : (
-                            <>
-                              <Zap className="w-6 h-6" />
-                              <span>Start the Magic</span>
-                              <Send className="w-5 h-5" />
-                            </>
-                          )}
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {isSubmitting ? (
+                          <div className="flex items-center space-x-3">
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                            <span>Sending...</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-center space-x-3">
+                            <Send className="w-5 h-5" />
+                            <span>Send Message</span>
+                            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                          </div>
+                        )}
                       </Button>
+
+                      <div className="text-center mt-4">
+                        <Button
+                          onClick={() => window.location.hash = '/quotation'}
+                          variant="outline"
+                          className="border-white/20 text-white hover:bg-white/10"
+                        >
+                          Or Get Instant Quotation
+                          <ArrowUpRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </div>
 
                       <p className="text-sm text-gray-400 text-center">
                         🔒 Your information is secure and will never be shared.
@@ -433,7 +437,7 @@ export function ContactSection() {
                     >
                       <CheckCircle className="w-10 h-10 text-white" />
                     </motion.div>
-                    
+
                     <h3 className="font-outfit text-4xl font-bold text-white mb-4">
                       Magic in Motion! ✨
                     </h3>

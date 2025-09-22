@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { ScrollReveal, StaggeredReveal, Parallax } from '../components/animations/ScrollReveal'
 import { HoverLift, AnimatedIcon, Typewriter } from '../components/animations/MicroInteractions'
 import { AboutSection } from '../components/AboutSection'
+import { Button } from '../components/ui/button'
+import { Sparkles } from 'lucide-react'
 
 export function AboutPage() {
   return (
@@ -13,7 +15,7 @@ export function AboutPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-purple-950/20 to-slate-950" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(139,92,246,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(6,182,212,0.15),transparent_50%)]" />
-        
+
         {/* Animated background particles */}
         <Parallax speed={0.2} className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-float" />
@@ -22,7 +24,7 @@ export function AboutPage() {
             style={{ animationDelay: '2s' }}
           />
         </Parallax>
-        
+
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <ScrollReveal variant="fadeUp" delay={0.2}>
@@ -35,7 +37,7 @@ export function AboutPage() {
                 <span className="font-medium text-gray-200">About CodeFlow</span>
               </div>
             </ScrollReveal>
-            
+
             <ScrollReveal variant="fadeUp" delay={0.4}>
               <h1 className="font-outfit text-6xl lg:text-7xl font-bold mb-8 leading-tight">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -51,12 +53,23 @@ export function AboutPage() {
                 </span>
               </h1>
             </ScrollReveal>
-            
+
             <ScrollReveal variant="fadeUp" delay={0.8}>
               <p className="text-2xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
                 A passionate team of designers, developers, and strategists dedicated to creating 
                 digital experiences that mesmerize users and transform businesses into industry leaders.
               </p>
+            </ScrollReveal>
+
+            <ScrollReveal variant="fadeUp" delay={1.0}>
+              <Button 
+                onClick={() => window.location.hash = '/quotation'}
+                size="lg" 
+                className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white px-8 py-4"
+              >
+                <Sparkles className="w-5 h-5 mr-2" />
+                Get Quotation
+              </Button>
             </ScrollReveal>
           </div>
         </div>
@@ -78,7 +91,7 @@ export function AboutPage() {
           </div>
         </ScrollReveal>
       </section>
-      
+
       {/* About Content - Removed the motion wrapper that was causing issues */}
       <AboutSection />
     </div>

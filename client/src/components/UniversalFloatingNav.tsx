@@ -96,8 +96,8 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
   }
 
   const viewQuote = () => {
-    // Open quote/proposal generator
-    window.open('#/pricing', '_blank')
+    // Navigate to quotation page
+    window.location.hash = '/quotation'
     setIsExpanded(false)
   }
 
@@ -170,7 +170,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
     {
       id: 'quote',
       icon: FileText,
-      label: 'Get Quote',
+      label: 'Get Quotation',
       action: viewQuote,
       color: 'from-pink-500 to-rose-500',
       show: currentPage !== 'pricing',

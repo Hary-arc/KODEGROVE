@@ -114,8 +114,11 @@ export function EnhancedHeroSection() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white px-8 py-4 rounded-xl font-semibold text-lg group">
-                REQUEST A QUOTE
+              <Button 
+                onClick={() => window.location.hash = '/quotation'}
+                className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white px-8 py-4 rounded-xl font-semibold text-lg group"
+              >
+                GET QUOTATION
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
             </motion.div>

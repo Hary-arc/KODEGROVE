@@ -3,20 +3,22 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import React from 'react'
+import { Button } from '@/components/ui/button' // Assuming Button component is here
+import { Eye, ArrowRight, Sparkles } from 'lucide-react' // Assuming these icons are here
 
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const isInView = useInView(containerRef, { once: true })
-  
-  
-  
+
+
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   })
-  
+
 
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
 
@@ -86,34 +88,34 @@ export function HeroSection() {
 
     function animate() {
       if (!ctx || !canvas) return
-      
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
+
       particles.forEach((particle, index) => {
         particle.x += particle.vx
         particle.y += particle.vy
-        
+
         if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
         if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
-        
+
         ctx.save()
         ctx.globalAlpha = particle.opacity
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
         ctx.fillStyle = particle.color
         ctx.fill()
-        
+
         ctx.shadowBlur = 15
         ctx.shadowColor = particle.color
         ctx.fill()
         ctx.restore()
-        
+
         // Connect nearby particles
         particles.slice(index + 1).forEach(otherParticle => {
           const dx = particle.x - otherParticle.x
           const dy = particle.y - otherParticle.y
           const distance = Math.sqrt(dx * dx + dy * dy)
-          
+
           if (distance < 120) {
             ctx.save()
             ctx.globalAlpha = (120 - distance) / 120 * 0.15
@@ -127,10 +129,10 @@ export function HeroSection() {
           }
         })
       })
-      
+
       animationId = requestAnimationFrame(animate)
     }
-    
+
     animate()
 
     const handleResize = () => {
@@ -139,14 +141,14 @@ export function HeroSection() {
     }
 
     window.addEventListener('resize', handleResize)
-    
+
     return () => {
       cancelAnimationFrame(animationId)
       window.removeEventListener('resize', handleResize)
     }
   }, [])
 
-  
+
 
   const scrollToPortfolio = () => {
     const element = document.querySelector('#portfolio')
@@ -164,7 +166,7 @@ export function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         style={{ opacity: 0.4 }}
       />
-      
+
       {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-purple-900/30 to-slate-900/90" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(139,92,246,0.15),transparent_50%)]" />
@@ -181,7 +183,7 @@ export function HeroSection() {
           <div className="text-center mb-12">
             <p className="text-gray-400 font-medium mb-8">Trusted by industry leaders</p>
           </div>
-          
+
           {/* Marquee Container */}
           <div className="relative overflow-hidden">
             <div className="flex animate-marquee whitespace-nowrap">
@@ -200,7 +202,7 @@ export function HeroSection() {
                   </div>
                 </motion.div>
               ))}
-              
+
               {/* Duplicate set for seamless loop */}
               {clientLogos.map((logo, index) => (
                 <motion.div

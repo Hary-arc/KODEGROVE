@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, User, Menu, X, LogOut, Settings, BarChart3, ChevronDown, Globe, Smartphone, ShoppingCart, Database, Palette, Code } from "lucide-react";
+import { Sparkles, User, Menu, X, LogOut, Settings, BarChart3, ChevronDown, Globe, Smartphone, ShoppingCart, Database, Palette, Code, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCurrentRoute, navigateTo } from "./Router";
 import { AuthModal } from "./AuthModal";
@@ -80,11 +80,11 @@ export function Navigation() {
     // Close dropdowns first
     setIsProfileMenuOpen(false);
     setIsServicesDropdownOpen(false);
-    
+
     // Check if it's a service section anchor
     if (path.includes('#')) {
       const [basePath, sectionId] = path.split('#');
-      
+
       // Navigate to the page first if not already there
       if (currentRoute !== basePath) {
         navigateTo(basePath);
@@ -221,7 +221,7 @@ export function Navigation() {
                     )}
                   </motion.button>
                 ))}
-                
+
                 {/* Services Dropdown */}
                 <div className="relative services-dropdown">
                   <motion.button
@@ -327,7 +327,7 @@ export function Navigation() {
                                 className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                                 initial={false}
                               />
-                              
+
                               {/* Icon Container */}
                               <motion.div 
                                 className="relative z-10 w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center group-hover:from-purple-500/30 group-hover:to-cyan-500/30 transition-all duration-300 border border-white/10 group-hover:border-white/20"
@@ -339,7 +339,7 @@ export function Navigation() {
                               >
                                 <service.icon className="w-6 h-6 text-purple-300 group-hover:text-white transition-colors duration-300" />
                               </motion.div>
-                              
+
                               {/* Content */}
                               <div className="relative z-10 flex-1 min-w-0">
                                 <motion.h4 
@@ -363,7 +363,7 @@ export function Navigation() {
                             </motion.button>
                           ))}
                         </div>
-                        
+
                         {/* CTA Button */}
                         <motion.div
                           className="relative z-10 pt-4 border-t border-white/10"
@@ -506,12 +506,11 @@ export function Navigation() {
           {/* Desktop CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <Button
-              onClick={() => handleNavigation("/contact")}
-              size="sm"
-              className="gradient-electric hover:shadow-lg hover:shadow-purple-500/25 text-white rounded-xl px-6 py-2 font-semibold transition-all duration-300"
+              onClick={() => handleNavigation("/quotation")}
+              className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white font-semibold"
             >
-              <Sparkles className="w-4 h-4 mr-2" />
-              Get Started
+              GET QUOTATION
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
 
             {user ? (
@@ -646,7 +645,7 @@ export function Navigation() {
                   )}
                 </motion.button>
               ))}
-              
+
               {/* Mobile Services Button */}
               <motion.button
                 onClick={() => handleNavigation("/services")}
@@ -677,6 +676,16 @@ export function Navigation() {
               </motion.button>
             </div>
           </motion.nav>
+
+          <div className="mt-6 border-t border-white/10 pt-6">
+              <Button 
+                onClick={() => handleNavigation("/quotation")}
+                className="w-full gradient-electric text-white font-semibold"
+              >
+                Get Quotation
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
         </div>
       </div>
     </header>

@@ -11,22 +11,24 @@ import { siteConfig, navigation, footerLinks } from './data/site-config'
 
 // Lazy load page components for better performance
 const EnhancedHomePage = React.lazy(() => import('./pages/EnhancedHomePage').then(module => ({ default: module.EnhancedHomePage })))
-const AboutPage = React.lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
-const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage').then(module => ({ default: module.PortfolioPage })))
 const ServicesPage = React.lazy(() => import('./pages/ServicesPage').then(module => ({ default: module.ServicesPage })))
-const PricingPage = React.lazy(() => import('./pages/PricingPage').then(module => ({ default: module.PricingPage })))
-const BlogPage = React.lazy(() => import('./pages/BlogPage').then(module => ({ default: module.BlogPage })))
+const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage').then(module => ({ default: module.PortfolioPage })))
+const AboutPage = React.lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
 const ContactPage = React.lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
 const CareersPage = React.lazy(() => import('./pages/CareersPage').then(module => ({ default: module.CareersPage })))
+const PricingPage = React.lazy(() => import('./pages/PricingPage').then(module => ({ default: module.PricingPage })))
+const BlogPage = React.lazy(() => import('./pages/BlogPage').then(module => ({ default: module.BlogPage })))
 const DashboardPage = React.lazy(() => import('./pages/DashboardPage').then(module => ({ default: module.DashboardPage })))
+const AuthPage = React.lazy(() => import('./pages/AuthPage').then(m => ({ default: m.AuthPage })))
+const QuotationPage = React.lazy(() => import('./pages/QuotationPage').then(m => ({ default: m.QuotationPage })))
 
 // Loading fallback component
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center">
     <div className="relative">
       <div className="w-16 h-16 border-4 border-transparent border-t-white/60 border-r-white/60 rounded-full animate-spin"></div>
-      <div 
-        className="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-purple-400 border-l-purple-400 rounded-full animate-spin" 
+      <div
+        className="absolute inset-0 w-16 h-16 border-4 border-transparent border-b-purple-400 border-l-purple-400 rounded-full animate-spin"
         style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}
       ></div>
     </div>
@@ -95,7 +97,7 @@ export default function App() {
   }, [])
 
   // Define routes with lazy loading
-  const routes = [
+  const routes: RouteConfig[] = [
     { path: '/', component: <Suspense fallback={<PageLoader />}><EnhancedHomePage /></Suspense> },
     { path: '/about', component: <Suspense fallback={<PageLoader />}><AboutPage /></Suspense> },
     { path: '/portfolio', component: <Suspense fallback={<PageLoader />}><PortfolioPage /></Suspense> },
@@ -104,7 +106,9 @@ export default function App() {
     { path: '/blog', component: <Suspense fallback={<PageLoader />}><BlogPage /></Suspense> },
     { path: '/contact', component: <Suspense fallback={<PageLoader />}><ContactPage /></Suspense> },
     { path: '/careers', component: <Suspense fallback={<PageLoader />}><CareersPage /></Suspense> },
-    { path: '/dashboard', component: <Suspense fallback={<PageLoader />}><DashboardPage /></Suspense> }
+    { path: '/dashboard', component: <Suspense fallback={<PageLoader />}><DashboardPage /></Suspense> },
+    { path: '/auth', component: <Suspense fallback={<PageLoader />}><AuthPage /></Suspense> },
+    { path: '/quotation', component: <Suspense fallback={<PageLoader />}><QuotationPage /></Suspense> }
   ]
 
   return (
@@ -133,8 +137,8 @@ export default function App() {
         <div className="fixed inset-0 overflow-hidden pointer-events-none will-change-transform" style={{ position: 'relative' }}>
           <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
           <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-float will-change-transform"></div>
-          <div 
-            className="absolute top-3/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float will-change-transform" 
+          <div
+            className="absolute top-3/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float will-change-transform"
             style={{ animationDelay: '2s' }}
           ></div>
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] will-change-transform"></div>
@@ -165,11 +169,11 @@ export default function App() {
                 >
                   <div className="relative">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-500 via-violet-600 to-purple-700 rounded-full flex items-center justify-center relative overflow-hidden shadow-lg shadow-purple-500/25">
-                      <svg 
-                        className="w-7 h-7 text-white relative z-10" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
+                      <svg
+                        className="w-7 h-7 text-white relative z-10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
                         strokeWidth="1.5"
                       >
                         <path d="M12 2L8 8l4 6 4-6-4-6z" />
