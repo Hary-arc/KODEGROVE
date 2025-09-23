@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, ReactNode } from "react"
 import { motion, useInView, useSpring, useTransform, useScroll } from 'framer-motion'
 
 // Enhanced scroll-triggered animations
@@ -7,7 +7,7 @@ export const useScrollAnimation = (threshold = 0.1) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { 
     once: true, 
-    threshold,
+    amount: threshold, // Adjust threshold as needed
     margin: "-10% 0px -10% 0px"
   })
 
@@ -22,7 +22,10 @@ export const useParallaxEffect = (speed = 0.5) => {
 }
 
 // Organic hover animations
-export const OrganicHover = ({ children, className = "" }) => {
+export const OrganicHover = ({children,className = "",}: {
+  children: ReactNode
+  className?: string
+}) => {
   return (
     <motion.div
       className={className}
@@ -50,7 +53,13 @@ export const OrganicHover = ({ children, className = "" }) => {
 }
 
 // Smooth stagger animations
-export const StaggerContainer = ({ children, staggerDelay = 0.1 }) => {
+export const StaggerContainer = ({
+  children,
+  staggerDelay = 0.1,
+}: {
+  children: ReactNode
+  staggerDelay?: number
+})  => {
   return (
     <motion.div
       initial="hidden"
@@ -70,7 +79,13 @@ export const StaggerContainer = ({ children, staggerDelay = 0.1 }) => {
   )
 }
 
-export const StaggerItem = ({ children, className = "" }) => {
+export const StaggerItem = ({
+  children,
+  className = "",
+}: {
+  children: ReactNode
+  className?: string
+}) => {
   return (
     <motion.div
       className={className}
@@ -101,7 +116,15 @@ export const StaggerItem = ({ children, className = "" }) => {
 }
 
 // Floating elements with natural movement
-export const FloatingElement = ({ children, intensity = 1, className = "" }) => {
+export const FloatingElement = ({
+  children,
+  intensity = 1,
+  className = "",
+}: {
+  children: ReactNode
+  intensity?: number
+  className?: string
+}) => {
   return (
     <motion.div
       className={className}
@@ -146,7 +169,17 @@ export const MorphingGradient = ({ className = "" }) => {
 }
 
 // Enhanced button with organic animations
-export const OrganicButton = ({ children, onClick, className = "", variant = "primary" }) => {
+export const OrganicButton = ({
+  children,
+  onClick,
+  className = "",
+  variant = "primary",
+}: {
+  children: ReactNode
+  onClick?: () => void
+  className?: string
+  variant?: "primary" | "secondary" | "ghost"
+})  => {
   const [isPressed, setIsPressed] = useState(false)
 
   const variants = {
@@ -189,7 +222,7 @@ export const LiquidCursor = () => {
   const [isHovering, setIsHovering] = useState(false)
 
   useEffect(() => {
-    const updateMousePosition = (e) => {
+    const updateMousePosition = (e: { clientX: any; clientY: any }) => {
       setMousePosition({ x: e.clientX, y: e.clientY })
     }
 
@@ -233,7 +266,13 @@ export const LiquidCursor = () => {
 }
 
 // Text reveal animation
-export const TextReveal = ({ children, className = "" }) => {
+export const TextReveal = ({
+  children,
+  className = "",
+}: {
+  children: ReactNode
+  className?: string
+}) => {
   const { ref, isInView } = useScrollAnimation()
 
   return (

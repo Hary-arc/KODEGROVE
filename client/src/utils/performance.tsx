@@ -1,3 +1,4 @@
+import React from "react";
 
 // Performance monitoring utilities
 export class PerformanceMonitor {
@@ -184,15 +185,25 @@ export class PerformanceMonitor {
 // Lazy loading utility for components
 export function lazyLoadComponent<T extends React.ComponentType<any>>(
   importFunction: () => Promise<{ default: T }>,
-  fallback?: React.ComponentType
+  fallback?: React.ComponentType<any>
 ): React.LazyExoticComponent<T> {
-  return React.lazy(() => {
-    return importFunction().catch(error => {
-      console.error('Failed to load component:', error)
-      return { default: fallback || (() => React.createElement('div', {}, 'Loading failed')) as T }
-    })
-  })
+  const loader = async (): Promise<{ default: T }> => {
+    try {
+      return await importFunction();
+    } catch (error) {
+      console.error("Failed to load component:", error);
+
+      const Fallback: React.ComponentType<any> =
+        fallback ?? DefaultFallback;
+
+      return { default: (Fallback as unknown) as T };
+    }
+  };
+
+  return React.lazy(loader as () => Promise<{ default: T }>);
 }
+
+const DefaultFallback: React.FC = () => <div>'Loading failed'</div>;
 
 // Debounce utility for performance
 export function debounce<T extends (...args: any[]) => any>(

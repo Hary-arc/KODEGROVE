@@ -17,17 +17,21 @@ export const usePerformantAnimation = (options: any = {}) => {
   const observerRef = useRef<IntersectionObserver | null>(null)
   const shouldReduceMotion = useReducedMotion()
 
-  const handleIntersection = useCallback((entries) => {
-    const [entry] = entries
-    const isIntersecting = entry.isIntersecting
+  const handleIntersection = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const [entry] = entries
+      const isIntersecting = entry.isIntersecting
 
-    if (isIntersecting && (!triggerOnce || !hasTriggered)) {
-      setIsVisible(true)
-      setHasTriggered(true)
-    } else if (!triggerOnce && !isIntersecting) {
-      setIsVisible(false)
-    }
-  }, [triggerOnce, hasTriggered])
+      if (isIntersecting && (!triggerOnce || !hasTriggered)) {
+        setIsVisible(true)
+        setHasTriggered(true)
+      } else if (!triggerOnce && !isIntersecting) {
+        setIsVisible(false)
+      }
+    },
+    [triggerOnce, hasTriggered]
+  )
+
 
   useEffect(() => {
     const element = elementRef.current

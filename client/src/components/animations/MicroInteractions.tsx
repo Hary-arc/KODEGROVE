@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useCallback, useRef, MouseEvent } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform, MotionValue } from 'framer-motion'
 import { ReactNode } from 'react'
 
 // Custom hook for mouse parallax effect
@@ -26,34 +26,39 @@ export const useMouseParallax = (strength = 0.5) => {
 }
 
 // Custom hook for magnetic hover effect
-export const useMagneticHover = (strength = 0.3) => {
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
+export const useMagneticHover = <T extends HTMLElement = HTMLDivElement>(
+  strength = 0.3
+) => {
+  const x: MotionValue<number> = useMotionValue(0);
+  const y: MotionValue<number> = useMotionValue(0);
 
-  const springX = useSpring(x, { stiffness: 400, damping: 40 })
-  const springY = useSpring(y, { stiffness: 400, damping: 40 })
+  const springX = useSpring(x, { stiffness: 400, damping: 40 });
+  const springY = useSpring(y, { stiffness: 400, damping: 40 });
 
-  const handleMouseMove = useCallback((e: MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<T>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-    x.set((e.clientX - centerX) * strength)
-    y.set((e.clientY - centerY) * strength)
-  }, [x, y, strength])
+      x.set((e.clientX - centerX) * strength);
+      y.set((e.clientY - centerY) * strength);
+    },
+    [x, y, strength]
+  );
 
   const handleMouseLeave = useCallback(() => {
-    x.set(0)
-    y.set(0)
-  }, [x, y])
+    x.set(0);
+    y.set(0);
+  }, [x, y]);
 
   return {
     x: springX,
     y: springY,
     onMouseMove: handleMouseMove,
-    onMouseLeave: handleMouseLeave
-  }
-}
+    onMouseLeave: handleMouseLeave,
+  };
+};
 
 // Magnetic button component
 export const MagneticButton = ({
@@ -67,7 +72,7 @@ export const MagneticButton = ({
   strength?: number
   [key: string]: any
 }) => {
-  const { x, y, onMouseMove, onMouseLeave } = useMagneticHover(strength)
+  const { x, y, onMouseMove, onMouseLeave } = useMagneticHover<HTMLButtonElement>(0.3);
 
   return (
     <motion.button
