@@ -15,7 +15,8 @@ import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 import { ResponsiveCard, ResponsiveCardGrid } from './ui/responsive-card'
 import { ImageWithFallback } from './figma/ImageWithFallback'
-import exampleImage from 'attached_assets/Screenshot 2025-09-08 030722_1758575378245.png'
+// @ts-ignore
+import exampleImage from '../../../attached_assets/Screenshot 2025-09-08 030722_1758575378245.png'
 import React from 'react'
 // Major client logos and information
 const clientsData = [

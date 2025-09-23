@@ -16,7 +16,8 @@ import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 import { ResponsiveCard } from './ui/responsive-card'
 import { ImageWithFallback } from './figma/ImageWithFallback'
-import exampleImage from 'figma:asset/1787cc73d341b691f9f5f240d514e80ec93f243c.png'
+// @ts-ignore
+import exampleImage from '../assets/1787cc73d341b691f9f5f240d514e80ec93f243c.png'
 import React from 'react'
 // Solution features with enhanced descriptions
 const creativeSolutions = [

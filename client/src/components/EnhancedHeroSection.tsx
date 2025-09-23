@@ -13,7 +13,8 @@ import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 import { ResponsiveCard } from './ui/responsive-card'
 import { ImageWithFallback } from './figma/ImageWithFallback'
-import exampleImage from 'figma:asset/92f6adf529a2baec5efe16194b4955f985619e7a.png'
+// @ts-ignore
+import exampleImage from '../assets/92f6adf529a2baec5efe16194b4955f985619e7a.png'
 import React from 'react'
 
 // Client logos
