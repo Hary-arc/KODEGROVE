@@ -1655,6 +1655,37 @@ body.scroll-lock {
   }
 }
 
+/* Glass shine effect */
+.glass-shine-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.glass-shine-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%; /* start off-screen */
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 2.5s infinite;
+}
+
+@keyframes shine {
+  100% {
+    left: 125%; /* move fully across */
+  }
+}
+
+
 /* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,

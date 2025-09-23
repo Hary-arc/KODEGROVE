@@ -15,7 +15,7 @@ import {
   ExternalLink,
   Clock
 } from 'lucide-react'
-
+import React from 'react'
 interface DashboardNotificationsProps {
   notifications: Notification[]
   onMarkAsRead: (id: string) => void

@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { motion } from 'framer-motion'
 import { ResponsiveCard, ResponsiveCardHeader, ResponsiveCardContent, ResponsiveCardFooter } from './ui/responsive-card'
 import { Avatar } from './ui/avatar'

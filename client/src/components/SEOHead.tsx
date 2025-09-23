@@ -14,7 +14,7 @@ interface SEOHeadProps {
 }
 
 export function SEOHead({
-  title = 'CodeFlow - Digital Experiences That Mesmerize',
+  title = 'Kodegrove - Digital Experiences That Mesmerize',
   description = 'Crafting hypnotic digital experiences that transform businesses. Professional web development, design, and digital marketing services.',
   keywords = ['web development', 'digital marketing', 'web design', 'seo', 'react', 'typescript'],
   canonicalUrl,

@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { blogPosts, featuredPosts, blogCategories, BlogPost, BlogCategory, getPostBySlug } from '../data/blog'

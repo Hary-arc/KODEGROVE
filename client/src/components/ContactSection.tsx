@@ -19,7 +19,7 @@ import {
   Sparkles,
   Zap
 } from 'lucide-react'
-
+import React from 'react'
 export function ContactSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })

@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Card, CardContent } from './ui/card'
@@ -253,7 +253,7 @@ export function ServicesSection() {
             {[
               { icon: '🚀', value: '24h', label: 'Response Time' },
               { icon: '📈', value: '300%', label: 'ROI Average' },
-              { icon: '⭐', value: '500+', label: 'Happy Clients' },
+              { icon: '⭐', value: '100+', label: 'Happy Clients' },
               { icon: '🔒', value: '100%', label: 'Secure' }
             ].map((stat, index) => (
               <motion.div

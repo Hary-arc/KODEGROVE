@@ -27,7 +27,7 @@ import {
   Heart,
   Share2
 } from 'lucide-react'
-
+import React from 'react'
 // Demo data for showcase
 const showcaseCards = [
   {
