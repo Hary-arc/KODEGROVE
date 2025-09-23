@@ -1,4 +1,4 @@
-import { User } from './index';
+import { User } from './index.js';
 
 export interface IBlog {
   id: string;
