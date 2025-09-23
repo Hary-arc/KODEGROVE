@@ -149,14 +149,6 @@ export function HeroSection() {
   }, [])
 
 
-
-  const scrollToPortfolio = () => {
-    const element = document.querySelector('#portfolio')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section id="home" ref={containerRef} className="relative flex items-center justify-center overflow-hidden">
 
@@ -223,26 +215,7 @@ export function HeroSection() {
         </motion.div>
 
         {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 2.0 }}
-          style={{ opacity }}
-        >
-          <motion.div
-            className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center p-2 cursor-pointer"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            onClick={scrollToPortfolio}
-          >
-            <motion.div
-              className="w-1.5 h-4 gradient-electric rounded-full"
-              animate={{ scaleY: [1, 0.3, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </motion.div>
-        </motion.div>
+        
       </div>
     </section>
   )

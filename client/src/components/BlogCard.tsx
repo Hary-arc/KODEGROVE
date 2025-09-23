@@ -7,6 +7,7 @@ import { Button } from './ui/button'
 import { Avatar } from './ui/avatar'
 import { Clock, Eye, MessageCircle, BookOpen, ArrowUpRight, Share2, Bookmark } from 'lucide-react'
 import { ImageWithFallback } from './figma/ImageWithFallback'
+import React from 'react'
 
 interface BlogCardProps {
   post: {

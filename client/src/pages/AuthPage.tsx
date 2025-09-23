@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Sparkles, Github, Chrome, Shield, Zap } from 'lucide-react'

@@ -4,13 +4,15 @@ import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Building2, Briefcase, Globe, TrendingUp, Users, Award, Star, ArrowUpRight } from 'lucide-react'
 
+const standardGradient = 'from-blue-500 to-purple-600';
+
 const industries = [
   {
     icon: Building2,
     name: 'FinTech & Banking',
     description: 'Secure financial platforms and digital banking solutions',
     clientCount: '50+',
-    gradient: 'from-emerald-500 to-teal-600',
+    gradient: standardGradient,
     projects: ['Mobile Banking Apps', 'Trading Platforms', 'Payment Systems'],
     growth: '+340%'
   },
@@ -19,7 +21,7 @@ const industries = [
     name: 'Enterprise SaaS',
     description: 'Scalable business software and enterprise solutions',
     clientCount: '75+',
-    gradient: 'from-blue-500 to-purple-600',
+    gradient: standardGradient,
     projects: ['CRM Systems', 'Project Management', 'Analytics Dashboards'],
     growth: '+280%'
   },
@@ -28,7 +30,7 @@ const industries = [
     name: 'E-commerce & Retail',
     description: 'Conversion-optimized online stores and marketplaces',
     clientCount: '120+',
-    gradient: 'from-orange-500 to-red-600',
+    gradient: standardGradient,
     projects: ['Online Stores', 'Marketplaces', 'Mobile Commerce'],
     growth: '+450%'
   },
@@ -37,7 +39,7 @@ const industries = [
     name: 'Healthcare & MedTech',
     description: 'HIPAA-compliant medical and healthcare applications',
     clientCount: '35+',
-    gradient: 'from-pink-500 to-purple-600',
+    gradient: standardGradient,
     projects: ['Telemedicine Apps', 'Patient Portals', 'Medical Devices'],
     growth: '+220%'
   },
@@ -46,7 +48,7 @@ const industries = [
     name: 'Education & EdTech',
     description: 'Learning management systems and educational platforms',
     clientCount: '45+',
-    gradient: 'from-cyan-500 to-blue-600',
+    gradient: standardGradient,
     projects: ['LMS Platforms', 'Online Courses', 'Student Portals'],
     growth: '+360%'
   },
@@ -55,11 +57,12 @@ const industries = [
     name: 'Startups & Innovation',
     description: 'MVP development and scalable startup solutions',
     clientCount: '200+',
-    gradient: 'from-purple-500 to-pink-600',
+    gradient: standardGradient,
     projects: ['MVP Development', 'Prototyping', 'Scale Solutions'],
     growth: '+500%'
   }
-]
+];
+
 
 const clientLogos = [
   'TechCorp', 'InnovateLab', 'FutureBank', 'MedFlow', 'EduPlatform', 'RetailPro',

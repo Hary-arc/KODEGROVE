@@ -36,6 +36,7 @@ import {
   companyStats, 
   companyMission 
 } from '../data/team'
+import React from 'react'
 
 // Counter hook for animated numbers
 function useCounter(end: number, start: number = 0, duration: number = 2000) {

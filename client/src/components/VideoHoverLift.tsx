@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Play } from 'lucide-react'
+import React from 'react'
 import {
   HoverLift,
   MagneticHover
