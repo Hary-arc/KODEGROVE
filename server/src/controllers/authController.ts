@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs/
 import jwt, { Secret, SignOptions } from 'jsonwebtoken';
-import { User, userStore } from '../models';
-import { AuthRequest } from '../middleware/auth';
+import { User, userStore } from '../models/index.js';
+import { AuthRequest } from '../middleware/auth.js';
 
 // @desc    Register user
 // @route   POST /api/auth/register
