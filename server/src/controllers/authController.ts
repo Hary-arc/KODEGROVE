@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs/';
 import jwt, { Secret, SignOptions } from 'jsonwebtoken';
-import { User, userStore } from '../models';
-import { AuthRequest } from '../middleware/auth';
+import { User, userStore } from '../models/index.js';
+import { AuthRequest } from '../middleware/auth.js';
 
 // @desc    Register user
 // @route   POST /api/auth/register
@@ -62,13 +62,12 @@ export const register = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create user
-    const user = await userStore.create({
+    const user = await userStore.create(new User({
       name: trimmedName,
       email: trimmedEmail,
       password: hashedPassword,
-      role: 'user',
-      createdAt: new Date().toISOString()
-    });
+      role: 'user'
+    }));
 
     sendTokenResponse(user, 201, res);
   } catch (err: any) {

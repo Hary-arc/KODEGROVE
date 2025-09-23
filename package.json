@@ -3,6 +3,10 @@
   "name": "modern-interactive-website",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "workspaces": [
     "client",
     "server"
@@ -25,6 +29,7 @@
     "prepare": "npm run build:server"
   },
   "devDependencies": {
+    "@types/node": "^24.5.2",
     "concurrently": "^8.2.1"
   },
   "dependencies": {

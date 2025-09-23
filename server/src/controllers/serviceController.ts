@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Service, serviceStore } from '../models';
-import { AuthRequest } from '../middleware/auth';
+import { Service, serviceStore } from '../models/index.js';
+import { AuthRequest } from '../middleware/auth.js';
 
 // @desc    Get all services
 // @route   GET /api/services

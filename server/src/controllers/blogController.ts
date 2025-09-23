@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Blog,  blogStore } from '../models';
-import { AuthRequest } from '../middleware/auth';
+import { Blog,  blogStore } from '../models/index.js';
+import { AuthRequest } from '../middleware/auth.js';
 
 // @desc    Get all blogs
 // @route   GET /api/blogs

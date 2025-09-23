@@ -1,7 +1,7 @@
 
-import { User } from './User';
-import { Blog } from './Blog';
-import { DataStore } from '../utils/dataStore';
+import { User } from './User.js';
+import { Blog } from './Blog.js';
+import { DataStore } from '../utils/dataStore.js';
 
 // Service interface and class
 export interface IService {
@@ -73,5 +73,6 @@ export const blogStore = new DataStore<Blog>('blogs');
 export const serviceStore = new DataStore<Service>('services');
 
 // Export types and classes
-export { User, Blog };
-export type { IService };
+export { User, Blog, Service };
+// Re-export IService as ServiceInterface to avoid conflict
+export type { IService as ServiceInterface };
