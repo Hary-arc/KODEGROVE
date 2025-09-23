@@ -93,7 +93,7 @@ export const useScrollTrigger = (callback: any, dependencies: any[] = [], option
   const lastCallTime = useRef(0)
   const rafId = useRef<number | null>(null)
 
-  const throttledCallback = useCallback((...args) => {
+  const throttledCallback = useCallback((...args: any) => {
     const now = Date.now()
     if (now - lastCallTime.current >= throttle) {
       lastCallTime.current = now
