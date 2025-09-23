@@ -10,17 +10,17 @@ import { UniversalFloatingNav } from './components/UniversalFloatingNav'
 import { siteConfig, navigation, footerLinks } from './data/site-config'
 
 // Lazy load page components for better performance
-const EnhancedHomePage = React.lazy(() => import('./pages/EnhancedHomePage').then(module => ({ default: module.EnhancedHomePage })))
-const ServicesPage = React.lazy(() => import('./pages/ServicesPage').then(module => ({ default: module.ServicesPage })))
-const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage').then(module => ({ default: module.PortfolioPage })))
-const AboutPage = React.lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })))
-const ContactPage = React.lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })))
-const CareersPage = React.lazy(() => import('./pages/CareersPage').then(module => ({ default: module.CareersPage })))
-const PricingPage = React.lazy(() => import('./pages/PricingPage').then(module => ({ default: module.PricingPage })))
-const BlogPage = React.lazy(() => import('./pages/BlogPage').then(module => ({ default: module.BlogPage })))
-const DashboardPage = React.lazy(() => import('./pages/DashboardPage').then(module => ({ default: module.DashboardPage })))
-const AuthPage = React.lazy(() => import('./pages/AuthPage').then(m => ({ default: m.AuthPage })))
-const QuotationPage = React.lazy(() => import('./pages/QuotationPage').then(m => ({ default: m.QuotationPage })))
+const EnhancedHomePage = React.lazy(() => import('./pages/EnhancedHomePage.js').then(module => ({ default: module.EnhancedHomePage })))
+const ServicesPage = React.lazy(() => import('./pages/ServicesPage.js').then(module => ({ default: module.ServicesPage })))
+const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage.js').then(module => ({ default: module.PortfolioPage })))
+const AboutPage = React.lazy(() => import('./pages/AboutPage.js').then(module => ({ default: module.AboutPage })))
+const ContactPage = React.lazy(() => import('./pages/ContactPage.js').then(module => ({ default: module.ContactPage })))
+const CareersPage = React.lazy(() => import('./pages/CareersPage.js').then(module => ({ default: module.CareersPage })))
+const PricingPage = React.lazy(() => import('./pages/PricingPage.js').then(module => ({ default: module.PricingPage })))
+const BlogPage = React.lazy(() => import('./pages/BlogPage.js').then(module => ({ default: module.BlogPage })))
+const DashboardPage = React.lazy(() => import('./pages/DashboardPage.js').then(module => ({ default: module.DashboardPage })))
+const AuthPage = React.lazy(() => import('./pages/AuthPage.js').then(m => ({ default: m.AuthPage })))
+const QuotationPage = React.lazy(() => import('./pages/QuotationPage.js').then(m => ({ default: m.QuotationPage })))
 
 // Loading fallback component
 const PageLoader = () => (

@@ -73,6 +73,6 @@ export const blogStore = new DataStore<Blog>('blogs');
 export const serviceStore = new DataStore<Service>('services');
 
 // Export types and classes
-export { User, Blog, Service };
+export { User, Blog };
 // Re-export IService as ServiceInterface to avoid conflict
 export type { IService as ServiceInterface };

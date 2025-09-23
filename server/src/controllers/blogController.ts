@@ -28,7 +28,7 @@ export const getBlogs = async (req: Request, res: Response) => {
 export const getBlog = async (req: Request, res: Response) => {
   try {
     const blog = await blogStore.findById(req.params.id);
-
+    
     if (!blog) {
       return res.status(404).json({
         success: false,
@@ -60,17 +60,24 @@ export const getBlog = async (req: Request, res: Response) => {
 // @access  Private/Admin
 export const createBlog = async (req: AuthRequest, res: Response) => {
   try {
-    const blog: Blog = {
+      const authReq = req as AuthRequest;
+      const blog = new Blog({
+       
+        
       id: crypto.randomUUID(),
       title: req.body.title,
       content: req.body.content,
-      authorId: req.user.id,
+      authorId: authReq.user.id,
       slug: req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-'),
       tags: req.body.tags || [],
       published: req.body.published || false,
       createdAt: new Date().toISOString()
-    };
+    });
+  const user = req.user; // ✅ TypeScript knows this exists now
 
+  if (!user || user.role !== 'admin') {
+    return res.status(403).json({ message: 'Forbidden' });
+  }
     // Basic validation
     if (!blog.title) {
       return res.status(400).json({
@@ -118,18 +125,17 @@ export const updateBlog = async (req: AuthRequest, res: Response) => {
         message: 'Blog not found'
       });
     }
-
-    const updatedBlog: Blog = {
+    
+    const updatedBlog = new Blog({
       ...blog,
       title: req.body.title || blog.title,
       content: req.body.content || blog.content,
-      slug: req.body.title ? req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-') : blog.slug,
+      slug: req.body.title
+        ? req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-')
+        : blog.slug,
       tags: req.body.tags || blog.tags,
       published: req.body.published ?? blog.published,
-      id: blog.id,
-      authorId: blog.authorId,
-      createdAt: blog.createdAt
-    };
+    });
 
     // Basic validation
     if (!updatedBlog.title) {

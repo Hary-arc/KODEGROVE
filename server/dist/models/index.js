@@ -1,6 +1,6 @@
-import { User } from './User';
-import { Blog } from './Blog';
-import { DataStore } from '../utils/dataStore';
+import { User } from './User.js';
+import { Blog } from './Blog.js';
+import { DataStore } from '../utils/dataStore.js';
 export class Service {
     id;
     title;

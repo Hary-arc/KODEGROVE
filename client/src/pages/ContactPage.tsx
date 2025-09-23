@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import { useInView, AnimatePresence } from 'framer-motion'
-import { motion, Variants } from "framer-motion"; // ✅ correct
+import { motion, Variants } from "framer-motion"; // 
 
 import { 
   Mail, 

@@ -1,4 +1,4 @@
-import { blogStore } from '../models';
+import { Blog, blogStore } from '../models/index.js';
 // @desc    Get all blogs
 // @route   GET /api/blogs
 // @access  Public
@@ -54,16 +54,21 @@ export const getBlog = async (req, res) => {
 // @access  Private/Admin
 export const createBlog = async (req, res) => {
     try {
-        const blog = {
+        const authReq = req;
+        const blog = new Blog({
             id: crypto.randomUUID(),
             title: req.body.title,
             content: req.body.content,
-            authorId: req.user.id,
+            authorId: authReq.user.id,
             slug: req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-'),
             tags: req.body.tags || [],
             published: req.body.published || false,
             createdAt: new Date().toISOString()
-        };
+        });
+        const user = req.user; // ✅ TypeScript knows this exists now
+        if (!user || user.role !== 'admin') {
+            return res.status(403).json({ message: 'Forbidden' });
+        }
         // Basic validation
         if (!blog.title) {
             return res.status(400).json({
@@ -108,17 +113,16 @@ export const updateBlog = async (req, res) => {
                 message: 'Blog not found'
             });
         }
-        const updatedBlog = {
+        const updatedBlog = new Blog({
             ...blog,
             title: req.body.title || blog.title,
             content: req.body.content || blog.content,
-            slug: req.body.title ? req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-') : blog.slug,
+            slug: req.body.title
+                ? req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-')
+                : blog.slug,
             tags: req.body.tags || blog.tags,
             published: req.body.published ?? blog.published,
-            id: blog.id,
-            authorId: blog.authorId,
-            createdAt: blog.createdAt
-        };
+        });
         // Basic validation
         if (!updatedBlog.title) {
             return res.status(400).json({

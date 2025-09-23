@@ -240,14 +240,15 @@ export function BlogPage() {
                       autoFocus
                     />
                     <button
-                      onClick={() => {
-                        setSearchQuery('')
-                        setIsSearchOpen(false)
-                      }}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-300"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
+                    onClick={() => {
+                      setSearchQuery('');
+                      setIsSearchOpen(false);
+                    }}
+                    aria-label="Clear search"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-300"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
                   </div>
                 </motion.div>
               )}

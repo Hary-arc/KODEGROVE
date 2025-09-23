@@ -1,6 +1,6 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs/';
 import jwt from 'jsonwebtoken';
-import { userStore } from '../models';
+import { User, userStore } from '../models/index.js';
 // @desc    Register user
 // @route   POST /api/auth/register
 // @access  Public
@@ -14,9 +14,19 @@ export const register = async (req, res) => {
                 message: 'Please provide name, email and password'
             });
         }
+        // Trim inputs
+        const trimmedName = name.trim();
+        const trimmedEmail = email.trim().toLowerCase();
+        // Validate name
+        if (trimmedName.length < 2) {
+            return res.status(400).json({
+                success: false,
+                message: 'Name must be at least 2 characters long'
+            });
+        }
         // Validate email format
-        const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (!emailRegex.test(email)) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(trimmedEmail)) {
             return res.status(400).json({
                 success: false,
                 message: 'Please provide a valid email address'
@@ -26,28 +36,27 @@ export const register = async (req, res) => {
         if (password.length < 6) {
             return res.status(400).json({
                 success: false,
-                message: 'Password must be at least 6 characters'
+                message: 'Password must be at least 6 characters long'
             });
         }
         // Check if user exists
-        const existingUser = await userStore.findOne(user => user.email === email);
+        const existingUser = await userStore.findOne(user => user.email === trimmedEmail);
         if (existingUser) {
             return res.status(400).json({
                 success: false,
-                message: 'User already exists'
+                message: 'User with this email already exists'
             });
         }
         // Hash password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         // Create user
-        const user = await userStore.create({
-            name,
-            email,
+        const user = await userStore.create(new User({
+            name: trimmedName,
+            email: trimmedEmail,
             password: hashedPassword,
-            role: 'user',
-            createdAt: new Date().toISOString()
-        });
+            role: 'user'
+        }));
         sendTokenResponse(user, 201, res);
     }
     catch (err) {
@@ -71,8 +80,9 @@ export const login = async (req, res) => {
                 message: 'Please provide an email and password'
             });
         }
+        const trimmedEmail = email.trim().toLowerCase();
         // Check for user
-        const user = await userStore.findOne(user => user.email === email);
+        const user = await userStore.findOne(user => user.email === trimmedEmail);
         if (!user) {
             return res.status(401).json({
                 success: false,

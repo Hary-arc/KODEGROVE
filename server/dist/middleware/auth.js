@@ -14,7 +14,6 @@ export const protect = async (req, res, next) => {
         });
     }
     try {
-        // Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-jwt-secret-key');
         const user = await userStore.findById(decoded.id);
         if (!user) {
@@ -23,6 +22,7 @@ export const protect = async (req, res, next) => {
                 message: 'User not found'
             });
         }
+        //  Cast req to AuthRequest to assign user
         req.user = user;
         next();
     }
@@ -36,10 +36,11 @@ export const protect = async (req, res, next) => {
 // Grant access to specific roles
 export const authorize = (...roles) => {
     return (req, res, next) => {
-        if (!req.user || !roles.includes(req.user.role)) {
+        const user = req.user;
+        if (!user || !roles.includes(user.role)) {
             return res.status(403).json({
                 success: false,
-                message: `User role ${req.user?.role} is not authorized to access this route`
+                message: `User role ${user?.role} is not authorized to access this route`
             });
         }
         next();

@@ -52,14 +52,14 @@ export const getService = async (req: Request, res: Response) => {
 // @access  Private/Admin
 export const createService = async (req: AuthRequest, res: Response) => {
   try {
-    const service: Service = {
+      const service = new Service({
       id: crypto.randomUUID(),
       title: req.body.title,
       description: req.body.description,
       price: Number(req.body.price),
       features: req.body.features || [],
       createdAt: new Date().toISOString()
-    };
+    });
 
     // Validation
     if (!service.title) {
@@ -115,7 +115,7 @@ export const updateService = async (req: AuthRequest, res: Response) => {
       });
     }
 
-    const updatedService: Service = {
+    const updatedService = new Service ({
       ...service,
       title: req.body.title || service.title,
       description: req.body.description || service.description,
@@ -123,7 +123,7 @@ export const updateService = async (req: AuthRequest, res: Response) => {
       features: req.body.features || service.features,
       id: service.id,
       createdAt: service.createdAt
-    };
+    });
 
     // Validation
     if (!updatedService.title) {

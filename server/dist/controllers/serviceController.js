@@ -1,4 +1,4 @@
-import { serviceStore } from '../models';
+import { Service, serviceStore } from '../models/index.js';
 // @desc    Get all services
 // @route   GET /api/services
 // @access  Public
@@ -47,14 +47,14 @@ export const getService = async (req, res) => {
 // @access  Private/Admin
 export const createService = async (req, res) => {
     try {
-        const service = {
+        const service = new Service({
             id: crypto.randomUUID(),
             title: req.body.title,
             description: req.body.description,
             price: Number(req.body.price),
             features: req.body.features || [],
             createdAt: new Date().toISOString()
-        };
+        });
         // Validation
         if (!service.title) {
             return res.status(400).json({
@@ -105,7 +105,7 @@ export const updateService = async (req, res) => {
                 message: 'Service not found'
             });
         }
-        const updatedService = {
+        const updatedService = new Service({
             ...service,
             title: req.body.title || service.title,
             description: req.body.description || service.description,
@@ -113,7 +113,7 @@ export const updateService = async (req, res) => {
             features: req.body.features || service.features,
             id: service.id,
             createdAt: service.createdAt
-        };
+        });
         // Validation
         if (!updatedService.title) {
             return res.status(400).json({
