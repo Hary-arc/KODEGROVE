@@ -81,13 +81,13 @@ export function SEOHead({
 
     // Schema.org structured data
     if (schemaData) {
-      let script = document.querySelector('script[type="application/ld+json"]')
+      let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement
       if (!script) {
-        script = document.createElement('script')
-        (script as HTMLScriptElement).type = 'application/ld+json'
+        script = document.createElement('script') as HTMLScriptElement
+        script.type = 'application/ld+json'
         document.head.appendChild(script)
       }
-      (script as HTMLScriptElement).textContent = JSON.stringify(schemaData)
+      script.textContent = JSON.stringify(schemaData)
     }
 
   }, [title, description, keywords, canonicalUrl, ogImage, ogType, twitterCard, schemaData, noIndex])
