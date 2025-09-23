@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { motion } from 'framer-motion'
 import { ScrollReveal, StaggeredReveal, Parallax } from '../components/animations/ScrollReveal'
 import { HoverLift, AnimatedIcon, Typewriter } from '../components/animations/MicroInteractions'

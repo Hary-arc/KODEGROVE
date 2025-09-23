@@ -20,6 +20,7 @@ import {
   FileText,
   Shield
 } from 'lucide-react'
+import React from 'react'
 
 // Company milestones
 const milestones = [

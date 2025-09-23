@@ -21,6 +21,7 @@ import {
   Palette,
   Code,
 } from "lucide-react";
+import { ChevronDown } from "lucide-react"; 
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
@@ -181,7 +182,7 @@ export function EnhancedHomePage() {
 
               {/* Typewriter Headline */}
               <ScrollReveal variant="fadeUp" delay={0.4}>
-                <h1 className="font-outfit text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight">
+                <h1 className="font-outfit text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                   <span className="block bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent mb-4">
                     Digital Experiences
                   </span>
@@ -210,7 +211,7 @@ export function EnhancedHomePage() {
               {/* Stats Cards */}
               <StaggeredReveal
                 staggerDelay={0.2}
-                initialDelay={1.0}
+                //initialDelay={1.0}
                 className="grid grid-cols-3 gap-3 sm:gap-6"
               >
                 {[
@@ -226,7 +227,12 @@ export function EnhancedHomePage() {
                   },
                   {
                     number: `${siteConfig.stats.avgROI}%`,
-                    label: "Average ROI",
+                    label: (
+                      <>
+                        Average <br /> ROI
+                      </>
+                    ),
+
                     icon: TrendingUp,
                   },
                 ].map(
@@ -272,7 +278,7 @@ export function EnhancedHomePage() {
                     aria-label="Start your project"
                   >
                     <Sparkles className="w-5 h-5 transition-transform group-hover:rotate-6 group-hover:scale-110" />
-                    <span>Start Your Project</span>
+                    <span>Request Quotation</span>
                     <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                   </RippleButton>
 
@@ -297,28 +303,22 @@ export function EnhancedHomePage() {
 
         {/* Scroll Indicator */}
         <ScrollReveal variant="fadeUp" delay={2.0}>
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
             <motion.div
-              className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center p-2 cursor-pointer"
-              animate={{ y: [0, 8, 0] }}
+              className="flex flex-col items-center text-white cursor-pointer"
+              animate={{ y: [0, 10, 0, -10, 0] }}
               transition={{
-                duration: 2,
+                duration: 2.5,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
             >
-              <motion.div
-                className="w-1.5 h-4 gradient-electric rounded-full"
-                animate={{ scaleY: [1, 0.3, 1] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+              <ChevronDown className="w-14 h-10 mb-[-1px] text-purple-400 drop-shadow-lg" />
+              <ChevronDown className="w-14 h-7 text-cyan-400 drop-shadow-md" />
             </motion.div>
           </div>
         </ScrollReveal>
+
       </section>
       <section>
         <HeroSection />

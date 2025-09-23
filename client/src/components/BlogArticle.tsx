@@ -17,6 +17,7 @@ import {
   ChevronUp
 } from 'lucide-react'
 import { ImageWithFallback } from './figma/ImageWithFallback'
+import React from 'react'
 
 interface BlogArticleProps {
   post: BlogPost

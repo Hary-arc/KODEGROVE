@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion'
 import { Button } from '../components/ui/button'

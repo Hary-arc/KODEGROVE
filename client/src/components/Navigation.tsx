@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 import { useCurrentRoute, navigateTo } from "./Router";
 import { AuthModal } from "./AuthModal";
 import { authUtils } from "../utils/auth";
-
+import React from 'react'
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -61,7 +61,7 @@ export function Navigation() {
     { name: "Portfolio", path: "/portfolio" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
-    { name: "Careers", path: "/careers" },
+    { name: "Blogs", path: "/blog" },
   ];
 
   const serviceItems = [
@@ -140,7 +140,7 @@ export function Navigation() {
           : "bg-white/3 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-6 lg:px-8">
         {/* Main Header Row */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 lg:py-0 lg:h-20">
           {/* Logo and Desktop Nav */}
@@ -183,7 +183,7 @@ export function Navigation() {
                 />
               </motion.div>
               <motion.span 
-                className="font-outfit text-2xl font-bold bg-gradient-to-r from-white via-purple-200 to-violet-300 bg-clip-text text-transparent"
+                className="font-outfit text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-violet-300 bg-clip-text text-transparent"
                 whileHover={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
                 }}
@@ -405,7 +405,7 @@ export function Navigation() {
                 className="gradient-electric hover:shadow-lg hover:shadow-purple-500/25 text-white rounded-xl px-4 py-2 font-semibold transition-all duration-300 text-xs"
               >
                 <Sparkles className="w-3 h-3 mr-1" />
-                Start
+                GET QUOTE
               </Button>
 
               {user ? (
@@ -496,7 +496,7 @@ export function Navigation() {
                     aria-label="Login"
                   >
                     <User className="w-3 h-3 mr-1 transition-transform group-hover:rotate-6" />
-                    Login
+                    
                   </Button>
                 </AuthModal>
               )}
@@ -505,6 +505,7 @@ export function Navigation() {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
+
             <Button
               onClick={() => handleNavigation("/quotation")}
               className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white font-semibold"
@@ -677,15 +678,7 @@ export function Navigation() {
             </div>
           </motion.nav>
 
-          <div className="mt-6 border-t border-white/10 pt-6">
-              <Button 
-                onClick={() => handleNavigation("/quotation")}
-                className="w-full gradient-electric text-white font-semibold"
-              >
-                Get Quotation
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
+          
         </div>
       </div>
     </header>

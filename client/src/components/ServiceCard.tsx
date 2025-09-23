@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { motion } from 'framer-motion'
 import { ResponsiveCard, ResponsiveCardHeader, ResponsiveCardContent, ResponsiveCardFooter, ResponsiveCardTitle, ResponsiveCardDescription } from './ui/responsive-card'
 import { Button } from './ui/button'

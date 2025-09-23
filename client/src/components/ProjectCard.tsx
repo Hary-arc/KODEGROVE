@@ -17,6 +17,7 @@ import {
   Play,
   Target
 } from 'lucide-react'
+import React from 'react'
 
 interface ProjectCardProps {
   project: Project

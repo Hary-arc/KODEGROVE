@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, ReactNode } from 'react'
-
+import React from 'react'
 interface RouteConfig {
   path: string
   component: ReactNode

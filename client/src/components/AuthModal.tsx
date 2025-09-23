@@ -24,6 +24,7 @@ import {
   Shield,
   Zap
 } from 'lucide-react'
+import React from 'react'
 
 interface AuthModalProps {
   children: React.ReactNode

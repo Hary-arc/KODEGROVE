@@ -21,6 +21,7 @@ import {
   User,
   CreditCard
 } from 'lucide-react'
+import React from 'react'
 
 interface UniversalFloatingNavProps {
   currentPage?: string
@@ -316,7 +317,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
           transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
         >
           {/* Animated background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
           {/* Shimmer effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
