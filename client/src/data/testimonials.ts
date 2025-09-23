@@ -11,6 +11,11 @@ export interface Testimonial {
   project?: string
   industry?: string
   featured?: boolean
+  metrics?: {
+    time?: string
+    roi?: string
+    engagement?: string
+  }
 }
 
 export const testimonials: Testimonial[] = [

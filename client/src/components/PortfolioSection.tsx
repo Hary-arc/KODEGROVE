@@ -142,7 +142,7 @@ export function PortfolioSection() {
         project.description
           .toLowerCase()
           .includes(searchTerm.toLowerCase()) ||
-        project.technologies.some((tech) =>
+        project.technologies.some((tech: string) =>
           tech.toLowerCase().includes(searchTerm.toLowerCase()),
         );
 
@@ -491,7 +491,7 @@ export function PortfolioSection() {
                         {/* Results */}
                         <div className="grid grid-cols-3 gap-4 mb-6">
                           {project.results.map(
-                            (result, resultIndex) => (
+                            (result: any, resultIndex: number) => (
                               <motion.div
                                 key={resultIndex}
                                 className="text-center p-3 glass rounded-xl border border-white/10"
@@ -517,7 +517,7 @@ export function PortfolioSection() {
                         <div className="flex flex-wrap gap-2">
                           {project.technologies
                             .slice(0, 4)
-                            .map((tech) => (
+                            .map((tech: string) => (
                               <span
                                 key={tech}
                                 className="text-xs px-3 py-1 glass border border-white/20 text-gray-300 rounded-full hover:border-white/40 transition-colors duration-300"
@@ -657,7 +657,7 @@ export function PortfolioSection() {
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {selectedProjectData.technologies.map(
-                            (tech) => (
+                            (tech: string) => (
                               <span
                                 key={tech}
                                 className="px-3 py-1 glass border border-white/20 text-gray-300 rounded-full text-sm"
@@ -697,7 +697,7 @@ export function PortfolioSection() {
                         </h4>
                         <div className="grid grid-cols-2 gap-4">
                           {selectedProjectData.results.map(
-                            (result, resultIndex) => (
+                            (result: any, resultIndex: number) => (
                               <motion.div
                                 key={resultIndex}
                                 className="text-center p-3 glass rounded-xl border border-white/10"

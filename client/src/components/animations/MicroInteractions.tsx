@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback, useRef, MouseEvent } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { ReactNode } from 'react'
 
@@ -9,8 +9,9 @@ export const useMouseParallax = (strength = 0.5) => {
   const mouseY = useMotionValue(0)
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e
+    const handleMouseMove = (e: Event) => {
+      const mouseEvent = e as globalThis.MouseEvent
+      const { clientX, clientY } = mouseEvent
       const { innerWidth, innerHeight } = window
 
       mouseX.set((clientX - innerWidth / 2) * strength)
@@ -32,7 +33,7 @@ export const useMagneticHover = (strength = 0.3) => {
   const springX = useSpring(x, { stiffness: 400, damping: 40 })
   const springY = useSpring(y, { stiffness: 400, damping: 40 })
 
-  const handleMouseMove = useCallback((e) => {
+  const handleMouseMove = useCallback((e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
@@ -60,6 +61,11 @@ export const MagneticButton = ({
   className = "",
   strength = 0.3,
   ...props
+}: {
+  children: ReactNode
+  className?: string
+  strength?: number
+  [key: string]: any
 }) => {
   const { x, y, onMouseMove, onMouseLeave } = useMagneticHover(strength)
 
@@ -113,7 +119,11 @@ export const HoverLift = ({
 }
 
 // MagneticHover component
-export const MagneticHover = ({ children, className = "", strength = 0.3 }) => {
+export const MagneticHover = ({ children, className = "", strength = 0.3 }: {
+  children: ReactNode
+  className?: string
+  strength?: number
+}) => {
   const { x, y, onMouseMove, onMouseLeave } = useMagneticHover(strength)
 
   return (
@@ -129,7 +139,11 @@ export const MagneticHover = ({ children, className = "", strength = 0.3 }) => {
 }
 
 // AnimatedIcon component
-export const AnimatedIcon = ({ children, className = "", ...props }) => {
+export const AnimatedIcon = ({ children, className = "", ...props }: {
+  children: ReactNode
+  className?: string
+  [key: string]: any
+}) => {
   return (
     <motion.div
       className={className}
@@ -144,7 +158,11 @@ export const AnimatedIcon = ({ children, className = "", ...props }) => {
 }
 
 // Typewriter effect component
-export const Typewriter = ({ text, className = "", speed = 100 }) => {
+export const Typewriter = ({ text, className = "", speed = 100 }: {
+  text: string
+  className?: string
+  speed?: number
+}) => {
   const [displayText, setDisplayText] = React.useState("")
   const [currentIndex, setCurrentIndex] = React.useState(0)
 
@@ -174,7 +192,12 @@ export const Typewriter = ({ text, className = "", speed = 100 }) => {
 }
 
 // FloatingElement component
-export const FloatingElement = ({ children, className = "", amplitude = 10, duration = 3 }) => {
+export const FloatingElement = ({ children, className = "", amplitude = 10, duration = 3 }: {
+  children: ReactNode
+  className?: string
+  amplitude?: number
+  duration?: number
+}) => {
   return (
     <motion.div
       className={className}
@@ -197,6 +220,10 @@ export const ParallaxCard = ({
   children,
   className = "",
   strength = 0.1
+}: {
+  children: ReactNode
+  className?: string
+  strength?: number
 }) => {
   const { mouseX, mouseY } = useMouseParallax(strength);
 
@@ -223,10 +250,15 @@ export const RippleButton = ({
   className = "",
   rippleColor = "rgba(255, 255, 255, 0.6)",
   ...props
+}: {
+  children: ReactNode
+  className?: string
+  rippleColor?: string
+  [key: string]: any
 }) => {
   const [ripples, setRipples] = useState<Array<{x: number, y: number, size: number, id: number}>>([])
 
-  const createRipple = (e) => {
+  const createRipple = (e: MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const size = Math.max(rect.width, rect.height)
     const x = e.clientX - rect.left - size / 2
@@ -280,10 +312,14 @@ export const TiltCard = ({
   children,
   className = "",
   tiltStrength = 10
+}: {
+  children: ReactNode
+  className?: string
+  tiltStrength?: number
 }) => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top

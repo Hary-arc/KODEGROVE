@@ -84,10 +84,10 @@ export function SEOHead({
       let script = document.querySelector('script[type="application/ld+json"]')
       if (!script) {
         script = document.createElement('script')
-        script.type = 'application/ld+json'
+        (script as HTMLScriptElement).type = 'application/ld+json'
         document.head.appendChild(script)
       }
-      script.textContent = JSON.stringify(schemaData)
+      (script as HTMLScriptElement).textContent = JSON.stringify(schemaData)
     }
 
   }, [title, description, keywords, canonicalUrl, ogImage, ogType, twitterCard, schemaData, noIndex])
