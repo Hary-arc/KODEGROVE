@@ -1,0 +1,121 @@
+
+[
+  {
+    "id": "inv-1",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": "proj-1",
+    "invoiceNumber": "INV-2024-001542",
+    "amount": 42500,
+    "status": "paid",
+    "dueDate": "2024-02-15",
+    "paidDate": "2024-02-10",
+    "description": "E-Commerce Platform - 50% milestone payment",
+    "lineItems": [
+      {
+        "description": "Frontend Development - 50% complete",
+        "quantity": 1,
+        "rate": 30000,
+        "total": 30000
+      },
+      {
+        "description": "Backend API Development - 50% complete",
+        "quantity": 1,
+        "rate": 12500,
+        "total": 12500
+      }
+    ],
+    "createdAt": "2024-01-15T00:00:00.000Z",
+    "updatedAt": "2024-02-10T10:30:00.000Z"
+  },
+  {
+    "id": "inv-2",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": "proj-2",
+    "invoiceNumber": "INV-2024-002113",
+    "amount": 60000,
+    "status": "pending",
+    "dueDate": "2024-03-10",
+    "description": "Mobile App Development - Final payment",
+    "lineItems": [
+      {
+        "description": "iOS App Development - Final phase",
+        "quantity": 1,
+        "rate": 30000,
+        "total": 30000
+      },
+      {
+        "description": "Android App Development - Final phase",
+        "quantity": 1,
+        "rate": 25000,
+        "total": 25000
+      },
+      {
+        "description": "App Store Submission",
+        "quantity": 1,
+        "rate": 5000,
+        "total": 5000
+      }
+    ],
+    "createdAt": "2024-02-10T00:00:00.000Z",
+    "updatedAt": "2024-02-10T00:00:00.000Z"
+  },
+  {
+    "id": "inv-3",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": "proj-4",
+    "invoiceNumber": "INV-2024-003789",
+    "amount": 13500,
+    "status": "overdue",
+    "dueDate": "2024-02-28",
+    "description": "Brand Website - Initial payment",
+    "lineItems": [
+      {
+        "description": "Project Setup & Planning",
+        "quantity": 1,
+        "rate": 5000,
+        "total": 5000
+      },
+      {
+        "description": "Wireframes & Design Concepts",
+        "quantity": 1,
+        "rate": 8500,
+        "total": 8500
+      }
+    ],
+    "createdAt": "2024-01-28T00:00:00.000Z",
+    "updatedAt": "2024-01-28T00:00:00.000Z"
+  },
+  {
+    "id": "inv-4",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": "proj-3",
+    "invoiceNumber": "INV-2023-004521",
+    "amount": 25000,
+    "status": "paid",
+    "dueDate": "2023-12-15",
+    "paidDate": "2023-12-10",
+    "description": "SEO Optimization Campaign - Full payment",
+    "lineItems": [
+      {
+        "description": "SEO Audit & Analysis",
+        "quantity": 1,
+        "rate": 8000,
+        "total": 8000
+      },
+      {
+        "description": "On-page Optimization",
+        "quantity": 1,
+        "rate": 10000,
+        "total": 10000
+      },
+      {
+        "description": "Technical SEO Improvements",
+        "quantity": 1,
+        "rate": 7000,
+        "total": 7000
+      }
+    ],
+    "createdAt": "2023-11-15T00:00:00.000Z",
+    "updatedAt": "2023-12-10T14:25:00.000Z"
+  }
+]

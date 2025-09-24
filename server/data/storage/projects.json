@@ -1,0 +1,104 @@
+
+[
+  {
+    "id": "proj-1",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "name": "E-Commerce Platform Redesign",
+    "slug": "ecommerce-platform-redesign-1703001600000",
+    "type": "ecommerce",
+    "status": "development",
+    "priority": "high",
+    "progress": 75,
+    "budget": 85000,
+    "spent": 63750,
+    "startDate": "2024-01-15",
+    "expectedCompletion": "2024-03-15",
+    "description": "Complete redesign of the e-commerce platform with modern UI/UX and enhanced performance.",
+    "requirements": {
+      "features": ["Shopping cart", "Payment integration", "User authentication", "Admin dashboard"],
+      "technologies": ["Next.js", "Node.js", "PostgreSQL", "Stripe"]
+    },
+    "deliverables": {
+      "completed": ["Wireframes", "Design mockups", "Database design"],
+      "pending": ["Frontend development", "Backend API", "Testing"]
+    },
+    "createdAt": "2024-01-15T00:00:00.000Z",
+    "updatedAt": "2024-02-28T10:30:00.000Z"
+  },
+  {
+    "id": "proj-2",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "name": "Mobile App Development",
+    "slug": "mobile-app-development-1698969600000",
+    "type": "mobile",
+    "status": "testing",
+    "priority": "urgent",
+    "progress": 90,
+    "budget": 120000,
+    "spent": 108000,
+    "startDate": "2023-11-01",
+    "expectedCompletion": "2024-02-01",
+    "description": "Native iOS and Android app for customer engagement and sales.",
+    "requirements": {
+      "features": ["Push notifications", "Offline mode", "Social sharing", "Analytics"],
+      "technologies": ["React Native", "Firebase", "Redux", "TypeScript"]
+    },
+    "deliverables": {
+      "completed": ["App architecture", "UI/UX design", "Core features", "Beta testing"],
+      "pending": ["App store submission", "Marketing materials"]
+    },
+    "createdAt": "2023-11-01T00:00:00.000Z",
+    "updatedAt": "2024-01-25T14:20:00.000Z"
+  },
+  {
+    "id": "proj-3",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "name": "SEO Optimization Campaign",
+    "slug": "seo-optimization-campaign-1693526400000",
+    "type": "consulting",
+    "status": "completed",
+    "priority": "medium",
+    "progress": 100,
+    "budget": 25000,
+    "spent": 24500,
+    "startDate": "2023-09-01",
+    "expectedCompletion": "2023-12-01",
+    "actualCompletion": "2023-12-01",
+    "description": "Comprehensive SEO audit and optimization for improved search rankings.",
+    "requirements": {
+      "features": ["Keyword research", "On-page optimization", "Technical SEO", "Link building"],
+      "technologies": ["Google Analytics", "SEMrush", "Screaming Frog", "GTM"]
+    },
+    "deliverables": {
+      "completed": ["SEO audit report", "Keyword strategy", "Technical fixes", "Content optimization", "Performance report"],
+      "pending": []
+    },
+    "createdAt": "2023-09-01T00:00:00.000Z",
+    "updatedAt": "2023-12-01T16:45:00.000Z"
+  },
+  {
+    "id": "proj-4",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "name": "Brand Website Refresh",
+    "slug": "brand-website-refresh-1708041600000",
+    "type": "website",
+    "status": "planning",
+    "priority": "low",
+    "progress": 15,
+    "budget": 45000,
+    "spent": 6750,
+    "startDate": "2024-02-15",
+    "expectedCompletion": "2024-05-15",
+    "description": "Modern website refresh with improved user experience and mobile optimization.",
+    "requirements": {
+      "features": ["Responsive design", "CMS integration", "Contact forms", "Blog section"],
+      "technologies": ["WordPress", "PHP", "MySQL", "JavaScript"]
+    },
+    "deliverables": {
+      "completed": ["Project kickoff", "Requirements gathering"],
+      "pending": ["Wireframes", "Design mockups", "Development", "Testing", "Launch"]
+    },
+    "createdAt": "2024-02-15T00:00:00.000Z",
+    "updatedAt": "2024-02-20T09:15:00.000Z"
+  }
+]

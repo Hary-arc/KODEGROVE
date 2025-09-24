@@ -1,0 +1,45 @@
+
+[
+  {
+    "id": "analytics-1",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "metricDate": "2024-03-01",
+    "totalProjects": 4,
+    "activeProjects": 3,
+    "completedProjects": 1,
+    "totalInvestment": 275000,
+    "spentAmount": 202750,
+    "onTimeDeliveryRate": 100,
+    "satisfactionScore": 4.8,
+    "avgProjectDuration": 4.2,
+    "createdAt": "2024-03-01T12:00:00.000Z"
+  },
+  {
+    "id": "analytics-2",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "metricDate": "2024-02-01",
+    "totalProjects": 4,
+    "activeProjects": 4,
+    "completedProjects": 0,
+    "totalInvestment": 275000,
+    "spentAmount": 180000,
+    "onTimeDeliveryRate": 95,
+    "satisfactionScore": 4.6,
+    "avgProjectDuration": 4.0,
+    "createdAt": "2024-02-01T12:00:00.000Z"
+  },
+  {
+    "id": "analytics-3",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "metricDate": "2024-01-01",
+    "totalProjects": 3,
+    "activeProjects": 3,
+    "completedProjects": 0,
+    "totalInvestment": 250000,
+    "spentAmount": 150000,
+    "onTimeDeliveryRate": 90,
+    "satisfactionScore": 4.5,
+    "avgProjectDuration": 3.8,
+    "createdAt": "2024-01-01T12:00:00.000Z"
+  }
+]

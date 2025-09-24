@@ -3,12 +3,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  mockUser, 
-  mockProjects, 
-  mockInvoices, 
-  mockSupportTickets, 
-  mockNotifications,
-  mockStats,
   formatCurrency,
   formatDate,
   getStatusColor,
@@ -33,18 +27,23 @@ import {
   Zap,
   Shield,
   Crown,
-  ExternalLink
+  ExternalLink,
+  Loader2
 } from 'lucide-react'
 import { authUtils } from '../utils/auth'
+import { dashboardApi } from '../utils/dashboardApi'
 
 export function DashboardPage() {
   const [activeTab, setActiveTab] = useState('overview')
-  const [user, setUser] = useState(mockUser)
-  const [projects] = useState(mockProjects)
-  const [notifications, setNotifications] = useState(mockNotifications)
-  const [invoices] = useState(mockInvoices)
-  const [tickets] = useState(mockSupportTickets)
+  const [user, setUser] = useState<any>(null)
+  const [projects, setProjects] = useState<any[]>([])
+  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [invoices, setInvoices] = useState<any[]>([])
+  const [tickets, setTickets] = useState<any[]>([])
+  const [stats, setStats] = useState<any>(null)
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     // Check if user is authenticated
@@ -57,17 +56,40 @@ export function DashboardPage() {
     const userData = authUtils.getUser()
     if (userData) {
       setUser({
-        ...mockUser,
         name: userData.name,
         email: userData.email,
         id: userData.id,
-        role: userData.role || 'Premium',
+        role: userData.role || 'user',
         tier: 'Premium',
         avatar: userData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}&background=8b5cf6&color=fff`,
         createdAt: userData.createdAt || new Date().toISOString()
       })
     }
+
+    // Fetch dashboard data
+    fetchDashboardData()
   }, [])
+
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      
+      const dashboardData = await dashboardApi.getDashboardData()
+      
+      setStats(dashboardData.stats)
+      setProjects(dashboardData.projects)
+      setInvoices(dashboardData.invoices)
+      setTickets(dashboardData.supportTickets)
+      setNotifications(dashboardData.notifications)
+      
+    } catch (err: any) {
+      console.error('Failed to fetch dashboard data:', err)
+      setError(err.message || 'Failed to load dashboard data')
+    } finally {
+      setLoading(false)
+    }
+  }
 
 
   // Update time every minute
@@ -102,9 +124,51 @@ export function DashboardPage() {
     return 'Good evening'
   }
 
-  const activeProjects = mockProjects.filter(p => p.status !== 'completed')
-  const recentInvoices = mockInvoices.slice(0, 3)
-  const openTickets = mockSupportTickets.filter(t => t.status !== 'closed')
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-white pt-20 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-purple-400" />
+          <p className="text-gray-400">Loading your dashboard...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-white pt-20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center mx-auto mb-4">
+            <ExternalLink className="w-6 h-6 text-red-400" />
+          </div>
+          <h2 className="text-xl font-semibold text-white mb-2">Unable to Load Dashboard</h2>
+          <p className="text-gray-400 mb-4">{error}</p>
+          <Button onClick={fetchDashboardData} className="bg-purple-600 hover:bg-purple-700">
+            <Loader2 className="w-4 h-4 mr-2" />
+            Retry
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  if (!user || !stats) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-white pt-20 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-purple-400" />
+          <p className="text-gray-400">Initializing dashboard...</p>
+        </div>
+      </div>
+    )
+  }
+
+  const activeProjects = projects.filter(p => p.status !== 'completed')
+  const recentInvoices = invoices.slice(0, 3)
+  const openTickets = tickets.filter(t => t.status !== 'closed')
 
   return (
     <div className="min-h-screen bg-slate-950 text-white pt-20">
@@ -179,7 +243,7 @@ export function DashboardPage() {
             <h2 className="text-3xl font-bold text-white mb-2">Dashboard Overview</h2>
             <p className="text-gray-400">Track your projects, billing, and account metrics</p>
           </div>
-          <DashboardStats stats={mockStats} />
+          <DashboardStats stats={stats} />
         </motion.section>
 
         {/* Next Milestone Alert */}
@@ -196,7 +260,7 @@ export function DashboardPage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-white mb-1">Upcoming Milestone</h3>
-                <p className="text-purple-300">{mockStats.nextMilestone}</p>
+                <p className="text-purple-300">{stats?.nextMilestone || 'No upcoming milestones'}</p>
               </div>
               <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
                 <Calendar className="w-4 h-4 mr-2" />

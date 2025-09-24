@@ -1,0 +1,66 @@
+
+[
+  {
+    "id": "ticket-1",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": "proj-2",
+    "title": "Login Issues on Mobile App",
+    "description": "Users are experiencing difficulties logging into the mobile app using their existing credentials. The issue seems to be related to the authentication system.",
+    "status": "in-progress",
+    "priority": "high",
+    "category": "technical",
+    "assignedTo": "Alex Rivera",
+    "createdAt": "2024-02-25T09:30:00.000Z",
+    "updatedAt": "2024-02-26T14:45:00.000Z"
+  },
+  {
+    "id": "ticket-2",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": "proj-1",
+    "title": "Request for Additional Features",
+    "description": "Would like to add a wishlist functionality and social sharing options to the e-commerce platform. These features would enhance user engagement significantly.",
+    "status": "open",
+    "priority": "medium",
+    "category": "feature-request",
+    "createdAt": "2024-02-20T11:15:00.000Z",
+    "updatedAt": "2024-02-21T10:30:00.000Z"
+  },
+  {
+    "id": "ticket-3",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": null,
+    "title": "Billing Question - Invoice #inv-2",
+    "description": "I have a question about the breakdown of costs in invoice INV-2024-002113. Could you provide more details about the app store submission fee?",
+    "status": "resolved",
+    "priority": "low",
+    "category": "billing",
+    "assignedTo": "Sarah Johnson",
+    "createdAt": "2024-02-10T16:20:00.000Z",
+    "updatedAt": "2024-02-12T09:45:00.000Z",
+    "resolvedAt": "2024-02-12T09:45:00.000Z"
+  },
+  {
+    "id": "ticket-4",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": "proj-4",
+    "title": "Website Content Migration",
+    "description": "Need assistance with migrating existing content from the old website to the new platform. There are about 200 pages of content that need to be transferred.",
+    "status": "open",
+    "priority": "medium",
+    "category": "general",
+    "createdAt": "2024-02-28T13:10:00.000Z",
+    "updatedAt": "2024-02-28T13:10:00.000Z"
+  },
+  {
+    "id": "ticket-5",
+    "userId": "24287ade-7b4f-4f4a-b8fe-aa4337a929b7",
+    "projectId": "proj-2",
+    "title": "App Crashes on Android 14",
+    "description": "The mobile app is crashing consistently on devices running Android 14. This is affecting a significant portion of our user base.",
+    "status": "open",
+    "priority": "urgent",
+    "category": "bug-report",
+    "createdAt": "2024-03-01T08:45:00.000Z",
+    "updatedAt": "2024-03-01T08:45:00.000Z"
+  }
+]
