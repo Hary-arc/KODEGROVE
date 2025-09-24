@@ -1,5 +1,9 @@
 'use client'
 
+import { EcommercePopup } from './pages/EcommercePopup'
+import { MobileAppPopup } from './pages/MobileAppPopup'
+import { WebDevelopmentPopup } from './pages/WebDevelopmentPopup'
+
 // Marketing Components
 export { PopupModal } from './components/PopupModal'
 
