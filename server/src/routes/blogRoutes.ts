@@ -16,7 +16,7 @@ router.route('/')
   .post(
     protect,
     authorize('admin'),
-    createBlog as unknown as RequestHandler // 👈 QUICK FIX
+    createBlog as unknown as RequestHandler //  QUICK FIX
   );
 
 
