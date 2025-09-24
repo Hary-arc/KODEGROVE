@@ -58,7 +58,7 @@ function ResponsiveCard({
     "";
 
   // Animation wrapper
-  const CardWrapper = animation ? motion.div : "div";
+  
   const animationProps = animation ? {
     initial: { opacity: 0, y: 20, scale: 0.95 },
     animate: { opacity: 1, y: 0, scale: 1 },
@@ -71,29 +71,64 @@ function ResponsiveCard({
     }
   } : {};
 
-  return (
-    <CardWrapper
-      className={cn(
-        baseClasses,
-        sizeClasses[size],
-        variantClasses[variant],
-        paddingClasses[size],
-        hoverClasses,
-        "focus-within:ring-2 focus-within:ring-purple-400/50 focus-within:border-purple-400/50",
-        className
-      )}
-      {...animationProps}
-      {...props}
-    >
-      {children}
-      
-      {/* Responsive shimmer effect on hover */}
-      {hover && (
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none rounded-xl" />
-      )}
-    </CardWrapper>
-  );
-}
+  function splitMotionProps(props: any) {
+    const {
+      onAnimationStart, // remove or rename if needed
+      onAnimationEnd,
+      onTransitionEnd,
+      onViewportEnter,
+      onViewportLeave,
+      ...rest
+    } = props;
+
+    return rest;
+  }
+
+  
+    const commonClasses = cn(
+      baseClasses,
+      sizeClasses[size],
+      variantClasses[variant],
+      paddingClasses[size],
+      hoverClasses,
+      "focus-within:ring-2 focus-within:ring-purple-400/50 focus-within:border-purple-400/50",
+      className
+    );
+
+    const shimmer = hover && (
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none rounded-xl" />
+    );
+
+    if (animation) {
+      return (
+        <motion.div
+          className={commonClasses}
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{
+            duration: 0.5,
+            delay: index * 0.1,
+            type: "spring",
+            stiffness: 100,
+            damping: 15
+          }}
+          {...splitMotionProps(props)} //  filtered props
+        >
+          {children}
+          {shimmer}
+        </motion.div>
+      );
+    }
+
+    return (
+      <div className={commonClasses} {...props}>
+        {children}
+        {shimmer}
+      </div>
+    );
+
+  }
+
 
 // Responsive card header with adaptive typography
 interface ResponsiveCardHeaderProps extends React.ComponentProps<"div"> {
