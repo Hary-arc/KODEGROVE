@@ -73,11 +73,19 @@ function ResponsiveCard({
 
   function splitMotionProps(props: any) {
     const {
-      onAnimationStart, // remove or rename if needed
+      onAnimationStart,
       onAnimationEnd,
       onTransitionEnd,
       onViewportEnter,
       onViewportLeave,
+      className,
+      children,
+      variant,
+      size,
+      breakpoint,
+      hover,
+      animation,
+      index,
       ...rest
     } = props;
 
@@ -92,6 +100,7 @@ function ResponsiveCard({
       paddingClasses[size],
       hoverClasses,
       "focus-within:ring-2 focus-within:ring-purple-400/50 focus-within:border-purple-400/50",
+      "relative", // Add relative positioning for framer-motion
       className
     );
 

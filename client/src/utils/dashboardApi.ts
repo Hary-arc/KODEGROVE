@@ -1,7 +1,9 @@
 
 import { authUtils } from './auth';
 
-const API_BASE_URL = 'http://localhost:5001/api';
+const API_BASE_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:5001/api' 
+  : `${window.location.protocol}//${window.location.hostname}:5001/api`;
 
 interface DashboardData {
   stats: any;
@@ -44,6 +46,11 @@ class DashboardApiService {
   async getDashboardData(): Promise<DashboardData> {
     try {
       const response = await this.fetchWithAuth('/dashboard');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
       const result: ApiResponse<DashboardData> = await response.json();
       
       if (!result.success || !result.data) {
@@ -51,9 +58,13 @@ class DashboardApiService {
       }
 
       return result.data;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Dashboard API Error:', error);
-      throw error;
+      // Return fallback data structure to prevent UI crashes
+      if (error.message === 'Authentication required') {
+        throw error;
+      }
+      throw new Error(error.message || 'Network error - please check your connection');
     }
   }
 

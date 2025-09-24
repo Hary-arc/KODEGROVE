@@ -75,16 +75,27 @@ export function DashboardPage() {
       setLoading(true)
       setError(null)
       
+      // Check if user is authenticated before making API call
+      if (!authUtils.isAuthenticated()) {
+        setError('Please log in to access your dashboard')
+        return
+      }
+      
       const dashboardData = await dashboardApi.getDashboardData()
       
       setStats(dashboardData.stats)
-      setProjects(dashboardData.projects)
-      setInvoices(dashboardData.invoices)
-      setTickets(dashboardData.supportTickets)
-      setNotifications(dashboardData.notifications)
+      setProjects(dashboardData.projects || [])
+      setInvoices(dashboardData.invoices || [])
+      setTickets(dashboardData.supportTickets || [])
+      setNotifications(dashboardData.notifications || [])
       
     } catch (err: any) {
       console.error('Failed to fetch dashboard data:', err)
+      if (err.message === 'Authentication required') {
+        authUtils.logout()
+        window.location.hash = '/'
+        return
+      }
       setError(err.message || 'Failed to load dashboard data')
     } finally {
       setLoading(false)
@@ -171,7 +182,7 @@ export function DashboardPage() {
   const openTickets = tickets.filter(t => t.status !== 'closed')
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white pt-20">
+    <div className="min-h-screen bg-slate-950 text-white pt-20 relative">
       {/* Header */}
       <div className="border-b border-white/10 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">

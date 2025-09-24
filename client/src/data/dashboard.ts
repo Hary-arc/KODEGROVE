@@ -257,6 +257,43 @@ export const mockStats: ClientStats = {
   nextMilestone: 'Mobile App Launch - March 5th'
 }
 
+// Utility functions
+export const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount)
+}
+
+export const formatDate = (dateString: string): string => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
+}
+
+export const getStatusColor = (status: string): string => {
+  const colors: Record<string, string> = {
+    'paid': 'text-green-400',
+    'pending': 'text-yellow-400',
+    'overdue': 'text-red-400',
+    'cancelled': 'text-gray-400',
+    'open': 'text-blue-400',
+    'in-progress': 'text-purple-400',
+    'resolved': 'text-green-400',
+    'closed': 'text-gray-400',
+    'planning': 'text-yellow-400',
+    'development': 'text-blue-400',
+    'testing': 'text-purple-400',
+    'completed': 'text-green-400',
+    'on-hold': 'text-orange-400'
+  }
+  return colors[status] || 'text-gray-400'
+}
+
 // Helper functions
 export const getStatusColor = (status: string): string => {
   const colors = {

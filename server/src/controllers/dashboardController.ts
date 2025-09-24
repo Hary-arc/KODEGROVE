@@ -17,7 +17,14 @@ import {
 // @access  Private
 export const getDashboardData = async (req: AuthRequest, res: Response) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
+    
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated'
+      });
+    }
 
     // Fetch user's data
     const projects = await projectStore.findAll(p => p.userId === userId);
@@ -66,7 +73,14 @@ export const getDashboardData = async (req: AuthRequest, res: Response) => {
 // @access  Private
 export const getUserProjects = async (req: AuthRequest, res: Response) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
+    
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated'
+      });
+    }
     const { status, limit = 10, offset = 0 } = req.query;
 
     let projects = await projectStore.findAll(p => p.userId === userId);
@@ -107,7 +121,14 @@ export const getUserProjects = async (req: AuthRequest, res: Response) => {
 // @access  Private
 export const getUserInvoices = async (req: AuthRequest, res: Response) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
+    
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated'
+      });
+    }
     const { status, limit = 10, offset = 0 } = req.query;
 
     let invoices = await invoiceStore.findAll(i => i.userId === userId);
@@ -148,7 +169,14 @@ export const getUserInvoices = async (req: AuthRequest, res: Response) => {
 // @access  Private
 export const getUserSupportTickets = async (req: AuthRequest, res: Response) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
+    
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated'
+      });
+    }
     const { status, limit = 10, offset = 0 } = req.query;
 
     let tickets = await supportTicketStore.findAll(t => t.userId === userId);
@@ -189,7 +217,14 @@ export const getUserSupportTickets = async (req: AuthRequest, res: Response) => 
 // @access  Private
 export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
+    
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated'
+      });
+    }
     const { period = '30' } = req.query;
 
     const days = parseInt(period as string);

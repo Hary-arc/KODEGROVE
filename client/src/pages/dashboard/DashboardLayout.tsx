@@ -44,7 +44,7 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white pt-20">
+    <div className="min-h-screen bg-slate-950 text-white pt-20 relative">
       {/* Header */}
       <div className="border-b border-white/10 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
