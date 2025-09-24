@@ -4,7 +4,7 @@ import { getBlogs, getBlog, createBlog, updateBlog, deleteBlog } from '../contro
 const router = express.Router();
 router.route('/')
     .get(getBlogs)
-    .post(protect, authorize('admin'), createBlog // 👈 QUICK FIX
+    .post(protect, authorize('admin'), createBlog //  QUICK FIX
 );
 router.route('/:id')
     .get(getBlog)

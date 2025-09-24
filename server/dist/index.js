@@ -125,6 +125,7 @@ app.use((req, res, next) => {
 import authRoutes from './routes/authRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
 // Enhanced health check endpoint (defined BEFORE 404 handler)
 app.get('/api/health', (req, res) => {
     const memoryUsage = process.memoryUsage();
@@ -146,8 +147,9 @@ app.get('/', (req, res) => {
 });
 // API Routes (defined BEFORE catch-all handlers)
 app.use('/api/auth', authRoutes);
-app.use('/api/blog', blogRoutes);
+app.use('/api/blogs', blogRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 // Static file serving for production (defined BEFORE catch-all routes)
 if (process.env.NODE_ENV === 'production') {
     const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build');
@@ -231,9 +233,12 @@ const startServer = async () => {
         if (port !== preferredPort) {
             console.warn(`Port ${preferredPort} was in use, using port ${port} instead`);
         }
-        app.listen(port, () => {
+        app.listen(port, '0.0.0.0', () => {
             console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${port}`);
             console.log(`📍 http://localhost:${port}`);
+            if (process.env.REPLIT_DEV_DOMAIN) {
+                console.log(`🌐 Replit URL: https://${process.env.REPLIT_DEV_DOMAIN}`);
+            }
             if (process.env.NODE_ENV === 'production') {
                 console.log(`🌐 Serving React app from client/build`);
             }

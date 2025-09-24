@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs/';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User, userStore } from '../models/index.js';
 // @desc    Register user
@@ -40,7 +40,7 @@ export const register = async (req, res) => {
             });
         }
         // Check if user exists
-        const existingUser = await userStore.findOne(user => user.email === trimmedEmail);
+        const existingUser = await userStore.findOne((user) => user.email === trimmedEmail);
         if (existingUser) {
             return res.status(400).json({
                 success: false,
@@ -82,7 +82,7 @@ export const login = async (req, res) => {
         }
         const trimmedEmail = email.trim().toLowerCase();
         // Check for user
-        const user = await userStore.findOne(user => user.email === trimmedEmail);
+        const user = await userStore.findOne((user) => user.email === trimmedEmail);
         if (!user) {
             return res.status(401).json({
                 success: false,

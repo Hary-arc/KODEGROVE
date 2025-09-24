@@ -7,70 +7,73 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const DATA_DIR = path.join(__dirname, '..', '..', 'data', 'storage');
 export class DataStore {
+    filename;
+    data = [];
     filePath;
-    constructor(fileName) {
-        this.filePath = path.join(DATA_DIR, `${fileName}.json`);
+    findOne;
+    constructor(filename) {
+        this.filename = filename;
+        this.filePath = path.join(DATA_DIR, `${filename}.json`);
+        this.loadData();
     }
-    async ensureFile() {
-        try {
-            await fs.access(this.filePath);
-        }
-        catch {
-            // Ensure directory exists
-            await fs.mkdir(DATA_DIR, { recursive: true });
-            await fs.writeFile(this.filePath, '[]');
-        }
-    }
-    async findAll() {
-        await this.ensureFile();
+    async loadData() {
         try {
             const data = await fs.readFile(this.filePath, 'utf-8');
-            return JSON.parse(data) || [];
+            this.data = JSON.parse(data);
         }
         catch (error) {
-            console.error(`Error reading ${this.filePath}:`, error);
-            return [];
+            // If file doesn't exist, start with empty array
+            this.data = [];
+            await this.saveData();
         }
     }
-    async findById(id) {
-        const items = await this.findAll();
-        return items.find(item => item.id === id) || null;
+    async saveData() {
+        try {
+            // Ensure directory exists
+            const dir = path.dirname(this.filePath);
+            await fs.mkdir(dir, { recursive: true });
+            await fs.writeFile(this.filePath, JSON.stringify(this.data, null, 2));
+        }
+        catch (error) {
+            console.error(`Error saving data to ${this.filePath}:`, error);
+        }
     }
-    async findOne(predicate) {
-        const items = await this.findAll();
-        return items.find(predicate) || null;
+    async findAll(filter) {
+        if (filter) {
+            return this.data.filter(filter);
+        }
+        return [...this.data];
+    }
+    async findById(id) {
+        return this.data.find(item => item.id === id) || null;
     }
     async create(item) {
-        const items = await this.findAll();
+        // Ensure the item has a unique ID, generating one if it doesn't.
         const newItem = {
             ...item,
             id: 'id' in item && item.id ? item.id : randomUUID()
         };
-        items.push(newItem);
-        await fs.writeFile(this.filePath, JSON.stringify(items, null, 2));
+        this.data.push(newItem);
+        await this.saveData();
         return newItem;
     }
     async update(id, updates) {
-        const items = await this.findAll();
-        const index = items.findIndex(item => item.id === id);
+        const index = this.data.findIndex(item => item.id === id);
         if (index === -1)
             return null;
-        const updatedItem = {
-            ...items[index],
-            ...updates,
-            id // Ensure ID doesn't get overwritten
-        };
-        items[index] = updatedItem;
-        await fs.writeFile(this.filePath, JSON.stringify(items, null, 2));
-        return updatedItem;
+        this.data[index] = { ...this.data[index], ...updates };
+        await this.saveData();
+        return this.data[index];
     }
     async delete(id) {
-        const items = await this.findAll();
-        const filteredItems = items.filter(item => item.id !== id);
-        if (filteredItems.length === items.length) {
+        const index = this.data.findIndex(item => item.id === id);
+        if (index === -1)
             return false;
-        }
-        await fs.writeFile(this.filePath, JSON.stringify(filteredItems, null, 2));
+        this.data.splice(index, 1);
+        await this.saveData();
         return true;
+    }
+    async count() {
+        return this.data.length;
     }
 }
