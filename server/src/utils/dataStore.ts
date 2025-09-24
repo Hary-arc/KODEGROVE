@@ -11,6 +11,7 @@ const DATA_DIR = path.join(__dirname, '..', '..', 'data', 'storage');
 export class DataStore<T extends { id: string }> {
   private data: T[] = [];
   private filePath: string;
+    findOne: any;
 
   constructor(private filename: string) {
     this.filePath = path.join(DATA_DIR, `${filename}.json`);

@@ -49,7 +49,7 @@ export const register = async (req: Request, res: Response) => {
     }
 
     // Check if user exists
-    const existingUser = await userStore.findOne(user => user.email === trimmedEmail);
+    const existingUser = await userStore.findOne((user: { email: any; }) => user.email === trimmedEmail);
     if (existingUser) {
       return res.status(400).json({
         success: false,
@@ -97,7 +97,7 @@ export const login = async (req: Request, res: Response) => {
     const trimmedEmail = email.trim().toLowerCase();
 
     // Check for user
-    const user = await userStore.findOne(user => user.email === trimmedEmail);
+    const user = await userStore.findOne((user: { email: any; }) => user.email === trimmedEmail);
     if (!user) {
       return res.status(401).json({
         success: false,

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Smartphone, Apple, Android, Zap, Users, TrendingUp, CheckCircle, ArrowRight, Star } from 'lucide-react'
+import { Smartphone, Apple, Zap, Users, TrendingUp, CheckCircle, ArrowRight, Star } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 
 export function MobileAppPopup() {
@@ -14,7 +14,7 @@ export function MobileAppPopup() {
       gradient: "from-gray-600 to-gray-800"
     },
     {
-      icon: Android,
+      icon: Users,
       name: "Android Development", 
       description: "Kotlin-based apps optimized for Google Play Store success",
       features: ["Material Design", "Google Play Console", "Firebase Integration", "Multi-device Support"],
@@ -32,7 +32,7 @@ export function MobileAppPopup() {
   const stats = [
     { icon: "📱", value: "50+", label: "Apps Launched" },
     { icon: "⭐", value: "4.8", label: "Average Rating" },
-    { icon: "📈", value: "2M+", label: "Downloads" },
+    { icon: "📈", value: "2k+", label: "Downloads" },
     { icon: "🚀", value: "95%", label: "Success Rate" }
   ]
 
