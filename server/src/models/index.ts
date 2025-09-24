@@ -1,4 +1,3 @@
-
 import { User } from './User.js';
 import { Blog } from './Blog.js';
 import { Project } from './Project.js';
@@ -8,7 +7,7 @@ import { ClientAnalytics } from './ClientAnalytics.js';
 import { DataStore } from '../utils/dataStore.js';
 
 // Service interface and class
-export interface IService {
+interface IService {
   id: string;
   title: string;
   description: string;
@@ -17,7 +16,7 @@ export interface IService {
   createdAt: string;
 }
 
-export class Service implements IService {
+class Service implements IService {
   id: string;
   title: string;
   description: string;
@@ -25,11 +24,11 @@ export class Service implements IService {
   features: string[];
   createdAt: string;
 
-  constructor(data: Partial<Service>) {
+  constructor(data: Partial<IService> & { title: string; description: string; price: number }) {
     this.id = data.id || crypto.randomUUID();
-    this.title = data.title || '';
-    this.description = data.description || '';
-    this.price = data.price || 0;
+    this.title = data.title;
+    this.description = data.description;
+    this.price = data.price;
     this.features = data.features || [];
     this.createdAt = data.createdAt || new Date().toISOString();
   }
@@ -37,20 +36,16 @@ export class Service implements IService {
   validate(): { isValid: boolean; errors: string[] } {
     const errors: string[] = [];
 
-    if (!this.title) {
+    if (!this.title || this.title.trim().length === 0) {
       errors.push('Title is required');
     }
 
-    if (!this.description) {
+    if (!this.description || this.description.trim().length === 0) {
       errors.push('Description is required');
     }
 
     if (this.price < 0) {
-      errors.push('Price must be positive');
-    }
-
-    if (!this.features || this.features.length === 0) {
-      errors.push('At least one feature is required');
+      errors.push('Price must be non-negative');
     }
 
     return {
@@ -82,21 +77,14 @@ export const clientAnalyticsStore = new DataStore<ClientAnalytics>('client_analy
 
 // Export types and classes
 export { User, Blog, Project, Invoice, SupportTicket, ClientAnalytics };
-// Re-export IService as ServiceInterface to avoid conflict
-export type { IService as ServiceInterface };
 
-// Export interfaces for TypeScript
+// Export interfaces for TypeScript (avoid duplicates)
 export type { 
   IProject, 
   IProjectTeam, 
-  IProjectMilestone,
-  IInvoice, 
-  IPayment,
-  ISupportTicket, 
-  ITicketMessage,
-  IClientAnalytics,
-  IDashboardStats 
+  IProjectMilestone
 } from './Project.js';
 export type { IInvoice, IPayment } from './Invoice.js';
 export type { ISupportTicket, ITicketMessage } from './SupportTicket.js';
 export type { IClientAnalytics, IDashboardStats } from './ClientAnalytics.js';
+export type { IService };

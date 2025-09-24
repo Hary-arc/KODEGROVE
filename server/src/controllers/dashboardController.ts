@@ -26,10 +26,10 @@ export const getDashboardData = async (req: AuthRequest, res: Response) => {
       });
     }
 
-    // Fetch user's data
-    const projects = await projectStore.findAll(p => p.userId === userId);
-    const invoices = await invoiceStore.findAll(i => i.userId === userId);
-    const supportTickets = await supportTicketStore.findAll(t => t.userId === userId);
+    // Fetch user's data with proper typing
+    const projects = await projectStore.findAll((p: Project) => p.userId === userId);
+    const invoices = await invoiceStore.findAll((i: Invoice) => i.userId === userId);
+    const supportTickets = await supportTicketStore.findAll((t: SupportTicket) => t.userId === userId);
 
     // Calculate current stats
     const stats = ClientAnalytics.calculateStats(projects, invoices, []);
@@ -83,7 +83,7 @@ export const getUserProjects = async (req: AuthRequest, res: Response) => {
     }
     const { status, limit = 10, offset = 0 } = req.query;
 
-    let projects = await projectStore.findAll(p => p.userId === userId);
+    let projects = await projectStore.findAll((p: Project) => p.userId === userId);
 
     // Filter by status if provided
     if (status && typeof status === 'string') {
@@ -131,7 +131,7 @@ export const getUserInvoices = async (req: AuthRequest, res: Response) => {
     }
     const { status, limit = 10, offset = 0 } = req.query;
 
-    let invoices = await invoiceStore.findAll(i => i.userId === userId);
+    let invoices = await invoiceStore.findAll((i: Invoice) => i.userId === userId);
 
     // Filter by status if provided
     if (status && typeof status === 'string') {
@@ -179,7 +179,7 @@ export const getUserSupportTickets = async (req: AuthRequest, res: Response) => 
     }
     const { status, limit = 10, offset = 0 } = req.query;
 
-    let tickets = await supportTicketStore.findAll(t => t.userId === userId);
+    let tickets = await supportTicketStore.findAll((t: SupportTicket) => t.userId === userId);
 
     // Filter by status if provided
     if (status && typeof status === 'string') {
@@ -232,7 +232,7 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
     const startDate = new Date();
     startDate.setDate(endDate.getDate() - days);
 
-    const analytics = await clientAnalyticsStore.findAll(a => 
+    const analytics = await clientAnalyticsStore.findAll((a: ClientAnalytics) => 
       a.userId === userId && 
       new Date(a.metricDate) >= startDate && 
       new Date(a.metricDate) <= endDate
@@ -263,7 +263,7 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
 };
 
 // Helper function to generate notifications
-async function generateNotifications(userId: string, projects: any[], invoices: any[], tickets: any[]) {
+async function generateNotifications(userId: string, projects: Project[], invoices: Invoice[], tickets: SupportTicket[]) {
   const notifications = [];
   
   // Project milestones
@@ -345,7 +345,7 @@ async function generateNotifications(userId: string, projects: any[], invoices: 
 }
 
 // Helper function to calculate trends
-function calculateTrends(analytics: any[]) {
+function calculateTrends(analytics: ClientAnalytics[]) {
   if (analytics.length < 2) {
     return {
       projectGrowth: 0,
@@ -358,7 +358,9 @@ function calculateTrends(analytics: any[]) {
   const previous = analytics[analytics.length - 2];
 
   const projectGrowth = latest.totalProjects - previous.totalProjects;
-  const investmentGrowth = ((latest.totalInvestment - previous.totalInvestment) / previous.totalInvestment) * 100;
+  const investmentGrowth = previous.totalInvestment > 0 
+    ? ((latest.totalInvestment - previous.totalInvestment) / previous.totalInvestment) * 100
+    : 0;
   const satisfactionTrend = latest.satisfactionScore - previous.satisfactionScore;
 
   return {
