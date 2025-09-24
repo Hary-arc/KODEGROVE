@@ -140,6 +140,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 import authRoutes from './routes/authRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
 
 // Enhanced health check endpoint (defined BEFORE 404 handler)
 app.get('/api/health', (req: Request, res: Response) => {
@@ -164,14 +165,15 @@ app.get('/', (req: Request, res: Response) => {
 
 // API Routes (defined BEFORE catch-all handlers)
 app.use('/api/auth', authRoutes);
-app.use('/api/blog', blogRoutes);
+app.use('/api/blogs', blogRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Static file serving for production (defined BEFORE catch-all routes)
 if (process.env.NODE_ENV === 'production') {
   const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build');
   console.log(`ℹ️ Serving static files from: ${clientBuildPath}`);
-  
+
   // Serve static files with proper caching
   app.use(express.static(clientBuildPath, {
     maxAge: '1y',
@@ -209,7 +211,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   const timestamp = new Date().toISOString();
   const errorId = Date.now().toString(36);
-  
+
   console.error(`❌ [${timestamp}] Error ${errorId}:`, {
     message: err.message,
     stack: err.stack,
@@ -218,7 +220,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     ip: req.ip,
     userAgent: req.get('User-Agent')
   });
-  
+
   res.status(500).json({
     success: false,
     message: 'Internal Server Error',

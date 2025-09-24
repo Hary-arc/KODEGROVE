@@ -1,6 +1,10 @@
 
 import { User } from './User.js';
 import { Blog } from './Blog.js';
+import { Project } from './Project.js';
+import { Invoice } from './Invoice.js';
+import { SupportTicket } from './SupportTicket.js';
+import { ClientAnalytics } from './ClientAnalytics.js';
 import { DataStore } from '../utils/dataStore.js';
 
 // Service interface and class
@@ -71,8 +75,28 @@ export class Service implements IService {
 export const userStore = new DataStore<User>('users');
 export const blogStore = new DataStore<Blog>('blogs');
 export const serviceStore = new DataStore<Service>('services');
+export const projectStore = new DataStore<Project>('projects');
+export const invoiceStore = new DataStore<Invoice>('invoices');
+export const supportTicketStore = new DataStore<SupportTicket>('support_tickets');
+export const clientAnalyticsStore = new DataStore<ClientAnalytics>('client_analytics');
 
 // Export types and classes
-export { User, Blog };
+export { User, Blog, Project, Invoice, SupportTicket, ClientAnalytics };
 // Re-export IService as ServiceInterface to avoid conflict
 export type { IService as ServiceInterface };
+
+// Export interfaces for TypeScript
+export type { 
+  IProject, 
+  IProjectTeam, 
+  IProjectMilestone,
+  IInvoice, 
+  IPayment,
+  ISupportTicket, 
+  ITicketMessage,
+  IClientAnalytics,
+  IDashboardStats 
+} from './Project.js';
+export type { IInvoice, IPayment } from './Invoice.js';
+export type { ISupportTicket, ITicketMessage } from './SupportTicket.js';
+export type { IClientAnalytics, IDashboardStats } from './ClientAnalytics.js';
