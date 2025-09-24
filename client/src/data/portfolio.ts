@@ -84,7 +84,7 @@ export const projects: Project[] = [
     timeline: '6 months',
     team: ['UX/UI Designer', 'Frontend Developer', '3D Artist', 'AI Engineer', 'Backend Developer', 'DevOps Engineer'],
     testimonial: {
-      quote: 'CodeFlow transformed our vision into a reality that exceeded every expectation. The platform is not just functional—it\'s absolutely mesmerizing.',
+      quote: 'Kodegrove transformed our vision into a reality that exceeded every expectation. The platform is not just functional—it\'s absolutely mesmerizing.',
       author: 'Sarah Chen',
       role: 'CEO',
       company: 'TechStyle Fashion'
@@ -288,7 +288,7 @@ export const projects: Project[] = [
     timeline: '7 months',
     team: ['Luxury UX Designer', 'Frontend Developer', 'E-commerce Specialist', 'Backend Developer', 'Brand Consultant', 'QA Engineer'],
     testimonial: {
-      quote: 'CodeFlow understood that luxury isn\'t just about products - it\'s about the entire experience. They\'ve created a platform that truly reflects our brand\'s sophistication.',
+      quote: 'kodeGrove understood that luxury isn\'t just about products - it\'s about the entire experience. They\'ve created a platform that truly reflects our brand\'s sophistication.',
       author: 'Isabella Rossi',
       role: 'Brand Director',
       company: 'Luxe Brands Collective'

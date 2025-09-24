@@ -231,7 +231,7 @@ export const pricingFAQs: FAQ[] = [
 ]
 
 export const pricingStats = {
-  clientsSaved: '2.5M+',
+  clientsSaved: '2.5k+',
   avgROI: '320%',
   projectsDelivered: '500+',
   satisfactionRate: '98%'

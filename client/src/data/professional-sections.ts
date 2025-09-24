@@ -109,7 +109,7 @@ export const technologyPartners = [
 // Press Mentions
 export const pressMentions = [
   {
-    title: 'CodeFlow Leads Digital Transformation for Fortune 500 Companies',
+    title: 'Kodegrove Leads Digital Transformation for Fortune 500 Companies',
     publication: 'TechCrunch',
     date: '2024-01-15',
     url: 'https://techcrunch.com/codeflow-digital-transformation',
