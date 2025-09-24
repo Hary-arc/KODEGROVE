@@ -11,7 +11,7 @@ const DATA_DIR = path.join(__dirname, '..', '..', 'data', 'storage');
 export class DataStore<T extends { id: string }> {
   private data: T[] = [];
   private filePath: string;
-    findOne: any;
+    
 
   constructor(private filename: string) {
     this.filePath = path.join(DATA_DIR, `${filename}.json`);
@@ -47,6 +47,10 @@ export class DataStore<T extends { id: string }> {
     }
     return [...this.data];
   }
+async findOne(filter: (item: T) => boolean): Promise<T | undefined> {
+  const results = await this.findAll(filter);
+  return results[0]; // return first match, or undefined if none
+}
 
   async findById(id: string): Promise<T | null> {
     return this.data.find(item => item.id === id) || null;

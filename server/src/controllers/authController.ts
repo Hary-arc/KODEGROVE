@@ -97,7 +97,9 @@ export const login = async (req: Request, res: Response) => {
     const trimmedEmail = email.trim().toLowerCase();
 
     // Check for user
+
     const user = await userStore.findOne((user: { email: any; }) => user.email === trimmedEmail);
+    console.log("userStore =", userStore);
     if (!user) {
       return res.status(401).json({
         success: false,
