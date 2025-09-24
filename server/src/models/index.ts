@@ -76,7 +76,7 @@ export const supportTicketStore = new DataStore<SupportTicket>('support_tickets'
 export const clientAnalyticsStore = new DataStore<ClientAnalytics>('client_analytics');
 
 // Export types and classes
-export { User, Blog, Project, Invoice, SupportTicket, ClientAnalytics };
+export { User, Blog, Service, Project, Invoice, SupportTicket, ClientAnalytics };
 
 // Export interfaces for TypeScript (avoid duplicates)
 export type { 

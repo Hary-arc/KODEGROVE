@@ -3,7 +3,9 @@ import { authUtils } from './auth';
 
 const API_BASE_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:5001/api' 
-  : `${window.location.protocol}//${window.location.hostname}:5001/api`;
+  : window.location.hostname.includes('replit') 
+    ? `${window.location.protocol}//${window.location.hostname}/api`
+    : `${window.location.protocol}//${window.location.hostname}:5001/api`;
 
 interface DashboardData {
   stats: any;
