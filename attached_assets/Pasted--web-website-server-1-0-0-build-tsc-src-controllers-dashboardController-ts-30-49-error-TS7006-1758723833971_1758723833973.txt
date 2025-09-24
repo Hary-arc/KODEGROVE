@@ -1,0 +1,55 @@
+> web-website-server@1.0.0 build
+> tsc
+src/controllers/dashboardController.ts(30,49): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/controllers/dashboardController.ts(30,49): error TS2554: Expected 0 arguments, but got 1.
+src/controllers/dashboardController.ts(31,49): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/controllers/dashboardController.ts(31,49): error TS2554: Expected 0 arguments, but got 1.
+src/controllers/dashboardController.ts(32,61): error TS7006: Parameter 't' implicitly has an 'any' type.
+src/controllers/dashboardController.ts(32,61): error TS2554: Expected 0 arguments, but got 1.
+src/controllers/dashboardController.ts(86,47): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/controllers/dashboardController.ts(86,47): error TS2554: Expected 0 arguments, but got 1.
+src/controllers/dashboardController.ts(134,47): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/controllers/dashboardController.ts(134,47): error TS2554: Expected 0 arguments, but got 1.
+src/controllers/dashboardController.ts(182,52): error TS7006: Parameter 't' implicitly has an 'any' type.
+src/controllers/dashboardController.ts(182,52): error TS2554: Expected 0 arguments, but got 1.
+src/controllers/dashboardController.ts(235,58): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/controllers/dashboardController.ts(235,58): error TS2554: Expected 0 arguments, but got 1.
+src/models/index.ts(93,3): error TS2300: Duplicate identifier 'IInvoice'.
+src/models/index.ts(93,3): error TS2305: Module '"./Project.js"' has no exported member 'IInvoice'.
+src/models/index.ts(94,3): error TS2300: Duplicate identifier 'IPayment'.
+src/models/index.ts(94,3): error TS2305: Module '"./Project.js"' has no exported member 'IPayment'.
+src/models/index.ts(95,3): error TS2300: Duplicate identifier 'ISupportTicket'.
+src/models/index.ts(95,3): error TS2305: Module '"./Project.js"' has no exported member 'ISupportTicket'.
+src/models/index.ts(96,3): error TS2300: Duplicate identifier 'ITicketMessage'.
+src/models/index.ts(96,3): error TS2305: Module '"./Project.js"' has no exported member 'ITicketMessage'.
+src/models/index.ts(97,3): error TS2300: Duplicate identifier 'IClientAnalytics'.
+src/models/index.ts(97,3): error TS2305: Module '"./Project.js"' has no exported member 'IClientAnalytics'.
+src/models/index.ts(98,3): error TS2300: Duplicate identifier 'IDashboardStats'.
+src/models/index.ts(98,3): error TS2305: Module '"./Project.js"' has no exported member 'IDashboardStats'.
+src/models/index.ts(100,15): error TS2300: Duplicate identifier 'IInvoice'.
+src/models/index.ts(100,25): error TS2300: Duplicate identifier 'IPayment'.
+src/models/index.ts(101,15): error TS2300: Duplicate identifier 'ISupportTicket'.
+src/models/index.ts(101,31): error TS2300: Duplicate identifier 'ITicketMessage'.
+src/models/index.ts(102,15): error TS2300: Duplicate identifier 'IClientAnalytics'.
+src/models/index.ts(102,33): error TS2300: Duplicate identifier 'IDashboardStats'.
+src/routes/dashboardRoutes.ts(18,17): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>' is not assignable to parameter of type 'Application<Record<string, any>>'.
+      Type '(req: AuthRequest, res: Response<any, Record<string, any>>) => Promise<Response<any, Record<string, any>> | undefined>' is missing the following properties from type 'Application<Record<string, any>>': init, defaultConfiguration, engine, set, and 63 more.
+src/routes/dashboardRoutes.ts(21,25): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>' is not assignable to parameter of type 'Application<Record<string, any>>'.
+      Type '(req: AuthRequest, res: Response<any, Record<string, any>>) => Promise<Response<any, Record<string, any>> | undefined>' is missing the following properties from type 'Application<Record<string, any>>': init, defaultConfiguration, engine, set, and 63 more.
+src/routes/dashboardRoutes.ts(22,25): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>' is not assignable to parameter of type 'Application<Record<string, any>>'.
+      Type '(req: AuthRequest, res: Response<any, Record<string, any>>) => Promise<Response<any, Record<string, any>> | undefined>' is missing the following properties from type 'Application<Record<string, any>>': init, defaultConfiguration, engine, set, and 63 more.
+src/routes/dashboardRoutes.ts(23,24): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>' is not assignable to parameter of type 'Application<Record<string, any>>'.
+      Type '(req: AuthRequest, res: Response<any, Record<string, any>>) => Promise<Response<any, Record<string, any>> | undefined>' is missing the following properties from type 'Application<Record<string, any>>': init, defaultConfiguration, engine, set, and 63 more.
+src/routes/dashboardRoutes.ts(24,26): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Argument of type '(req: AuthRequest, res: Response) => Promise<Response<any, Record<string, any>> | undefined>' is not assignable to parameter of type 'Application<Record<string, any>>'.
+      Type '(req: AuthRequest, res: Response<any, Record<string, any>>) => Promise<Response<any, Record<string, any>> | undefined>' is missing the following properties from type 'Application<Record<string, any>>': init, defaultConfiguration, engine, set, and 63 more.
+npm error Lifecycle script `build` failed with error:

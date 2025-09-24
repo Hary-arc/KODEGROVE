@@ -3,7 +3,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Outlet } from 'react-router-dom'
+//import { Outlet } from 'react-router-dom'
 import { 
   Settings, 
   LogOut, 
