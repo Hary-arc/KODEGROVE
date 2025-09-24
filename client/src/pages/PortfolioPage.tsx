@@ -18,17 +18,17 @@ export function PortfolioPage() {
         {/* Enhanced background animations */}
         <Parallax speed={0.3} className="absolute inset-0 z-0 pointer-events-none">
           {/* Purple glow */}
-          <FloatingElement intensity={1}>
+          <FloatingElement amplitude={1}>
             <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
           </FloatingElement>
         
           {/* Cyan glow */}
-          <FloatingElement intensity={0.8}>
+          <FloatingElement amplitude={0.8}>
             <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
           </FloatingElement>
         
           {/* Pink glow */}
-          <FloatingElement intensity={1.2}>
+          <FloatingElement amplitude={1.2}>
             <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-pink-500/10 rounded-full blur-2xl" />
           </FloatingElement>
         </Parallax>
@@ -69,7 +69,7 @@ export function PortfolioPage() {
               </p>
             </ScrollReveal>
             
-            <StaggeredReveal staggerDelay={0.2} initialDelay={1.0}>
+            <StaggeredReveal staggerDelay={0.2}>
               <div className="flex flex-wrap items-center justify-center gap-6 text-lg text-gray-400">
                 <HoverLift liftDistance={4} scale={1.05}>
                   <div className="flex items-center space-x-2">
@@ -106,7 +106,7 @@ export function PortfolioPage() {
           </div>
           
           {/* Enhanced Stats Overview */}
-          <StaggeredReveal staggerDelay={0.1} initialDelay={1.4} className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+          <StaggeredReveal staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
             {[
               { number: `${siteConfig.stats.projects}+`, label: 'Projects Delivered' },
               { number: `${siteConfig.stats.clients}+`, label: 'Happy Clients' },

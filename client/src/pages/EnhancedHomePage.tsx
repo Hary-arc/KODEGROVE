@@ -101,7 +101,7 @@ export function EnhancedHomePage() {
     amount: 0.2,
   });
 
-  const { scrollY, scrollDirection } = useScrollAnimation();
+  //const { scrollY, scrollDirection } = useScrollAnimation();
   const viewport = useViewportAnimation();
 
   const [activeService, setActiveService] = useState(0);

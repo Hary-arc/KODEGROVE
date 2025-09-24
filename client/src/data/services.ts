@@ -170,14 +170,14 @@ export const services: Service[] = [
       }
     ],
     pricing: {
-      starting: '$25,000',
+      starting: '$5,000',
       description: 'Custom software development projects'
     }
   }
 ]
 
 export const serviceStats = [
-  { icon: 'Award', number: '500+', label: 'Projects' },
+  { icon: 'Award', number: '50+', label: 'Projects' },
   { icon: 'Users', number: '250+', label: 'Clients' },
   { icon: 'Star', number: '98%', label: 'Satisfaction' },
   { icon: 'TrendingUp', number: '300%', label: 'Avg Growth' }

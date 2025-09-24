@@ -7,8 +7,8 @@ export const siteConfig = {
   url: 'https://kodegrove.dev',
   contact: {
     email: 'hello@kodegrove.dev',
-    phone: '+1 (555) 123-4567',
-    address: 'San Francisco, CA'
+    phone: '+91 (781) 123-4567',
+    address: 'INDIA, UTTARAKHAND'
   },
   social: {
     linkedin: '#',

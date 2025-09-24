@@ -63,8 +63,9 @@ export class PerformanceMonitor {
               if (entry.entryType === 'largest-contentful-paint') {
                 vitals.LCP = entry.startTime
               }
-              if (entry.entryType === 'first-input') {
-                vitals.FID = entry.processingStart - entry.startTime
+              if (entry.name === 'first-input') {
+                const event = entry as PerformanceEventTiming;
+                vitals.FID = event.processingStart - event.startTime;
               }
               if (entry.entryType === 'layout-shift' && !(entry as any).hadRecentInput) {
                 vitals.CLS = (vitals.CLS || 0) + (entry as any).value
