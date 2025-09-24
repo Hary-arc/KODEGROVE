@@ -8,7 +8,7 @@ import {
   getStatusColor,
   type Notification
 } from '../data/dashboard'
-import { DashboardStats } from '../components/DashboardStats'
+import { ResponsiveCard, ResponsiveCardHeader, ResponsiveCardTitle, ResponsiveCardContent } from '../components/ui/responsive-card'
 import { ProjectCard } from '../components/ProjectCard'
 import { DashboardNotifications } from '../components/DashboardNotifications'
 import { Badge } from '../components/ui/badge'
@@ -254,7 +254,55 @@ export function DashboardPage() {
             <h2 className="text-3xl font-bold text-white mb-2">Dashboard Overview</h2>
             <p className="text-gray-400">Track your projects, billing, and account metrics</p>
           </div>
-          <DashboardStats stats={stats} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <ResponsiveCard variant="glass" size="md" hover={true} animation={true}>
+              <ResponsiveCardHeader>
+                <ResponsiveCardTitle size="sm" className="text-gray-400">Total Projects</ResponsiveCardTitle>
+              </ResponsiveCardHeader>
+              <ResponsiveCardContent>
+                <div className="text-3xl font-bold text-white">{stats.totalProjects}</div>
+                <p className="text-sm text-gray-400 mt-1">
+                  {stats.activeProjects} active
+                </p>
+              </ResponsiveCardContent>
+            </ResponsiveCard>
+
+            <ResponsiveCard variant="glass" size="md" hover={true} animation={true} index={1}>
+              <ResponsiveCardHeader>
+                <ResponsiveCardTitle size="sm" className="text-gray-400">Total Investment</ResponsiveCardTitle>
+              </ResponsiveCardHeader>
+              <ResponsiveCardContent>
+                <div className="text-3xl font-bold text-white">{formatCurrency(stats.totalInvestment)}</div>
+                <p className="text-sm text-green-400 mt-1">
+                  ↗ Growing
+                </p>
+              </ResponsiveCardContent>
+            </ResponsiveCard>
+
+            <ResponsiveCard variant="glass" size="md" hover={true} animation={true} index={2}>
+              <ResponsiveCardHeader>
+                <ResponsiveCardTitle size="sm" className="text-gray-400">On-Time Delivery</ResponsiveCardTitle>
+              </ResponsiveCardHeader>
+              <ResponsiveCardContent>
+                <div className="text-3xl font-bold text-white">{stats.onTimeDelivery}%</div>
+                <p className="text-sm text-gray-400 mt-1">
+                  Excellent performance
+                </p>
+              </ResponsiveCardContent>
+            </ResponsiveCard>
+
+            <ResponsiveCard variant="glass" size="md" hover={true} animation={true} index={3}>
+              <ResponsiveCardHeader>
+                <ResponsiveCardTitle size="sm" className="text-gray-400">Satisfaction Score</ResponsiveCardTitle>
+              </ResponsiveCardHeader>
+              <ResponsiveCardContent>
+                <div className="text-3xl font-bold text-white">{stats.satisfactionScore}/5</div>
+                <p className="text-sm text-green-400 mt-1">
+                  ⭐ Excellent rating
+                </p>
+              </ResponsiveCardContent>
+            </ResponsiveCard>
+          </div>
         </motion.section>
 
         {/* Next Milestone Alert */}

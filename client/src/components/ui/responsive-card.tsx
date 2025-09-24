@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "./utils";
+import { cn } from "../../utils/cn";
 import { motion } from "framer-motion";
 
 // Base responsive card with comprehensive breakpoint support
@@ -71,15 +71,13 @@ function ResponsiveCard({
     }
   } : {};
 
-  function splitMotionProps(props: any) {
+  function splitMotionProps(allProps: any) {
     const {
       onAnimationStart,
       onAnimationEnd,
       onTransitionEnd,
       onViewportEnter,
       onViewportLeave,
-      className,
-      children,
       variant,
       size,
       breakpoint,
@@ -87,7 +85,7 @@ function ResponsiveCard({
       animation,
       index,
       ...rest
-    } = props;
+    } = allProps;
 
     return rest;
   }

@@ -285,34 +285,14 @@ export const getStatusColor = (status: string): string => {
     'in-progress': 'text-purple-400',
     'resolved': 'text-green-400',
     'closed': 'text-gray-400',
-    'planning': 'text-yellow-400',
-    'development': 'text-blue-400',
-    'testing': 'text-purple-400',
+    'planning': 'text-blue-400',
+    'development': 'text-yellow-400',
+    'testing': 'text-orange-400',
+    'deployment': 'text-purple-400',
     'completed': 'text-green-400',
-    'on-hold': 'text-orange-400'
+    'on-hold': 'text-gray-400'
   }
   return colors[status] || 'text-gray-400'
-}
-
-// Helper functions
-export const getStatusColor = (status: string): string => {
-  const colors = {
-    planning: 'text-blue-400',
-    development: 'text-yellow-400',
-    testing: 'text-orange-400',
-    deployment: 'text-purple-400',
-    completed: 'text-green-400',
-    'on-hold': 'text-gray-400',
-    pending: 'text-yellow-400',
-    paid: 'text-green-400',
-    overdue: 'text-red-400',
-    cancelled: 'text-gray-400',
-    open: 'text-blue-400',
-    'in-progress': 'text-yellow-400',
-    resolved: 'text-green-400',
-    closed: 'text-gray-400'
-  }
-  return colors[status as keyof typeof colors] || 'text-gray-400'
 }
 
 export const getPriorityColor = (priority: string): string => {
