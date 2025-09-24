@@ -744,7 +744,7 @@ export function Navigation() {
           <div className="hidden lg:flex items-center gap-4">
             <Button
               onClick={() => handleNavigation("/quotation")}
-              className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white font-semibold"
+              className="flex items-center px-6 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-blue-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50 group "
             >
               GET QUOTATION
               <ArrowRight className="w-4 h-4 ml-2" />

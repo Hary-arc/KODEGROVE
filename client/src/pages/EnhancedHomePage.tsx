@@ -21,16 +21,13 @@ import {
   Palette,
   Code,
 } from "lucide-react";
-import { ChevronDown } from "lucide-react"; 
+import { ChevronDown } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { siteConfig } from "../data/site-config";
 import { services } from "../data/services";
-import {
-  projects,
-  getFeaturedProjects,
-} from "../data/portfolio";
+import { projects, getFeaturedProjects } from "../data/portfolio";
 import { testimonials } from "../data/testimonials";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import VideoHoverLift from "../components/VideoHoverLift";
@@ -48,10 +45,7 @@ import {
   AnimatedIcon,
   Typewriter,
 } from "../components/animations/MicroInteractions";
-import {
-  VideoBackground,
-  CaseStudyVideo,
-} from "../components/animations/VideoBackground";
+import { VideoBackground } from "../components/animations/VideoBackground";
 import {
   LottieAnimation,
   AnimatedIcon as LottieIcon,
@@ -154,19 +148,18 @@ export function EnhancedHomePage() {
       >
         {/* Static Background instead of video to avoid issues */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900">
-          <ImageWithFallback
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070"
-            alt="Hero background"
-            className="w-full h-full object-cover opacity-40"
+          <VideoBackground
+            src="/public/output2.mp4" // put your video path here
+            poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070"
+            overlay
+            overlayOpacity={0.5}
+            className="absolute inset-0"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60" />
         </div>
 
         {/* Animated particles overlay */}
-        <Parallax
-          speed={0.3}
-          className="absolute inset-0 pointer-events-none"
-        >
+        <Parallax speed={0.3} className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-float" />
           <div
             className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-float"
@@ -203,8 +196,7 @@ export function EnhancedHomePage() {
                   <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                     hypnotic digital experiences
                   </span>{" "}
-                  that transform businesses and captivate users
-                  worldwide.
+                  that transform businesses and captivate users worldwide.
                 </p>
               </ScrollReveal>
 
@@ -227,53 +219,41 @@ export function EnhancedHomePage() {
                   },
                   {
                     number: `${siteConfig.stats.avgROI}%`,
-                    label: (
-                      <>
-                        Average <br /> ROI
-                      </>
-                    ),
+                    label: "Average ROI",
 
                     icon: TrendingUp,
                   },
-                ].map(
-                  ({ number, label, icon: Icon }, index) => (
-                    <HoverLift
-                      key={index}
-                      liftDistance={12}
-                      scale={1.05}
-                    >
-                      <Card className="glass border border-white/10 hover:border-purple-400/30 transition-all duration-500 text-center p-6 rounded-2xl backdrop-blur-md">
-                        <CardContent className="p-0">
-                          <AnimatedIcon
-                            hoverRotation={15}
-                            hoverScale={1.3}
-                            className="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-4 text-purple-400"
-                          >
-                            <Icon className="w-8 h-8" />
-                          </AnimatedIcon>
+                ].map(({ number, label, icon: Icon }, index) => (
+                  <HoverLift key={index} liftDistance={12} scale={1.05}>
+                    <Card className="glass border border-white/10 hover:border-purple-400/30 transition-all duration-500 text-center p-4 rounded-2xl backdrop-blur-md">
+                      <CardContent className="p-0">
+                        <AnimatedIcon
+                          hoverRotation={15}
+                          hoverScale={1.3}
+                          className="w-8 h-8 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-2 text-blue-400 glow-effect"
+                        >
+                          <Icon className="w-8 h-8" />
+                        </AnimatedIcon>
 
-                          <div className="text-3xl sm:text-xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-                            {number}+
-                          </div>
+                        <div className="text-3xl sm:text-xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                          {number}+
+                        </div>
 
-                          <div className="text-gray-300 font-medium text-sm md:text-base">
-                            {label}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </HoverLift>
-                  ),
-                )}
+                        <div className="text-gray-300 font-medium text-sm md:text-base">
+                          {label}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </HoverLift>
+                ))}
               </StaggeredReveal>
 
               {/* CTA Buttons */}
               <ScrollReveal variant="fadeUp" delay={1.4}>
                 <div className="flex flex-col sm:flex-row gap-6">
                   <RippleButton
-                    onClick={() =>
-                      (window.location.hash = "/contact")
-                    }
-                    className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
+                    onClick={() => (window.location.hash = "/contact")}
+                    className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
                     variant="primary"
                     aria-label="Start your project"
                   >
@@ -283,9 +263,7 @@ export function EnhancedHomePage() {
                   </RippleButton>
 
                   <RippleButton
-                    onClick={() =>
-                      (window.location.hash = "/portfolio")
-                    }
+                    onClick={() => (window.location.hash = "/portfolio")}
                     className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl border border-white/20 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/30"
                     variant="outline"
                     aria-label="View Portfolio"
@@ -318,7 +296,6 @@ export function EnhancedHomePage() {
             </motion.div>
           </div>
         </ScrollReveal>
-
       </section>
       <section>
         <HeroSection />
@@ -340,14 +317,11 @@ export function EnhancedHomePage() {
                   Watch Our Creative Process
                 </h2>
                 <p className="text-lg text-gray-300 max-w-md">
-                  Dive behind the scenes and see how we bring
-                  ideas to life from concept to code, and
-                  everything in between.
+                  Dive behind the scenes and see how we bring ideas to life from
+                  concept to code, and everything in between.
                 </p>
                 <button
-                  onClick={() =>
-                    (window.location.hash = "/about")
-                  }
+                  onClick={() => (window.location.hash = "/about")}
                   className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/10 text-white font-medium backdrop-blur hover:bg-white/20 transition"
                 >
                   Learn More
@@ -392,10 +366,7 @@ export function EnhancedHomePage() {
       </section>
 
       {/* Interactive Services Section */}
-      <section
-        ref={servicesRef}
-        className="py-12  relative overflow-hidden"
-      >
+      <section ref={servicesRef} className="py-12  relative overflow-hidden">
         <Parallax speed={0.2} className="absolute inset-0">
           <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
         </Parallax>
@@ -406,9 +377,7 @@ export function EnhancedHomePage() {
             <div className="text-center mb-20">
               <div className="inline-flex items-center space-x-3 glass rounded-full px-6 py-3 mb-8 border border-white/20">
                 <Zap className="w-5 h-5 text-purple-400" />
-                <span className="font-medium text-gray-200">
-                  Our Expertise
-                </span>
+                <span className="font-medium text-gray-200">Our Expertise</span>
               </div>
 
               <h2 className="font-outfit text-4xl lg:text-5xl font-bold mb-8 leading-tight">
@@ -459,9 +428,7 @@ export function EnhancedHomePage() {
                       transition={{ duration: 0.5 }}
                     >
                       {(() => {
-                        const IconComponent = getServiceIcon(
-                          service.icon,
-                        );
+                        const IconComponent = getServiceIcon(service.icon);
                         return (
                           <IconComponent className="w-10 h-10 text-white" />
                         );
@@ -478,24 +445,22 @@ export function EnhancedHomePage() {
 
                     {/* Feature List */}
                     <ul className="space-y-2 mb-8">
-                      {service.features
-                        .slice(0, 3)
-                        .map((feature, idx) => (
-                          <motion.li
-                            key={idx}
-                            className="flex items-center space-x-2 text-sm text-gray-300"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={
-                              activeService === index
-                                ? { opacity: 1, x: 0 }
-                                : { opacity: 0.7, x: 0 }
-                            }
-                            transition={{ delay: idx * 0.1 }}
-                          >
-                            <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
-                            <span>{feature}</span>
-                          </motion.li>
-                        ))}
+                      {service.features.slice(0, 3).map((feature, idx) => (
+                        <motion.li
+                          key={idx}
+                          className="flex items-center space-x-2 text-sm text-gray-300"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={
+                            activeService === index
+                              ? { opacity: 1, x: 0 }
+                              : { opacity: 0.7, x: 0 }
+                          }
+                          transition={{ delay: idx * 0.1 }}
+                        >
+                          <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                          <span>{feature}</span>
+                        </motion.li>
+                      ))}
                     </ul>
 
                     <RippleButton
@@ -525,9 +490,7 @@ export function EnhancedHomePage() {
             <div className="text-center mb-20">
               <div className="inline-flex items-center space-x-3 glass rounded-full px-6 py-3 mb-8 border border-white/20">
                 <Award className="w-5 h-5 text-purple-400" />
-                <span className="font-medium text-gray-200">
-                  Featured Work
-                </span>
+                <span className="font-medium text-gray-200">Featured Work</span>
               </div>
 
               <h2 className="font-outfit text-4xl lg:text-5xl font-bold mb-8 leading-tight">
@@ -548,11 +511,7 @@ export function EnhancedHomePage() {
             className="grid grid-cols-1 lg:grid-cols-3 gap-8"
           >
             {featuredProjects.map((project, index) => (
-              <HoverLift
-                key={project.id}
-                liftDistance={20}
-                scale={1.03}
-              >
+              <HoverLift key={project.id} liftDistance={20} scale={1.03}>
                 <Card className="glass border border-white/10 hover:border-purple-400/30 transition-all duration-700 overflow-hidden group cursor-pointer">
                   <div className="relative overflow-hidden">
                     <motion.div
@@ -629,9 +588,7 @@ export function EnhancedHomePage() {
           <ScrollReveal variant="fadeUp" delay={0.8}>
             <div className="text-center mt-16">
               <RippleButton
-                onClick={() =>
-                  (window.location.hash = "/portfolio")
-                }
+                onClick={() => (window.location.hash = "/portfolio")}
                 className="group relative inline-flex items-center justify-center px-10 py-5 rounded-2xl font-semibold text-white text-base md:text-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
                 variant="primary"
                 aria-label="View all projects"
@@ -660,12 +617,10 @@ export function EnhancedHomePage() {
 
       {/* Featured Website Redesigns Section */}
       <FeaturedWebsiteRedesignsSection />
-      
-      <DigitalTrendsSection/>
+
+      <DigitalTrendsSection />
       {/* Enhanced Testimonials with Right-to-Left Animation */}
-      <TestimonialMarquee
-        featuredTestimonials={featuredTestimonials}
-      />
+      <TestimonialMarquee featuredTestimonials={featuredTestimonials} />
 
       {/* Enhanced Service Cards Marquee */}
       <ServiceCardsMarquee />
