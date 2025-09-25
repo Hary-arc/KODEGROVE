@@ -171,7 +171,7 @@ app.use('/api/dashboard', dashboardRoutes);
 
 // Static file serving for production (defined BEFORE catch-all routes)
 if (process.env.NODE_ENV === 'production') {
-  const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'dist');
+  const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build');
   console.log(`ℹ️ Serving static files from: ${clientBuildPath}`);
 
   // Serve static files with proper caching
@@ -194,7 +194,7 @@ app.use('/api/*', (req: Request, res: Response) => {
 // Serve React app for all non-API routes in production (catch-all route)
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req: Request, res: Response) => {
-    const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'dist', 'index.html');
+    const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build', 'index.html');
     res.sendFile(clientBuildPath, (err) => {
       if (err) {
         console.error('❌ Error serving React app:', err);
