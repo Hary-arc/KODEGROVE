@@ -171,7 +171,7 @@ app.use('/api/dashboard', dashboardRoutes);
 
 // Static file serving for production (defined BEFORE catch-all routes)
 if (process.env.NODE_ENV === 'production') {
-  const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build');
+  const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'dist');
   console.log(`ℹ️ Serving static files from: ${clientBuildPath}`);
 
   // Serve static files with proper caching
@@ -194,7 +194,7 @@ app.use('/api/*', (req: Request, res: Response) => {
 // Serve React app for all non-API routes in production (catch-all route)
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req: Request, res: Response) => {
-    const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build', 'index.html');
+    const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'dist', 'index.html');
     res.sendFile(clientBuildPath, (err) => {
       if (err) {
         console.error('❌ Error serving React app:', err);
@@ -257,8 +257,10 @@ const findAvailablePort = async (startPort: number): Promise<number> => {
 // Start server
 const startServer = async () => {
   try {
-    const preferredPort = parseInt(process.env.PORT || '5001', 10);
-    const port = await findAvailablePort(preferredPort);
+    const port = parseInt(process.env.PORT || '5001', 10);
+    const preferredPort = port;
+    const availablePort = await findAvailablePort(port);
+    const finalPort = availablePort || preferredPort; // Fallback to preferred port if none found
 
     if (port !== preferredPort) {
       console.warn(`Port ${preferredPort} was in use, using port ${port} instead`);

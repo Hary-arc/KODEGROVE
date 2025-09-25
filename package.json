@@ -18,8 +18,8 @@
     "build": "npm run build --workspaces --if-present",
     "build:client": "npm run build --workspace=client",
     "build:server": "npm run build --workspace=server",
-    "start": "NODE_ENV=production node server/dist/index.js",
-    "start:prod": "npm run build && NODE_ENV=production npm run start --workspace=server",
+    "start": "cross-env NODE_ENV=production node server/dist/index.js",
+    "start:prod": "npm run build && cross-env NODE_ENV=production node server/dist/index.js",
     "prestart:prod": "npm run build",
     "test": "npm run test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
@@ -30,7 +30,8 @@
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
-    "concurrently": "^8.2.1"
+    "concurrently": "^8.2.1",
+    "cross-env": "^10.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.1",
