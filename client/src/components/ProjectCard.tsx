@@ -55,6 +55,9 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
   const priorityColor = getPriorityColor(project.priority)
   const typeIcon = getTypeIcon(project.type)
   
+  // Ensure team is always an array
+  const team = Array.isArray(project.team) ? project.team : []
+  
   const progressPercentage = Math.min(100, Math.max(0, project.progress))
   const budgetUsed = (project.spent / project.budget) * 100
 
@@ -155,7 +158,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
               <div>
                 <p className="text-xs text-gray-400">Team Size</p>
                 <p className="text-sm font-medium text-white">
-                  {project.team.length} members
+                  {team.length} members
                 </p>
               </div>
             </div>
@@ -175,18 +178,30 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
           <div className="mb-4">
             <p className="text-xs text-gray-400 mb-2">Team Members</p>
             <div className="flex items-center space-x-2">
-              {project.team.slice(0, 3).map((member, idx) => (
-                <div
-                  key={idx}
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-medium"
-                  title={member}
-                >
-                  {member.split(' ').map(n => n[0]).join('')}
-                </div>
-              ))}
-              {project.team.length > 3 && (
+              {team.length > 0 ? (
+                <>
+                  {team.slice(0, 3).map((member, idx) => {
+                    // Ensure member is a string
+                    const memberName = typeof member === 'string' ? member : 'Unknown'
+                    return (
+                      <div
+                        key={idx}
+                        className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-medium"
+                        title={memberName}
+                      >
+                        {memberName.split(' ').map(n => n[0]).join('')}
+                      </div>
+                    )
+                  })}
+                  {team.length > 3 && (
+                    <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-white text-xs">
+                      +{team.length - 3}
+                    </div>
+                  )}
+                </>
+              ) : (
                 <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-white text-xs">
-                  +{project.team.length - 3}
+                  TBD
                 </div>
               )}
             </div>

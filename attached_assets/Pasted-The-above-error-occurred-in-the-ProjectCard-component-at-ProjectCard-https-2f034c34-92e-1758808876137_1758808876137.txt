@@ -1,0 +1,46 @@
+The above error occurred in the <ProjectCard> component:
+
+    at ProjectCard (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/src/components/ProjectCard.tsx:51:31)
+    at div
+    at section
+    at MotionComponent (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/node_modules/.vite/deps/framer-motion.js?v=15690c76:277:40)
+    at div
+    at div
+    at div
+    at div
+    at DashboardPage (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/src/pages/DashboardPage.tsx:37:39)
+    at Suspense
+    at div
+    at Router (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/src/components/Router.tsx:25:26)
+    at main
+    at div
+    at App (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/src/App.tsx:108:35)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+at ProjectCard (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/src/components/ProjectCard.tsx:51:31)
+at div
+at section
+at MotionComponent (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/node_modules/.vite/deps/framer-motion.js?v=15690c76:277:40)
+at div
+at div
+at div
+at div
+at DashboardPage (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/src/pages/DashboardPage.tsx:37:39)
+at Suspense
+at div
+at Router (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/src/components/Router.tsx:25:26)
+at main
+at div
+at App (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/src/App.tsx:108:35)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+at t.value (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://2f034c34-92e3-4968-9f0e-2f69b15a3211-00-2ozyli6x6mgz9.picard.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
+Cannot read properties of undefined (reading 'length')
+Core Web Vitals: 
+Object {LCP: 7460, FID: null, CLS: 0.00006650598377445525, FCP: null, TTFB: 411.5}
