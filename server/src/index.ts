@@ -266,9 +266,9 @@ const startServer = async () => {
       console.warn(`Port ${preferredPort} was in use, using port ${port} instead`);
     }
 
-    app.listen(port, 'localhost', () => {
+    app.listen(port, '0.0.0.0', () => {
       console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${port}`);
-      console.log(`📍 http://localhost:${port}`);
+      console.log(`📍 http://0.0.0.0:${port}`);
       if (process.env.REPLIT_DEV_DOMAIN) {
         console.log(`🌐 Replit URL: https://${process.env.REPLIT_DEV_DOMAIN}`);
       }
@@ -276,6 +276,7 @@ const startServer = async () => {
         console.log(`🌐 Serving React app from client/build`);
       }
     });
+
   } catch (error) {
     console.error('❌ Failed to start server:', error);
     process.exit(1);
