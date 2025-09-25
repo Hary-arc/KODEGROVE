@@ -10,7 +10,6 @@ export class DataStore {
     filename;
     data = [];
     filePath;
-    findOne;
     constructor(filename) {
         this.filename = filename;
         this.filePath = path.join(DATA_DIR, `${filename}.json`);
@@ -43,6 +42,10 @@ export class DataStore {
             return this.data.filter(filter);
         }
         return [...this.data];
+    }
+    async findOne(filter) {
+        const results = await this.findAll(filter);
+        return results[0]; // return first match, or undefined if none
     }
     async findById(id) {
         return this.data.find(item => item.id === id) || null;
