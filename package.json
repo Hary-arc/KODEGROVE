@@ -18,7 +18,7 @@
     "build": "npm run build --workspaces --if-present",
     "build:client": "npm run build --workspace=client",
     "build:server": "npm run build --workspace=server",
-    "start": "npm run start --workspace=server",
+    "start": "NODE_ENV=production node server/dist/index.js",
     "start:prod": "npm run build && NODE_ENV=production npm run start --workspace=server",
     "prestart:prod": "npm run build",
     "test": "npm run test --workspaces --if-present",
