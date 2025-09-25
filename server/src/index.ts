@@ -266,7 +266,7 @@ const startServer = async () => {
       console.warn(`Port ${preferredPort} was in use, using port ${port} instead`);
     }
 
-    app.listen(port, '0.0.0.0', () => {
+    app.listen(port, 'localhost', () => {
       console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${port}`);
       console.log(`📍 http://localhost:${port}`);
       if (process.env.REPLIT_DEV_DOMAIN) {
