@@ -159,9 +159,9 @@ app.get('/api/health', (req: Request, res: Response) => {
 });
 
 // Default API route
-app.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'Welcome to the Web Website API' });
-});
+// app.get('/', (req: Request, res: Response) => {
+//   res.json({ message: 'Welcome to the Web Website API' });
+// });
 
 // API Routes (defined BEFORE catch-all handlers)
 app.use('/api/auth', authRoutes);
