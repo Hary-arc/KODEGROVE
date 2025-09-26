@@ -1,4 +1,5 @@
 "use client";
+
 import React from 'react'
 import { useState, useRef } from "react";
 import {
@@ -13,7 +14,6 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { CaseStudyDetail } from "./CaseStudyDetail";
-import { FloatingNav } from "./FloatingNav";
 import {
   ExternalLink,
   ArrowUpRight,
