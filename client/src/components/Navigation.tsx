@@ -186,7 +186,7 @@ const Logo = memo(() => (
     aria-label="Go to homepage"
   >
     <motion.div 
-      className="w-12 h-12 relative overflow-hidden rounded-full"
+      className="absolute inset-1 z-0 w-12 h-12 relative overflow-hidden rounded-full"
       whileHover={{ 
         rotate: [0, 5, -5, 0],
         scale: 1.1
@@ -199,11 +199,11 @@ const Logo = memo(() => (
       <img 
         src="/logo.png" 
         alt="KodeGrove Logo" 
-        className="w-full h-full object-cover rounded-full shadow-lg shadow-purple-500/25"
+        className="relative z-10 w-full h-full object-cover rounded-full shadow-xl shadow-blue-500/40 ring-2 ring-blue-300/20"
         loading="eager"
       />
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full"
+        className="absolute inset-1 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full"
         animate={{ 
           rotate: [0, 360],
           scale: [1, 1.1, 1]
@@ -222,7 +222,7 @@ const Logo = memo(() => (
       }}
       transition={{ duration: 2 }}
     >
-      KodeGrove
+      KODEGROVE
     </motion.span>
   </motion.button>
 ))
@@ -267,6 +267,7 @@ interface ServicesDropdownProps {
   onNavigate: (path: string) => void
 }
 
+
 const ServicesDropdown = memo<ServicesDropdownProps>(({ 
   isOpen, 
   onToggle, 
@@ -302,132 +303,55 @@ const ServicesDropdown = memo<ServicesDropdownProps>(({
       )}
     </motion.button>
 
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          variants={dropdownVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          className="absolute top-full left-0 mt-4 w-96 bg-slate-900/98 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl shadow-purple-500/10 z-50 overflow-hidden"
-          style={{
-            background: "linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 50%, rgba(15, 23, 42, 0.98) 100%)",
-            backdropFilter: "blur(20px)",
-            boxShadow: "0 25px 50px -12px rgba(139, 92, 246, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)"
-          }}
+          {/* Dropdown Menu */}
+   <AnimatePresence>
+  {isOpen && (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 10 }}
+      transition={{ duration: 0.2 }}
+      className="absolute top-full left-0 mt-3 w-64 rounded-xl z-50 p-2 shadow-lg border border-white/10 backdrop-blur-md bg-slate-800/60"
+      style={{
+        background: 'linear-gradient(135deg, rgba(30,41,59,0.5), rgba(15,23,42,0.4))',
+        backdropFilter: 'blur(20px)',
+      }}
+    >
+      {SERVICE_ITEMS.map((service) => (
+        <motion.button
+          key={service.path}
+          onClick={() => onNavigate(service.path)}
+          className="flex items-start space-x-3 w-full p-2 rounded-md hover:bg-white/5 transition-colors duration-200 text-left"
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
         >
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-transparent to-cyan-500/20" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.1),transparent_50%)]" />
+          {/* Icon */}
+          <div className="w-8 h-8 flex items-center justify-center bg-white/10 rounded-md">
+            <service.icon className="w-4 h-4 text-cyan-300" />
           </div>
 
-          {/* Header */}
-          <motion.div 
-            className="relative z-10 mb-6"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            <h3 className="text-lg font-semibold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-2">
-              Our Services
-            </h3>
-            <p className="text-sm text-gray-400">
-              Comprehensive digital solutions for your business
-            </p>
-          </motion.div>
-
-          {/* Services Grid */}
-          <div className="relative z-10 grid grid-cols-1 gap-3 mb-6">
-            {SERVICE_ITEMS.map((service, index) => (
-              <motion.button
-                key={service.path}
-                onClick={() => onNavigate(service.path)}
-                className="group relative w-full flex items-center space-x-4 p-4 rounded-2xl transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500/10 hover:via-transparent hover:to-cyan-500/10 border border-transparent hover:border-white/20 text-left overflow-hidden"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ 
-                  delay: index * 0.05 + 0.2,
-                  duration: 0.3,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
-                whileHover={{ 
-                  scale: 1.02,
-                  transition: { duration: 0.2 }
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {/* Hover Background Effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  initial={false}
-                />
-
-                {/* Icon Container */}
-                <motion.div 
-                  className="relative z-10 w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center group-hover:from-purple-500/30 group-hover:to-cyan-500/30 transition-all duration-300 border border-white/10 group-hover:border-white/20"
-                  whileHover={{ 
-                    rotate: [0, -5, 5, 0],
-                    scale: 1.1
-                  }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <service.icon className="w-6 h-6 text-purple-300 group-hover:text-white transition-colors duration-300" />
-                </motion.div>
-
-                {/* Content */}
-                <div className="relative z-10 flex-1 min-w-0">
-                  <motion.h4 
-                    className="text-white font-semibold group-hover:text-cyan-300 transition-colors duration-300 mb-1"
-                    initial={false}
-                  >
-                    {service.name}
-                  </motion.h4>
-                  <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors duration-300 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Arrow Indicator */}
-                <motion.div
-                  className="relative z-10 w-6 h-6 rounded-full bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
-                  whileHover={{ x: 3 }}
-                >
-                  <ChevronDown className="w-3 h-3 text-cyan-400 rotate-[-90deg]" />
-                </motion.div>
-              </motion.button>
-            ))}
+          {/* Text */}
+          <div className="flex-1">
+            <h4 className="text-sm font-medium text-white">{service.name}</h4>
+            <p className="text-xs text-gray-300">{service.description}</p>
           </div>
+        </motion.button>
+      ))}
 
-          {/* CTA Button */}
-          <motion.div
-            className="relative z-10 pt-4 border-t border-white/10"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <Button
-              onClick={() => onNavigate("/services")}
-              className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white rounded-xl font-semibold py-3 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] relative overflow-hidden group"
-            >
-              <span className="relative z-10 flex items-center justify-center space-x-2">
-                <span>View All Services</span>
-                <motion.div
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
-                </motion.div>
-              </span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                initial={false}
-              />
-            </Button>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      {/* Optional CTA */}
+      <div className="mt-2 pt-2 border-t border-white/10">
+        <button
+          onClick={() => onNavigate("/services")}
+          className="w-full text-sm text-cyan-400 hover:text-white py-2 transition-colors"
+        >
+          View All Services →
+        </button>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
   </div>
 ))
 

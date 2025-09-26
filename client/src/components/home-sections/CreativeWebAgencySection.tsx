@@ -24,7 +24,7 @@ const creativeServices = [
     title: 'Performance Optimization',
     description: 'Lightning-fast websites that deliver exceptional user experiences',
     features: ['Speed Optimization', 'Core Web Vitals', 'Performance Audits', 'Technical SEO'],
-    gradient: 'from-orange-500 to-red-600'
+    gradient: 'from-blue-500 to-purple-600'
   }
 ]
 
@@ -58,7 +58,7 @@ export default function CreativeWebAgencySection() {
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float"></div>
       <div className="absolute bottom-1/4 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
 
-      <div className="max-w-8xl mx-auto px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           className="text-center mb-20"

@@ -118,15 +118,15 @@ export default function FeaturedWebsiteRedesignsSection() {
           transition={{ duration: 0.8, delay: 1.0 }}
         >
           <div className="inline-flex items-center space-x-4">
-            <span className="text-orange-400 font-bold text-lg">BEFORE</span>
+            <span className="text-purple-400 font-bold text-lg">BEFORE</span>
             <motion.div
-              className="w-16 h-16 rounded-full bg-gradient-to-r from-green-400 to-cyan-400 flex items-center justify-center"
+              className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 flex items-center justify-center"
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             >
               <ArrowRight className="w-8 h-8 text-white" />
             </motion.div>
-            <span className="text-green-400 font-bold text-lg">AFTER</span>
+            <span className="text-cyan-400 font-bold text-lg">AFTER</span>
           </div>
         </motion.div>
 
@@ -154,7 +154,7 @@ export default function FeaturedWebsiteRedesignsSection() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   <div className="absolute top-4 left-4">
-                    <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                       BEFORE
                     </span>
                   </div>

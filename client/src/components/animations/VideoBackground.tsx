@@ -73,6 +73,7 @@ export function VideoBackground({
         muted={muted}
         loop={loop}
         playsInline
+        preload="auto"
         poster={poster}
         initial={{ scale: 1.1, opacity: 0 }}
         animate={{ 

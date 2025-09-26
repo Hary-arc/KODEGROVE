@@ -25,28 +25,28 @@ const cmsFeatures = [
     title: 'Intuitive Management',
     description: 'User-friendly interface that makes content management effortless',
     details: ['Drag & Drop Builder', 'WYSIWYG Editor', 'Media Library', 'Version Control'],
-    gradient: 'from-blue-500 to-cyan-600'
+    gradient: 'from-cyan-500 to-emerald-600'
   },
   {
     icon: Shield,
     title: 'Enterprise Security',
     description: 'Bank-level security with advanced user permissions and data protection',
     details: ['Role-based Access', 'SSL Encryption', 'Backup Systems', 'Audit Logs'],
-    gradient: 'from-emerald-500 to-teal-600'
+    gradient: 'from-cyan-500 to-emerald-600'
   },
   {
     icon: Zap,
     title: 'Lightning Performance',
     description: 'Optimized for speed with CDN integration and caching strategies',
     details: ['Global CDN', 'Smart Caching', 'Image Optimization', 'Lazy Loading'],
-    gradient: 'from-orange-500 to-red-600'
+    gradient: 'from-cyan-500 to-emerald-600'
   },
   {
     icon: Smartphone,
     title: 'Mobile-First Design',
     description: 'Responsive admin panel that works perfectly on all devices',
     details: ['Touch Optimized', 'Native Apps', 'Offline Mode', 'Push Notifications'],
-    gradient: 'from-purple-500 to-pink-600'
+    gradient: 'from-cyan-500 to-emerald-600'
   }
 ]
 

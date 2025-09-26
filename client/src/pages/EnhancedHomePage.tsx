@@ -150,7 +150,7 @@ export function EnhancedHomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900">
           <VideoBackground
             src="/output2.mp4" // put your video path here
-            poster="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070"
+            poster="/fallback.jpg"
             overlay
             overlayOpacity={0.5}
             className="absolute inset-0"
