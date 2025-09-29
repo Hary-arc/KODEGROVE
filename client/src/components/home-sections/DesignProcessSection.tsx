@@ -47,6 +47,9 @@ export default function DesignProcessSection() {
       });
 
       container.style.display = "flex";
+      container.style.flexWrap = "nowrap";
+      container.style.willChange = "transform";
+
       container.style.alignItems = "stretch";
       container.style.gap = `${gap}px`;
       container.style.paddingLeft = `${edgePadding}px`;
@@ -54,17 +57,22 @@ export default function DesignProcessSection() {
 
       const totalScroll = (panels.length * (cardWidth + gap)) - window.innerWidth + edgePadding;
 
+      
       gsap.to(container, {
         x: -totalScroll,
         ease: "none",
         scrollTrigger: {
           trigger: wrapper,
           start: `center center`,
-          end: `+=${totalScroll}px`,
-          pin: wrapper,
-          scrub: 1,
-          markers: false,
-        },
+          end: () => `+=${container.scrollWidth - wrapper.clientWidth}`,
+          pin: true,
+          scrub: 0.1,
+          snap: {
+            snapTo: 1 / (panels.length - 1),
+            duration: { min: 0.3, max: 0.4 },
+            ease: "power1.inOut"
+          }
+        }
       });
 
       ScrollTrigger.refresh();

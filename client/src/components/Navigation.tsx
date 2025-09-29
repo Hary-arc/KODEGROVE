@@ -4,6 +4,7 @@
 import React, { useState, useEffect, useCallback, useMemo, memo } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { 
+  FileText,
   Sparkles, 
   User, 
   Menu, 
@@ -167,11 +168,12 @@ const useScrollBehavior = () => {
   const backdropBlur = useTransform(scrollY, [0, 100], [4, 20])
 
   useEffect(() => {
-    const unsubscribe = scrollY.onChange((latest) => {
+    const unsubscribe = scrollY.on("change", (latest) => {
       setScrolled(latest > 50)
     })
     return unsubscribe
   }, [scrollY])
+
 
   return { scrolled, backgroundOpacity, backdropBlur }
 }
@@ -215,15 +217,16 @@ const Logo = memo(() => (
         }}
       />
     </motion.div>
-    <motion.span 
-      className="font-outfit text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-violet-300 bg-clip-text text-transparent"
-      whileHover={{
-        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-      }}
-      transition={{ duration: 2 }}
-    >
-      KODEGROVE
-    </motion.span>
+    <motion.span
+  className="font-outfit text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-purple-200 to-violet-300 bg-clip-text text-transparent"
+  whileHover={{
+    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+  }}
+  transition={{ duration: 2 }}
+>
+  KODEGROVE
+</motion.span>
+
   </motion.button>
 ))
 
@@ -634,12 +637,12 @@ export function Navigation() {
             {/* Mobile CTA Buttons */}
             <div className="flex items-center gap-2 lg:hidden">
               <Button
-                onClick={() => handleNavigation("/contact")}
+                onClick={() => handleNavigation("/quotation")}
                 size="sm"
                 className="gradient-electric hover:shadow-lg hover:shadow-purple-500/25 text-white rounded-xl px-4 py-2 font-semibold transition-all duration-300 text-xs"
               >
-                <Sparkles className="w-3 h-3 mr-1" />
-                GET QUOTE
+                <FileText className="w-3 h-3 mr-1" />
+                {/* Get Quotation */}
               </Button>
 
               {user ? (

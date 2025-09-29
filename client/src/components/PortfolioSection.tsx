@@ -11,7 +11,7 @@ import {
 } from "framer-motion";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
+import { Button  } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { CaseStudyDetail } from "./CaseStudyDetail";
 import {
@@ -469,7 +469,9 @@ export function PortfolioSection() {
                           >
                             {project.category}
                           </Badge>
-                          <button className="text-gray-400 hover:text-white transition-colors duration-300">
+                          <button 
+                          aria-label="Show trending projects"
+                          className="text-gray-400 hover:text-white transition-colors duration-300">
                             <TrendingUp className="w-5 h-5" />
                           </button>
                         </div>
@@ -617,6 +619,7 @@ export function PortfolioSection() {
                 {/* Close Button */}
                 <button
                   onClick={() => setSelectedProject(null)}
+                  aria-label="Close project details"
                   className="absolute top-6 right-6 w-12 h-12 glass rounded-full flex items-center justify-center text-gray-400 hover:text-white z-20 transition-colors duration-300"
                 >
                   <X className="w-6 h-6" />

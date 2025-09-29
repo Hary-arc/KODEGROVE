@@ -150,7 +150,7 @@ export function EnhancedHomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900">
           <VideoBackground
             src="/output2.mp4" // put your video path here
-            poster="/fallback.jpg"
+            poster="/bgfallback.jpg"
             overlay
             overlayOpacity={0.5}
             className="absolute inset-0"
@@ -176,7 +176,7 @@ export function EnhancedHomePage() {
               {/* Typewriter Headline */}
               <ScrollReveal variant="fadeUp" delay={0.4}>
                 <h1 className="font-outfit text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-                  <span className="block bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent mb-4">
+                  <span className="block bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent mb-2">
                     Digital Experiences
                   </span>
                   <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
@@ -219,7 +219,7 @@ export function EnhancedHomePage() {
                   },
                   {
                     number: `${siteConfig.stats.avgROI}%`,
-                    label: "Average ROI",
+                    label: "Reasonable ROI",
 
                     icon: TrendingUp,
                   },
@@ -252,7 +252,7 @@ export function EnhancedHomePage() {
               <ScrollReveal variant="fadeUp" delay={1.4}>
                 <div className="flex flex-col sm:flex-row gap-6">
                   <RippleButton
-                    onClick={() => (window.location.hash = "/contact")}
+                    onClick={() => (window.location.hash = "/quotation")}
                     className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
                     variant="primary"
                     aria-label="Start your project"

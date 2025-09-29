@@ -15,8 +15,8 @@ const DigitalTrendsSection: React.FC = () => {
     e.currentTarget.src = 'https://via.placeholder.com/150?text=Book';
   };
 
-  const openBookUrl = 'https://upload.wikimedia.org/wikipedia/commons/7/7e/Open_book_2.svg';
-  const closedBookUrl = 'https://upload.wikimedia.org/wikipedia/commons/1/16/Book_font_awesome.svg';
+  const openBookUrl = '/books/book-1.png';
+  const closedBookUrl = 'book.png';
 
   return (
     <section className="relative overflow-hidden py-20 px-4 sm:px-6 md:px-20 bg-gradient-to-r from-purple-950 via-purple-950 to-blue-950 text-white">
@@ -30,7 +30,7 @@ const DigitalTrendsSection: React.FC = () => {
       <p className="text-base sm:text-lg md:text-xl text-gray-300 drop-shadow-md">
         Discover the top digital trends shaping branding & web design, and stay ahead of the competition.
       </p>
-
+<div className="w-full sm:w-auto ">
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
         <input
@@ -48,7 +48,7 @@ const DigitalTrendsSection: React.FC = () => {
           DOWNLOAD <FiArrowDown className="text-xl" />
         </button>
       </form>
-
+</div>
       {submitted && (
         <div className="text-green-400 font-semibold mt-2 animate-pulse">
           Thank you! Check your email for the download.
@@ -61,17 +61,17 @@ const DigitalTrendsSection: React.FC = () => {
     </div>
 
     {/* Book Images (centered on mobile) */}
-    <div className="w-full flex justify-center md:justify-end items-center gap-6">
+    <div className="w-full flex justify-center md:justify-end items-center gap-0">
       <img
         src={closedBookUrl}
         alt="Closed Book"
-        className="w-20 sm:w-24 md:w-32 animate-bounce-slow drop-shadow-2xl hover:rotate-6 transition-all"
+        className="w-64 sm:w-24 md:w-32 animate-bounce-slow drop-shadow-2xl hover:rotate-2 transition-all"
         onError={handleImageError}
       />
       <img
         src={openBookUrl}
         alt="Open Book"
-        className="w-24 sm:w-28 md:w-40 rotate-6 animate-float drop-shadow-3xl hover:rotate-12 transition-all"
+        className="w-32 sm:w-28 md:w-40 rotate-12 animate-float drop-shadow-3xl hover:rotate-6 transition-all"
         onError={handleImageError}
       />
     </div>

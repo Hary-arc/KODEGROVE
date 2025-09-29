@@ -74,16 +74,16 @@ export function VideoBackground({
         loop={loop}
         playsInline
         poster={poster}
+        {...{ preload: "auto" }} // <-- wrap in spread to forward
         initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ 
-          scale: isLoaded ? 1 : 1.1, 
-          opacity: isLoaded ? 1 : 0 
-        }}
+        animate={{ scale: isLoaded ? 1 : 1.1, opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
+        onCanPlayThrough={() => setIsLoaded(true)}
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </motion.video>
+
 
       {overlay && (
         <div 

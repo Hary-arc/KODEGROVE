@@ -1266,6 +1266,9 @@ body.scroll-lock {
   z-index: 1;         /* Raise above siblings */
   transform-style: flat !important; /* Optional: try to disable 3d for glow layer */
 }
+.container {
+  position: relative; /* or absolute/fixed depending on context */
+}
 
 
 /* Responsive adjustments for careers page */
@@ -1684,6 +1687,42 @@ body.scroll-lock {
     left: 125%; /* move fully across */
   }
 }
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
+
+/* Works for Chrome, Safari, and Edge */
+/* Webkit browsers (Chrome, Safari, Edge) */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px; /* thinner scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* transparent track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #8624d5, #da0960); /* blue → pink gradient */
+  border-radius: 9999px; /* fully rounded */
+  border: 2px solid transparent; /* optional for "divided" effect */
+  background-clip: content-box; /* makes thumb look like thin line */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #2563eb, #da0960); /* darker on hover */
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #953bf6 transparent;
+}
+
 
 
 /* Accessibility improvements */
