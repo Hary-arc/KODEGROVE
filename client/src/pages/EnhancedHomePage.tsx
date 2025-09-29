@@ -219,7 +219,7 @@ export function EnhancedHomePage() {
                   },
                   {
                     number: `${siteConfig.stats.avgROI}%`,
-                    label: "Reasonable ROI",
+                    label: "Measured Impact",
 
                     icon: TrendingUp,
                   },
