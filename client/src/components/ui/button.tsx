@@ -31,8 +31,10 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
-);
+  }
+) satisfies ReturnType<typeof cva>;
+
+
 
 const Button = React.forwardRef<
   HTMLButtonElement,

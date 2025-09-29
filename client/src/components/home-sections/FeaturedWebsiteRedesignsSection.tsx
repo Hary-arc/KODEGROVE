@@ -1,223 +1,186 @@
 
 'use client'
 
-import React, { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { RefreshCw, ArrowRight, ExternalLink, TrendingUp } from 'lucide-react'
+import { useRef, useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react'
 import { Button } from '../ui/button'
-import { ImageWithFallback } from '../figma/ImageWithFallback'
 
 const clientLogos = [
-  { name: 'NewChurch Live', color: 'text-blue-400' },
-  { name: 'POWR2', color: 'text-cyan-400' },
-  { name: 'Applied Intelligence', color: 'text-purple-400' },
-  { name: 'Ventura Foods', color: 'text-green-400' },
-  { name: 'VERUS', color: 'text-indigo-400' }
+  '/logos/blueridge.png',
+  '/logos/integral.jpg',
+  '/logos/legacy.png',
+  '/logos/riverchurch.png',
+  '/logos/vitech.jpg',
 ]
 
 const redesignProjects = [
   {
-    title: 'University Website Redesign',
-    category: 'Educational Institution',
-    beforeImage: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072',
-    afterImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070',
-    improvement: '+285% User Engagement',
-    description: 'Complete overhaul of university website with modern design and improved user experience'
-  }
+    before: '/redesigns/oldschool.jpeg',
+    after: '/redesigns/newschool.jpg',
+    title: 'University Website Transformation',
+    description:
+      'A complete redesign focusing on usability, accessibility, and brand modernization.',
+    stat: '+285% Engagement',
+  },
+  {
+    before: '/redesigns/food-before.png',
+    after: '/redesigns/food-after.png',
+    title: 'Food Brand Digital Refresh',
+    description:
+      'Elevated their digital presence with vibrant visuals and a streamlined UX.',
+    stat: '+173% Conversions',
+  },
 ]
 
-export default function FeaturedWebsiteRedesignsSection() {
-  const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
+export default function FeaturedWebsiteRedesigns() {
+  const sliderRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  // Scroll slider to specific index
+  const scrollToIndex = (newIndex: number) => {
+  if (!sliderRef.current) return
+  const slider = sliderRef.current
+  const card = slider.children[newIndex] as HTMLElement
+  const left = card.offsetLeft - (slider.clientWidth - card.clientWidth) / 2
+  slider.scrollTo({ left, behavior: 'smooth' })
+  setActiveIndex(newIndex)
+}
+
+
+  // Update activeIndex on manual scroll
+  useEffect(() => {
+    const slider = sliderRef.current
+    if (!slider) return
+    const handleScroll = () => {
+      const children = Array.from(slider.children) as HTMLElement[]
+      const center = slider.scrollLeft + slider.offsetWidth / 2
+      const newIndex = children.findIndex(
+        (child) => child.offsetLeft <= center && child.offsetLeft + child.offsetWidth > center
+      )
+      if (newIndex !== -1 && newIndex !== activeIndex) setActiveIndex(newIndex)
+    }
+    slider.addEventListener('scroll', handleScroll, { passive: true })
+    return () => slider.removeEventListener('scroll', handleScroll)
+  }, [activeIndex])
+
+  const next = () => scrollToIndex((activeIndex + 1) % redesignProjects.length)
+  const prev = () =>
+    scrollToIndex((activeIndex - 1 + redesignProjects.length) % redesignProjects.length)
 
   return (
-    <section 
-      ref={sectionRef}
-      className="py-24 relative overflow-hidden bg-gradient-to-b from-slate-950 to-blue-950/20"
-    >
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-cyan-900/10 to-slate-900"></div>
-      <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+    <section className="relative py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-blue-950/30">
+      {/* Decorative Blobs */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-blue-500/20 blur-3xl animate-pulse" />
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-indigo-500/20 blur-3xl animate-pulse" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.25, 0.25, 0, 1] }}
-        >
-          <motion.div
-            className="inline-flex items-center space-x-3 glass rounded-full px-6 py-3 mb-8 border border-white/20"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <RefreshCw className="w-5 h-5 text-cyan-400" />
-            <span className="font-medium text-gray-200">BEFORE & AFTER</span>
-          </motion.div>
-          
-          <h2 className="font-outfit text-4xl lg:text-6xl font-bold mb-8 leading-tight">
-            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-              Featured Website
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Redesigns
-            </span>
-          </h2>
-          
-          <motion.div
-            className="max-w-3xl mx-auto space-y-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <p className="text-lg text-gray-300 leading-relaxed">
-              Our web design agency reimagines digital experiences for brands of all sizes and across industries.
-            </p>
-            <p className="text-xl font-semibold text-cyan-400">
-              Explore our redesign portfolio.
-            </p>
-          </motion.div>
-        </motion.div>
+      {/* Header */}
+      <div className="relative z-10 text-center mb-14 px-4">
+          <div className="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 mb-4">
+            <RefreshCw className="w-4 h-4 animate-spin-slow" />
+BEFORE & AFTER
+          </div>
+                    <h2 className="text-3xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
+          Featured Website Redesigns
+                      </h2>
+          <p className="mt-4 text-gray-300 max-w-2xl mx-auto">
+              Our web design agency reimagines digital experiences for brands of all
+sizes and industries.
+            <span className="font-semibold"> Explore our redesign portfolio.</span>
+          </p>
+        </div>
 
         {/* Client Logos */}
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {clientLogos.map((client, index) => (
-              <motion.div
-                key={client.name}
-                className="group cursor-pointer"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
-              >
-                <div className="glass rounded-lg px-6 py-3 border border-white/10 hover:border-cyan-400/30 transition-all duration-300">
-                  <span className={`text-lg font-bold ${client.color} group-hover:text-white transition-colors duration-300`}>
-                    {client.name}
-                  </span>
-                </div>
-              </motion.div>
+        <div className="overflow-x-auto mb-16">
+          <div className="flex gap-8 px-4 md:px-0 min-w-max">
+            {clientLogos.map((logo, i) => (
+              <button
+              key={i}
+              onClick={() => scrollToIndex(i)}
+              className={`flex-shrink-0 rounded-lg p-2 transition-transform hover:scale-110 ${
+                activeIndex === i ? 'ring-2 ring-blue-500' : ''
+              }`}
+            >
+              <img
+                src={logo}
+                alt={`client-${i}`}
+                className="h-12 md:h-16 object-contain"
+              />
+              </button>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Before/After Arrow */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.8, delay: 1.0 }}
+        {/* Slider */}
+        <div className="relative max-w-6xl mx-auto px-4 md:px-0">
+        <div
+          ref={sliderRef}
+          className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
         >
-          <div className="inline-flex items-center space-x-4">
-            <span className="text-purple-400 font-bold text-lg">BEFORE</span>
+          {redesignProjects.map((project, i) => (
             <motion.div
-              className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-400 to-cyan-400 flex items-center justify-center"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              key={i}
+              className="snap-start min-w-[80%] md:min-w-[600px] lg:min-w-[700px] bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl backdrop-blur hover:scale-105 transition-transform duration-300 flex-shrink-0"
             >
-              <ArrowRight className="w-8 h-8 text-white" />
-            </motion.div>
-            <span className="text-cyan-400 font-bold text-lg">AFTER</span>
-          </div>
-        </motion.div>
-
-        {/* Redesign Showcase */}
-        <motion.div
-          className="relative"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 1.2 }}
-        >
-          <div className="glass rounded-3xl p-8 border border-white/10 hover:border-cyan-400/30 transition-all duration-500">
-            {/* Project Images */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-              {/* Before Image */}
-              <motion.div
-                className="relative group"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative aspect-video rounded-xl overflow-hidden">
-                  <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072"
-                    alt="Website Before Redesign"
-                    className="w-full h-full object-cover"
+            {/* Images */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="relative overflow-hidden rounded-xl h-64 md:h-72">
+                  <img
+                    src={project.before}
+                    alt="Before"
+                    className="w-full h-full object-cover rounded-xl"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="absolute top-3 left-3 bg-red-500/80 text-white text-xs font-bold px-2 py-1 rounded">
                       BEFORE
                     </span>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* After Image */}
-              <motion.div
-                className="relative group"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative aspect-video rounded-xl overflow-hidden">
-                  <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070"
-                    alt="Website After Redesign"
-                    className="w-full h-full object-cover"
+                                  </div>
+              <div className="relative overflow-hidden rounded-xl h-64 md:h-72">
+                  <img
+                    src={project.after}
+                    alt="After"
+                    className="w-full h-full object-cover rounded-xl"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="absolute top-3 right-3 bg-green-500/80 text-white text-xs font-bold px-2 py-1 rounded">
                       AFTER
                     </span>
-                  </div>
-                  <div className="absolute bottom-4 right-4">
-                    <div className="flex items-center space-x-2 bg-green-500/20 backdrop-blur-md rounded-lg px-3 py-2">
-                      <TrendingUp className="w-4 h-4 text-green-400" />
-                      <span className="text-green-400 font-bold text-sm">+285% Engagement</span>
-                    </div>
-                  </div>
+                  <span className="absolute bottom-3 right-3 bg-gradient-to-r from-green-400 to-blue-500 text-white text-sm px-3 py-1 rounded-full shadow-lg">
+                    {project.stat}
+                  </span>
                 </div>
-              </motion.div>
-            </div>
+                          </div>
 
-            {/* Project Info */}
-            <div className="text-center">
-              <h3 className="text-2xl font-bold text-white mb-2">
-                University Website Transformation
+            {/* Text */}
+                          <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                {project.title}
               </h3>
-              <p className="text-gray-300 mb-6">
-                Complete digital transformation with modern design, improved user experience, 
-                and enhanced performance resulting in significant engagement increase.
-              </p>
-            </div>
-          </div>
-        </motion.div>
+              <p className="text-gray-300 mb-6">{project.description}</p>
 
-        {/* CTA Button */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1.6 }}
+              <Button
+                onClick={() => (window.location.href = '/portfolio')}
+                className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 shadow-lg rounded-full px-6 py-3 text-sm font-semibold flex items-center gap-2"
+              >
+                View More Work <ChevronRight className="w-4 h-4" />
+              </Button>
+            </motion.div>
+))}
+          </div>
+        
+        {/* Navigation */}
+        <button
+          onClick={prev}
+          aria-label="Previous project"
+          className="absolute top-1/2 -left-16 md:-left-20 transform -translate-y-1/2 p-5 rounded-full bg-blue-600/60 hover:bg-blue-700/80 z-20 shadow-lg"
         >
-          <Button
-            onClick={() => window.location.hash = '/portfolio'}
-            className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 hover:shadow-xl hover:shadow-cyan-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400"
+          <ChevronLeft className="w-7 h-7 text-white" />
+        </button>
+          <button
+            onClick={next}
+          aria-label="Next project"
+            className="absolute top-1/2 -right-16 md:-right-20 transform -translate-y-1/2 p-5 rounded-full bg-blue-600/60 hover:bg-blue-700/80 z-20 shadow-lg"
           >
-            <span>CLICK HERE TO VIEW MORE</span>
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </Button>
-        </motion.div>
-      </div>
+            <ChevronRight className="w-7 h-7 text-white" />
+          </button>
+              </div>
     </section>
   )
 }
