@@ -142,9 +142,9 @@ app.get('/api/health', (req, res) => {
     });
 });
 // Default API route
-app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to the Web Website API' });
-});
+// app.get('/', (req: Request, res: Response) => {
+//   res.json({ message: 'Welcome to the Web Website API' });
+// });
 // API Routes (defined BEFORE catch-all handlers)
 app.use('/api/auth', authRoutes);
 app.use('/api/blogs', blogRoutes);
@@ -152,7 +152,7 @@ app.use('/api/services', serviceRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 // Static file serving for production (defined BEFORE catch-all routes)
 if (process.env.NODE_ENV === 'production') {
-    const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'dist');
+    const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build');
     console.log(`ℹ️ Serving static files from: ${clientBuildPath}`);
     // Serve static files with proper caching
     app.use(express.static(clientBuildPath, {
@@ -172,7 +172,7 @@ app.use('/api/*', (req, res) => {
 // Serve React app for all non-API routes in production (catch-all route)
 if (process.env.NODE_ENV === 'production') {
     app.get('*', (req, res) => {
-        const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'dist', 'index.html');
+        const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build', 'index.html');
         res.sendFile(clientBuildPath, (err) => {
             if (err) {
                 console.error('❌ Error serving React app:', err);
@@ -235,9 +235,9 @@ const startServer = async () => {
         if (port !== preferredPort) {
             console.warn(`Port ${preferredPort} was in use, using port ${port} instead`);
         }
-        app.listen(port, 'localhost', () => {
+        app.listen(port, '0.0.0.0', () => {
             console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${port}`);
-            console.log(`📍 http://localhost:${port}`);
+            console.log(`📍 http://0.0.0.0:${port}`);
             if (process.env.REPLIT_DEV_DOMAIN) {
                 console.log(`🌐 Replit URL: https://${process.env.REPLIT_DEV_DOMAIN}`);
             }

@@ -12,12 +12,12 @@ import {
   Sparkles,
   Award
 } from 'lucide-react'
-import { Button } from './ui/button'
-import { Badge } from './ui/badge'
-import { ResponsiveCard } from './ui/responsive-card'
-import { ImageWithFallback } from './figma/ImageWithFallback'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import { ResponsiveCard } from '../ui/responsive-card'
+import { ImageWithFallback } from '../figma/ImageWithFallback'
 // @ts-ignore
-import exampleImage from '../assets/1787cc73d341b691f9f5f240d514e80ec93f243c.png'
+import exampleImage from '/8e92ef233594715.Y3JvcCwyNTU2LDIwMDAsMjIxLDA.jpg'
 import React from 'react'
 // Solution features with enhanced descriptions
 const creativeSolutions = [
@@ -319,3 +319,4 @@ export function CreativeSolutionsSection() {
     </section>
   )
 }
+export default CreativeSolutionsSection 

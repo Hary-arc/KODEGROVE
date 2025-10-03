@@ -12,7 +12,7 @@ const DigitalTrendsSection: React.FC = () => {
   };
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.src = 'https://via.placeholder.com/150?text=Book';
+    e.currentTarget.src = 'book.png';
   };
 
   const openBookUrl = '/books/book-1.png';

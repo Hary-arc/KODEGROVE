@@ -21,6 +21,7 @@ const BlogPage = React.lazy(() => import('./pages/BlogPage.js').then(module => (
 const DashboardPage = React.lazy(() => import('./pages/DashboardPage.js').then(module => ({ default: module.DashboardPage })))
 const AuthPage = React.lazy(() => import('./pages/AuthPage.js').then(m => ({ default: m.AuthPage })))
 const QuotationPage = React.lazy(() => import('./pages/QuotationPage.js').then(m => ({ default: m.QuotationPage })))
+const ComingSoonPage = React.lazy(() => import('./pages/ComingSoonPage.js').then(m => ({ default: m.ComingSoonPage })))
 
 // Loading fallback component
 const PageLoader = () => (
@@ -113,7 +114,8 @@ export default function App() {
     { path: '/careers', component: <Suspense fallback={<PageLoader />}><CareersPage /></Suspense> },
     { path: '/dashboard', component: <Suspense fallback={<PageLoader />}><DashboardPage /></Suspense> },
     { path: '/auth', component: <Suspense fallback={<PageLoader />}><AuthPage /></Suspense> },
-    { path: '/quotation', component: <Suspense fallback={<PageLoader />}><QuotationPage /></Suspense> }
+    { path: '/quotation', component: <Suspense fallback={<PageLoader />}><QuotationPage /></Suspense> },
+    { path: '/coming-soon', component: <Suspense fallback={<PageLoader />}><ComingSoonPage /></Suspense> }
   ]
 
   return (
@@ -122,7 +124,7 @@ export default function App() {
       <SEOHead
         title={`${siteConfig.name} - ${siteConfig.tagline}`}
         description={siteConfig.description}
-        keywords={['web development', 'digital agency', 'react', 'typescript', 'design']}
+        keywords={['web development', 'digital agency', 'react', 'typescript', 'design','branding', 'ecommerce', 'marketing','kodegrove']}
         canonicalUrl={siteConfig.url}
         schemaData={generateWebsiteSchema(siteConfig)}
       />
@@ -271,7 +273,7 @@ export default function App() {
                     { name: "Digital Trends", path: "/blog/digital-trends" },
                     { name: "Top Companies", path: "/top-companies" },
                     { name: "Reviews", path: "/reviews" },
-                    { name: "Sitemap", path: "/sitemap" },
+                    { name: "Sitemap", path: "/#/coming-soon" },
                     { name: "Locations", path: "/locations" },
                     { name: "Contact Us", path: "/contact" },
                   ].map((item) => (
@@ -320,15 +322,11 @@ export default function App() {
                 <a href="/privacy-policy" className="hover:text-white transition">Privacy Policy</a>
                 <a href="/consent" className="hover:text-white transition">Manage Your Consent</a>
                 <a href="/accessibility" className="hover:text-white transition">Accessibility</a>
-                <a href="tel:+18002069413" className="hover:text-white transition">Call us at (800) 206-9413</a>
+                <a href="tel:+91 7817942713" className="hover:text-white transition">Call us at (781) 794-2713</a>
               </div>
             </div>
           </div>
         </footer>
-
-
-
-
 
       </div>
     </>

@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardGrid } from './ui/responsive-card'
-import { Badge } from './ui/badge'
+import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card'
+import { Badge } from '../ui/badge'
 import { 
   Shield, 
   Award, 
@@ -17,7 +17,7 @@ import {
   Heart,
   Target
 } from 'lucide-react'
-import { ImageWithFallback } from './figma/ImageWithFallback'
+import { ImageWithFallback } from '../figma/ImageWithFallback'
 
 // Trust indicators data
 const trustIndicators = [
@@ -379,3 +379,4 @@ export function TrustAndCredibilitySection({ showAll = true, variant = 'full' }:
     </section>
   )
 }
+export default TrustAndCredibilitySection

@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardGrid } from './ui/responsive-card'
-import { Badge } from './ui/badge'
-import { Button } from './ui/button'
+import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 import { 
   Shield,
   Lock,
@@ -551,3 +551,4 @@ export function SecurityComplianceSection({
     </section>
   )
 }
+export default SecurityComplianceSection

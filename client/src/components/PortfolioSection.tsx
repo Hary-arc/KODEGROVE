@@ -264,6 +264,7 @@ export function PortfolioSection() {
             {/* View Mode Toggle */}
             <div className="flex items-center space-x-2 glass rounded-2xl p-2 border border-white/20">
               <button
+                aria-label="Show all projects"
                 onClick={() => setViewMode("grid")}
                 className={`p-3 rounded-xl transition-all duration-300 ${
                   viewMode === "grid"
@@ -274,6 +275,7 @@ export function PortfolioSection() {
                 <Grid3X3 className="w-5 h-5" />
               </button>
               <button
+                aria-label="Show masonry layout"
                 onClick={() => setViewMode("masonry")}
                 className={`p-3 rounded-xl transition-all duration-300 ${
                   viewMode === "masonry"

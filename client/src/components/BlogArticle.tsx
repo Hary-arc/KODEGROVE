@@ -106,6 +106,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
         {/* Share Button */}
         <div className="relative">
           <button
+            aria-label="Share this article"
             onClick={() => setIsShareOpen(!isShareOpen)}
             className="w-12 h-12 glass rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:scale-110 transition-all duration-300"
           >
@@ -120,6 +121,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
             >
               <div className="space-y-2">
                 <button
+                  aria-label="Share on Twitter"
                   onClick={() => handleShare('twitter')}
                   className="w-full flex items-center space-x-3 px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
                 >
@@ -127,6 +129,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
                   <span className="text-sm">Twitter</span>
                 </button>
                 <button
+                  aria-label="Share on LinkedIn"
                   onClick={() => handleShare('linkedin')}
                   className="w-full flex items-center space-x-3 px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
                 >
@@ -134,6 +137,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
                   <span className="text-sm">LinkedIn</span>
                 </button>
                 <button
+                  aria-label="Copy link to clipboard"
                   onClick={() => handleShare('copy')}
                   className="w-full flex items-center space-x-3 px-3 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
                 >
@@ -147,6 +151,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
 
         {/* Like Button */}
         <button
+          aria-label="Like this article"
           onClick={() => setIsLiked(!isLiked)}
           className={`w-12 h-12 glass rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 ${
             isLiked ? 'text-red-400' : 'text-gray-300 hover:text-white'
@@ -157,6 +162,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
 
         {/* Bookmark Button */}
         <button
+          aria-label="Bookmark this article"
           onClick={() => setIsBookmarked(!isBookmarked)}
           className={`w-12 h-12 glass rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 ${
             isBookmarked ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
@@ -166,7 +172,9 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
         </button>
 
         {/* Comments Button */}
-        <button className="w-12 h-12 glass rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:scale-110 transition-all duration-300">
+        <button 
+          aria-label="View comments"
+          className="w-12 h-12 glass rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:scale-110 transition-all duration-300">
           <MessageCircle className="w-5 h-5" />
         </button>
       </div>

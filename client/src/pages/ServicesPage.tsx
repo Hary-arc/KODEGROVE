@@ -30,6 +30,7 @@ import {
   ChevronRight,
   ArrowUpRight
 } from 'lucide-react'
+import { ServicesSection } from '@/components/ServicesSection'
 import { services, serviceStats } from '../data/services'
 import { pageHeaders } from '../data/content'
 import { siteConfig } from '../data/site-config'
@@ -245,6 +246,8 @@ export function ServicesPage() {
           </div>
         </div>
       </section>
+      {/* ServicesSection */}
+      <ServicesSection/>
 
       {/* Sticky Navigation */}
       <nav className="sticky top-20 z-30 bg-slate-900/95 backdrop-blur-xl border-b border-white/10">
@@ -533,5 +536,6 @@ function ServiceSection({ service, index }: { service: any; index: number }) {
         </div>
       </div>
     </section>
+    
   )
 }

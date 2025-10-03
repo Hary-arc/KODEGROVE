@@ -1,10 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardGrid } from './ui/responsive-card'
+import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card'
 import React from 'react'
-import { Badge } from './ui/badge'
-import { Button } from './ui/button'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 import { 
   Award,
   Star,
@@ -21,7 +21,7 @@ import {
   CheckCircle,
   Heart
 } from 'lucide-react'
-import { ImageWithFallback } from './figma/ImageWithFallback'
+import { ImageWithFallback } from '../figma/ImageWithFallback'
 
 // Industry awards and recognition
 const industryAwards = [
@@ -529,3 +529,4 @@ export function IndustryRecognitionSection({
     </section>
   )
 }
+export default IndustryRecognitionSection 

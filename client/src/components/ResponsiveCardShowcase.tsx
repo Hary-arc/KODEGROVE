@@ -251,10 +251,14 @@ export function ResponsiveCardShowcase({ showControls = true, maxCards }: Respon
 
                   <ResponsiveCardFooter direction="row">
                     <div className="flex items-center space-x-3">
-                      <button className="w-8 h-8 glass rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors duration-300">
+                      <button 
+                        aria-label="Add to favorites"
+                        className="w-8 h-8 glass rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors duration-300">
                         <Heart className="w-4 h-4" />
                       </button>
-                      <button className="w-8 h-8 glass rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors duration-300">
+                      <button 
+                        aria-label="Share"
+                        className="w-8 h-8 glass rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-colors duration-300">
                         <Share2 className="w-4 h-4" />
                       </button>
                     </div>

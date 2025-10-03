@@ -1,9 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardGrid } from './ui/responsive-card'
-import { Badge } from './ui/badge'
-import { Button } from './ui/button'
+import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 import { 
   Building2, 
   MapPin, 
@@ -476,3 +476,4 @@ export function CompanyInfoSection({
     </section>
   )
 }
+export default CompanyInfoSection

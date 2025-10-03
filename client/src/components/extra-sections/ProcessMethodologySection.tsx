@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardGrid } from './ui/responsive-card'
-import { Badge } from './ui/badge'
-import { Button } from './ui/button'
+import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 import { 
   Search,
   Lightbulb,
@@ -458,3 +458,5 @@ export function ProcessMethodologySection({
     </section>
   )
 }
+
+export default ProcessMethodologySection 

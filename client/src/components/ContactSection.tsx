@@ -321,6 +321,7 @@ export function ContactSection() {
                         <div className="space-y-2">
                           <Label htmlFor="service" className="text-white font-medium">Service Needed</Label>
                           <select
+                            aria-label="Select service needed"
                             id="service"
                             name="service"
                             value={formData.service}
@@ -339,6 +340,7 @@ export function ContactSection() {
                         <div className="space-y-2">
                           <Label htmlFor="budget" className="text-white font-medium">Project Budget</Label>
                           <select
+                            aria-label="Select project budget"
                             id="budget"
                             name="budget"
                             value={formData.budget}
@@ -358,6 +360,7 @@ export function ContactSection() {
                       <div className="space-y-2">
                         <Label htmlFor="timeline" className="text-white font-medium">Timeline</Label>
                         <select
+                          aria-label="Select project timeline"
                           id="timeline"
                           name="timeline"
                           value={formData.timeline}
