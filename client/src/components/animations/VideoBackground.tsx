@@ -48,15 +48,15 @@ export function VideoBackground({
   // Fallback to image if video fails or isn't supported
   if (hasError || !src) {
     return (
-      <div className={`relative overflow-hidden ${className}`}>
+      <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`}>
         <ImageWithFallback
-          src={poster || "https://images.unsplash.com/photo-1519389950473-47ba0277781c"}
+          src={poster || "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070"}
           alt="Video background fallback"
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         />
         {overlay && (
           <div 
-            className="absolute inset-0 bg-black"
+            className="absolute inset-0 bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60"
             style={{ opacity: overlayOpacity }}
           />
         )}
@@ -65,29 +65,28 @@ export function VideoBackground({
   }
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`}>
       <motion.video
         ref={videoRef}
-        className="w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
         autoPlay={autoPlay}
         muted={muted}
         loop={loop}
         playsInline
         poster={poster}
-        {...{ preload: "auto" }} // <-- wrap in spread to forward
+        preload="auto"
         initial={{ scale: 1.1, opacity: 0 }}
         animate={{ scale: isLoaded ? 1 : 1.1, opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         onCanPlayThrough={() => setIsLoaded(true)}
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </motion.video>
 
-
       {overlay && (
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60"
+          className="absolute inset-0 bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60 pointer-events-none"
           style={{ opacity: overlayOpacity }}
         />
       )}
@@ -102,6 +101,33 @@ export function VideoBackground({
           />
         </div>
       )}
+    </div>
+  )
+}
+
+// Export for case study videos
+export function CaseStudyVideo({
+  src,
+  poster,
+  className = '',
+  controls = true
+}: {
+  src: string
+  poster?: string
+  className?: string
+  controls?: boolean
+}) {
+  return (
+    <div className={`relative rounded-2xl overflow-hidden ${className}`}>
+      <video
+        className="w-full h-full rounded-2xl"
+        controls={controls}
+        poster={poster}
+        preload="metadata"
+      >
+        <source src={src} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
   )
 }

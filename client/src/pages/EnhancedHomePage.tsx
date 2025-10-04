@@ -67,6 +67,7 @@ import DigitalTrendsSection from "../components/home-sections/DigitalTrendsSecti
 import CustomWebDesignPricingSection from "../components/home-sections/CustomWebDesignPricingSection";
 import FeaturedWebsiteRedesignsSection from "../components/home-sections/FeaturedWebsiteRedesignsSection";
 import React from "react";
+
 export function EnhancedHomePage() {
   const heroRef = useRef(null);
   const statsRef = useRef(null);
@@ -147,16 +148,14 @@ export function EnhancedHomePage() {
         className="relative min-h-screen flex items-center overflow-hidden"
       >
         {/* Static Background instead of video to avoid issues */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900">
-          <VideoBackground
+         <VideoBackground
             src="/output2.mp4" // put your video path here
             poster="/bgfallback.jpg"
-            overlay
+            overlay={true}
             overlayOpacity={0.5}
-            className="absolute inset-0"
+            className=" "
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60" />
-        </div>
+          
 
         {/* Animated particles overlay */}
         <Parallax speed={0.3} className="absolute inset-0 pointer-events-none">
@@ -603,6 +602,7 @@ export function EnhancedHomePage() {
 
       {/* Creative Web Agency Section */}
       <CreativeWebAgencySection />
+      
       <section>
         <DesignProcessSection />
       </section>
