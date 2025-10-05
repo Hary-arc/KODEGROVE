@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Blog,  blogStore } from '../models/index.js';
+import { Blog, blogStore } from '../models/index.js';
 import { AuthRequest } from '../middleware/auth.js';
 
 // @desc    Get all blogs
@@ -12,12 +12,12 @@ export const getBlogs = async (req: Request, res: Response) => {
     res.json({
       success: true,
       count: publishedBlogs.length,
-      data: publishedBlogs
+      data: publishedBlogs,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error retrieving blogs'
+      message: 'Error retrieving blogs',
     });
   }
 };
@@ -28,29 +28,29 @@ export const getBlogs = async (req: Request, res: Response) => {
 export const getBlog = async (req: Request, res: Response) => {
   try {
     const blog = await blogStore.findById(req.params.id);
-    
+
     if (!blog) {
       return res.status(404).json({
         success: false,
-        message: 'Blog not found'
+        message: 'Blog not found',
       });
     }
 
     if (!blog.published) {
       return res.status(404).json({
         success: false,
-        message: 'Blog not found'
+        message: 'Blog not found',
       });
     }
 
     res.json({
       success: true,
-      data: blog
+      data: blog,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error retrieving blog'
+      message: 'Error retrieving blog',
     });
   }
 };
@@ -60,10 +60,8 @@ export const getBlog = async (req: Request, res: Response) => {
 // @access  Private/Admin
 export const createBlog = async (req: AuthRequest, res: Response) => {
   try {
-      const authReq = req as AuthRequest;
-      const blog = new Blog({
-       
-        
+    const authReq = req as AuthRequest;
+    const blog = new Blog({
       id: crypto.randomUUID(),
       title: req.body.title,
       content: req.body.content,
@@ -71,30 +69,30 @@ export const createBlog = async (req: AuthRequest, res: Response) => {
       slug: req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-'),
       tags: req.body.tags || [],
       published: req.body.published || false,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
-  const user = req.user; // ✅ TypeScript knows this exists now
+    const user = req.user; // ✅ TypeScript knows this exists now
 
-  if (!user || user.role !== 'admin') {
-    return res.status(403).json({ message: 'Forbidden' });
-  }
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
     // Basic validation
     if (!blog.title) {
       return res.status(400).json({
         success: false,
-        errors: ['Title is required']
+        errors: ['Title is required'],
       });
     }
     if (!blog.content) {
       return res.status(400).json({
         success: false,
-        errors: ['Content is required']
+        errors: ['Content is required'],
       });
     }
     if (!blog.tags?.length) {
       return res.status(400).json({
         success: false,
-        errors: ['At least one tag is required']
+        errors: ['At least one tag is required'],
       });
     }
 
@@ -102,12 +100,12 @@ export const createBlog = async (req: AuthRequest, res: Response) => {
 
     res.status(201).json({
       success: true,
-      data: blog
+      data: blog,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error creating blog'
+      message: 'Error creating blog',
     });
   }
 };
@@ -122,17 +120,15 @@ export const updateBlog = async (req: AuthRequest, res: Response) => {
     if (!blog) {
       return res.status(404).json({
         success: false,
-        message: 'Blog not found'
+        message: 'Blog not found',
       });
     }
-    
+
     const updatedBlog = new Blog({
       ...blog,
       title: req.body.title || blog.title,
       content: req.body.content || blog.content,
-      slug: req.body.title
-        ? req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-')
-        : blog.slug,
+      slug: req.body.title ? req.body.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '-') : blog.slug,
       tags: req.body.tags || blog.tags,
       published: req.body.published ?? blog.published,
     });
@@ -141,19 +137,19 @@ export const updateBlog = async (req: AuthRequest, res: Response) => {
     if (!updatedBlog.title) {
       return res.status(400).json({
         success: false,
-        errors: ['Title is required']
+        errors: ['Title is required'],
       });
     }
     if (!updatedBlog.content) {
       return res.status(400).json({
         success: false,
-        errors: ['Content is required']
+        errors: ['Content is required'],
       });
     }
     if (!updatedBlog.tags?.length) {
       return res.status(400).json({
         success: false,
-        errors: ['At least one tag is required']
+        errors: ['At least one tag is required'],
       });
     }
 
@@ -161,12 +157,12 @@ export const updateBlog = async (req: AuthRequest, res: Response) => {
 
     res.json({
       success: true,
-      data: blog
+      data: blog,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error updating blog'
+      message: 'Error updating blog',
     });
   }
 };
@@ -181,7 +177,7 @@ export const deleteBlog = async (req: Request, res: Response) => {
     if (!blog) {
       return res.status(404).json({
         success: false,
-        message: 'Blog not found'
+        message: 'Blog not found',
       });
     }
 
@@ -189,12 +185,12 @@ export const deleteBlog = async (req: Request, res: Response) => {
 
     res.json({
       success: true,
-      data: {}
+      data: {},
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error deleting blog'
+      message: 'Error deleting blog',
     });
   }
 };

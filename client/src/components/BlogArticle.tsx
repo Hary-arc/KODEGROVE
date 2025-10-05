@@ -1,92 +1,92 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { BlogPost, getRelatedPosts } from '../data/blog'
-import { 
-  ArrowLeft, 
-  Calendar, 
-  Clock, 
-  Share2, 
-  Twitter, 
-  Linkedin, 
-  Link, 
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { BlogPost, getRelatedPosts } from '../data/blog';
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Share2,
+  Twitter,
+  Linkedin,
+  Link,
   Heart,
   Bookmark,
   MessageCircle,
-  ChevronUp
-} from 'lucide-react'
-import { ImageWithFallback } from './figma/ImageWithFallback'
-import React from 'react'
+  ChevronUp,
+} from 'lucide-react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
+import React from 'react';
 
 interface BlogArticleProps {
-  post: BlogPost
-  onBack: () => void
+  post: BlogPost;
+  onBack: () => void;
 }
 
 export function BlogArticle({ post, onBack }: BlogArticleProps) {
-  const [readingProgress, setReadingProgress] = useState(0)
-  const [isShareOpen, setIsShareOpen] = useState(false)
-  const [isLiked, setIsLiked] = useState(false)
-  const [isBookmarked, setIsBookmarked] = useState(false)
-  const [showScrollTop, setShowScrollTop] = useState(false)
-  const contentRef = useRef<HTMLDivElement>(null)
+  const [readingProgress, setReadingProgress] = useState(0);
+  const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // Track reading progress
   useEffect(() => {
     const handleScroll = () => {
-      if (!contentRef.current) return
+      if (!contentRef.current) return;
 
-      const totalHeight = contentRef.current.offsetHeight
-      const windowHeight = window.innerHeight
-      const scrolled = window.scrollY
-      const headerHeight = 400 // Approximate hero height
+      const totalHeight = contentRef.current.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrolled = window.scrollY;
+      const headerHeight = 400; // Approximate hero height
 
       // Calculate progress based on content area
-      const contentStart = headerHeight
-      const contentHeight = totalHeight - headerHeight
-      const progressHeight = Math.max(0, scrolled - contentStart)
-      const progress = Math.min((progressHeight / (contentHeight - windowHeight)) * 100, 100)
+      const contentStart = headerHeight;
+      const contentHeight = totalHeight - headerHeight;
+      const progressHeight = Math.max(0, scrolled - contentStart);
+      const progress = Math.min((progressHeight / (contentHeight - windowHeight)) * 100, 100);
 
-      setReadingProgress(Math.max(0, progress))
-      setShowScrollTop(scrolled > 500)
-    }
+      setReadingProgress(Math.max(0, progress));
+      setShowScrollTop(scrolled > 500);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
-    })
-  }
+      day: 'numeric',
+    });
+  };
 
-  const shareUrl = window.location.href
-  const shareText = `Check out this article: ${post.title}`
+  const shareUrl = window.location.href;
+  const shareText = `Check out this article: ${post.title}`;
 
   const handleShare = (platform: string) => {
     const urls = {
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
       linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
-      copy: shareUrl
-    }
+      copy: shareUrl,
+    };
 
     if (platform === 'copy') {
-      navigator.clipboard.writeText(shareUrl)
+      navigator.clipboard.writeText(shareUrl);
       // You could add a toast notification here
     } else {
-      window.open(urls[platform as keyof typeof urls], '_blank', 'width=600,height=400')
+      window.open(urls[platform as keyof typeof urls], '_blank', 'width=600,height=400');
     }
-  }
+  };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-  const relatedPosts = getRelatedPosts(post.id, post.category, 3)
+  const relatedPosts = getRelatedPosts(post.id, post.category, 3);
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -112,7 +112,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
           >
             <Share2 className="w-5 h-5" />
           </button>
-          
+
           {isShareOpen && (
             <motion.div
               initial={{ opacity: 0, scale: 0.8, x: 20 }}
@@ -172,9 +172,10 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
         </button>
 
         {/* Comments Button */}
-        <button 
+        <button
           aria-label="View comments"
-          className="w-12 h-12 glass rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:scale-110 transition-all duration-300">
+          className="w-12 h-12 glass rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:scale-110 transition-all duration-300"
+        >
           <MessageCircle className="w-5 h-5" />
         </button>
       </div>
@@ -197,7 +198,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
         <section className="relative py-20 pt-32 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-slate-900 to-cyan-900/20"></div>
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-          
+
           <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8">
             {/* Back Button */}
             <motion.button
@@ -226,7 +227,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
                 <span>{post.readTime} min read</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
+                {post.tags.map(tag => (
                   <span key={tag} className="px-2 py-1 bg-white/10 rounded-md text-xs">
                     {tag}
                   </span>
@@ -339,7 +340,7 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     </div>
-                    
+
                     <div className="p-6">
                       <h3 className="font-outfit text-xl font-bold mb-3 group-hover:text-purple-300 transition-colors duration-300 line-clamp-2">
                         {relatedPost.title}
@@ -356,5 +357,5 @@ export function BlogArticle({ post, onBack }: BlogArticleProps) {
         )}
       </div>
     </div>
-  )
+  );
 }

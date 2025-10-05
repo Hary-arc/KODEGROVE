@@ -1,50 +1,50 @@
-'use client'
+'use client';
 
-import { EcommercePopup } from './pages/EcommercePopup'
-import { MobileAppPopup } from './pages/MobileAppPopup'
-import { WebDevelopmentPopup } from './pages/WebDevelopmentPopup'
+import { EcommercePopup } from './pages/EcommercePopup';
+import { MobileAppPopup } from './pages/MobileAppPopup';
+import { WebDevelopmentPopup } from './pages/WebDevelopmentPopup';
 
 // Marketing Components
-export { PopupModal } from './components/PopupModal'
+export { PopupModal } from './components/PopupModal';
 
 // Marketing Pages
-export { WebDevelopmentPopup } from './pages/WebDevelopmentPopup'
-export { MobileAppPopup } from './pages/MobileAppPopup'
-export { EcommercePopup } from './pages/EcommercePopup'
+export { WebDevelopmentPopup } from './pages/WebDevelopmentPopup';
+export { MobileAppPopup } from './pages/MobileAppPopup';
+export { EcommercePopup } from './pages/EcommercePopup';
 
 // Marketing Hooks
-export { usePopupManager } from './hooks/usePopupManager'
-export type { PopupType } from './hooks/usePopupManager'
+export { usePopupManager } from './hooks/usePopupManager';
+export type { PopupType } from './hooks/usePopupManager';
 
 // Marketing Utils
 export const getPopupComponent = (type: string) => {
   switch (type) {
     case 'web-development':
-      return WebDevelopmentPopup
+      return WebDevelopmentPopup;
     case 'mobile-app':
-      return MobileAppPopup
+      return MobileAppPopup;
     case 'ecommerce':
-      return EcommercePopup
+      return EcommercePopup;
     default:
-      return null
+      return null;
   }
-}
+};
 
 export const getPopupTitle = (type: string) => {
   switch (type) {
     case 'web-development':
-      return 'Web Development Services'
+      return 'Web Development Services';
     case 'mobile-app':
-      return 'Mobile App Development'
+      return 'Mobile App Development';
     case 'ecommerce':
-      return 'E-Commerce Solutions'
+      return 'E-Commerce Solutions';
     case 'backend-systems':
-      return 'Backend & Infrastructure'
+      return 'Backend & Infrastructure';
     case 'ui-ux-design':
-      return 'UI/UX Design Services'
+      return 'UI/UX Design Services';
     case 'security-devops':
-      return 'Security & DevOps'
+      return 'Security & DevOps';
     default:
-      return 'Our Services'
+      return 'Our Services';
   }
-}
+};

@@ -1,6 +1,5 @@
 // tailwind.config.js
 module.exports = {
-  
   theme: {
     extend: {
       // You can extend spacing, colors, etc. here

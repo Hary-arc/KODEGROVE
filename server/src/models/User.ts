@@ -53,7 +53,7 @@ export class User implements IUser, IUserMethods {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -71,13 +71,9 @@ export class User implements IUser, IUserMethods {
       throw new Error('JWT_SECRET is required');
     }
 
-    return jwt.sign(
-      { id: this.id },
-      process.env.JWT_SECRET as jwt.Secret,
-      { 
-        expiresIn: (process.env.JWT_EXPIRE || '30d') as jwt.SignOptions['expiresIn']
-      }
-    );
+    return jwt.sign({ id: this.id }, process.env.JWT_SECRET as jwt.Secret, {
+      expiresIn: (process.env.JWT_EXPIRE || '30d') as jwt.SignOptions['expiresIn'],
+    });
   }
 
   static async hashPassword(password: string): Promise<string> {

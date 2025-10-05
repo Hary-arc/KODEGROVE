@@ -1,30 +1,30 @@
-'use client'
-import React from 'react'
-import { useState, useRef } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { 
-  pricingPlans, 
-  pricingAddons, 
-  pricingFAQs, 
+'use client';
+import React from 'react';
+import { useState, useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import {
+  pricingPlans,
+  pricingAddons,
+  pricingFAQs,
   pricingStats,
   testimonialHighlights,
   comparisonFeatures,
   formatPrice,
   calculateSavings,
-  type PricingPlan 
-} from '../data/pricing'
-import { siteConfig } from '../data/site-config'
-import { Button } from '../components/ui/button'
-import { Card, CardContent } from '../components/ui/card'
-import { Badge } from '../components/ui/badge'
-import { Switch } from '../components/ui/switch'
-import { Progress } from '../components/ui/progress'
+  type PricingPlan,
+} from '../data/pricing';
+import { siteConfig } from '../data/site-config';
+import { Button } from '../components/ui/button';
+import { Card, CardContent } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Switch } from '../components/ui/switch';
+import { Progress } from '../components/ui/progress';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '../components/ui/accordion'
+} from '../components/ui/accordion';
 import {
   Check,
   X,
@@ -42,43 +42,43 @@ import {
   Mail,
   MessageCircle,
   ChevronRight,
-  Info
-} from 'lucide-react'
+  Info,
+} from 'lucide-react';
 
 export function PricingPage() {
-  const [isAnnual, setIsAnnual] = useState(true)
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null)
-  const [expandedAddon, setExpandedAddon] = useState<string | null>(null)
+  const [isAnnual, setIsAnnual] = useState(true);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [expandedAddon, setExpandedAddon] = useState<string | null>(null);
 
-  const heroRef = useRef(null)
-  const plansRef = useRef(null)
-  const comparisonRef = useRef(null)
-  const faqRef = useRef(null)
+  const heroRef = useRef(null);
+  const plansRef = useRef(null);
+  const comparisonRef = useRef(null);
+  const faqRef = useRef(null);
 
-  const isHeroInView = useInView(heroRef, { once: true, amount: 0.2 })
-  const isPlansInView = useInView(plansRef, { once: true, amount: 0.1 })
-  const isComparisonInView = useInView(comparisonRef, { once: true, amount: 0.1 })
-  const isFaqInView = useInView(faqRef, { once: true, amount: 0.1 })
+  const isHeroInView = useInView(heroRef, { once: true, amount: 0.2 });
+  const isPlansInView = useInView(plansRef, { once: true, amount: 0.1 });
+  const isComparisonInView = useInView(comparisonRef, { once: true, amount: 0.1 });
+  const isFaqInView = useInView(faqRef, { once: true, amount: 0.1 });
 
   const getIcon = (iconName: string) => {
-    const icons = { Zap, Star, Crown }
-    return icons[iconName as keyof typeof icons] || Star
-  }
+    const icons = { Zap, Star, Crown };
+    return icons[iconName as keyof typeof icons] || Star;
+  };
 
   const handlePlanSelect = (planId: string) => {
-    setSelectedPlan(planId)
+    setSelectedPlan(planId);
     // In a real app, this would trigger the checkout process
-    console.log(`Selected plan: ${planId}`)
-  }
+    console.log(`Selected plan: ${planId}`);
+  };
 
   const getPrice = (plan: PricingPlan) => {
-    return isAnnual ? plan.price.annually : plan.price.monthly
-  }
+    return isAnnual ? plan.price.annually : plan.price.monthly;
+  };
 
   const getOriginalPrice = (plan: PricingPlan) => {
-    if (!plan.originalPrice) return null
-    return isAnnual ? plan.originalPrice.annually : plan.originalPrice.monthly
-  }
+    if (!plan.originalPrice) return null;
+    return isAnnual ? plan.originalPrice.annually : plan.originalPrice.monthly;
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 text-white pt-20">
@@ -86,33 +86,33 @@ export function PricingPage() {
       <section ref={heroRef} className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-slate-900 to-cyan-900/30" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
-        
+
         {/* Animated background orbs */}
-        <motion.div 
+        <motion.div
           className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"
           animate={{
             x: [0, 30, -30, 0],
             y: [0, -20, 20, 0],
-            scale: [1, 1.1, 0.9, 1]
+            scale: [1, 1.1, 0.9, 1],
           }}
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl"
           animate={{
             x: [0, -25, 25, 0],
             y: [0, 25, -25, 0],
-            scale: [1, 0.8, 1.2, 1]
+            scale: [1, 0.8, 1.2, 1],
           }}
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
+            ease: 'easeInOut',
+            delay: 2,
           }}
         />
 
@@ -126,7 +126,7 @@ export function PricingPage() {
           >
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
             >
               <Sparkles className="w-5 h-5 text-purple-400" />
             </motion.div>
@@ -134,7 +134,7 @@ export function PricingPage() {
           </motion.div>
 
           {/* Hero Headlines */}
-          <motion.h1 
+          <motion.h1
             className="font-outfit text-5xl lg:text-7xl font-bold mb-8 leading-tight"
             initial={{ opacity: 0, y: 50 }}
             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
@@ -155,8 +155,8 @@ export function PricingPage() {
             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            Choose the perfect plan for your business. No hidden fees, no surprises. 
-            Just premium digital solutions that drive real results.
+            Choose the perfect plan for your business. No hidden fees, no surprises. Just premium
+            digital solutions that drive real results.
           </motion.p>
 
           {/* Pricing Toggle */}
@@ -180,7 +180,8 @@ export function PricingPage() {
               Annual
             </span>
             <Badge className="gradient-electric text-white border-0 ml-2">
-              Save {calculateSavings(pricingPlans[1].price.monthly, pricingPlans[1].price.annually)}%
+              Save {calculateSavings(pricingPlans[1].price.monthly, pricingPlans[1].price.annually)}
+              %
             </Badge>
           </motion.div>
 
@@ -195,7 +196,7 @@ export function PricingPage() {
               { icon: Users, label: 'Happy Clients', value: pricingStats.projectsDelivered },
               { icon: TrendingUp, label: 'Average ROI', value: pricingStats.avgROI },
               { icon: Award, label: 'Projects Done', value: pricingStats.projectsDelivered },
-              { icon: Star, label: 'Satisfaction', value: pricingStats.satisfactionRate }
+              { icon: Star, label: 'Satisfaction', value: pricingStats.satisfactionRate },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -234,17 +235,20 @@ export function PricingPage() {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              All plans include our signature premium design, cutting-edge technology, and exceptional support.
+              All plans include our signature premium design, cutting-edge technology, and
+              exceptional support.
             </p>
           </motion.div>
 
           {/* Pricing Cards */}
           <div className="grid lg:grid-cols-3 gap-8 mb-20">
             {pricingPlans.map((plan, index) => {
-              const PlanIcon = getIcon(plan.icon)
-              const currentPrice = getPrice(plan)
-              const originalPrice = getOriginalPrice(plan)
-              const savings = originalPrice ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100) : 0
+              const PlanIcon = getIcon(plan.icon);
+              const currentPrice = getPrice(plan);
+              const originalPrice = getOriginalPrice(plan);
+              const savings = originalPrice
+                ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100)
+                : 0;
 
               return (
                 <motion.div
@@ -254,11 +258,13 @@ export function PricingPage() {
                   animate={isPlansInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.8, delay: index * 0.2 }}
                 >
-                  <Card className={`relative h-full overflow-hidden transition-all duration-500 ${
-                    plan.popular 
-                      ? 'glass border-2 border-purple-500/50 shadow-2xl shadow-purple-500/20 scale-105 hover:scale-110' 
-                      : 'glass border border-white/10 hover:border-white/30 hover:scale-105'
-                  }`}>
+                  <Card
+                    className={`relative h-full overflow-hidden transition-all duration-500 ${
+                      plan.popular
+                        ? 'glass border-2 border-purple-500/50 shadow-2xl shadow-purple-500/20 scale-105 hover:scale-110'
+                        : 'glass border border-white/10 hover:border-white/30 hover:scale-105'
+                    }`}
+                  >
                     {plan.popular && (
                       <div className="absolute top-0 inset-x-0">
                         <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-center py-2">
@@ -270,10 +276,14 @@ export function PricingPage() {
                     <CardContent className={`p-8 ${plan.popular ? 'pt-12' : ''}`}>
                       {/* Plan Header */}
                       <div className="text-center mb-8">
-                        <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${plan.gradient} rounded-2xl flex items-center justify-center`}>
+                        <div
+                          className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${plan.gradient} rounded-2xl flex items-center justify-center`}
+                        >
                           <PlanIcon className="w-8 h-8 text-white" />
                         </div>
-                        <h3 className="font-outfit text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                        <h3 className="font-outfit text-2xl font-bold text-white mb-2">
+                          {plan.name}
+                        </h3>
                         <p className="text-purple-300 font-medium mb-4">{plan.tagline}</p>
 
                         {/* Price */}
@@ -289,18 +299,16 @@ export function PricingPage() {
                             </div>
                           )}
                           <div className="flex items-baseline justify-center space-x-1">
-                            <span className={`text-4xl font-bold bg-gradient-to-r ${plan.gradient} bg-clip-text text-transparent`}>
+                            <span
+                              className={`text-4xl font-bold bg-gradient-to-r ${plan.gradient} bg-clip-text text-transparent`}
+                            >
                               {formatPrice(currentPrice)}
                             </span>
-                            <span className="text-gray-400">
-                              /{isAnnual ? 'year' : 'month'}
-                            </span>
+                            <span className="text-gray-400">/{isAnnual ? 'year' : 'month'}</span>
                           </div>
                         </div>
 
-                        <p className="text-gray-300 text-sm leading-relaxed">
-                          {plan.description}
-                        </p>
+                        <p className="text-gray-300 text-sm leading-relaxed">{plan.description}</p>
                       </div>
 
                       {/* Features List */}
@@ -311,10 +319,15 @@ export function PricingPage() {
                             className="flex items-center space-x-3"
                             initial={{ opacity: 0, x: -20 }}
                             animate={isPlansInView ? { opacity: 1, x: 0 } : {}}
-                            transition={{ duration: 0.4, delay: 0.8 + index * 0.1 + featureIndex * 0.05 }}
+                            transition={{
+                              duration: 0.4,
+                              delay: 0.8 + index * 0.1 + featureIndex * 0.05,
+                            }}
                           >
                             {feature.included ? (
-                              <div className={`w-6 h-6 rounded-full bg-gradient-to-r ${plan.gradient} flex items-center justify-center flex-shrink-0`}>
+                              <div
+                                className={`w-6 h-6 rounded-full bg-gradient-to-r ${plan.gradient} flex items-center justify-center flex-shrink-0`}
+                              >
                                 <Check className="w-4 h-4 text-white" />
                               </div>
                             ) : (
@@ -322,7 +335,9 @@ export function PricingPage() {
                                 <X className="w-4 h-4 text-gray-400" />
                               </div>
                             )}
-                            <span className={`text-sm ${feature.included ? 'text-white' : 'text-gray-400'}`}>
+                            <span
+                              className={`text-sm ${feature.included ? 'text-white' : 'text-gray-400'}`}
+                            >
                               {feature.name}
                             </span>
                             {feature.tooltip && (
@@ -339,8 +354,8 @@ export function PricingPage() {
                           plan.popular
                             ? `bg-gradient-to-r ${plan.gradient} hover:shadow-xl hover:shadow-purple-500/30 text-white`
                             : plan.enterprise
-                            ? `bg-gradient-to-r ${plan.gradient} hover:shadow-xl hover:shadow-cyan-500/30 text-white`
-                            : `glass border border-white/20 text-white hover:bg-white/10 hover:border-white/40`
+                              ? `bg-gradient-to-r ${plan.gradient} hover:shadow-xl hover:shadow-cyan-500/30 text-white`
+                              : `glass border border-white/20 text-white hover:bg-white/10 hover:border-white/40`
                         }`}
                         size="lg"
                       >
@@ -350,7 +365,7 @@ export function PricingPage() {
                     </CardContent>
                   </Card>
                 </motion.div>
-              )
+              );
             })}
           </div>
 
@@ -437,7 +452,10 @@ export function PricingPage() {
       </section>
 
       {/* Feature Comparison Table */}
-      <section ref={comparisonRef} className="relative py-20 bg-gradient-to-b from-slate-950 to-purple-950/20">
+      <section
+        ref={comparisonRef}
+        className="relative py-20 bg-gradient-to-b from-slate-950 to-purple-950/20"
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -445,9 +463,7 @@ export function PricingPage() {
             animate={isComparisonInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-outfit text-4xl font-bold text-white mb-4">
-              Feature Comparison
-            </h2>
+            <h2 className="font-outfit text-4xl font-bold text-white mb-4">Feature Comparison</h2>
             <p className="text-gray-300 max-w-2xl mx-auto">
               See exactly what's included in each plan
             </p>
@@ -465,7 +481,7 @@ export function PricingPage() {
                 <div className="bg-slate-950 p-6">
                   <h3 className="font-semibold text-white">Features</h3>
                 </div>
-                {pricingPlans.map((plan) => (
+                {pricingPlans.map(plan => (
                   <div key={plan.id} className="bg-slate-950 p-6 text-center">
                     <h3 className="font-semibold text-white mb-2">{plan.name}</h3>
                     <p className="text-sm text-gray-400">{formatPrice(getPrice(plan))}</p>
@@ -478,22 +494,28 @@ export function PricingPage() {
                     <div className="bg-slate-950 p-4 border-t border-white/5">
                       <span className="text-gray-300">{feature}</span>
                     </div>
-                    {pricingPlans.map((plan) => {
-                      const planFeature = plan.features.find(f => f.name.toLowerCase().includes(feature.toLowerCase()))
-                      const isIncluded = planFeature?.included || 
+                    {pricingPlans.map(plan => {
+                      const planFeature = plan.features.find(f =>
+                        f.name.toLowerCase().includes(feature.toLowerCase())
+                      );
+                      const isIncluded =
+                        planFeature?.included ||
                         (feature === 'Custom Design' && true) ||
                         (feature === 'Responsive Layout' && true) ||
-                        (feature === 'SSL Certificate' && true)
+                        (feature === 'SSL Certificate' && true);
 
                       return (
-                        <div key={`${plan.id}-${feature}`} className="bg-slate-950 p-4 border-t border-white/5 text-center">
+                        <div
+                          key={`${plan.id}-${feature}`}
+                          className="bg-slate-950 p-4 border-t border-white/5 text-center"
+                        >
                           {isIncluded ? (
                             <Check className="w-5 h-5 text-green-400 mx-auto" />
                           ) : (
                             <X className="w-5 h-5 text-gray-400 mx-auto" />
                           )}
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 ))}
@@ -533,8 +555,8 @@ export function PricingPage() {
                   animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                 >
-                  <AccordionItem 
-                    value={`item-${index}`} 
+                  <AccordionItem
+                    value={`item-${index}`}
                     className="glass border border-white/10 rounded-2xl px-6 hover:border-purple-400/30 transition-all duration-300"
                   >
                     <AccordionTrigger className="hover:no-underline text-left py-6">
@@ -562,7 +584,7 @@ export function PricingPage() {
             viewport={{ once: true }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-cyan-500/5" />
-            
+
             <div className="relative z-10">
               <h3 className="font-outfit text-4xl font-bold text-white mb-6">
                 Ready to Transform Your{' '}
@@ -571,10 +593,10 @@ export function PricingPage() {
                 </span>
               </h3>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join hundreds of successful businesses who trust CodeFlow to deliver 
-                extraordinary digital experiences.
+                Join hundreds of successful businesses who trust CodeFlow to deliver extraordinary
+                digital experiences.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Button
                   size="lg"
@@ -617,5 +639,5 @@ export function PricingPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

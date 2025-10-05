@@ -57,39 +57,43 @@ fs.mkdir(dataDir, { recursive: true }).catch(console.error);
 
 // Security and Performance Middleware
 if (process.env.NODE_ENV === 'production') {
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-        fontSrc: ["'self'", "https://fonts.gstatic.com"],
-        imgSrc: ["'self'", "data:", "https:", "blob:"],
-        scriptSrc: ["'self'"],
-        connectSrc: ["'self'"],
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+          fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+          imgSrc: ["'self'", 'data:', 'https:', 'blob:'],
+          scriptSrc: ["'self'"],
+          connectSrc: ["'self'"],
+        },
       },
-    },
-  }));
+    })
+  );
 } else {
   // Development - more permissive CSP
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-        fontSrc: ["'self'", "https://fonts.gstatic.com"],
-        imgSrc: ["'self'", "data:", "https:", "blob:"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-        connectSrc: ["'self'", "ws:", "wss:"],
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+          fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+          imgSrc: ["'self'", 'data:', 'https:', 'blob:'],
+          scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+          connectSrc: ["'self'", 'ws:', 'wss:'],
+        },
       },
-    },
-  }));
+    })
+  );
 }
 
 // Dynamic CORS configuration
 const allowedOrigins = [
   'http://localhost:5000',
   'http://127.0.0.1:5000',
-  process.env.CORS_ORIGIN
+  process.env.CORS_ORIGIN,
 ].filter(Boolean);
 
 // Add Replit domain if available
@@ -97,12 +101,14 @@ if (process.env.REPLIT_DEV_DOMAIN) {
   allowedOrigins.push(`https://${process.env.REPLIT_DEV_DOMAIN}`);
 }
 
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cache-Control']
-}));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cache-Control'],
+  })
+);
 
 // Compression middleware for production
 app.use(compression());
@@ -141,20 +147,21 @@ import authRoutes from './routes/authRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
+import subscriberRoutes from './routes/subscriberRoutes.js';
 
 // Enhanced health check endpoint (defined BEFORE 404 handler)
 app.get('/api/health', (req: Request, res: Response) => {
   const memoryUsage = process.memoryUsage();
-  res.json({ 
+  res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV,
     uptime: process.uptime(),
     memory: {
       used: Math.round(memoryUsage.heapUsed / 1024 / 1024) + ' MB',
-      total: Math.round(memoryUsage.heapTotal / 1024 / 1024) + ' MB'
+      total: Math.round(memoryUsage.heapTotal / 1024 / 1024) + ' MB',
     },
-    version: '1.0.0'
+    version: '1.0.0',
   });
 });
 
@@ -168,6 +175,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/subscribers', subscriberRoutes);
 
 // Static file serving for production (defined BEFORE catch-all routes)
 if (process.env.NODE_ENV === 'production') {
@@ -175,11 +183,13 @@ if (process.env.NODE_ENV === 'production') {
   console.log(`ℹ️ Serving static files from: ${clientBuildPath}`);
 
   // Serve static files with proper caching
-  app.use(express.static(clientBuildPath, {
-    maxAge: '1y',
-    etag: true,
-    lastModified: true
-  }));
+  app.use(
+    express.static(clientBuildPath, {
+      maxAge: '1y',
+      etag: true,
+      lastModified: true,
+    })
+  );
 }
 
 // 404 handler for API routes (AFTER all API routes are defined)
@@ -187,7 +197,7 @@ app.use('/api/*', (req: Request, res: Response) => {
   res.status(404).json({
     success: false,
     message: 'API endpoint not found',
-    path: req.path
+    path: req.path,
   });
 });
 
@@ -195,12 +205,12 @@ app.use('/api/*', (req: Request, res: Response) => {
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req: Request, res: Response) => {
     const clientBuildPath = path.join(__dirname, '..', '..', 'client', 'build', 'index.html');
-    res.sendFile(clientBuildPath, (err) => {
+    res.sendFile(clientBuildPath, err => {
       if (err) {
         console.error('❌ Error serving React app:', err);
-        res.status(500).json({ 
-          success: false, 
-          message: 'Failed to serve application'
+        res.status(500).json({
+          success: false,
+          message: 'Failed to serve application',
         });
       }
     });
@@ -218,17 +228,17 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     url: req.url,
     method: req.method,
     ip: req.ip,
-    userAgent: req.get('User-Agent')
+    userAgent: req.get('User-Agent'),
   });
 
   res.status(500).json({
     success: false,
     message: 'Internal Server Error',
     errorId,
-    ...(process.env.NODE_ENV === 'development' && { 
+    ...(process.env.NODE_ENV === 'development' && {
       error: err.message,
-      stack: err.stack 
-    })
+      stack: err.stack,
+    }),
   });
 });
 
@@ -267,7 +277,9 @@ const startServer = async () => {
     }
 
     app.listen(port, '0.0.0.0', () => {
-      console.log(`🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${port}`);
+      console.log(
+        `🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${port}`
+      );
       console.log(`📍 http://0.0.0.0:${port}`);
       if (process.env.REPLIT_DEV_DOMAIN) {
         console.log(`🌐 Replit URL: https://${process.env.REPLIT_DEV_DOMAIN}`);
@@ -276,7 +288,6 @@ const startServer = async () => {
         console.log(`🌐 Serving React app from client/build`);
       }
     });
-
   } catch (error) {
     console.error('❌ Failed to start server:', error);
     process.exit(1);

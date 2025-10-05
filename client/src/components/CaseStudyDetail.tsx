@@ -1,18 +1,12 @@
-"use client";
+'use client';
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 
-import {
-  motion,
-  useInView,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
-import React from 'react'
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 import {
   ArrowLeft,
   ExternalLink,
@@ -39,12 +33,8 @@ import {
   Globe,
   Zap,
   Shield,
-} from "lucide-react";
-import {
-  projects,
-  portfolioTabs,
-  getProjectsByCategory,
-} from "../data/portfolio";
+} from 'lucide-react';
+import { projects, portfolioTabs, getProjectsByCategory } from '../data/portfolio';
 interface CaseStudyDetailProps {
   project: {
     id: number;
@@ -85,16 +75,10 @@ interface CaseStudyDetailProps {
   onBack: () => void;
 }
 
-export function CaseStudyDetail({
-  project,
-  onBack,
-}: CaseStudyDetailProps) {
-  const [currentGalleryIndex, setCurrentGalleryIndex] =
-    useState(0);
+export function CaseStudyDetail({ project, onBack }: CaseStudyDetailProps) {
+  const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [selectedDevice, setSelectedDevice] = useState<
-    "desktop" | "tablet" | "mobile"
-  >("desktop");
+  const [selectedDevice, setSelectedDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -132,76 +116,64 @@ export function CaseStudyDetail({
 
   const { scrollYProgress } = useScroll({
     container: containerRef,
-    offset: ["start start", "end start"],
+    offset: ['start start', 'end start'],
   });
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     };
   }, []);
-  
-  const heroY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, -200],
-  );
-  const heroOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.5],
-    [1, 0],
-  );
+
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   // Ensure we have data - use actual project data directly
   const caseStudyData = {
     ...project,
-    fullDescription:
-      project.fullDescription || project.description,
-    timeline:
-      project.timeline || project.duration || "6 months",
+    fullDescription: project.fullDescription || project.description,
+    timeline: project.timeline || project.duration || '6 months',
     team: project.team || [
-      "UX/UI Designer",
-      "Frontend Developer",
-      "Backend Developer",
-      "DevOps Engineer",
+      'UX/UI Designer',
+      'Frontend Developer',
+      'Backend Developer',
+      'DevOps Engineer',
     ],
     gallery: project.gallery || [project.image],
     // Use project results directly - they should already be in the correct format from PortfolioSection
     results: project.results || [
       {
-        metric: project.metrics?.increase || "100%",
-        label: project.metrics?.metric || "Growth",
+        metric: project.metrics?.increase || '100%',
+        label: project.metrics?.metric || 'Growth',
       },
     ],
   };
 
-  
-
   const deviceFrames = {
     desktop: {
-      width: "w-full",
-      height: "h-96",
-      scale: "scale-100",
+      width: 'w-full',
+      height: 'h-96',
+      scale: 'scale-100',
     },
     tablet: {
-      width: "w-80",
-      height: "h-96",
-      scale: "scale-95",
+      width: 'w-80',
+      height: 'h-96',
+      scale: 'scale-95',
     },
     mobile: {
-      width: "w-60",
-      height: "h-96",
-      scale: "scale-90",
+      width: 'w-60',
+      height: 'h-96',
+      scale: 'scale-90',
     },
   };
 
   useEffect(() => {
-    scrollYProgress.on("change", (v) => {
-      console.log("ScrollYProgress:", v);
+    scrollYProgress.on('change', v => {
+      console.log('ScrollYProgress:', v);
     });
   }, [scrollYProgress]);
-  
+
   return (
     <motion.div
       ref={containerRef}
@@ -214,9 +186,7 @@ export function CaseStudyDetail({
       {/* Hero Section */}
 
       {!caseStudyData ? (
-        <div className="text-white p-10">
-          Loading Case Study Data...
-        </div>
+        <div className="text-white p-10">Loading Case Study Data...</div>
       ) : (
         <motion.section
           ref={heroRef}
@@ -235,10 +205,7 @@ export function CaseStudyDetail({
                   playsInline
                   poster={caseStudyData.image} // fallback
                 >
-                  <source
-                    src={caseStudyData.videoUrl}
-                    type="video/mp4"
-                  />
+                  <source src={caseStudyData.videoUrl} type="video/mp4" />
                 </video>
               </div>
             ) : (
@@ -282,11 +249,7 @@ export function CaseStudyDetail({
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              {isVideoPlaying ? (
-                <Pause className="w-6 h-6" />
-              ) : (
-                <Play className="w-6 h-6 ml-1" />
-              )}
+              {isVideoPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 ml-1" />}
             </motion.button>
           )}
 
@@ -302,10 +265,7 @@ export function CaseStudyDetail({
                   {caseStudyData.category}
                 </Badge>
                 {caseStudyData.year && (
-                  <Badge
-                    variant="outline"
-                    className="border-white/30 text-white px-6 py-2 text-lg"
-                  >
+                  <Badge variant="outline" className="border-white/30 text-white px-6 py-2 text-lg">
                     {caseStudyData.year}
                   </Badge>
                 )}
@@ -357,7 +317,7 @@ export function CaseStudyDetail({
             transition={{
               delay: 1,
               repeat: Infinity,
-              repeatType: "reverse",
+              repeatType: 'reverse',
               duration: 2,
             }}
           >
@@ -379,7 +339,7 @@ export function CaseStudyDetail({
             transition={{ duration: 1 }}
           >
             <h2 className="font-outfit text-5xl font-bold text-white mb-6">
-              Project{" "}
+              Project{' '}
               <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 Overview
               </span>
@@ -392,20 +352,14 @@ export function CaseStudyDetail({
               <motion.div
                 className="glass rounded-2xl p-8 border border-white/10 text-center"
                 initial={{ opacity: 0, y: 50 }}
-                animate={
-                  overviewInView ? { opacity: 1, y: 0 } : {}
-                }
+                animate={overviewInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8 }}
               >
                 <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
                   <Building className="w-6 h-6 text-purple-400" />
                 </div>
-                <h3 className="font-outfit font-bold text-white mb-2 text-xl">
-                  Client
-                </h3>
-                <p className="text-gray-300 text-lg">
-                  {caseStudyData.client}
-                </p>
+                <h3 className="font-outfit font-bold text-white mb-2 text-xl">Client</h3>
+                <p className="text-gray-300 text-lg">{caseStudyData.client}</p>
               </motion.div>
             )}
 
@@ -413,40 +367,28 @@ export function CaseStudyDetail({
             <motion.div
               className="glass rounded-2xl p-8 border border-white/10 text-center"
               initial={{ opacity: 0, y: 50 }}
-              animate={
-                overviewInView ? { opacity: 1, y: 0 } : {}
-              }
+              animate={overviewInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
               <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-6 h-6 text-cyan-400" />
               </div>
-              <h3 className="font-outfit font-bold text-white mb-2 text-xl">
-                Timeline
-              </h3>
-              <p className="text-gray-300 text-lg">
-                {caseStudyData.timeline}
-              </p>
+              <h3 className="font-outfit font-bold text-white mb-2 text-xl">Timeline</h3>
+              <p className="text-gray-300 text-lg">{caseStudyData.timeline}</p>
             </motion.div>
 
             {/* Team Size */}
             <motion.div
               className="glass rounded-2xl p-8 border border-white/10 text-center"
               initial={{ opacity: 0, y: 50 }}
-              animate={
-                overviewInView ? { opacity: 1, y: 0 } : {}
-              }
+              animate={overviewInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mx-auto mb-4">
                 <Users className="w-6 h-6 text-green-400" />
               </div>
-              <h3 className="font-outfit font-bold text-white mb-2 text-xl">
-                Team
-              </h3>
-              <p className="text-gray-300 text-lg">
-                {caseStudyData.team.length} Experts
-              </p>
+              <h3 className="font-outfit font-bold text-white mb-2 text-xl">Team</h3>
+              <p className="text-gray-300 text-lg">{caseStudyData.team.length} Experts</p>
             </motion.div>
 
             {/* Year */}
@@ -454,20 +396,14 @@ export function CaseStudyDetail({
               <motion.div
                 className="glass rounded-2xl p-8 border border-white/10 text-center"
                 initial={{ opacity: 0, y: 50 }}
-                animate={
-                  overviewInView ? { opacity: 1, y: 0 } : {}
-                }
+                animate={overviewInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
                 <div className="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center mx-auto mb-4">
                   <Calendar className="w-6 h-6 text-pink-400" />
                 </div>
-                <h3 className="font-outfit font-bold text-white mb-2 text-xl">
-                  Year
-                </h3>
-                <p className="text-gray-300 text-lg">
-                  {caseStudyData.year}
-                </p>
+                <h3 className="font-outfit font-bold text-white mb-2 text-xl">Year</h3>
+                <p className="text-gray-300 text-lg">{caseStudyData.year}</p>
               </motion.div>
             )}
           </div>
@@ -491,11 +427,7 @@ export function CaseStudyDetail({
                     key={member}
                     className="text-center"
                     initial={{ opacity: 0, scale: 0.8 }}
-                    animate={
-                      overviewInView
-                        ? { opacity: 1, scale: 1 }
-                        : {}
-                    }
+                    animate={overviewInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{
                       duration: 0.5,
                       delay: 0.5 + index * 0.1,
@@ -504,9 +436,7 @@ export function CaseStudyDetail({
                     <div className="w-16 h-16 rounded-2xl glass border border-white/20 flex items-center justify-center mx-auto mb-3 hover:scale-110 transition-transform duration-300">
                       <Zap className="w-8 h-8 text-purple-400" />
                     </div>
-                    <p className="text-gray-300 text-sm font-medium">
-                      {member}
-                    </p>
+                    <p className="text-gray-300 text-sm font-medium">{member}</p>
                   </motion.div>
                 ))}
               </div>
@@ -526,9 +456,7 @@ export function CaseStudyDetail({
                 <motion.div
                   ref={challengeRef}
                   initial={{ opacity: 0, x: -100 }}
-                  animate={
-                    challengeInView ? { opacity: 1, x: 0 } : {}
-                  }
+                  animate={challengeInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 1 }}
                 >
                   <div className="glass rounded-3xl p-12 border border-white/10 h-full relative overflow-hidden">
@@ -539,9 +467,7 @@ export function CaseStudyDetail({
                         <div className="w-16 h-16 rounded-2xl bg-red-500/20 flex items-center justify-center">
                           <Target className="w-8 h-8 text-red-400" />
                         </div>
-                        <h3 className="font-outfit text-4xl font-bold text-white">
-                          The Challenge
-                        </h3>
+                        <h3 className="font-outfit text-4xl font-bold text-white">The Challenge</h3>
                       </div>
 
                       <p className="text-gray-300 text-xl leading-relaxed mb-8">
@@ -549,40 +475,31 @@ export function CaseStudyDetail({
                       </p>
 
                       {/* Key Challenges */}
-                      {caseStudyData.challenges &&
-                        caseStudyData.challenges.length > 0 && (
-                          <div className="space-y-4">
-                            <h4 className="font-outfit text-xl font-semibold text-white mb-4">
-                              Key Challenges:
-                            </h4>
-                            {caseStudyData.challenges.map(
-                              (challenge, index) => (
-                                <motion.div
-                                  key={challenge}
-                                  className="flex items-start space-x-3"
-                                  initial={{
-                                    opacity: 0,
-                                    x: -20,
-                                  }}
-                                  animate={
-                                    challengeInView
-                                      ? { opacity: 1, x: 0 }
-                                      : {}
-                                  }
-                                  transition={{
-                                    duration: 0.5,
-                                    delay: 0.5 + index * 0.1,
-                                  }}
-                                >
-                                  <div className="w-2 h-2 rounded-full bg-red-400 mt-3 flex-shrink-0" />
-                                  <p className="text-gray-300 text-lg">
-                                    {challenge}
-                                  </p>
-                                </motion.div>
-                              ),
-                            )}
-                          </div>
-                        )}
+                      {caseStudyData.challenges && caseStudyData.challenges.length > 0 && (
+                        <div className="space-y-4">
+                          <h4 className="font-outfit text-xl font-semibold text-white mb-4">
+                            Key Challenges:
+                          </h4>
+                          {caseStudyData.challenges.map((challenge, index) => (
+                            <motion.div
+                              key={challenge}
+                              className="flex items-start space-x-3"
+                              initial={{
+                                opacity: 0,
+                                x: -20,
+                              }}
+                              animate={challengeInView ? { opacity: 1, x: 0 } : {}}
+                              transition={{
+                                duration: 0.5,
+                                delay: 0.5 + index * 0.1,
+                              }}
+                            >
+                              <div className="w-2 h-2 rounded-full bg-red-400 mt-3 flex-shrink-0" />
+                              <p className="text-gray-300 text-lg">{challenge}</p>
+                            </motion.div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -593,9 +510,7 @@ export function CaseStudyDetail({
                 <motion.div
                   ref={solutionRef}
                   initial={{ opacity: 0, x: 100 }}
-                  animate={
-                    solutionInView ? { opacity: 1, x: 0 } : {}
-                  }
+                  animate={solutionInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 1, delay: 0.2 }}
                 >
                   <div className="glass rounded-3xl p-12 border border-white/10 h-full relative overflow-hidden">
@@ -606,9 +521,7 @@ export function CaseStudyDetail({
                         <div className="w-16 h-16 rounded-2xl bg-green-500/20 flex items-center justify-center">
                           <Lightbulb className="w-8 h-8 text-green-400" />
                         </div>
-                        <h3 className="font-outfit text-4xl font-bold text-white">
-                          Our Solution
-                        </h3>
+                        <h3 className="font-outfit text-4xl font-bold text-white">Our Solution</h3>
                       </div>
 
                       <p className="text-gray-300 text-xl leading-relaxed mb-8">
@@ -621,30 +534,24 @@ export function CaseStudyDetail({
                           Technologies Used:
                         </h4>
                         <div className="flex flex-wrap gap-3">
-                          {caseStudyData.technologies.map(
-                            (tech, index) => (
-                              <motion.span
-                                key={tech}
-                                className="px-4 py-2 glass border border-white/20 text-gray-300 rounded-xl hover:border-green-400/40 transition-colors duration-300 font-medium"
-                                initial={{
-                                  opacity: 0,
-                                  scale: 0.8,
-                                }}
-                                animate={
-                                  solutionInView
-                                    ? { opacity: 1, scale: 1 }
-                                    : {}
-                                }
-                                transition={{
-                                  duration: 0.5,
-                                  delay: 0.5 + index * 0.1,
-                                }}
-                                whileHover={{ scale: 1.05 }}
-                              >
-                                {tech}
-                              </motion.span>
-                            ),
-                          )}
+                          {caseStudyData.technologies.map((tech, index) => (
+                            <motion.span
+                              key={tech}
+                              className="px-4 py-2 glass border border-white/20 text-gray-300 rounded-xl hover:border-green-400/40 transition-colors duration-300 font-medium"
+                              initial={{
+                                opacity: 0,
+                                scale: 0.8,
+                              }}
+                              animate={solutionInView ? { opacity: 1, scale: 1 } : {}}
+                              transition={{
+                                duration: 0.5,
+                                delay: 0.5 + index * 0.1,
+                              }}
+                              whileHover={{ scale: 1.05 }}
+                            >
+                              {tech}
+                            </motion.span>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -656,128 +563,116 @@ export function CaseStudyDetail({
         </section>
       )}
       {/* Interactive Gallery Section */}
-      {caseStudyData.gallery &&
-        caseStudyData.gallery.length > 1 && (
-          <section className="py-24 relative">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(139,92,246,0.1),transparent_70%)]" />
+      {caseStudyData.gallery && caseStudyData.gallery.length > 1 && (
+        <section className="py-24 relative">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(139,92,246,0.1),transparent_70%)]" />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <motion.div
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 60 }}
+              animate={solutionInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1 }}
+            >
+              <h3 className="font-outfit text-5xl font-bold text-white mb-6">
+                Project{' '}
+                <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  Gallery
+                </span>
+              </h3>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Explore the design across all devices with our interactive gallery
+              </p>
+            </motion.div>
+
+            {/* Device Selector */}
+            <div className="flex justify-center space-x-6 mb-16">
+              {[
+                {
+                  id: 'desktop',
+                  icon: Monitor,
+                  label: 'Desktop',
+                },
+                {
+                  id: 'tablet',
+                  icon: Tablet,
+                  label: 'Tablet',
+                },
+                {
+                  id: 'mobile',
+                  icon: Smartphone,
+                  label: 'Mobile',
+                },
+              ].map(device => (
+                <motion.button
+                  key={device.id}
+                  onClick={() => setSelectedDevice(device.id as any)}
+                  className={`flex items-center space-x-3 sm: space-x-2 px-4 sm:px-8 py-2 sm:py-4 rounded-2xl transition-all duration-300 text-lg font-semibold ${
+                    selectedDevice === device.id
+                      ? 'gradient-electric text-white'
+                      : 'glass border border-white/20 text-gray-300 hover:text-white hover:border-white/40'
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <device.icon className="w-6 h-6" />
+                  <span>{device.label}</span>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Device Mockup */}
+            <div className="flex justify-center">
               <motion.div
-                className="text-center mb-20"
-                initial={{ opacity: 0, y: 60 }}
-                animate={
-                  solutionInView ? { opacity: 1, y: 0 } : {}
-                }
-                transition={{ duration: 1 }}
+                className="relative"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                key={selectedDevice}
               >
-                <h3 className="font-outfit text-5xl font-bold text-white mb-6">
-                  Project{" "}
-                  <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                    Gallery
-                  </span>
-                </h3>
-                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                  Explore the design across all devices with our
-                  interactive gallery
-                </p>
-              </motion.div>
-
-              {/* Device Selector */}
-              <div className="flex justify-center space-x-6 mb-16">
-                {[
-                  {
-                    id: "desktop",
-                    icon: Monitor,
-                    label: "Desktop",
-                  },
-                  {
-                    id: "tablet",
-                    icon: Tablet,
-                    label: "Tablet",
-                  },
-                  {
-                    id: "mobile",
-                    icon: Smartphone,
-                    label: "Mobile",
-                  },
-                ].map((device) => (
-                  <motion.button
-                    key={device.id}
-                    onClick={() =>
-                      setSelectedDevice(device.id as any)
-                    }
-                    className={`flex items-center space-x-3 sm: space-x-2 px-4 sm:px-8 py-2 sm:py-4 rounded-2xl transition-all duration-300 text-lg font-semibold ${
-                      selectedDevice === device.id
-                        ? "gradient-electric text-white"
-                        : "glass border border-white/20 text-gray-300 hover:text-white hover:border-white/40"
-                    }`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <device.icon className="w-6 h-6" />
-                    <span>{device.label}</span>
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Device Mockup */}
-              <div className="flex justify-center">
-                <motion.div
-                  className="relative"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  key={selectedDevice}
+                <div
+                  className={`relative ${deviceFrames[selectedDevice].width} ${deviceFrames[selectedDevice].height} mx-auto max-w-4xl`}
                 >
                   <div
-                    className={`relative ${deviceFrames[selectedDevice].width} ${deviceFrames[selectedDevice].height} mx-auto max-w-4xl`}
+                    className="glass rounded-3xl border border-white/20 p-6 h-full relative overflow-hidden group cursor-pointer"
+                    onClick={() => setIsGalleryOpen(true)}
                   >
-                    <div
-                      className="glass rounded-3xl border border-white/20 p-6 h-full relative overflow-hidden group cursor-pointer"
-                      onClick={() => setIsGalleryOpen(true)}
-                    >
-                      <ImageWithFallback
-                        src={
-                          caseStudyData.gallery[
-                            currentGalleryIndex
-                          ]
-                        }
-                        alt={`${caseStudyData.title} ${selectedDevice} view`}
-                        className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
-                      <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-white font-semibold text-lg">
-                          Click to expand gallery
-                        </span>
-                        <Maximize2 className="w-6 h-6 text-white" />
-                      </div>
+                    <ImageWithFallback
+                      src={caseStudyData.gallery[currentGalleryIndex]}
+                      alt={`${caseStudyData.title} ${selectedDevice} view`}
+                      className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl" />
+                    <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="text-white font-semibold text-lg">
+                        Click to expand gallery
+                      </span>
+                      <Maximize2 className="w-6 h-6 text-white" />
                     </div>
                   </div>
+                </div>
 
-                  {/* Gallery Navigation */}
-                  {caseStudyData.gallery.length > 1 && (
-                    <div className="flex justify-center space-x-3 mt-8">
-                      {caseStudyData.gallery.map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={() =>
-                            setCurrentGalleryIndex(index)
-                          }
-                          className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                            index === currentGalleryIndex
-                              ? "bg-purple-400 scale-125"
-                              : "bg-white/30 hover:bg-white/50"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              </div>
+                {/* Gallery Navigation */}
+                {caseStudyData.gallery.length > 1 && (
+                  <div className="flex justify-center space-x-3 mt-8">
+                    {caseStudyData.gallery.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentGalleryIndex(index)}
+                        className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                          index === currentGalleryIndex
+                            ? 'bg-purple-400 scale-125'
+                            : 'bg-white/30 hover:bg-white/50'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </motion.div>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
       {/* Results Section */}
       <section ref={resultsRef} className="py-24 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-cyan-950/10 to-slate-950" />
@@ -794,7 +689,7 @@ export function CaseStudyDetail({
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
               <h3 className="font-outfit text-5xl font-bold text-white">
-                Measurable{" "}
+                Measurable{' '}
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                   Results
                 </span>
@@ -813,9 +708,7 @@ export function CaseStudyDetail({
                 key={index}
                 className="glass rounded-3xl p-12 border border-white/10 text-center relative overflow-hidden group hover-glow"
                 initial={{ opacity: 0, y: 50 }}
-                animate={
-                  resultsInView ? { opacity: 1, y: 0 } : {}
-                }
+                animate={resultsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
                   duration: 0.8,
                   delay: index * 0.2,
@@ -834,7 +727,7 @@ export function CaseStudyDetail({
                     transition={{
                       duration: 0.5,
                       delay: 0.5 + index * 0.1,
-                      type: "spring",
+                      type: 'spring',
                       stiffness: 200,
                     }}
                   >
@@ -851,19 +744,14 @@ export function CaseStudyDetail({
       </section>
       {/* Testimonial Section */}
       {caseStudyData.testimonial && (
-        <section
-          ref={testimonialRef}
-          className="py-24 relative"
-        >
+        <section ref={testimonialRef} className="py-24 relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(236,72,153,0.1),transparent_70%)]" />
 
           <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
             <motion.div
               className="glass rounded-3xl p-16 border border-white/10 text-center relative overflow-hidden"
               initial={{ opacity: 0, y: 100 }}
-              animate={
-                testimonialInView ? { opacity: 1, y: 0 } : {}
-              }
+              animate={testimonialInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent" />
@@ -883,9 +771,7 @@ export function CaseStudyDetail({
                   <div className="font-outfit text-2xl font-bold text-white mb-2">
                     {caseStudyData.testimonial.author}
                   </div>
-                  <div className="text-xl text-gray-400 mb-4">
-                    {caseStudyData.testimonial.role}
-                  </div>
+                  <div className="text-xl text-gray-400 mb-4">{caseStudyData.testimonial.role}</div>
                   <div className="text-lg text-purple-400 font-semibold">
                     {caseStudyData.testimonial.company}
                   </div>
@@ -910,7 +796,7 @@ export function CaseStudyDetail({
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               <button
                 onClick={() => setIsGalleryOpen(false)}
@@ -921,9 +807,7 @@ export function CaseStudyDetail({
 
               <div className="relative">
                 <ImageWithFallback
-                  src={
-                    caseStudyData.gallery[currentGalleryIndex]
-                  }
+                  src={caseStudyData.gallery[currentGalleryIndex]}
                   alt={`${caseStudyData.title} gallery ${currentGalleryIndex + 1}`}
                   className="w-full h-auto max-h-[85vh] object-contain rounded-2xl"
                 />
@@ -932,10 +816,8 @@ export function CaseStudyDetail({
                   <>
                     <button
                       onClick={() =>
-                        setCurrentGalleryIndex((prev) =>
-                          prev === 0
-                            ? caseStudyData.gallery!.length - 1
-                            : prev - 1,
+                        setCurrentGalleryIndex(prev =>
+                          prev === 0 ? caseStudyData.gallery!.length - 1 : prev - 1
                         )
                       }
                       className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 glass rounded-full flex items-center justify-center text-white hover:bg-white/10 text-xl"
@@ -945,11 +827,8 @@ export function CaseStudyDetail({
 
                     <button
                       onClick={() =>
-                        setCurrentGalleryIndex((prev) =>
-                          prev ===
-                          caseStudyData.gallery!.length - 1
-                            ? 0
-                            : prev + 1,
+                        setCurrentGalleryIndex(prev =>
+                          prev === caseStudyData.gallery!.length - 1 ? 0 : prev + 1
                         )
                       }
                       className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 glass rounded-full flex items-center justify-center text-white hover:bg-white/10 text-xl"
@@ -965,13 +844,11 @@ export function CaseStudyDetail({
                   {caseStudyData.gallery.map((_, index) => (
                     <button
                       key={index}
-                      onClick={() =>
-                        setCurrentGalleryIndex(index)
-                      }
+                      onClick={() => setCurrentGalleryIndex(index)}
                       className={`w-4 h-4 rounded-full transition-all duration-300 ${
                         index === currentGalleryIndex
-                          ? "bg-white scale-125"
-                          : "bg-white/30 hover:bg-white/60"
+                          ? 'bg-white scale-125'
+                          : 'bg-white/30 hover:bg-white/60'
                       }`}
                     />
                   ))}

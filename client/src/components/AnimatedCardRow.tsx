@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import React, { useRef, useEffect, useState } from 'react'
-import { motion, useAnimation } from 'framer-motion'
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 
 interface AnimatedCardRowProps {
-  children: React.ReactNode[]
-  direction?: 'rtl' | 'ltr'
-  speed?: number
-  pauseOnHover?: boolean
-  className?: string
-  gap?: string
+  children: React.ReactNode[];
+  direction?: 'rtl' | 'ltr';
+  speed?: number;
+  pauseOnHover?: boolean;
+  className?: string;
+  gap?: string;
 }
 
 export function AnimatedCardRow({
@@ -18,12 +18,12 @@ export function AnimatedCardRow({
   speed = 40,
   pauseOnHover = true,
   className = '',
-  gap = 'gap-6'
+  gap = 'gap-6',
 }: AnimatedCardRowProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const controls = useAnimation()
-  const [isHovered, setIsHovered] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const animationConfig = {
     x: direction === 'rtl' ? [0, -100] : [0, 100],
@@ -31,49 +31,49 @@ export function AnimatedCardRow({
       duration: speed,
       ease: 'linear',
       repeat: Infinity,
-      repeatType: 'loop' as const
-    }
-  }
+      repeatType: 'loop' as const,
+    },
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
       { threshold: 0.1 }
-    )
+    );
 
     if (containerRef.current) {
-      observer.observe(containerRef.current)
+      observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (isVisible && !isHovered) {
-      controls.start(animationConfig)
+      controls.start(animationConfig);
     } else if (isHovered && pauseOnHover) {
-      controls.stop()
+      controls.stop();
     }
-  }, [isVisible, isHovered, pauseOnHover, controls])
+  }, [isVisible, isHovered, pauseOnHover, controls]);
 
   const handleMouseEnter = () => {
     if (pauseOnHover) {
-      setIsHovered(true)
+      setIsHovered(true);
     }
-  }
+  };
 
   const handleMouseLeave = () => {
     if (pauseOnHover) {
-      setIsHovered(false)
+      setIsHovered(false);
     }
-  }
+  };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`relative overflow-hidden ${className}`}
       onMouseEnter={handleMouseEnter}
@@ -83,9 +83,9 @@ export function AnimatedCardRow({
         className={`flex ${gap} min-w-max`}
         animate={controls}
         initial={{ x: direction === 'rtl' ? '0%' : '0%' }}
-        style={{ 
+        style={{
           width: 'fit-content',
-          willChange: 'transform'
+          willChange: 'transform',
         }}
       >
         {/* Original items */}
@@ -94,7 +94,7 @@ export function AnimatedCardRow({
             {child}
           </div>
         ))}
-        
+
         {/* Duplicated items for seamless loop */}
         {children.map((child, index) => (
           <div key={`duplicate-${index}`} className="flex-shrink-0">
@@ -107,18 +107,18 @@ export function AnimatedCardRow({
       <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-950 to-transparent pointer-events-none z-10" />
       <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-950 to-transparent pointer-events-none z-10" />
     </div>
-  )
+  );
 }
 
 // Enhanced version with more control
 interface EnhancedAnimatedRowProps {
-  items: React.ReactNode[]
-  direction?: 'rtl' | 'ltr'
-  speed?: 'slow' | 'medium' | 'fast'
-  pauseOnHover?: boolean
-  className?: string
-  itemClassName?: string
-  showGradientOverlay?: boolean
+  items: React.ReactNode[];
+  direction?: 'rtl' | 'ltr';
+  speed?: 'slow' | 'medium' | 'fast';
+  pauseOnHover?: boolean;
+  className?: string;
+  itemClassName?: string;
+  showGradientOverlay?: boolean;
 }
 
 export function EnhancedAnimatedRow({
@@ -128,24 +128,24 @@ export function EnhancedAnimatedRow({
   pauseOnHover = true,
   className = '',
   itemClassName = '',
-  showGradientOverlay = true
+  showGradientOverlay = true,
 }: EnhancedAnimatedRowProps) {
   const speedMap = {
     slow: 60,
     medium: 40,
-    fast: 25
-  }
+    fast: 25,
+  };
 
-  const animationDuration = speedMap[speed]
+  const animationDuration = speedMap[speed];
 
   return (
     <div className={`marquee-container ${className}`}>
       <div className="relative overflow-hidden">
-        <div 
+        <div
           className={`flex gap-6 ${direction === 'rtl' ? 'animate-marquee-rtl' : 'animate-marquee-ltr'}`}
-          style={{ 
+          style={{
             animationDuration: `${animationDuration}s`,
-            animationPlayState: pauseOnHover ? 'running' : 'running'
+            animationPlayState: pauseOnHover ? 'running' : 'running',
           }}
         >
           {/* Original set */}
@@ -154,7 +154,7 @@ export function EnhancedAnimatedRow({
               {item}
             </div>
           ))}
-          
+
           {/* Duplicate set for seamless loop */}
           {items.map((item, index) => (
             <div key={`dup-${index}`} className={`flex-shrink-0 ${itemClassName}`}>
@@ -172,5 +172,5 @@ export function EnhancedAnimatedRow({
         )}
       </div>
     </div>
-  )
+  );
 }

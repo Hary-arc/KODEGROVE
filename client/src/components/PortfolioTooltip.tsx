@@ -9,8 +9,18 @@ interface PortfolioTooltipProps {
   filteredCount?: number;
 }
 
-export function PortfolioTooltip({ isVisible = true, content, position = { x: 0, y: 0 }, totalProjects, filteredCount }: PortfolioTooltipProps) {
-  const displayContent = content || (totalProjects && filteredCount ? `${filteredCount} of ${totalProjects} projects` : 'Portfolio');
+export function PortfolioTooltip({
+  isVisible = true,
+  content,
+  position = { x: 0, y: 0 },
+  totalProjects,
+  filteredCount,
+}: PortfolioTooltipProps) {
+  const displayContent =
+    content ||
+    (totalProjects && filteredCount
+      ? `${filteredCount} of ${totalProjects} projects`
+      : 'Portfolio');
   return (
     <AnimatePresence>
       {isVisible && (

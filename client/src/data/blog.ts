@@ -1,27 +1,27 @@
 export interface BlogPost {
-  id: string
-  title: string
-  excerpt: string
-  content: string
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
   author: {
-    name: string
-    avatar: string
-    role: string
-  }
-  category: string
-  tags: string[]
-  publishedAt: string
-  readTime: number
-  featured: boolean
-  image: string
-  slug: string
+    name: string;
+    avatar: string;
+    role: string;
+  };
+  category: string;
+  tags: string[];
+  publishedAt: string;
+  readTime: number;
+  featured: boolean;
+  image: string;
+  slug: string;
 }
 
 export interface BlogCategory {
-  id: string
-  name: string
-  description: string
-  color: string
+  id: string;
+  name: string;
+  description: string;
+  color: string;
 }
 
 export const blogCategories: BlogCategory[] = [
@@ -29,33 +29,34 @@ export const blogCategories: BlogCategory[] = [
     id: 'development',
     name: 'Development',
     description: 'Latest in web development and software engineering',
-    color: 'from-blue-500 to-cyan-500'
+    color: 'from-blue-500 to-cyan-500',
   },
   {
     id: 'design',
     name: 'Design',
-    description: 'UI/UX trends and design methodologies', 
-    color: 'from-purple-500 to-pink-500'
+    description: 'UI/UX trends and design methodologies',
+    color: 'from-purple-500 to-pink-500',
   },
   {
     id: 'tech-trends',
     name: 'Tech Trends',
     description: 'Emerging technologies and industry insights',
-    color: 'from-green-500 to-emerald-500'
+    color: 'from-green-500 to-emerald-500',
   },
   {
     id: 'case-studies',
     name: 'Case Studies',
     description: 'Real project breakdowns and lessons learned',
-    color: 'from-orange-500 to-red-500'
-  }
-]
+    color: 'from-orange-500 to-red-500',
+  },
+];
 
 export const blogPosts: BlogPost[] = [
   {
     id: '1',
     title: 'The Future of Web Development: AI-Powered Code Generation',
-    excerpt: 'Exploring how artificial intelligence is revolutionizing the way we write, test, and deploy code in modern web applications.',
+    excerpt:
+      'Exploring how artificial intelligence is revolutionizing the way we write, test, and deploy code in modern web applications.',
     content: `
       <p>Artificial Intelligence is fundamentally changing how we approach web development. From automated code generation to intelligent debugging, AI tools are becoming indispensable in the modern developer's toolkit.</p>
       
@@ -78,8 +79,9 @@ export const blogPosts: BlogPost[] = [
     `,
     author: {
       name: 'Alex Rivera',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
-      role: 'Lead Developer'
+      avatar:
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
+      role: 'Lead Developer',
     },
     category: 'development',
     tags: ['AI', 'Web Development', 'Automation', 'Future Tech'],
@@ -87,12 +89,13 @@ export const blogPosts: BlogPost[] = [
     readTime: 8,
     featured: true,
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop',
-    slug: 'future-of-web-development-ai-powered-code-generation'
+    slug: 'future-of-web-development-ai-powered-code-generation',
   },
   {
     id: '2',
     title: 'Designing for Accessibility: A Complete Guide',
-    excerpt: 'Learn how to create inclusive digital experiences that work for everyone, regardless of their abilities or circumstances.',
+    excerpt:
+      'Learn how to create inclusive digital experiences that work for everyone, regardless of their abilities or circumstances.',
     content: `
       <p>Accessibility isn't just a nice-to-have feature—it's a fundamental requirement for creating inclusive digital experiences. In this comprehensive guide, we'll explore the principles, techniques, and tools needed to build accessible applications.</p>
       
@@ -113,8 +116,9 @@ export const blogPosts: BlogPost[] = [
     `,
     author: {
       name: 'Sarah Chen',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b9da8e3e?w=100&h=100&fit=crop&crop=face',
-      role: 'UX Designer'
+      avatar:
+        'https://images.unsplash.com/photo-1494790108755-2616b9da8e3e?w=100&h=100&fit=crop&crop=face',
+      role: 'UX Designer',
     },
     category: 'design',
     tags: ['Accessibility', 'UX Design', 'Inclusive Design', 'WCAG'],
@@ -122,12 +126,13 @@ export const blogPosts: BlogPost[] = [
     readTime: 12,
     featured: true,
     image: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=400&fit=crop',
-    slug: 'designing-for-accessibility-complete-guide'
+    slug: 'designing-for-accessibility-complete-guide',
   },
   {
     id: '3',
     title: 'Microservices Architecture: When and How to Implement',
-    excerpt: 'A deep dive into microservices architecture, exploring when it makes sense and how to implement it effectively in your projects.',
+    excerpt:
+      'A deep dive into microservices architecture, exploring when it makes sense and how to implement it effectively in your projects.',
     content: `
       <p>Microservices architecture has become increasingly popular, but it's not always the right solution. This article explores when microservices make sense and how to implement them effectively.</p>
       
@@ -139,8 +144,9 @@ export const blogPosts: BlogPost[] = [
     `,
     author: {
       name: 'Marcus Johnson',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
-      role: 'Solutions Architect'
+      avatar:
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
+      role: 'Solutions Architect',
     },
     category: 'development',
     tags: ['Microservices', 'Architecture', 'Scalability', 'Backend'],
@@ -148,12 +154,13 @@ export const blogPosts: BlogPost[] = [
     readTime: 15,
     featured: false,
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop',
-    slug: 'microservices-architecture-when-how-implement'
+    slug: 'microservices-architecture-when-how-implement',
   },
   {
     id: '4',
     title: 'The Psychology of Color in Digital Design',
-    excerpt: 'Understanding how color choices impact user behavior and emotion in digital interfaces.',
+    excerpt:
+      'Understanding how color choices impact user behavior and emotion in digital interfaces.',
     content: `
       <p>Color is one of the most powerful tools in a designer's arsenal. It can evoke emotions, guide attention, and influence user behavior in profound ways.</p>
       
@@ -162,8 +169,9 @@ export const blogPosts: BlogPost[] = [
     `,
     author: {
       name: 'Emma Williams',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
-      role: 'Creative Director'
+      avatar:
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
+      role: 'Creative Director',
     },
     category: 'design',
     tags: ['Color Theory', 'Psychology', 'UI Design', 'Branding'],
@@ -171,12 +179,13 @@ export const blogPosts: BlogPost[] = [
     readTime: 6,
     featured: false,
     image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=400&fit=crop',
-    slug: 'psychology-of-color-digital-design'
+    slug: 'psychology-of-color-digital-design',
   },
   {
     id: '5',
     title: 'Blockchain Technology: Beyond Cryptocurrency',
-    excerpt: 'Exploring practical applications of blockchain technology in enterprise solutions and web development.',
+    excerpt:
+      'Exploring practical applications of blockchain technology in enterprise solutions and web development.',
     content: `
       <p>While cryptocurrency grabbed headlines, blockchain technology offers numerous practical applications beyond digital currency.</p>
       
@@ -185,8 +194,9 @@ export const blogPosts: BlogPost[] = [
     `,
     author: {
       name: 'David Park',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face',
-      role: 'Blockchain Developer'
+      avatar:
+        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face',
+      role: 'Blockchain Developer',
     },
     category: 'tech-trends',
     tags: ['Blockchain', 'Enterprise', 'Innovation', 'Security'],
@@ -194,12 +204,13 @@ export const blogPosts: BlogPost[] = [
     readTime: 10,
     featured: false,
     image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=400&fit=crop',
-    slug: 'blockchain-technology-beyond-cryptocurrency'
+    slug: 'blockchain-technology-beyond-cryptocurrency',
   },
   {
     id: '6',
     title: 'Case Study: Scaling a Startup to 1M Users',
-    excerpt: 'How we helped a fintech startup scale their platform from 10K to 1M users while maintaining performance and security.',
+    excerpt:
+      'How we helped a fintech startup scale their platform from 10K to 1M users while maintaining performance and security.',
     content: `
       <p>This case study examines how we successfully scaled a fintech platform from 10,000 to over 1 million users in just 18 months.</p>
       
@@ -208,8 +219,9 @@ export const blogPosts: BlogPost[] = [
     `,
     author: {
       name: 'Lisa Thompson',
-      avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face',
-      role: 'Project Manager'
+      avatar:
+        'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face',
+      role: 'Project Manager',
     },
     category: 'case-studies',
     tags: ['Case Study', 'Scaling', 'Performance', 'Fintech'],
@@ -217,23 +229,23 @@ export const blogPosts: BlogPost[] = [
     readTime: 18,
     featured: false,
     image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop',
-    slug: 'case-study-scaling-startup-1m-users'
-  }
-]
+    slug: 'case-study-scaling-startup-1m-users',
+  },
+];
 
-export const featuredPosts = blogPosts.filter(post => post.featured)
-export const recentPosts = blogPosts.slice(0, 6)
+export const featuredPosts = blogPosts.filter(post => post.featured);
+export const recentPosts = blogPosts.slice(0, 6);
 
 export function getPostsByCategory(categoryId: string) {
-  return blogPosts.filter(post => post.category === categoryId)
+  return blogPosts.filter(post => post.category === categoryId);
 }
 
 export function getPostBySlug(slug: string) {
-  return blogPosts.find(post => post.slug === slug)
+  return blogPosts.find(post => post.slug === slug);
 }
 
 export function getRelatedPosts(currentPostId: string, category: string, limit: number = 3) {
   return blogPosts
     .filter(post => post.id !== currentPostId && post.category === category)
-    .slice(0, limit)
+    .slice(0, limit);
 }

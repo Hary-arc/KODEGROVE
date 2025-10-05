@@ -1,4 +1,3 @@
-
 export interface IClientAnalytics {
   id: string;
   userId: string;
@@ -57,50 +56,53 @@ export class ClientAnalytics implements IClientAnalytics {
     this.createdAt = data.createdAt || new Date().toISOString();
   }
 
-  static calculateStats(
-    projects: any[], 
-    invoices: any[], 
-    surveys: any[]
-  ): IDashboardStats {
+  static calculateStats(projects: any[], invoices: any[], surveys: any[]): IDashboardStats {
     const activeStatuses = ['planning', 'development', 'testing', 'deployment'];
     const activeProjects = projects.filter(p => activeStatuses.includes(p.status));
     const completedProjects = projects.filter(p => p.status === 'completed');
-    
+
     const totalInvestment = projects.reduce((sum, p) => sum + (p.budget || 0), 0);
-    
-    const onTimeProjects = completedProjects.filter(p => 
-      p.actualCompletion && p.expectedCompletion && 
-      new Date(p.actualCompletion) <= new Date(p.expectedCompletion)
+
+    const onTimeProjects = completedProjects.filter(
+      p =>
+        p.actualCompletion &&
+        p.expectedCompletion &&
+        new Date(p.actualCompletion) <= new Date(p.expectedCompletion)
     );
-    
-    const onTimeDeliveryRate = completedProjects.length > 0 
-      ? (onTimeProjects.length / completedProjects.length) * 100 
-      : 0;
-    
-    const avgSatisfaction = surveys.length > 0 
-      ? surveys.reduce((sum, s) => sum + (s.overallRating || 0), 0) / surveys.length 
-      : 0;
-    
-    const avgDuration = completedProjects.length > 0 
-      ? completedProjects.reduce((sum, p) => {
-          if (p.actualCompletion && p.startDate) {
-            const start = new Date(p.startDate);
-            const end = new Date(p.actualCompletion);
-            const months = (end.getTime() - start.getTime()) / (30.44 * 24 * 60 * 60 * 1000);
-            return sum + months;
-          }
-          return sum;
-        }, 0) / completedProjects.length 
-      : 0;
+
+    const onTimeDeliveryRate =
+      completedProjects.length > 0 ? (onTimeProjects.length / completedProjects.length) * 100 : 0;
+
+    const avgSatisfaction =
+      surveys.length > 0
+        ? surveys.reduce((sum, s) => sum + (s.overallRating || 0), 0) / surveys.length
+        : 0;
+
+    const avgDuration =
+      completedProjects.length > 0
+        ? completedProjects.reduce((sum, p) => {
+            if (p.actualCompletion && p.startDate) {
+              const start = new Date(p.startDate);
+              const end = new Date(p.actualCompletion);
+              const months = (end.getTime() - start.getTime()) / (30.44 * 24 * 60 * 60 * 1000);
+              return sum + months;
+            }
+            return sum;
+          }, 0) / completedProjects.length
+        : 0;
 
     // Find next milestone
     const upcomingMilestones = projects
       .filter(p => activeStatuses.includes(p.status) && p.expectedCompletion)
-      .sort((a, b) => new Date(a.expectedCompletion).getTime() - new Date(b.expectedCompletion).getTime());
-    
-    const nextMilestone = upcomingMilestones.length > 0 
-      ? `${upcomingMilestones[0].name} - ${new Date(upcomingMilestones[0].expectedCompletion).toLocaleDateString()}`
-      : 'No upcoming milestones';
+      .sort(
+        (a, b) =>
+          new Date(a.expectedCompletion).getTime() - new Date(b.expectedCompletion).getTime()
+      );
+
+    const nextMilestone =
+      upcomingMilestones.length > 0
+        ? `${upcomingMilestones[0].name} - ${new Date(upcomingMilestones[0].expectedCompletion).toLocaleDateString()}`
+        : 'No upcoming milestones';
 
     return {
       totalProjects: projects.length,
@@ -110,7 +112,7 @@ export class ClientAnalytics implements IClientAnalytics {
       onTimeDelivery: Math.round(onTimeDeliveryRate * 100) / 100,
       satisfactionScore: Math.round(avgSatisfaction * 10) / 10,
       avgProjectDuration: Math.round(avgDuration * 10) / 10,
-      nextMilestone
+      nextMilestone,
     };
   }
 
@@ -127,7 +129,7 @@ export class ClientAnalytics implements IClientAnalytics {
       onTimeDeliveryRate: this.onTimeDeliveryRate,
       satisfactionScore: this.satisfactionScore,
       avgProjectDuration: this.avgProjectDuration,
-      createdAt: this.createdAt
+      createdAt: this.createdAt,
     };
   }
 }

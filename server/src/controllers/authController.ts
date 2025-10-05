@@ -15,19 +15,19 @@ export const register = async (req: Request, res: Response) => {
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide name, email and password'
+        message: 'Please provide name, email and password',
       });
     }
 
     // Trim inputs
     const trimmedName = name.trim();
     const trimmedEmail = email.trim().toLowerCase();
-    
+
     // Validate name
     if (trimmedName.length < 2) {
       return res.status(400).json({
         success: false,
-        message: 'Name must be at least 2 characters long'
+        message: 'Name must be at least 2 characters long',
       });
     }
 
@@ -36,7 +36,7 @@ export const register = async (req: Request, res: Response) => {
     if (!emailRegex.test(trimmedEmail)) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide a valid email address'
+        message: 'Please provide a valid email address',
       });
     }
 
@@ -44,16 +44,18 @@ export const register = async (req: Request, res: Response) => {
     if (password.length < 6) {
       return res.status(400).json({
         success: false,
-        message: 'Password must be at least 6 characters long'
+        message: 'Password must be at least 6 characters long',
       });
     }
 
     // Check if user exists
-    const existingUser = await userStore.findOne((user: { email: any; }) => user.email === trimmedEmail);
+    const existingUser = await userStore.findOne(
+      (user: { email: any }) => user.email === trimmedEmail
+    );
     if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: 'User with this email already exists'
+        message: 'User with this email already exists',
       });
     }
 
@@ -62,19 +64,21 @@ export const register = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create user
-    const user = await userStore.create(new User({
-      name: trimmedName,
-      email: trimmedEmail,
-      password: hashedPassword,
-      role: 'user'
-    }));
+    const user = await userStore.create(
+      new User({
+        name: trimmedName,
+        email: trimmedEmail,
+        password: hashedPassword,
+        role: 'user',
+      })
+    );
 
     sendTokenResponse(user, 201, res);
   } catch (err: any) {
     console.error('Registration error:', err);
     res.status(500).json({
       success: false,
-      message: 'Server error during registration'
+      message: 'Server error during registration',
     });
   }
 };
@@ -90,7 +94,7 @@ export const login = async (req: Request, res: Response) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide an email and password'
+        message: 'Please provide an email and password',
       });
     }
 
@@ -98,12 +102,12 @@ export const login = async (req: Request, res: Response) => {
 
     // Check for user
 
-    const user = await userStore.findOne((user: { email: any; }) => user.email === trimmedEmail);
-    console.log("userStore =", userStore);
+    const user = await userStore.findOne((user: { email: any }) => user.email === trimmedEmail);
+    console.log('userStore =', userStore);
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid credentials'
+        message: 'Invalid credentials',
       });
     }
 
@@ -112,7 +116,7 @@ export const login = async (req: Request, res: Response) => {
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid credentials'
+        message: 'Invalid credentials',
       });
     }
 
@@ -121,7 +125,7 @@ export const login = async (req: Request, res: Response) => {
     console.error('Login error:', err);
     res.status(500).json({
       success: false,
-      message: 'Server error during login'
+      message: 'Server error during login',
     });
   }
 };
@@ -135,19 +139,19 @@ export const getMe = async (req: AuthRequest, res: Response) => {
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: 'User not found'
+        message: 'User not found',
       });
     }
 
     const { password, ...userWithoutPassword } = user;
     res.status(200).json({
       success: true,
-      data: userWithoutPassword
+      data: userWithoutPassword,
     });
   } catch (err: any) {
     res.status(400).json({
       success: false,
-      message: err.message
+      message: err.message,
     });
   }
 };
@@ -159,19 +163,15 @@ const sendTokenResponse = (user: User, statusCode: number, res: Response) => {
   }
 
   // Create token
-  const token = jwt.sign(
-    { id: user.id },
-    process.env.JWT_SECRET as jwt.Secret,
-    { 
-      expiresIn: (process.env.JWT_EXPIRE || '30d') as jwt.SignOptions['expiresIn']
-    }
-  );
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as jwt.Secret, {
+    expiresIn: (process.env.JWT_EXPIRE || '30d') as jwt.SignOptions['expiresIn'],
+  });
 
   const { password, ...userWithoutPassword } = user;
 
   res.status(statusCode).json({
     success: true,
     token,
-    user: userWithoutPassword
+    user: userWithoutPassword,
   });
 };

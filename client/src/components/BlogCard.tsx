@@ -1,52 +1,59 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardHeader, ResponsiveCardContent, ResponsiveCardFooter, ResponsiveCardTitle, ResponsiveCardDescription } from './ui/responsive-card'
-import { Badge } from './ui/badge'
-import { Button } from './ui/button'
-import { Avatar } from './ui/avatar'
-import { Clock, Eye, MessageCircle, BookOpen, ArrowUpRight, Share2, Bookmark } from 'lucide-react'
-import { ImageWithFallback } from './figma/ImageWithFallback'
-import React from 'react'
+import { motion } from 'framer-motion';
+import {
+  ResponsiveCard,
+  ResponsiveCardHeader,
+  ResponsiveCardContent,
+  ResponsiveCardFooter,
+  ResponsiveCardTitle,
+  ResponsiveCardDescription,
+} from './ui/responsive-card';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
+import { Avatar } from './ui/avatar';
+import { Clock, Eye, MessageCircle, BookOpen, ArrowUpRight, Share2, Bookmark } from 'lucide-react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
+import React from 'react';
 
 interface BlogCardProps {
   post: {
-    id: string
-    title: string
-    excerpt: string
-    content?: string
-    image: string
+    id: string;
+    title: string;
+    excerpt: string;
+    content?: string;
+    image: string;
     author: {
-      name: string
-      avatar?: string
-      role?: string
-    }
-    category: string
-    tags: string[]
-    publishedAt: string
-    readTime: number
-    views?: number
-    comments?: number
-    featured?: boolean
-    gradient?: string
-  }
-  index: number
-  variant?: 'default' | 'featured' | 'compact' | 'horizontal'
-  onReadMore?: (postId: string) => void
+      name: string;
+      avatar?: string;
+      role?: string;
+    };
+    category: string;
+    tags: string[];
+    publishedAt: string;
+    readTime: number;
+    views?: number;
+    comments?: number;
+    featured?: boolean;
+    gradient?: string;
+  };
+  index: number;
+  variant?: 'default' | 'featured' | 'compact' | 'horizontal';
+  onReadMore?: (postId: string) => void;
 }
 
 export function BlogCard({ post, index, variant = 'default', onReadMore }: BlogCardProps) {
-  const isCompact = variant === 'compact'
-  const isFeatured = variant === 'featured'
-  const isHorizontal = variant === 'horizontal'
+  const isCompact = variant === 'compact';
+  const isFeatured = variant === 'featured';
+  const isHorizontal = variant === 'horizontal';
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
-      year: 'numeric'
-    })
-  }
+      year: 'numeric',
+    });
+  };
 
   return (
     <ResponsiveCard
@@ -68,24 +75,31 @@ export function BlogCard({ post, index, variant = 'default', onReadMore }: BlogC
       )}
 
       {/* Image Section */}
-      <div className={`relative overflow-hidden ${
-        isCompact ? 'h-32 sm:h-40' : 
-        isFeatured ? 'h-48 sm:h-64 lg:h-80' : 
-        isHorizontal ? 'w-full sm:w-1/3 h-48 sm:h-auto' : 
-        'h-40 sm:h-48 lg:h-56'
-      } ${isHorizontal ? 'sm:flex-shrink-0' : ''}`}>
+      <div
+        className={`relative overflow-hidden ${
+          isCompact
+            ? 'h-32 sm:h-40'
+            : isFeatured
+              ? 'h-48 sm:h-64 lg:h-80'
+              : isHorizontal
+                ? 'w-full sm:w-1/3 h-48 sm:h-auto'
+                : 'h-40 sm:h-48 lg:h-56'
+        } ${isHorizontal ? 'sm:flex-shrink-0' : ''}`}
+      >
         <ImageWithFallback
           src={post.image}
           alt={post.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        
+
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-        
+
         {/* Category Badge */}
         <div className="absolute top-3 left-3">
-          <Badge className={`${post.gradient ? `bg-gradient-to-r ${post.gradient}` : 'gradient-electric'} text-white border-0 shadow-lg text-xs`}>
+          <Badge
+            className={`${post.gradient ? `bg-gradient-to-r ${post.gradient}` : 'gradient-electric'} text-white border-0 shadow-lg text-xs`}
+          >
             {post.category}
           </Badge>
         </div>
@@ -114,8 +128,8 @@ export function BlogCard({ post, index, variant = 'default', onReadMore }: BlogC
         <ResponsiveCardHeader responsive={!isHorizontal}>
           <div className="space-y-2 sm:space-y-3">
             {/* Title */}
-            <ResponsiveCardTitle 
-              size={isCompact ? 'sm' : isFeatured ? 'xl' : 'lg'} 
+            <ResponsiveCardTitle
+              size={isCompact ? 'sm' : isFeatured ? 'xl' : 'lg'}
               className="text-white group-hover:text-purple-300 transition-colors duration-300 line-clamp-2 sm:line-clamp-3"
             >
               {post.title}
@@ -126,14 +140,14 @@ export function BlogCard({ post, index, variant = 'default', onReadMore }: BlogC
               <div className="flex items-center space-x-1">
                 <span>{formatDate(post.publishedAt)}</span>
               </div>
-              
+
               {post.views && (
                 <div className="flex items-center space-x-1">
                   <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>{post.views.toLocaleString()}</span>
                 </div>
               )}
-              
+
               {post.comments && (
                 <div className="flex items-center space-x-1">
                   <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -146,9 +160,15 @@ export function BlogCard({ post, index, variant = 'default', onReadMore }: BlogC
 
         <ResponsiveCardContent spacing={isCompact ? 'sm' : 'md'}>
           {/* Excerpt */}
-          <ResponsiveCardDescription className={`text-gray-300 group-hover:text-gray-200 transition-colors duration-300 ${
-            isCompact ? 'line-clamp-2' : isFeatured ? 'line-clamp-4 sm:line-clamp-6' : 'line-clamp-3'
-          }`}>
+          <ResponsiveCardDescription
+            className={`text-gray-300 group-hover:text-gray-200 transition-colors duration-300 ${
+              isCompact
+                ? 'line-clamp-2'
+                : isFeatured
+                  ? 'line-clamp-4 sm:line-clamp-6'
+                  : 'line-clamp-3'
+            }`}
+          >
             {post.excerpt}
           </ResponsiveCardDescription>
 
@@ -187,18 +207,17 @@ export function BlogCard({ post, index, variant = 'default', onReadMore }: BlogC
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xs">
-                  {post.author.name.split(' ').map(n => n[0]).join('')}
+                  {post.author.name
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')}
                 </div>
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium text-white truncate">
-                {post.author.name}
-              </p>
+              <p className="text-sm font-medium text-white truncate">{post.author.name}</p>
               {post.author.role && (
-                <p className="text-xs text-gray-400 truncate">
-                  {post.author.role}
-                </p>
+                <p className="text-xs text-gray-400 truncate">{post.author.role}</p>
               )}
             </div>
           </div>
@@ -218,27 +237,36 @@ export function BlogCard({ post, index, variant = 'default', onReadMore }: BlogC
 
       {/* Background Gradient */}
       {post.gradient && (
-        <div className={`absolute inset-0 bg-gradient-to-br ${post.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${post.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}
+        />
       )}
 
       {/* Hover Effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
     </ResponsiveCard>
-  )
+  );
 }
 
 // Blog Cards Grid Component
 interface BlogCardsGridProps {
-  posts: BlogCardProps['post'][]
-  variant?: 'default' | 'masonry' | 'featured'
-  columns?: 1 | 2 | 3 | 4
-  onReadMore?: (postId: string) => void
+  posts: BlogCardProps['post'][];
+  variant?: 'default' | 'masonry' | 'featured';
+  columns?: 1 | 2 | 3 | 4;
+  onReadMore?: (postId: string) => void;
 }
 
-export function BlogCardsGrid({ posts, variant = 'default', columns = 3, onReadMore }: BlogCardsGridProps) {
+export function BlogCardsGrid({
+  posts,
+  variant = 'default',
+  columns = 3,
+  onReadMore,
+}: BlogCardsGridProps) {
   if (variant === 'masonry') {
     return (
-      <div className={`columns-1 md:columns-2 ${columns >= 3 ? 'lg:columns-3' : ''} ${columns >= 4 ? 'xl:columns-4' : ''} gap-4 sm:gap-6 lg:gap-8 space-y-4 sm:space-y-6 lg:space-y-8`}>
+      <div
+        className={`columns-1 md:columns-2 ${columns >= 3 ? 'lg:columns-3' : ''} ${columns >= 4 ? 'xl:columns-4' : ''} gap-4 sm:gap-6 lg:gap-8 space-y-4 sm:space-y-6 lg:space-y-8`}
+      >
         {posts.map((post, index) => (
           <div key={post.id} className="break-inside-avoid">
             <BlogCard
@@ -250,25 +278,20 @@ export function BlogCardsGrid({ posts, variant = 'default', columns = 3, onReadM
           </div>
         ))}
       </div>
-    )
+    );
   }
 
   if (variant === 'featured') {
-    const [featuredPost, ...otherPosts] = posts
+    const [featuredPost, ...otherPosts] = posts;
     return (
       <div className="space-y-8 lg:space-y-12">
         {/* Featured Post */}
         {featuredPost && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <BlogCard
-                post={featuredPost}
-                index={0}
-                variant="featured"
-                onReadMore={onReadMore}
-              />
+              <BlogCard post={featuredPost} index={0} variant="featured" onReadMore={onReadMore} />
             </div>
-            
+
             {/* Side Posts */}
             <div className="space-y-6">
               {otherPosts.slice(0, 3).map((post, index) => (
@@ -286,7 +309,9 @@ export function BlogCardsGrid({ posts, variant = 'default', columns = 3, onReadM
 
         {/* Remaining Posts */}
         {otherPosts.length > 3 && (
-          <div className={`grid grid-cols-1 md:grid-cols-2 ${columns >= 3 ? 'lg:grid-cols-3' : ''} gap-6 lg:gap-8`}>
+          <div
+            className={`grid grid-cols-1 md:grid-cols-2 ${columns >= 3 ? 'lg:grid-cols-3' : ''} gap-6 lg:gap-8`}
+          >
             {otherPosts.slice(3).map((post, index) => (
               <BlogCard
                 key={post.id}
@@ -299,11 +324,13 @@ export function BlogCardsGrid({ posts, variant = 'default', columns = 3, onReadM
           </div>
         )}
       </div>
-    )
+    );
   }
 
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-2 ${columns >= 3 ? 'lg:grid-cols-3' : ''} ${columns >= 4 ? 'xl:grid-cols-4' : ''} gap-4 sm:gap-6 lg:gap-8`}>
+    <div
+      className={`grid grid-cols-1 md:grid-cols-2 ${columns >= 3 ? 'lg:grid-cols-3' : ''} ${columns >= 4 ? 'xl:grid-cols-4' : ''} gap-4 sm:gap-6 lg:gap-8`}
+    >
       {posts.map((post, index) => (
         <BlogCard
           key={post.id}
@@ -314,5 +341,5 @@ export function BlogCardsGrid({ posts, variant = 'default', columns = 3, onReadM
         />
       ))}
     </div>
-  )
+  );
 }

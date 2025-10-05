@@ -1,8 +1,17 @@
-'use client'
+'use client';
 
-import React, { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { Building2, Briefcase, Globe, TrendingUp, Users, Award, Star, ArrowUpRight } from 'lucide-react'
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import {
+  Building2,
+  Briefcase,
+  Globe,
+  TrendingUp,
+  Users,
+  Award,
+  Star,
+  ArrowUpRight,
+} from 'lucide-react';
 
 const standardGradient = 'from-blue-500 to-purple-600';
 
@@ -14,7 +23,7 @@ const industries = [
     clientCount: '50+',
     gradient: standardGradient,
     projects: ['Mobile Banking Apps', 'Trading Platforms', 'Payment Systems'],
-    growth: '+340%'
+    growth: '+340%',
   },
   {
     icon: Briefcase,
@@ -23,7 +32,7 @@ const industries = [
     clientCount: '75+',
     gradient: standardGradient,
     projects: ['CRM Systems', 'Project Management', 'Analytics Dashboards'],
-    growth: '+280%'
+    growth: '+280%',
   },
   {
     icon: Globe,
@@ -32,7 +41,7 @@ const industries = [
     clientCount: '120+',
     gradient: standardGradient,
     projects: ['Online Stores', 'Marketplaces', 'Mobile Commerce'],
-    growth: '+450%'
+    growth: '+450%',
   },
   {
     icon: TrendingUp,
@@ -41,7 +50,7 @@ const industries = [
     clientCount: '35+',
     gradient: standardGradient,
     projects: ['Telemedicine Apps', 'Patient Portals', 'Medical Devices'],
-    growth: '+220%'
+    growth: '+220%',
   },
   {
     icon: Users,
@@ -50,7 +59,7 @@ const industries = [
     clientCount: '45+',
     gradient: standardGradient,
     projects: ['LMS Platforms', 'Online Courses', 'Student Portals'],
-    growth: '+360%'
+    growth: '+360%',
   },
   {
     icon: Award,
@@ -59,36 +68,45 @@ const industries = [
     clientCount: '200+',
     gradient: standardGradient,
     projects: ['MVP Development', 'Prototyping', 'Scale Solutions'],
-    growth: '+500%'
-  }
+    growth: '+500%',
+  },
 ];
 
-
 const clientLogos = [
-  'TechCorp', 'InnovateLab', 'FutureBank', 'MedFlow', 'EduPlatform', 'RetailPro',
-  'StartupHub', 'CloudTech', 'DataDrive', 'AppForge', 'WebCraft', 'CodeLab'
-]
+  'TechCorp',
+  'InnovateLab',
+  'FutureBank',
+  'MedFlow',
+  'EduPlatform',
+  'RetailPro',
+  'StartupHub',
+  'CloudTech',
+  'DataDrive',
+  'AppForge',
+  'WebCraft',
+  'CodeLab',
+];
 
 const successMetrics = [
   { metric: '500+', label: 'Global Clients', icon: Globe },
   { metric: '50+', label: 'Industries Served', icon: Building2 },
   { metric: '98%', label: 'Client Retention', icon: Star },
-  { metric: '$2M+', label: 'Revenue Generated', icon: TrendingUp }
-]
+  { metric: '$2M+', label: 'Revenue Generated', icon: TrendingUp },
+];
 
 export default function ClientsIndustriesSection() {
-  const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   return (
-    <section 
-      ref={sectionRef}
-      className="py-24 relative overflow-hidden"
-    >
+    <section ref={sectionRef} className="py-24 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900"></div>
       <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
+      <div
+        className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float"
+        style={{ animationDelay: '3s' }}
+      ></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Section Header */}
@@ -107,7 +125,7 @@ export default function ClientsIndustriesSection() {
             <Globe className="w-5 h-5 text-cyan-400" />
             <span className="font-medium text-gray-200">Trusted Worldwide</span>
           </motion.div>
-          
+
           <h2 className="font-outfit text-4xl lg:text-6xl font-bold mb-8 leading-tight">
             <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Transforming Industries
@@ -117,10 +135,10 @@ export default function ClientsIndustriesSection() {
               Across the Globe
             </span>
           </h2>
-          
+
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            From Fortune 500 companies to innovative startups, we've delivered game-changing 
-            digital solutions across diverse industries, driving measurable growth and success.
+            From Fortune 500 companies to innovative startups, we've delivered game-changing digital
+            solutions across diverse industries, driving measurable growth and success.
           </p>
         </motion.div>
 
@@ -145,9 +163,7 @@ export default function ClientsIndustriesSection() {
                 <div className="text-3xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors duration-300">
                   {item.metric}
                 </div>
-                <div className="text-gray-300 text-sm">
-                  {item.label}
-                </div>
+                <div className="text-gray-300 text-sm">{item.label}</div>
               </div>
             </motion.div>
           ))}
@@ -172,7 +188,9 @@ export default function ClientsIndustriesSection() {
               <div className="glass rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 h-full">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-6">
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${industry.gradient} p-3 group-hover:scale-110 transition-transform duration-300`}>
+                  <div
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-r ${industry.gradient} p-3 group-hover:scale-110 transition-transform duration-300`}
+                  >
                     <industry.icon className="w-full h-full text-white" />
                   </div>
                   <div className="text-right">
@@ -180,21 +198,19 @@ export default function ClientsIndustriesSection() {
                     <div className="text-xs text-gray-400">Clients</div>
                   </div>
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">
                   {industry.name}
                 </h3>
-                
-                <p className="text-gray-300 mb-6 text-sm leading-relaxed">
-                  {industry.description}
-                </p>
-                
+
+                <p className="text-gray-300 mb-6 text-sm leading-relaxed">{industry.description}</p>
+
                 {/* Growth Metric */}
                 <div className="flex items-center justify-between mb-6">
                   <span className="text-gray-400 text-sm">Avg. Growth:</span>
                   <span className="font-bold text-green-400">{industry.growth}</span>
                 </div>
-                
+
                 {/* Project Types */}
                 <div className="space-y-2 mb-6">
                   {industry.projects.map((project, projectIndex) => (
@@ -210,7 +226,7 @@ export default function ClientsIndustriesSection() {
                     </motion.div>
                   ))}
                 </div>
-                
+
                 <motion.div
                   className="flex items-center justify-between text-purple-400 font-medium group-hover:text-cyan-400 transition-colors duration-300"
                   whileHover={{ x: 5 }}
@@ -246,9 +262,7 @@ export default function ClientsIndustriesSection() {
                   key={`${logo}-${index}`}
                   className="flex-shrink-0 glass rounded-lg px-8 py-4 border border-white/10 hover:border-purple-400/30 transition-all duration-300"
                 >
-                  <div className="text-lg font-bold text-gray-300 whitespace-nowrap">
-                    {logo}
-                  </div>
+                  <div className="text-lg font-bold text-gray-300 whitespace-nowrap">{logo}</div>
                 </div>
               ))}
             </div>
@@ -260,5 +274,5 @@ export default function ClientsIndustriesSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

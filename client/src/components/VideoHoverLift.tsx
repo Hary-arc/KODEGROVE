@@ -1,20 +1,16 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Play } from 'lucide-react'
-import React from 'react'
-import {
-  HoverLift,
-  MagneticHover
-} from "../components/animations/MicroInteractions";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Play } from 'lucide-react';
+import React from 'react';
+import { HoverLift, MagneticHover } from '../components/animations/MicroInteractions';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 function VideoHoverLift() {
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <HoverLift liftDistance={16} scale={1.02}>
       <div className="relative overflow-hidden rounded-3xl shadow-xl border border-white/20">
-
         {/* Video or Thumbnail */}
         {!isPlaying ? (
           <>
@@ -60,10 +56,9 @@ function VideoHoverLift() {
             onEnded={() => setIsPlaying(false)}
           />
         )}
-
       </div>
     </HoverLift>
-  )
+  );
 }
 
-export default VideoHoverLift
+export default VideoHoverLift;

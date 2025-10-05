@@ -1,75 +1,85 @@
-'use client'
+'use client';
 
-import { useRef, useEffect, useState } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
-import React from 'react'
+import { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import React from 'react';
 // Button component imported from UI components
-import { Eye, ArrowRight, Sparkles } from 'lucide-react'
-
+import { Eye, ArrowRight, Sparkles } from 'lucide-react';
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const isInView = useInView(containerRef, { once: true })
-
-
+  const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isInView = useInView(containerRef, { once: true });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
-  })
+    offset: ['start start', 'end start'],
+  });
 
-
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   // Client logos data
   const clientLogos = [
-    'Google', 'Microsoft', 'Apple', 'Amazon', 'Meta', 'Netflix', 'Spotify', 'Adobe',
-    'Uber', 'Airbnb', 'Stripe', 'Slack', 'Zoom', 'Tesla', 'Twitter', 'LinkedIn'
-  ]
+    'Google',
+    'Microsoft',
+    'Apple',
+    'Amazon',
+    'Meta',
+    'Netflix',
+    'Spotify',
+    'Adobe',
+    'Uber',
+    'Airbnb',
+    'Stripe',
+    'Slack',
+    'Zoom',
+    'Tesla',
+    'Twitter',
+    'LinkedIn',
+  ];
 
   // Animated headline text
-  const headlineText = "Digital Mastery Unleashed"
-  const [displayedText, setDisplayedText] = useState("")
+  const headlineText = 'Digital Mastery Unleashed';
+  const [displayedText, setDisplayedText] = useState('');
 
   useEffect(() => {
-    if (!isInView) return
+    if (!isInView) return;
 
-    let currentIndex = 0
+    let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex <= headlineText.length) {
-        setDisplayedText(headlineText.slice(0, currentIndex))
-        currentIndex++
+        setDisplayedText(headlineText.slice(0, currentIndex));
+        currentIndex++;
       } else {
-        clearInterval(interval)
+        clearInterval(interval);
       }
-    }, 100)
+    }, 100);
 
-    return () => clearInterval(interval)
-  }, [isInView])
+    return () => clearInterval(interval);
+  }, [isInView]);
 
   // Hypnotic particles animation
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     const particles: Array<{
-      x: number
-      y: number
-      vx: number
-      vy: number
-      size: number
-      opacity: number
-      color: string
-    }> = []
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      opacity: number;
+      color: string;
+    }> = [];
 
-    const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#10b981']
+    const colors = ['#8b5cf6', '#06b6d4', '#ec4899', '#10b981'];
 
     // Create particles
     for (let i = 0; i < 80; i++) {
@@ -80,78 +90,80 @@ export function HeroSection() {
         vy: (Math.random() - 0.5) * 0.3,
         size: Math.random() * 2 + 1,
         opacity: Math.random() * 0.3 + 0.2,
-        color: colors[Math.floor(Math.random() * colors.length)]
-      })
+        color: colors[Math.floor(Math.random() * colors.length)],
+      });
     }
 
-    let animationId: number
+    let animationId: number;
 
     function animate() {
-      if (!ctx || !canvas) return
+      if (!ctx || !canvas) return;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle, index) => {
-        particle.x += particle.vx
-        particle.y += particle.vy
+        particle.x += particle.vx;
+        particle.y += particle.vy;
 
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
-        ctx.save()
-        ctx.globalAlpha = particle.opacity
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fillStyle = particle.color
-        ctx.fill()
+        ctx.save();
+        ctx.globalAlpha = particle.opacity;
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
+        ctx.fill();
 
-        ctx.shadowBlur = 15
-        ctx.shadowColor = particle.color
-        ctx.fill()
-        ctx.restore()
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = particle.color;
+        ctx.fill();
+        ctx.restore();
 
         // Connect nearby particles
         particles.slice(index + 1).forEach(otherParticle => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+          const dx = particle.x - otherParticle.x;
+          const dy = particle.y - otherParticle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 120) {
-            ctx.save()
-            ctx.globalAlpha = (120 - distance) / 120 * 0.15
-            ctx.strokeStyle = particle.color
-            ctx.lineWidth = 0.5
-            ctx.beginPath()
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
-            ctx.stroke()
-            ctx.restore()
+            ctx.save();
+            ctx.globalAlpha = ((120 - distance) / 120) * 0.15;
+            ctx.strokeStyle = particle.color;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.stroke();
+            ctx.restore();
           }
-        })
-      })
+        });
+      });
 
-      animationId = requestAnimationFrame(animate)
+      animationId = requestAnimationFrame(animate);
     }
 
-    animate()
+    animate();
 
     const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      cancelAnimationFrame(animationId)
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <section id="home" ref={containerRef} className="relative flex items-center justify-center overflow-hidden">
-
+    <section
+      id="home"
+      ref={containerRef}
+      className="relative flex items-center justify-center overflow-hidden"
+    >
       {/* Animated Canvas Background */}
       <canvas
         ref={canvasRef}
@@ -185,7 +197,7 @@ export function HeroSection() {
                   key={`first-${index}`}
                   className="mx-8 flex-shrink-0"
                   whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <div className="glass rounded-2xl px-8 py-4 border border-white/10 hover:border-white/30 transition-all duration-300">
                     <span className="text-2xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
@@ -201,7 +213,7 @@ export function HeroSection() {
                   key={`second-${index}`}
                   className="mx-8 flex-shrink-0"
                   whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <div className="glass rounded-2xl px-8 py-4 border border-white/10 hover:border-white/30 transition-all duration-300">
                     <span className="text-2xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
@@ -215,8 +227,7 @@ export function HeroSection() {
         </motion.div>
 
         {/* Scroll Indicator */}
-        
       </div>
     </section>
-  )
+  );
 }

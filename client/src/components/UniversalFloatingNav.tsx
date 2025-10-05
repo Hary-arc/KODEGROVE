@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from './ui/button'
-import { WebsiteCalculator } from './WebsiteCalculator'
-import { 
-  ArrowUp, 
-  Calculator, 
-  MessageCircle, 
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from './ui/button';
+import { WebsiteCalculator } from './WebsiteCalculator';
+import {
+  ArrowUp,
+  Calculator,
+  MessageCircle,
   Phone,
   Mail,
   Calendar,
@@ -19,88 +19,88 @@ import {
   Sparkles,
   Zap,
   User,
-  CreditCard
-} from 'lucide-react'
-import React from 'react'
+  CreditCard,
+} from 'lucide-react';
+import React from 'react';
 
 interface UniversalFloatingNavProps {
-  currentPage?: string
+  currentPage?: string;
 }
 
 export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloatingNavProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [showScrollTop, setShowScrollTop] = useState(false)
-  const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
-  const [showCalculator, setShowCalculator] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [showCalculator, setShowCalculator] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      
+      const currentScrollY = window.scrollY;
+
       // Show scroll to top button after 500px
-      setShowScrollTop(currentScrollY > 500)
-      
+      setShowScrollTop(currentScrollY > 500);
+
       // Hide/show based on scroll direction
       if (currentScrollY > lastScrollY && currentScrollY > 200) {
-        setIsVisible(false)
-        setIsExpanded(false)
+        setIsVisible(false);
+        setIsExpanded(false);
       } else {
-        setIsVisible(true)
+        setIsVisible(true);
       }
-      
-      setLastScrollY(currentScrollY)
-    }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const scrollToTop = () => {
-    window.scrollTo({ 
-      top: 0, 
-      behavior: 'smooth' 
-    })
-    setIsExpanded(false)
-  }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    setIsExpanded(false);
+  };
 
   const openCalculator = () => {
-    setShowCalculator(true)
-    setIsExpanded(false)
-  }
+    setShowCalculator(true);
+    setIsExpanded(false);
+  };
 
   const openSupport = () => {
     // Open support chat or contact
-    window.open('#/contact', '_blank')
-    setIsExpanded(false)
-  }
+    window.open('#/contact', '_blank');
+    setIsExpanded(false);
+  };
 
   const scheduleCall = () => {
     // Open calendar booking
-    window.open('https://calendly.com/codeflow-consultation', '_blank')
-    setIsExpanded(false)
-  }
+    window.open('https://calendly.com/codeflow-consultation', '_blank');
+    setIsExpanded(false);
+  };
 
   const sendEmail = () => {
-    window.location.href = 'mailto:hello@codeflow.dev?subject=Project Inquiry'
-    setIsExpanded(false)
-  }
+    window.location.href = 'mailto:hello@codeflow.dev?subject=Project Inquiry';
+    setIsExpanded(false);
+  };
 
   const callUs = () => {
-    window.location.href = 'tel:+15551234567'
-    setIsExpanded(false)
-  }
+    window.location.href = 'tel:+15551234567';
+    setIsExpanded(false);
+  };
 
   const viewDashboard = () => {
-    window.location.hash = '/dashboard'
-    setIsExpanded(false)
-  }
+    window.location.hash = '/dashboard';
+    setIsExpanded(false);
+  };
 
   const viewQuote = () => {
     // Navigate to quotation page
-    window.location.hash = '/quotation'
-    setIsExpanded(false)
-  }
+    window.location.hash = '/quotation';
+    setIsExpanded(false);
+  };
 
   const quickActions = [
     {
@@ -110,7 +110,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       action: scrollToTop,
       color: 'from-purple-500 to-pink-500',
       show: showScrollTop,
-      priority: 1
+      priority: 1,
     },
     {
       id: 'calculator',
@@ -120,7 +120,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       color: 'from-blue-500 to-cyan-500',
       show: true,
       priority: 2,
-      badge: 'New'
+      badge: 'New',
     },
     {
       id: 'support',
@@ -130,7 +130,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       color: 'from-green-500 to-emerald-500',
       show: true,
       priority: 3,
-      pulse: true
+      pulse: true,
     },
     {
       id: 'schedule',
@@ -139,7 +139,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       action: scheduleCall,
       color: 'from-orange-500 to-red-500',
       show: true,
-      priority: 4
+      priority: 4,
     },
     {
       id: 'email',
@@ -148,7 +148,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       action: sendEmail,
       color: 'from-indigo-500 to-purple-500',
       show: true,
-      priority: 5
+      priority: 5,
     },
     {
       id: 'call',
@@ -157,7 +157,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       action: callUs,
       color: 'from-teal-500 to-cyan-500',
       show: true,
-      priority: 6
+      priority: 6,
     },
     {
       id: 'dashboard',
@@ -166,7 +166,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       action: viewDashboard,
       color: 'from-violet-500 to-purple-500',
       show: currentPage !== 'dashboard',
-      priority: 7
+      priority: 7,
     },
     {
       id: 'quote',
@@ -175,16 +175,16 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       action: viewQuote,
       color: 'from-pink-500 to-rose-500',
       show: currentPage !== 'pricing',
-      priority: 8
-    }
-  ]
+      priority: 8,
+    },
+  ];
 
   const visibleActions = quickActions
     .filter(action => action.show)
     .sort((a, b) => a.priority - b.priority)
-    .slice(0, 6) // Show maximum 6 actions
+    .slice(0, 6); // Show maximum 6 actions
 
-  if (!isVisible) return null
+  if (!isVisible) return null;
 
   return (
     <>
@@ -204,10 +204,10 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       <motion.div
         className="fixed bottom-6 right-6 z-40"
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ 
-          opacity: isVisible ? 1 : 0, 
+        animate={{
+          opacity: isVisible ? 1 : 0,
           scale: isVisible ? 1 : 0.8,
-          y: isVisible ? 0 : 20
+          y: isVisible ? 0 : 20,
         }}
         transition={{ duration: 0.3 }}
       >
@@ -223,14 +223,12 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
             >
               {visibleActions.map((action, index) => (
                 <motion.div
-                  
                   key={action.id}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ delay: index * 0.05 }}
                   className="flex items-center space-x-3 justify-end group"
-
                 >
                   {/* Action Label */}
                   <motion.div
@@ -246,7 +244,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
                       )}
                     </span>
                   </motion.div>
-                  
+
                   {/* Action Button */}
                   <motion.button
                     onClick={action.action}
@@ -256,7 +254,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                     <action.icon className="w-5 h-5 relative z-10" />
-                    
+
                     {/* Pulse ring for support */}
                     {action.pulse && (
                       <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-400 to-emerald-400 opacity-75 animate-ping" />
@@ -279,7 +277,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
                       Quick Actions
                     </span>
                   </div>
-                  
+
                   <div className="space-y-1 text-xs text-gray-300">
                     <div className="flex justify-between">
                       <span>Response Time:</span>
@@ -314,38 +312,34 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           animate={{ rotate: isExpanded ? 135 : 0 }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
+          transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
         >
           {/* Animated background */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
+
           {/* Shimmer effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-          
+
           {/* Icon */}
           <motion.div
             className="relative z-10"
             animate={{ rotate: isExpanded ? 45 : 0 }}
             transition={{ duration: 0.3 }}
           >
-            {isExpanded ? (
-              <X className="w-7 h-7" />
-            ) : (
-              <Plus className="w-7 h-7" />
-            )}
+            {isExpanded ? <X className="w-7 h-7" /> : <Plus className="w-7 h-7" />}
           </motion.div>
 
           {/* Notification dot for new features */}
           <motion.div
             className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full"
-            animate={{ 
+            animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.7, 1, 0.7]
+              opacity: [0.7, 1, 0.7],
             }}
-            transition={{ 
-              duration: 2, 
+            transition={{
+              duration: 2,
               repeat: Infinity,
-              ease: "easeInOut" 
+              ease: 'easeInOut',
             }}
           />
         </motion.button>
@@ -367,7 +361,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
                 </div>
                 <div className="text-purple-300 mt-1">Click to explore</div>
               </div>
-              
+
               {/* Arrow pointer */}
               <div className="absolute top-full left-1/2 transform -translate-x-1/2">
                 <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20"></div>
@@ -378,10 +372,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       </motion.div>
 
       {/* Website Calculator Modal */}
-      <WebsiteCalculator 
-        isOpen={showCalculator}
-        onClose={() => setShowCalculator(false)}
-      />
+      <WebsiteCalculator isOpen={showCalculator} onClose={() => setShowCalculator(false)} />
     </>
-  )
+  );
 }

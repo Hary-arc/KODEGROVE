@@ -1,4 +1,3 @@
-
 import express from 'express';
 import { RequestHandler } from 'express';
 import { protect, authorize } from '../middleware/auth.js';
@@ -7,7 +6,7 @@ import {
   getUserProjects,
   getUserInvoices,
   getUserSupportTickets,
-  getUserAnalytics
+  getUserAnalytics,
 } from '../controllers/dashboardController.js';
 
 const router = express.Router();

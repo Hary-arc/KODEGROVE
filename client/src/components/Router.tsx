@@ -1,66 +1,62 @@
-'use client'
+'use client';
 
-import { useState, useEffect, ReactNode } from 'react'
-import React from 'react'
+import { useState, useEffect, ReactNode } from 'react';
+import React from 'react';
 interface RouteConfig {
-  path: string
-  component: ReactNode
+  path: string;
+  component: ReactNode;
 }
 
 interface RouterProps {
-  routes: RouteConfig[]
-  defaultRoute?: string
+  routes: RouteConfig[];
+  defaultRoute?: string;
 }
 
 export function Router({ routes, defaultRoute = '/' }: RouterProps) {
-  const [currentPath, setCurrentPath] = useState('')
+  const [currentPath, setCurrentPath] = useState('');
 
   useEffect(() => {
     // Get initial path from hash or default
-    const path = window.location.hash.replace('#', '') || defaultRoute
-    setCurrentPath(path)
+    const path = window.location.hash.replace('#', '') || defaultRoute;
+    setCurrentPath(path);
 
     // Listen for hash changes
     const handleHashChange = () => {
-      const newPath = window.location.hash.replace('#', '') || defaultRoute
-      setCurrentPath(newPath)
-    }
+      const newPath = window.location.hash.replace('#', '') || defaultRoute;
+      setCurrentPath(newPath);
+    };
 
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [defaultRoute])
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [defaultRoute]);
 
   // Find matching route
-  const currentRoute = routes.find(route => route.path === currentPath)
-  
+  const currentRoute = routes.find(route => route.path === currentPath);
+
   // If no route matches, show default route
-  const defaultRouteComponent = routes.find(route => route.path === defaultRoute)?.component
-  
-  return (
-    <div className="router-container">
-      {currentRoute?.component || defaultRouteComponent}
-    </div>
-  )
+  const defaultRouteComponent = routes.find(route => route.path === defaultRoute)?.component;
+
+  return <div className="router-container">{currentRoute?.component || defaultRouteComponent}</div>;
 }
 
 // Navigation helper function
 export function navigateTo(path: string) {
-  window.location.hash = path
+  window.location.hash = path;
 }
 
 // Hook to get current route
 export function useCurrentRoute() {
-  const [currentPath, setCurrentPath] = useState('')
+  const [currentPath, setCurrentPath] = useState('');
 
   useEffect(() => {
     const updatePath = () => {
-      setCurrentPath(window.location.hash.replace('#', '') || '/')
-    }
+      setCurrentPath(window.location.hash.replace('#', '') || '/');
+    };
 
-    updatePath()
-    window.addEventListener('hashchange', updatePath)
-    return () => window.removeEventListener('hashchange', updatePath)
-  }, [])
+    updatePath();
+    window.addEventListener('hashchange', updatePath);
+    return () => window.removeEventListener('hashchange', updatePath);
+  }, []);
 
-  return currentPath
+  return currentPath;
 }

@@ -1,34 +1,31 @@
-
-import React, { useState, useEffect, useCallback, useRef, MouseEvent } from 'react'
-import { motion, useMotionValue, useSpring, useTransform, MotionValue } from 'framer-motion'
-import { ReactNode } from 'react'
+import React, { useState, useEffect, useCallback, useRef, MouseEvent } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, MotionValue } from 'framer-motion';
+import { ReactNode } from 'react';
 
 // Custom hook for mouse parallax effect
 export const useMouseParallax = (strength = 0.5) => {
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   useEffect(() => {
     const handleMouseMove = (e: Event) => {
-      const mouseEvent = e as globalThis.MouseEvent
-      const { clientX, clientY } = mouseEvent
-      const { innerWidth, innerHeight } = window
+      const mouseEvent = e as globalThis.MouseEvent;
+      const { clientX, clientY } = mouseEvent;
+      const { innerWidth, innerHeight } = window;
 
-      mouseX.set((clientX - innerWidth / 2) * strength)
-      mouseY.set((clientY - innerHeight / 2) * strength)
-    }
+      mouseX.set((clientX - innerWidth / 2) * strength);
+      mouseY.set((clientY - innerHeight / 2) * strength);
+    };
 
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [mouseX, mouseY, strength])
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY, strength]);
 
-  return { mouseX, mouseY }
-}
+  return { mouseX, mouseY };
+};
 
 // Custom hook for magnetic hover effect
-export const useMagneticHover = <T extends HTMLElement = HTMLDivElement>(
-  strength = 0.3
-) => {
+export const useMagneticHover = <T extends HTMLElement = HTMLDivElement>(strength = 0.3) => {
   const x: MotionValue<number> = useMotionValue(0);
   const y: MotionValue<number> = useMotionValue(0);
 
@@ -63,14 +60,14 @@ export const useMagneticHover = <T extends HTMLElement = HTMLDivElement>(
 // Magnetic button component
 export const MagneticButton = ({
   children,
-  className = "",
+  className = '',
   strength = 0.3,
   ...props
 }: {
-  children: ReactNode
-  className?: string
-  strength?: number
-  [key: string]: any
+  children: ReactNode;
+  className?: string;
+  strength?: number;
+  [key: string]: any;
 }) => {
   const { x, y, onMouseMove, onMouseLeave } = useMagneticHover<HTMLButtonElement>(0.3);
 
@@ -86,50 +83,54 @@ export const MagneticButton = ({
     >
       {children}
     </motion.button>
-  )
-}
+  );
+};
 
 // HoverLift component - single declaration
-export const HoverLift = ({ 
-  children, 
-  className = '', 
-  liftHeight = 10, 
+export const HoverLift = ({
+  children,
+  className = '',
+  liftHeight = 10,
   lift = 8,
   liftDistance = 10,
-  scale = 1.02 
-}: { 
-  children: ReactNode
-  className?: string
-  liftHeight?: number
-  lift?: number
-  liftDistance?: number
-  scale?: number
+  scale = 1.02,
+}: {
+  children: ReactNode;
+  className?: string;
+  liftHeight?: number;
+  lift?: number;
+  liftDistance?: number;
+  scale?: number;
 }) => {
   // Use the highest priority prop for lift distance
-  const finalLift = liftDistance || liftHeight || lift
-  
+  const finalLift = liftDistance || liftHeight || lift;
+
   return (
     <motion.div
       className={className}
-      whileHover={{ 
+      whileHover={{
         y: -finalLift,
         scale: scale,
-        transition: { type: "spring", stiffness: 300, damping: 30 }
+        transition: { type: 'spring', stiffness: 300, damping: 30 },
       }}
       whileTap={{ scale: 0.98 }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // MagneticHover component
-export const MagneticHover = ({ children, className = "", strength = 0.3 }: {
-  children: ReactNode
-  className?: string
-  strength?: number
+export const MagneticHover = ({
+  children,
+  className = '',
+  strength = 0.3,
+}: {
+  children: ReactNode;
+  className?: string;
+  strength?: number;
 }) => {
-  const { x, y, onMouseMove, onMouseLeave } = useMagneticHover(strength)
+  const { x, y, onMouseMove, onMouseLeave } = useMagneticHover(strength);
 
   return (
     <motion.div
@@ -140,68 +141,78 @@ export const MagneticHover = ({ children, className = "", strength = 0.3 }: {
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // AnimatedIcon component
-export const AnimatedIcon = ({ children, className = "", ...props }: {
-  children: ReactNode
-  className?: string
-  [key: string]: any
+export const AnimatedIcon = ({
+  children,
+  className = '',
+  ...props
+}: {
+  children: ReactNode;
+  className?: string;
+  [key: string]: any;
 }) => {
   return (
     <motion.div
       className={className}
       whileHover={{ scale: 1.1, rotate: 5 }}
       whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       {...props}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // Typewriter effect component
-export const Typewriter = ({ text, className = "", speed = 100 }: {
-  text: string
-  className?: string
-  speed?: number
+export const Typewriter = ({
+  text,
+  className = '',
+  speed = 100,
+}: {
+  text: string;
+  className?: string;
+  speed?: number;
 }) => {
-  const [displayText, setDisplayText] = React.useState("")
-  const [currentIndex, setCurrentIndex] = React.useState(0)
+  const [displayText, setDisplayText] = React.useState('');
+  const [currentIndex, setCurrentIndex] = React.useState(0);
 
   React.useEffect(() => {
     if (currentIndex < text.length) {
       const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex])
-        setCurrentIndex(prev => prev + 1)
-      }, speed)
-      return () => clearTimeout(timeout)
+        setDisplayText(prev => prev + text[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, speed);
+      return () => clearTimeout(timeout);
     }
-  }, [currentIndex, text, speed])
+  }, [currentIndex, text, speed]);
 
   return (
     <span className={className}>
       {displayText}
       {currentIndex < text.length && (
-        <motion.span
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.8, repeat: Infinity }}
-        >
+        <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.8, repeat: Infinity }}>
           |
         </motion.span>
       )}
     </span>
-  )
-}
+  );
+};
 
 // FloatingElement component
-export const FloatingElement = ({ children, className = "", amplitude = 10, duration = 3 }: {
-  children: ReactNode
-  className?: string
-  amplitude?: number
-  duration?: number
+export const FloatingElement = ({
+  children,
+  className = '',
+  amplitude = 10,
+  duration = 3,
+}: {
+  children: ReactNode;
+  className?: string;
+  amplitude?: number;
+  duration?: number;
 }) => {
   return (
     <motion.div
@@ -212,23 +223,23 @@ export const FloatingElement = ({ children, className = "", amplitude = 10, dura
       transition={{
         duration,
         repeat: Infinity,
-        ease: "easeInOut",
+        ease: 'easeInOut',
       }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // Parallax card component
 export const ParallaxCard = ({
   children,
-  className = "",
-  strength = 0.1
+  className = '',
+  strength = 0.1,
 }: {
-  children: ReactNode
-  className?: string
-  strength?: number
+  children: ReactNode;
+  className?: string;
+  strength?: number;
 }) => {
   const { mouseX, mouseY } = useMouseParallax(strength);
 
@@ -239,49 +250,51 @@ export const ParallaxCard = ({
         x: mouseX,
         y: mouseY,
         rotateX: useTransform(mouseY, y => y * 0.1),
-        rotateY: useTransform(mouseX, x => x * -0.1)
+        rotateY: useTransform(mouseX, x => x * -0.1),
       }}
       whileHover={{ scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // Ripple effect component
 export const RippleButton = ({
   children,
-  className = "",
-  rippleColor = "rgba(255, 255, 255, 0.6)",
+  className = '',
+  rippleColor = 'rgba(255, 255, 255, 0.6)',
   ...props
 }: {
-  children: ReactNode
-  className?: string
-  rippleColor?: string
-  [key: string]: any
+  children: ReactNode;
+  className?: string;
+  rippleColor?: string;
+  [key: string]: any;
 }) => {
-  const [ripples, setRipples] = useState<Array<{x: number, y: number, size: number, id: number}>>([])
+  const [ripples, setRipples] = useState<Array<{ x: number; y: number; size: number; id: number }>>(
+    []
+  );
 
   const createRipple = (e: MouseEvent<HTMLButtonElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const size = Math.max(rect.width, rect.height)
-    const x = e.clientX - rect.left - size / 2
-    const y = e.clientY - rect.top - size / 2
+    const rect = e.currentTarget.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = e.clientX - rect.left - size / 2;
+    const y = e.clientY - rect.top - size / 2;
 
     const newRipple = {
       x,
       y,
       size,
-      id: Date.now()
-    }
+      id: Date.now(),
+    };
 
-    setRipples(prev => [...prev, newRipple])
+    setRipples(prev => [...prev, newRipple]);
 
     setTimeout(() => {
-      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id))
-    }, 600)
-  }
+      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
+    }, 600);
+  };
 
   return (
     <motion.button
@@ -301,45 +314,45 @@ export const RippleButton = ({
             top: ripple.y,
             width: ripple.size,
             height: ripple.size,
-            backgroundColor: rippleColor
+            backgroundColor: rippleColor,
           }}
           initial={{ scale: 0, opacity: 1 }}
           animate={{ scale: 2, opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         />
       ))}
     </motion.button>
-  )
-}
+  );
+};
 
 // Tilt card component
 export const TiltCard = ({
   children,
-  className = "",
-  tiltStrength = 10
+  className = '',
+  tiltStrength = 10,
 }: {
-  children: ReactNode
-  className?: string
-  tiltStrength?: number
+  children: ReactNode;
+  className?: string;
+  tiltStrength?: number;
 }) => {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
     setTilt({
       x: ((y - centerY) / centerY) * tiltStrength,
-      y: ((x - centerX) / centerX) * -tiltStrength
-    })
-  }
+      y: ((x - centerX) / centerX) * -tiltStrength,
+    });
+  };
 
   const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 })
-  }
+    setTilt({ x: 0, y: 0 });
+  };
 
   return (
     <motion.div
@@ -347,28 +360,28 @@ export const TiltCard = ({
       style={{
         rotateX: tilt.x,
         rotateY: tilt.y,
-        transformStyle: "preserve-3d"
+        transformStyle: 'preserve-3d',
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // Pulse component
 export const Pulse = ({
   children,
   scale = 1.05,
   duration = 2,
-  className = ""
+  className = '',
 }: {
-  children: React.ReactNode
-  scale?: number
-  duration?: number
-  className?: string
+  children: React.ReactNode;
+  scale?: number;
+  duration?: number;
+  className?: string;
 }) => {
   return (
     <motion.div
@@ -379,79 +392,79 @@ export const Pulse = ({
       transition={{
         duration,
         repeat: Infinity,
-        ease: "easeInOut"
+        ease: 'easeInOut',
       }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // Scale Animation Component
-export function ScaleOnHover({ 
-  children, 
+export function ScaleOnHover({
+  children,
   className = '',
-  scale = 1.05 
-}: { 
-  children: ReactNode
-  className?: string
-  scale?: number
+  scale = 1.05,
+}: {
+  children: ReactNode;
+  className?: string;
+  scale?: number;
 }) {
   return (
     <motion.div
       className={className}
-      whileHover={{ 
+      whileHover={{
         scale,
-        transition: { type: "spring", stiffness: 300, damping: 20 }
+        transition: { type: 'spring', stiffness: 300, damping: 20 },
       }}
     >
       {children}
     </motion.div>
-  )
+  );
 }
 
 // Magnetic Effect Component
-export function MagneticEffect({ 
-  children, 
+export function MagneticEffect({
+  children,
   className = '',
-  strength = 20 
-}: { 
-  children: ReactNode
-  className?: string
-  strength?: number
+  strength = 20,
+}: {
+  children: ReactNode;
+  className?: string;
+  strength?: number;
 }) {
   return (
     <motion.div
       className={className}
       whileHover={{
         scale: 1.05,
-        transition: { type: "spring", stiffness: 400, damping: 25 }
+        transition: { type: 'spring', stiffness: 400, damping: 25 },
       }}
     >
       {children}
     </motion.div>
-  )
+  );
 }
 
 // Rotate Animation Component
-export function RotateOnHover({ 
-  children, 
+export function RotateOnHover({
+  children,
   className = '',
-  rotation = 10 
-}: { 
-  children: ReactNode
-  className?: string
-  rotation?: number
+  rotation = 10,
+}: {
+  children: ReactNode;
+  className?: string;
+  rotation?: number;
 }) {
   return (
     <motion.div
       className={className}
-      whileHover={{ 
+      whileHover={{
         rotate: rotation,
-        transition: { type: "spring", stiffness: 300, damping: 20 }
+        transition: { type: 'spring', stiffness: 300, damping: 20 },
       }}
     >
       {children}
     </motion.div>
-  )
+  );
 }

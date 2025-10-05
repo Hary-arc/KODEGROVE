@@ -1,60 +1,50 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { Label } from './ui/label'
-import { 
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from './ui/dialog'
-import { 
-  User, 
-  Lock, 
-  Eye, 
-  EyeOff, 
-  Mail,
-  LogIn,
-  UserPlus,
-  Shield,
-  Zap
-} from 'lucide-react'
-import React from 'react'
+} from './ui/dialog';
+import { User, Lock, Eye, EyeOff, Mail, LogIn, UserPlus, Shield, Zap } from 'lucide-react';
+import React from 'react';
 
 interface AuthModalProps {
-  children: React.ReactNode
-  onLogin?: (email: string, password: string) => void
-  onSignup?: (name: string, email: string, password: string) => void
+  children: React.ReactNode;
+  onLogin?: (email: string, password: string) => void;
+  onSignup?: (name: string, email: string, password: string) => void;
 }
 
 export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isLogin, setIsLogin] = useState(true)
-  const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState('') // Added message state
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState(''); // Added message state
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
-  })
+    password: '',
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setMessage('') // Clear previous messages
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage(''); // Clear previous messages
 
     try {
-      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register'
-      const payload = isLogin 
+      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+      const payload = isLogin
         ? { email: formData.email, password: formData.password }
-        : { name: formData.name, email: formData.email, password: formData.password }
+        : { name: formData.name, email: formData.email, password: formData.password };
 
       const response = await fetch(`/api/auth${endpoint.replace('/api/auth', '')}`, {
         method: 'POST',
@@ -62,49 +52,47 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (response.ok && data.success) {
         // Store auth data
-        localStorage.setItem('auth-token', data.token)
-        localStorage.setItem('user-data', JSON.stringify(data.user))
+        localStorage.setItem('auth-token', data.token);
+        localStorage.setItem('user-data', JSON.stringify(data.user));
 
-        setIsOpen(false)
-        setIsLogin(true)
-        setFormData({ name: '', email: '', password: '' })
-        setMessage('')
+        setIsOpen(false);
+        setIsLogin(true);
+        setFormData({ name: '', email: '', password: '' });
+        setMessage('');
 
         // Dispatch auth change event to update navigation
-        window.dispatchEvent(new Event('auth-changed'))
+        window.dispatchEvent(new Event('auth-changed'));
 
         // Redirect to dashboard
         setTimeout(() => {
-          window.location.hash = '/dashboard'
-          window.location.reload()
-        }, 100)
+          window.location.hash = '/dashboard';
+          window.location.reload();
+        }, 100);
       } else {
-        console.error('Auth error:', data.message)
-        setMessage(data.message || 'Authentication failed') // Set error message
+        console.error('Auth error:', data.message);
+        setMessage(data.message || 'Authentication failed'); // Set error message
       }
     } catch (error) {
-      console.error('Network error:', error)
-      setMessage('Network error. Please try again.') // Set network error message
+      console.error('Network error:', error);
+      setMessage('Network error. Please try again.'); // Set network error message
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-  }
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
 
       <DialogContent className="sm:max-w-md bg-slate-900/95 backdrop-blur-sm border border-white/10">
         <DialogHeader className="text-center">
@@ -115,10 +103,9 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
             {isLogin ? 'Welcome Back' : 'Create Account'}
           </DialogTitle>
           <DialogDescription className="text-gray-400">
-            {isLogin 
-              ? 'Sign in to access your client dashboard' 
-              : 'Join CodeFlow for premium digital solutions'
-            }
+            {isLogin
+              ? 'Sign in to access your client dashboard'
+              : 'Join CodeFlow for premium digital solutions'}
           </DialogDescription>
         </DialogHeader>
 
@@ -144,7 +131,7 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
                       type="text"
                       placeholder="Enter your full name"
                       value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      onChange={e => handleInputChange('name', e.target.value)}
                       className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500"
                       required={!isLogin}
                     />
@@ -163,7 +150,7 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
                     type="email"
                     placeholder="Enter your email"
                     value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    onChange={e => handleInputChange('email', e.target.value)}
                     className="pl-10 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500"
                     required
                   />
@@ -181,7 +168,7 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter your password"
                     value={formData.password}
-                    onChange={(e) => handleInputChange('password', e.target.value)}
+                    onChange={e => handleInputChange('password', e.target.value)}
                     className="pl-10 pr-10 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-purple-500 focus:ring-purple-500"
                     required
                   />
@@ -200,7 +187,10 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
           {isLogin && (
             <div className="flex items-center justify-between">
               <label className="flex items-center">
-                <input type="checkbox" className="mr-2 rounded border-gray-600 bg-gray-700 text-purple-600 focus:ring-purple-500" />
+                <input
+                  type="checkbox"
+                  className="mr-2 rounded border-gray-600 bg-gray-700 text-purple-600 focus:ring-purple-500"
+                />
                 <span className="text-sm text-gray-400">Remember me</span>
               </label>
               <button
@@ -213,7 +203,9 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
           )}
 
           {message && (
-            <div className={`text-center text-sm ${message.startsWith('Error') || message.startsWith('Network') ? 'text-red-500' : 'text-green-500'}`}>
+            <div
+              className={`text-center text-sm ${message.startsWith('Error') || message.startsWith('Network') ? 'text-red-500' : 'text-green-500'}`}
+            >
               {message}
             </div>
           )}
@@ -242,10 +234,7 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
               onClick={() => setIsLogin(!isLogin)}
               className="text-sm text-gray-400 hover:text-white transition-colors"
             >
-              {isLogin 
-                ? "Don't have an account? Sign up" 
-                : "Already have an account? Sign in"
-              }
+              {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
             </button>
           </div>
         </form>
@@ -266,5 +255,5 @@ export function AuthModal({ children, onLogin, onSignup }: AuthModalProps) {
         )}
       </DialogContent>
     </Dialog>
-  )
+  );
 }

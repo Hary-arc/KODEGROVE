@@ -1,42 +1,46 @@
 {
- 
   "name": "modern-interactive-website",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
-  },
   "workspaces": [
     "client",
     "server"
   ],
   "scripts": {
-    "dev": "concurrently --kill-others-on-fail \"npm run dev:client\" \"npm run dev:server\" --names \"CLIENT,SERVER\" --prefix-colors \"cyan,yellow\"",
-    "dev:client": "npm run dev --workspace=client",
-    "dev:server": "npm run dev --workspace=server",
     "build": "npm run build --workspaces --if-present",
     "build:client": "npm run build --workspace=client",
     "build:server": "npm run build --workspace=server",
-    "start": "cross-env NODE_ENV=production node server/dist/index.js",
-    "start:prod": "npm run build && cross-env NODE_ENV=production node server/dist/index.js",
-    "prestart:prod": "npm run build",
-    "test": "npm run test --workspaces --if-present",
-    "lint": "npm run lint --workspaces --if-present",
     "clean": "rm -rf node_modules client/node_modules server/node_modules client/dist client/build server/dist",
+    "dev": "concurrently --kill-others-on-fail \"npm run dev:client\" \"npm run dev:server\" --names \"CLIENT,SERVER\" --prefix-colors \"cyan,yellow\"",
+    "dev:client": "npm run dev --workspace=client",
+    "dev:server": "npm run dev --workspace=server",
+    "format": "prettier --write .",
     "postinstall": "npm run build:server",
-    "validate": "npm run lint && npm run build",
-    "prepare": "npm run build:server"
-  },
-  "devDependencies": {
-    "@types/node": "^24.5.2",
-    "concurrently": "^8.2.1",
-    "cross-env": "^10.0.0"
+    "lint": "npm run lint --workspaces --if-present",
+    "prepare": "npm run build:server",
+    "start": "cross-env NODE_ENV=production node server/dist/index.js",
+    "prestart:prod": "npm run build",
+    "start:prod": "npm run build && cross-env NODE_ENV=production node server/dist/index.js",
+    "test": "npm run test --workspaces --if-present",
+    "validate": "npm run lint && npm run build"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "compression": "^1.8.1",
     "framer-motion": "^12.23.20",
+    "nodemailer": "^7.0.6",
     "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "@types/nodemailer": "^7.0.2",
+    "concurrently": "^8.2.2",
+    "cross-env": "^10.0.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-packagejson": "^2.5.19"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }

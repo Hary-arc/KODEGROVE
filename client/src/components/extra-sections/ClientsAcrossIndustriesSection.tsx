@@ -1,23 +1,23 @@
-'use client'
+'use client';
 
-import { useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { 
-  ArrowRight, 
+import { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import {
+  ArrowRight,
   Globe,
   Building2,
   TrendingUp,
   Star,
   CheckCircle,
-  ExternalLink
-} from 'lucide-react'
-import { Button } from '../ui/button'
-import { Badge } from '../ui/badge'
-import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card'
-import { ImageWithFallback } from '../figma/ImageWithFallback'
+  ExternalLink,
+} from 'lucide-react';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
+import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 // @ts-ignore
-import exampleImage from '/8e92ef233594715.Y3JvcCwyNTU2LDIwMDAsMjIxLDA.jpg'
-import React from 'react'
+import exampleImage from '/8e92ef233594715.Y3JvcCwyNTU2LDIwMDAsMjIxLDA.jpg';
+import React from 'react';
 // Major client logos and information
 const clientsData = [
   {
@@ -25,86 +25,86 @@ const clientsData = [
     description: 'Northwestern University',
     logo: '/logos/northwestern.svg',
     industry: 'Education',
-    size: 'Enterprise'
+    size: 'Enterprise',
   },
   {
     name: 'IBM',
     description: 'IBM',
     logo: '/logos/ibm.svg',
     industry: 'Technology',
-    size: 'Fortune 100'
+    size: 'Fortune 100',
   },
   {
     name: 'BUDDHA BRANDS',
     description: 'Buddha Brands',
     logo: '/logos/buddha-brands.svg',
     industry: 'Consumer Goods',
-    size: 'Scale-up'
+    size: 'Scale-up',
   },
   {
     name: 'Paul Stuart',
     description: 'Paul Stuart',
     logo: '/logos/paul-stuart.svg',
     industry: 'Fashion',
-    size: 'Luxury Brand'
+    size: 'Luxury Brand',
   },
   {
     name: 'SPAR BERNSTEIN',
     description: 'Spar & Bernstein',
     logo: '/logos/spar-bernstein.svg',
     industry: 'Legal',
-    size: 'Mid-market'
+    size: 'Mid-market',
   },
   {
     name: 'BABIES R US',
     description: 'Babies R Us',
     logo: '/logos/babies-r-us.svg',
     industry: 'Retail',
-    size: 'Enterprise'
+    size: 'Enterprise',
   },
   {
     name: 'ENCHANT',
     description: 'Enchant Christmas',
     logo: '/logos/enchant.svg',
     industry: 'Entertainment',
-    size: 'Enterprise'
+    size: 'Enterprise',
   },
   {
     name: 'Xerox',
     description: 'Xerox',
     logo: '/logos/xerox.svg',
     industry: 'Technology',
-    size: 'Fortune 500'
+    size: 'Fortune 500',
   },
   {
     name: 'PUMA ENERGY',
     description: 'Puma Energy',
     logo: '/logos/puma-energy.svg',
     industry: 'Energy',
-    size: 'Enterprise'
+    size: 'Enterprise',
   },
   {
     name: 'MITSUI PLASTICS',
     description: 'Mitsui Plastics',
     logo: '/logos/mitsui-plastics.svg',
     industry: 'Manufacturing',
-    size: 'Enterprise'
+    size: 'Enterprise',
   },
   {
     name: 'Absolute Dogs',
     description: 'Absolute Dogs',
     logo: '/logos/absolute-dogs.svg',
     industry: 'Pet Care',
-    size: 'Scale-up'
+    size: 'Scale-up',
   },
   {
     name: 'BEST BUY',
     description: 'Best Buy',
     logo: '/logos/best-buy.svg',
     industry: 'Retail',
-    size: 'Fortune 500'
-  }
-]
+    size: 'Fortune 500',
+  },
+];
 
 // Industry categories
 const industries = [
@@ -112,8 +112,8 @@ const industries = [
   { name: 'Retail', count: 2, color: 'from-green-500 to-emerald-500' },
   { name: 'Enterprise', count: 4, color: 'from-purple-500 to-pink-500' },
   { name: 'Healthcare', count: 1, color: 'from-red-500 to-orange-500' },
-  { name: 'Finance', count: 2, color: 'from-yellow-500 to-orange-500' }
-]
+  { name: 'Finance', count: 2, color: 'from-yellow-500 to-orange-500' },
+];
 
 // Success metrics
 const successMetrics = [
@@ -121,26 +121,26 @@ const successMetrics = [
     number: '500+',
     label: 'Fortune 500 Companies',
     description: 'Trust our expertise',
-    icon: Building2
+    icon: Building2,
   },
   {
     number: '25+',
     label: 'Industries Served',
     description: 'Across global markets',
-    icon: Globe
+    icon: Globe,
   },
   {
     number: '300%',
     label: 'Average Growth',
     description: 'Client business increase',
-    icon: TrendingUp
-  }
-]
+    icon: TrendingUp,
+  },
+];
 
 export function ClientsAcrossIndustriesSection() {
-  const sectionRef = useRef(null)
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
-  const [hoveredClient, setHoveredClient] = useState<number | null>(null)
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const [hoveredClient, setHoveredClient] = useState<number | null>(null);
 
   return (
     <section ref={sectionRef} className="py-24 lg:py-32 relative overflow-hidden">
@@ -158,27 +158,27 @@ export function ClientsAcrossIndustriesSection() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1, 1.2, 1], 
-            opacity: [0.3, 0.6, 0.3] 
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.6, 0.3],
           }}
-          transition={{ 
-            duration: 8, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
           }}
         />
         <motion.div
           className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1.2, 1, 1.2], 
-            opacity: [0.4, 0.7, 0.4] 
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.4, 0.7, 0.4],
           }}
-          transition={{ 
-            duration: 10, 
-            repeat: Infinity, 
-            ease: "easeInOut",
-            delay: 2
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 2,
           }}
         />
       </div>
@@ -195,11 +195,11 @@ export function ClientsAcrossIndustriesSection() {
             <Globe className="w-4 h-4 mr-2" />
             CLIENTS ACROSS INDUSTRIES
           </Badge>
-          
+
           <h2 className="font-outfit text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-8">
             <span className="block text-white">Full-Service Web Design Agency</span>
           </h2>
-          
+
           <div className="max-w-3xl mx-auto space-y-4">
             <p className="text-xl text-gray-300 leading-relaxed">
               From startups to Fortune 500 companies,
@@ -219,7 +219,7 @@ export function ClientsAcrossIndustriesSection() {
         >
           <ResponsiveCardGrid columns={3} gap="lg">
             {successMetrics.map((metric, index) => {
-              const Icon = metric.icon
+              const Icon = metric.icon;
               return (
                 <ResponsiveCard
                   key={index}
@@ -233,20 +233,16 @@ export function ClientsAcrossIndustriesSection() {
                   <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  
+
                   <div className="text-3xl sm:text-4xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors duration-300">
                     {metric.number}
                   </div>
-                  
-                  <h3 className="font-semibold text-gray-200 mb-2">
-                    {metric.label}
-                  </h3>
-                  
-                  <p className="text-sm text-gray-400">
-                    {metric.description}
-                  </p>
+
+                  <h3 className="font-semibold text-gray-200 mb-2">{metric.label}</h3>
+
+                  <p className="text-sm text-gray-400">{metric.description}</p>
                 </ResponsiveCard>
-              )
+              );
             })}
           </ResponsiveCardGrid>
         </motion.div>
@@ -282,19 +278,17 @@ export function ClientsAcrossIndustriesSection() {
                       </span>
                     </div>
                   </div>
-                  
+
                   {/* Client Info */}
                   <h3 className="font-bold text-white text-sm mb-1 group-hover:text-purple-300 transition-colors duration-300 line-clamp-1">
                     {client.name}
                   </h3>
-                  
-                  <p className="text-xs text-gray-400 mb-2 line-clamp-1">
-                    {client.description}
-                  </p>
-                  
+
+                  <p className="text-xs text-gray-400 mb-2 line-clamp-1">{client.description}</p>
+
                   {/* Industry Badge */}
-                  <Badge 
-                    variant="outline" 
+                  <Badge
+                    variant="outline"
                     className="border-purple-400/50 text-purple-400 bg-purple-400/10 text-xs"
                   >
                     {client.size}
@@ -323,7 +317,7 @@ export function ClientsAcrossIndustriesSection() {
           className="mb-16"
         >
           <h3 className="text-2xl font-bold text-white text-center mb-8">Industries We Serve</h3>
-          
+
           <div className="flex flex-wrap justify-center gap-4">
             {industries.map((industry, index) => (
               <motion.div
@@ -340,16 +334,16 @@ export function ClientsAcrossIndustriesSection() {
                   className="group cursor-pointer"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${industry.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`w-10 h-10 rounded-lg bg-gradient-to-br ${industry.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <CheckCircle className="w-5 h-5 text-white" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-white group-hover:text-purple-300 transition-colors duration-300">
                         {industry.name}
                       </h4>
-                      <p className="text-xs text-gray-400">
-                        {industry.count} Clients
-                      </p>
+                      <p className="text-xs text-gray-400">{industry.count} Clients</p>
                     </div>
                   </div>
                 </ResponsiveCard>
@@ -373,23 +367,26 @@ export function ClientsAcrossIndustriesSection() {
                 ))}
               </div>
             </div>
-            
+
             <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Ready to Join Our Success Stories?
             </h3>
-            
+
             <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-              Join hundreds of industry leaders who trust us to grow their brands online 
-              with custom web solutions that deliver real results.
+              Join hundreds of industry leaders who trust us to grow their brands online with custom
+              web solutions that deliver real results.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <Button className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white px-8 py-4 rounded-xl font-semibold text-lg group">
                 EXPLORE ALL SERVICES
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
-              
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 backdrop-blur-xl px-8 py-4 rounded-xl font-semibold text-lg group">
+
+              <Button
+                variant="outline"
+                className="border-white/20 text-white hover:bg-white/10 backdrop-blur-xl px-8 py-4 rounded-xl font-semibold text-lg group"
+              >
                 <Globe className="w-5 h-5 mr-2" />
                 View Case Studies
               </Button>
@@ -398,6 +395,6 @@ export function ClientsAcrossIndustriesSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-export default ClientsAcrossIndustriesSection
+export default ClientsAcrossIndustriesSection;

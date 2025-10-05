@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 import { default as CreativeSolutionsSection } from '../components/extra-sections/CreativeSolutionsSection';
-import { default as ClientsAcrossIndustriesSection } from '../components/extra-sections/ClientsAcrossIndustriesSection'; 
+import { default as ClientsAcrossIndustriesSection } from '../components/extra-sections/ClientsAcrossIndustriesSection';
 import { default as CompanyInfoSection } from '../components/extra-sections/CompanyInfoSection';
 import { default as ProcessMethodologySection } from '../components/extra-sections/ProcessMethodologySection';
 import { default as IndustryRecognitionSection } from '../components/extra-sections/IndustryRecognitionSection';
@@ -15,7 +15,10 @@ export const ComingSoonPage: React.FC = () => {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-yellow-500/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float"
+          style={{ animationDelay: '2s' }}
+        ></div>
       </div>
 
       {/* Content */}
@@ -26,7 +29,7 @@ export const ComingSoonPage: React.FC = () => {
         <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto">
           We're working on something amazing. Stay tuned for updates!
         </p>
-        
+
         {/* Newsletter Signup */}
         <div className="max-w-md mx-auto">
           <div className="flex flex-col sm:flex-row gap-4">
@@ -46,8 +49,8 @@ export const ComingSoonPage: React.FC = () => {
           {[
             { name: 'Twitter', icon: 'tw' },
             { name: 'LinkedIn', icon: 'in' },
-            { name: 'Instagram', icon: 'ig' }
-          ].map((social) => (
+            { name: 'Instagram', icon: 'ig' },
+          ].map(social => (
             <a
               key={social.name}
               href="#"
@@ -58,7 +61,7 @@ export const ComingSoonPage: React.FC = () => {
             </a>
           ))}
         </div>
-     
+
         {/* <div className="relative z-10 text-center px-4 mt-20 w-full">
       <section>
       <CreativeSolutionsSection />
@@ -70,7 +73,7 @@ export const ComingSoonPage: React.FC = () => {
       <TrustAndCredibilitySection />
       </section>
       </div> */}
-       </div>
+      </div>
     </div>
-  )
-}
+  );
+};

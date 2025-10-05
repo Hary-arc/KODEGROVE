@@ -2,6 +2,6 @@
 // Removed unused content to clean up codebase
 
 export function HomePage() {
-  console.warn('HomePage.tsx is deprecated. Use EnhancedHomePage.tsx instead.')
-  return null
+  console.warn('HomePage.tsx is deprecated. Use EnhancedHomePage.tsx instead.');
+  return null;
 }

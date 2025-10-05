@@ -1,79 +1,87 @@
-'use client'
-import React from 'react'
-import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { blogPosts, featuredPosts, blogCategories, BlogPost, BlogCategory, getPostBySlug } from '../data/blog'
-import { Search, Calendar, Clock, ArrowRight, Filter, X } from 'lucide-react'
-import { ImageWithFallback } from '../components/figma/ImageWithFallback'
-import { BlogArticle } from '../components/BlogArticle'
+'use client';
+import React from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import {
+  blogPosts,
+  featuredPosts,
+  blogCategories,
+  BlogPost,
+  BlogCategory,
+  getPostBySlug,
+} from '../data/blog';
+import { Search, Calendar, Clock, ArrowRight, Filter, X } from 'lucide-react';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { BlogArticle } from '../components/BlogArticle';
 
 export function BlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all')
-  const [searchQuery, setSearchQuery] = useState('')
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(blogPosts)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [visiblePosts, setVisiblePosts] = useState<Set<string>>(new Set())
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null)
-  const observerRef = useRef<IntersectionObserver | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(blogPosts);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [visiblePosts, setVisiblePosts] = useState<Set<string>>(new Set());
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Filter posts based on category and search
   useEffect(() => {
-    let filtered = blogPosts
+    let filtered = blogPosts;
 
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter(post => post.category === selectedCategory)
+      filtered = filtered.filter(post => post.category === selectedCategory);
     }
 
     if (searchQuery) {
-      filtered = filtered.filter(post => 
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-      )
+      filtered = filtered.filter(
+        post =>
+          post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
     }
 
-    setFilteredPosts(filtered)
-  }, [selectedCategory, searchQuery])
+    setFilteredPosts(filtered);
+  }, [selectedCategory, searchQuery]);
 
   // Intersection observer for scroll animations
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
-            setVisiblePosts(prev => new Set([...prev, entry.target.id]))
+            setVisiblePosts(prev => new Set([...prev, entry.target.id]));
           }
-        })
+        });
       },
       { threshold: 0.1 }
-    )
+    );
 
     return () => {
       if (observerRef.current) {
-        observerRef.current.disconnect()
+        observerRef.current.disconnect();
       }
-    }
-  }, [])
+    };
+  }, []);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
-    })
-  }
+      day: 'numeric',
+    });
+  };
 
   const handlePostClick = (post: BlogPost) => {
-    setSelectedPost(post)
-  }
+    setSelectedPost(post);
+  };
 
   const handleBackToList = () => {
-    setSelectedPost(null)
-  }
+    setSelectedPost(null);
+  };
 
   // If a post is selected, show the article view
   if (selectedPost) {
-    return <BlogArticle post={selectedPost} onBack={handleBackToList} />
+    return <BlogArticle post={selectedPost} onBack={handleBackToList} />;
   }
 
   return (
@@ -82,7 +90,7 @@ export function BlogPage() {
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-slate-900 to-cyan-900/20"></div>
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           {/* Hero Header */}
           <motion.div
@@ -93,7 +101,7 @@ export function BlogPage() {
           >
             <h1 className="font-outfit text-6xl lg:text-7xl font-bold mb-8">
               <span className="bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
-                Insights & 
+                Insights &
               </span>
               <br />
               <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent animate-pulse-glow">
@@ -101,8 +109,8 @@ export function BlogPage() {
               </span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Explore the latest trends, insights, and innovations in technology, design, and development. 
-              Stay ahead of the curve with our expert perspectives.
+              Explore the latest trends, insights, and innovations in technology, design, and
+              development. Stay ahead of the curve with our expert perspectives.
             </p>
           </motion.div>
 
@@ -134,7 +142,7 @@ export function BlogPage() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="p-8">
                   <div className="flex items-center space-x-4 mb-4 text-sm text-gray-400">
                     <div className="flex items-center space-x-2">
@@ -146,15 +154,13 @@ export function BlogPage() {
                       <span>{post.readTime} min read</span>
                     </div>
                   </div>
-                  
+
                   <h2 className="font-outfit text-2xl font-bold mb-4 group-hover:text-purple-300 transition-colors duration-300">
                     {post.title}
                   </h2>
-                  
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                  
+
+                  <p className="text-gray-300 mb-6 leading-relaxed">{post.excerpt}</p>
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 rounded-full overflow-hidden">
@@ -169,7 +175,7 @@ export function BlogPage() {
                         <p className="text-sm text-gray-400">{post.author.role}</p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center space-x-2 text-purple-400 hover:text-white transition-colors duration-300 group">
                       <span>Read More</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -198,7 +204,7 @@ export function BlogPage() {
               >
                 All Articles
               </button>
-              {blogCategories.map((category) => (
+              {blogCategories.map(category => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
@@ -222,7 +228,7 @@ export function BlogPage() {
                 <Search className="w-5 h-5" />
                 <span>Search Articles</span>
               </button>
-              
+
               {isSearchOpen && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -235,20 +241,20 @@ export function BlogPage() {
                       type="text"
                       placeholder="Search articles, tags..."
                       value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onChange={e => setSearchQuery(e.target.value)}
                       className="w-full pl-10 pr-10 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 transition-colors duration-300"
                       autoFocus
                     />
                     <button
-                    onClick={() => {
-                      setSearchQuery('');
-                      setIsSearchOpen(false);
-                    }}
-                    aria-label="Clear search"
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-300"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
+                      onClick={() => {
+                        setSearchQuery('');
+                        setIsSearchOpen(false);
+                      }}
+                      aria-label="Clear search"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-300"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
                   </div>
                 </motion.div>
               )}
@@ -273,8 +279,8 @@ export function BlogPage() {
               <p className="text-gray-400 mb-8">Try adjusting your search or filter criteria.</p>
               <button
                 onClick={() => {
-                  setSearchQuery('')
-                  setSelectedCategory('all')
+                  setSearchQuery('');
+                  setSelectedCategory('all');
                 }}
                 className="px-6 py-3 gradient-electric rounded-xl font-medium hover:scale-105 transition-transform duration-300"
               >
@@ -287,15 +293,15 @@ export function BlogPage() {
                 <motion.article
                   key={post.id}
                   id={`post-${post.id}`}
-                  ref={(el) => {
+                  ref={el => {
                     if (el && observerRef.current) {
-                      observerRef.current.observe(el)
+                      observerRef.current.observe(el);
                     }
                   }}
                   initial={{ opacity: 0, y: 50 }}
-                  animate={{ 
+                  animate={{
                     opacity: visiblePosts.has(`post-${post.id}`) ? 1 : 0,
-                    y: visiblePosts.has(`post-${post.id}`) ? 0 : 50
+                    y: visiblePosts.has(`post-${post.id}`) ? 0 : 50,
                   }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="group glass rounded-2xl overflow-hidden hover:scale-105 hover-glow transition-all duration-500 cursor-pointer"
@@ -309,14 +315,17 @@ export function BlogPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 bg-gradient-to-r ${
-                        blogCategories.find(cat => cat.id === post.category)?.color || 'from-purple-500 to-pink-500'
-                      } rounded-full text-xs font-medium`}>
+                      <span
+                        className={`px-3 py-1 bg-gradient-to-r ${
+                          blogCategories.find(cat => cat.id === post.category)?.color ||
+                          'from-purple-500 to-pink-500'
+                        } rounded-full text-xs font-medium`}
+                      >
                         {blogCategories.find(cat => cat.id === post.category)?.name}
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="p-6">
                     <div className="flex items-center space-x-4 mb-3 text-sm text-gray-400">
                       <div className="flex items-center space-x-1">
@@ -328,15 +337,15 @@ export function BlogPage() {
                         <span>{post.readTime}m</span>
                       </div>
                     </div>
-                    
+
                     <h3 className="font-outfit text-xl font-bold mb-3 group-hover:text-purple-300 transition-colors duration-300 line-clamp-2">
                       {post.title}
                     </h3>
-                    
+
                     <p className="text-gray-300 mb-4 line-clamp-3 leading-relaxed">
                       {post.excerpt}
                     </p>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <div className="w-8 h-8 rounded-full overflow-hidden">
@@ -348,7 +357,7 @@ export function BlogPage() {
                         </div>
                         <span className="text-sm text-gray-400">{post.author.name}</span>
                       </div>
-                      
+
                       <ArrowRight className="w-5 h-5 text-purple-400 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
@@ -375,10 +384,10 @@ export function BlogPage() {
               </span>
             </h2>
             <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-              Get the latest insights, trends, and best practices delivered directly to your inbox. 
+              Get the latest insights, trends, and best practices delivered directly to your inbox.
               Join thousands of developers and designers who trust our content.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
                 type="email"
@@ -389,7 +398,7 @@ export function BlogPage() {
                 Subscribe
               </button>
             </div>
-            
+
             <p className="text-sm text-gray-400 mt-4">
               No spam, unsubscribe at any time. We respect your privacy.
             </p>
@@ -397,5 +406,5 @@ export function BlogPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

@@ -1,23 +1,23 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  formatCurrency,
-  formatDate,
-  getStatusColor,
-  type Notification
-} from '../data/dashboard'
-import { ResponsiveCard, ResponsiveCardHeader, ResponsiveCardTitle, ResponsiveCardContent } from '../components/ui/responsive-card'
-import { ProjectCard } from '../components/ProjectCard'
-import { DashboardNotifications } from '../components/DashboardNotifications'
-import { Badge } from '../components/ui/badge'
-import { Button } from '../components/ui/button'
-import { Progress } from '../components/ui/progress'
-import { 
-  User, 
-  Settings, 
-  LogOut, 
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { formatCurrency, formatDate, getStatusColor, type Notification } from '../data/dashboard';
+import {
+  ResponsiveCard,
+  ResponsiveCardHeader,
+  ResponsiveCardTitle,
+  ResponsiveCardContent,
+} from '../components/ui/responsive-card';
+import { ProjectCard } from '../components/ProjectCard';
+import { DashboardNotifications } from '../components/DashboardNotifications';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Progress } from '../components/ui/progress';
+import {
+  User,
+  Settings,
+  LogOut,
   Download,
   CreditCard,
   MessageCircle,
@@ -28,32 +28,32 @@ import {
   Shield,
   Crown,
   ExternalLink,
-  Loader2
-} from 'lucide-react'
-import { authUtils } from '../utils/auth'
-import { dashboardApi } from '../utils/dashboardApi'
+  Loader2,
+} from 'lucide-react';
+import { authUtils } from '../utils/auth';
+import { dashboardApi } from '../utils/dashboardApi';
 
 export function DashboardPage() {
-  const [activeTab, setActiveTab] = useState('overview')
-  const [user, setUser] = useState<any>(null)
-  const [projects, setProjects] = useState<any[]>([])
-  const [notifications, setNotifications] = useState<Notification[]>([])
-  const [invoices, setInvoices] = useState<any[]>([])
-  const [tickets, setTickets] = useState<any[]>([])
-  const [stats, setStats] = useState<any>(null)
-  const [currentTime, setCurrentTime] = useState(new Date())
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState('overview');
+  const [user, setUser] = useState<any>(null);
+  const [projects, setProjects] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [invoices, setInvoices] = useState<any[]>([]);
+  const [tickets, setTickets] = useState<any[]>([]);
+  const [stats, setStats] = useState<any>(null);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Check if user is authenticated
     if (!authUtils.isAuthenticated()) {
-      window.location.hash = '/'
-      return
+      window.location.hash = '/';
+      return;
     }
 
     // Get user data from localStorage
-    const userData = authUtils.getUser()
+    const userData = authUtils.getUser();
     if (userData) {
       setUser({
         name: userData.name,
@@ -61,79 +61,77 @@ export function DashboardPage() {
         id: userData.id,
         role: userData.role || 'user',
         tier: 'Premium',
-        avatar: userData.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}&background=8b5cf6&color=fff`,
-        createdAt: userData.createdAt || new Date().toISOString()
-      })
+        avatar:
+          userData.avatar ||
+          `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}&background=8b5cf6&color=fff`,
+        createdAt: userData.createdAt || new Date().toISOString(),
+      });
     }
 
     // Fetch dashboard data
-    fetchDashboardData()
-  }, [])
+    fetchDashboardData();
+  }, []);
 
   const fetchDashboardData = async () => {
     try {
-      setLoading(true)
-      setError(null)
-      
+      setLoading(true);
+      setError(null);
+
       // Check if user is authenticated before making API call
       if (!authUtils.isAuthenticated()) {
-        setError('Please log in to access your dashboard')
-        return
+        setError('Please log in to access your dashboard');
+        return;
       }
-      
-      const dashboardData = await dashboardApi.getDashboardData()
-      
-      setStats(dashboardData.stats)
-      setProjects(dashboardData.projects || [])
-      setInvoices(dashboardData.invoices || [])
-      setTickets(dashboardData.supportTickets || [])
-      setNotifications(dashboardData.notifications || [])
-      
-    } catch (err: any) {
-      console.error('Failed to fetch dashboard data:', err)
-      if (err.message === 'Authentication required') {
-        authUtils.logout()
-        window.location.hash = '/'
-        return
-      }
-      setError(err.message || 'Failed to load dashboard data')
-    } finally {
-      setLoading(false)
-    }
-  }
 
+      const dashboardData = await dashboardApi.getDashboardData();
+
+      setStats(dashboardData.stats);
+      setProjects(dashboardData.projects || []);
+      setInvoices(dashboardData.invoices || []);
+      setTickets(dashboardData.supportTickets || []);
+      setNotifications(dashboardData.notifications || []);
+    } catch (err: any) {
+      console.error('Failed to fetch dashboard data:', err);
+      if (err.message === 'Authentication required') {
+        authUtils.logout();
+        window.location.hash = '/';
+        return;
+      }
+      setError(err.message || 'Failed to load dashboard data');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Update time every minute
   useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 60000)
-    return () => clearInterval(timer)
-  }, [])
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleMarkAsRead = (id: string) => {
-    setNotifications(prev => 
-      prev.map(notif => 
-        notif.id === id ? { ...notif, read: true } : notif
-      )
-    )
-  }
+    setNotifications(prev =>
+      prev.map(notif => (notif.id === id ? { ...notif, read: true } : notif))
+    );
+  };
 
   const handleDismissNotification = (id: string) => {
-    setNotifications(prev => prev.filter(notif => notif.id !== id))
-  }
+    setNotifications(prev => prev.filter(notif => notif.id !== id));
+  };
 
   const handleActionClick = (notification: Notification) => {
     if (notification.action?.url) {
       // In a real app, this would navigate to the URL
-      console.log('Navigating to:', notification.action.url)
+      console.log('Navigating to:', notification.action.url);
     }
-  }
+  };
 
   const getGreeting = () => {
-    const hour = currentTime.getHours()
-    if (hour < 12) return 'Good morning'
-    if (hour < 18) return 'Good afternoon'
-    return 'Good evening'
-  }
+    const hour = currentTime.getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
 
   // Show loading state
   if (loading) {
@@ -144,7 +142,7 @@ export function DashboardPage() {
           <p className="text-gray-400">Loading your dashboard...</p>
         </div>
       </div>
-    )
+    );
   }
 
   // Show error state
@@ -163,7 +161,7 @@ export function DashboardPage() {
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
   if (!user || !stats) {
@@ -174,12 +172,12 @@ export function DashboardPage() {
           <p className="text-gray-400">Initializing dashboard...</p>
         </div>
       </div>
-    )
+    );
   }
 
-  const activeProjects = projects.filter(p => p.status !== 'completed')
-  const recentInvoices = invoices.slice(0, 3)
-  const openTickets = tickets.filter(t => t.status !== 'closed')
+  const activeProjects = projects.filter(p => p.status !== 'completed');
+  const recentInvoices = invoices.slice(0, 3);
+  const openTickets = tickets.filter(t => t.status !== 'closed');
 
   return (
     <div className="min-h-screen bg-slate-950 text-white pt-20 relative">
@@ -190,11 +188,7 @@ export function DashboardPage() {
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center overflow-hidden">
                 {user.avatar ? (
-                  <img 
-                    src={user.avatar} 
-                    alt={user.name} 
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-white text-lg font-bold">
                     {user.name.charAt(0).toUpperCase()}
@@ -203,15 +197,20 @@ export function DashboardPage() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">
-                  {getGreeting()}, {user.name.split(' ')[0]}! 
+                  {getGreeting()}, {user.name.split(' ')[0]}!
                 </h1>
                 <p className="text-sm text-gray-400">
-                  {currentTime.toLocaleDateString('en-US', { 
+                  {currentTime.toLocaleDateString('en-US', {
                     weekday: 'long',
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                  })} • Member since {new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}{' '}
+                  • Member since{' '}
+                  {new Date(user.createdAt).toLocaleDateString('en-US', {
+                    month: 'long',
+                    year: 'numeric',
+                  })}
                 </p>
               </div>
             </div>
@@ -226,13 +225,13 @@ export function DashboardPage() {
                 <Settings className="w-4 h-4" />
               </Button>
 
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 className="text-gray-400 hover:text-white"
                 onClick={() => {
-                  authUtils.logout()
-                  window.dispatchEvent(new Event('auth-changed'))
+                  authUtils.logout();
+                  window.dispatchEvent(new Event('auth-changed'));
                 }}
               >
                 <LogOut className="w-4 h-4" />
@@ -244,7 +243,7 @@ export function DashboardPage() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 mt-6">
         {/* Stats Overview */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -257,56 +256,58 @@ export function DashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <ResponsiveCard variant="glass" size="md" hover={true} animation={true}>
               <ResponsiveCardHeader>
-                <ResponsiveCardTitle size="sm" className="text-gray-400">Total Projects</ResponsiveCardTitle>
+                <ResponsiveCardTitle size="sm" className="text-gray-400">
+                  Total Projects
+                </ResponsiveCardTitle>
               </ResponsiveCardHeader>
               <ResponsiveCardContent>
                 <div className="text-3xl font-bold text-white">{stats.totalProjects}</div>
-                <p className="text-sm text-gray-400 mt-1">
-                  {stats.activeProjects} active
-                </p>
+                <p className="text-sm text-gray-400 mt-1">{stats.activeProjects} active</p>
               </ResponsiveCardContent>
             </ResponsiveCard>
 
             <ResponsiveCard variant="glass" size="md" hover={true} animation={true} index={1}>
               <ResponsiveCardHeader>
-                <ResponsiveCardTitle size="sm" className="text-gray-400">Total Investment</ResponsiveCardTitle>
+                <ResponsiveCardTitle size="sm" className="text-gray-400">
+                  Total Investment
+                </ResponsiveCardTitle>
               </ResponsiveCardHeader>
               <ResponsiveCardContent>
-                <div className="text-3xl font-bold text-white">{formatCurrency(stats.totalInvestment)}</div>
-                <p className="text-sm text-green-400 mt-1">
-                  ↗ Growing
-                </p>
+                <div className="text-3xl font-bold text-white">
+                  {formatCurrency(stats.totalInvestment)}
+                </div>
+                <p className="text-sm text-green-400 mt-1">↗ Growing</p>
               </ResponsiveCardContent>
             </ResponsiveCard>
 
             <ResponsiveCard variant="glass" size="md" hover={true} animation={true} index={2}>
               <ResponsiveCardHeader>
-                <ResponsiveCardTitle size="sm" className="text-gray-400">On-Time Delivery</ResponsiveCardTitle>
+                <ResponsiveCardTitle size="sm" className="text-gray-400">
+                  On-Time Delivery
+                </ResponsiveCardTitle>
               </ResponsiveCardHeader>
               <ResponsiveCardContent>
                 <div className="text-3xl font-bold text-white">{stats.onTimeDelivery}%</div>
-                <p className="text-sm text-gray-400 mt-1">
-                  Excellent performance
-                </p>
+                <p className="text-sm text-gray-400 mt-1">Excellent performance</p>
               </ResponsiveCardContent>
             </ResponsiveCard>
 
             <ResponsiveCard variant="glass" size="md" hover={true} animation={true} index={3}>
               <ResponsiveCardHeader>
-                <ResponsiveCardTitle size="sm" className="text-gray-400">Satisfaction Score</ResponsiveCardTitle>
+                <ResponsiveCardTitle size="sm" className="text-gray-400">
+                  Satisfaction Score
+                </ResponsiveCardTitle>
               </ResponsiveCardHeader>
               <ResponsiveCardContent>
                 <div className="text-3xl font-bold text-white">{stats.satisfactionScore}/5</div>
-                <p className="text-sm text-green-400 mt-1">
-                  ⭐ Excellent rating
-                </p>
+                <p className="text-sm text-green-400 mt-1">⭐ Excellent rating</p>
               </ResponsiveCardContent>
             </ResponsiveCard>
           </div>
         </motion.section>
 
         {/* Next Milestone Alert */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -319,7 +320,9 @@ export function DashboardPage() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-white mb-1">Upcoming Milestone</h3>
-                <p className="text-purple-300">{stats?.nextMilestone || 'No upcoming milestones'}</p>
+                <p className="text-purple-300">
+                  {stats?.nextMilestone || 'No upcoming milestones'}
+                </p>
               </div>
               <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
                 <Calendar className="w-4 h-4 mr-2" />
@@ -333,7 +336,7 @@ export function DashboardPage() {
           {/* Left Column - Projects & Quick Actions */}
           <div className="lg:col-span-2 space-y-8">
             {/* Active Projects */}
-            <motion.section 
+            <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -353,14 +356,14 @@ export function DashboardPage() {
             </motion.section>
 
             {/* Quick Actions */}
-            <motion.section 
+            <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <h2 className="text-2xl font-bold text-white mb-6">Quick Actions</h2>
               <div className="grid md:grid-cols-3 gap-4">
-                <Button 
+                <Button
                   className="h-20 glass border border-white/10 hover:border-purple-500/50 hover:bg-purple-500/10 flex-col"
                   variant="ghost"
                 >
@@ -368,7 +371,7 @@ export function DashboardPage() {
                   <span>Contact Support</span>
                 </Button>
 
-                <Button 
+                <Button
                   className="h-20 glass border border-white/10 hover:border-green-500/50 hover:bg-green-500/10 flex-col"
                   variant="ghost"
                 >
@@ -376,7 +379,7 @@ export function DashboardPage() {
                   <span>Download Reports</span>
                 </Button>
 
-                <Button 
+                <Button
                   className="h-20 glass border border-white/10 hover:border-blue-500/50 hover:bg-blue-500/10 flex-col"
                   variant="ghost"
                 >
@@ -418,18 +421,19 @@ export function DashboardPage() {
                 </div>
 
                 <div className="space-y-3">
-                  {recentInvoices.map((invoice) => (
-                    <div key={invoice.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors duration-200">
+                  {recentInvoices.map(invoice => (
+                    <div
+                      key={invoice.id}
+                      className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors duration-200"
+                    >
                       <div>
                         <p className="text-sm font-medium text-white">
                           {formatCurrency(invoice.amount)}
                         </p>
-                        <p className="text-xs text-gray-400">
-                          Due: {formatDate(invoice.dueDate)}
-                        </p>
+                        <p className="text-xs text-gray-400">Due: {formatDate(invoice.dueDate)}</p>
                       </div>
-                      <Badge 
-                        variant="outline" 
+                      <Badge
+                        variant="outline"
                         className={`${getStatusColor(invoice.status)} border-current bg-current/10`}
                       >
                         {invoice.status}
@@ -455,14 +459,17 @@ export function DashboardPage() {
                 </div>
 
                 <div className="space-y-3">
-                  {openTickets.map((ticket) => (
-                    <div key={ticket.id} className="p-3 rounded-lg hover:bg-white/5 transition-colors duration-200">
+                  {openTickets.map(ticket => (
+                    <div
+                      key={ticket.id}
+                      className="p-3 rounded-lg hover:bg-white/5 transition-colors duration-200"
+                    >
                       <div className="flex items-center justify-between mb-2">
                         <p className="text-sm font-medium text-white line-clamp-1">
                           {ticket.title}
                         </p>
-                        <Badge 
-                          variant="outline" 
+                        <Badge
+                          variant="outline"
                           className={`${getStatusColor(ticket.status)} border-current bg-current/10 text-xs`}
                         >
                           {ticket.status.replace('-', ' ')}
@@ -521,5 +528,5 @@ export function DashboardPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,72 +1,84 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Code, Zap, Target, CheckCircle, ArrowRight, Globe, Smartphone, Database } from 'lucide-react'
-import { Button } from '../../components/ui/button'
+import { motion } from 'framer-motion';
+import {
+  Code,
+  Zap,
+  Target,
+  CheckCircle,
+  ArrowRight,
+  Globe,
+  Smartphone,
+  Database,
+} from 'lucide-react';
+import { Button } from '../../components/ui/button';
 
 export function WebDevelopmentPopup() {
   const features = [
     {
       icon: Code,
-      title: "Modern Tech Stack",
-      description: "Next.js, React, TypeScript, and cutting-edge frameworks for lightning-fast performance."
+      title: 'Modern Tech Stack',
+      description:
+        'Next.js, React, TypeScript, and cutting-edge frameworks for lightning-fast performance.',
     },
     {
       icon: Zap,
-      title: "Performance Optimized",
-      description: "Sub-2 second load times with advanced caching, CDN integration, and code optimization."
+      title: 'Performance Optimized',
+      description:
+        'Sub-2 second load times with advanced caching, CDN integration, and code optimization.',
     },
     {
       icon: Target,
-      title: "SEO Mastery",
-      description: "Built-in SEO optimization that drives organic traffic and improves search rankings."
-    }
-  ]
+      title: 'SEO Mastery',
+      description:
+        'Built-in SEO optimization that drives organic traffic and improves search rankings.',
+    },
+  ];
 
   const packages = [
     {
-      name: "Starter",
-      price: "$2,999",
-      description: "Perfect for small businesses",
+      name: 'Starter',
+      price: '$2,999',
+      description: 'Perfect for small businesses',
       features: [
-        "5-page responsive website",
-        "Mobile optimization",
-        "Basic SEO setup",
-        "Contact form integration",
-        "1 month support"
+        '5-page responsive website',
+        'Mobile optimization',
+        'Basic SEO setup',
+        'Contact form integration',
+        '1 month support',
       ],
-      gradient: "from-blue-500 to-cyan-500"
+      gradient: 'from-blue-500 to-cyan-500',
     },
     {
-      name: "Professional",
-      price: "$7,999",
-      description: "Ideal for growing companies",
+      name: 'Professional',
+      price: '$7,999',
+      description: 'Ideal for growing companies',
       features: [
-        "15-page custom website",
-        "Advanced animations",
-        "E-commerce integration",
-        "Analytics dashboard",
-        "3 months support",
-        "Performance optimization"
+        '15-page custom website',
+        'Advanced animations',
+        'E-commerce integration',
+        'Analytics dashboard',
+        '3 months support',
+        'Performance optimization',
       ],
-      gradient: "from-purple-500 to-pink-500",
-      popular: true
+      gradient: 'from-purple-500 to-pink-500',
+      popular: true,
     },
     {
-      name: "Enterprise",
-      price: "$15,999",
-      description: "For large-scale operations",
+      name: 'Enterprise',
+      price: '$15,999',
+      description: 'For large-scale operations',
       features: [
-        "Unlimited pages",
-        "Custom CMS",
-        "Multi-language support",
-        "Advanced integrations",
-        "12 months support",
-        "Dedicated project manager"
+        'Unlimited pages',
+        'Custom CMS',
+        'Multi-language support',
+        'Advanced integrations',
+        '12 months support',
+        'Dedicated project manager',
       ],
-      gradient: "from-green-500 to-emerald-500"
-    }
-  ]
+      gradient: 'from-green-500 to-emerald-500',
+    },
+  ];
 
   return (
     <div className="p-8">
@@ -81,7 +93,7 @@ export function WebDevelopmentPopup() {
           <Globe className="w-5 h-5 text-cyan-400" />
           <span className="font-medium text-gray-200">Web Development</span>
         </div>
-        
+
         <h1 className="font-outfit text-4xl lg:text-5xl font-bold mb-6 leading-tight">
           <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
             Hypnotic Websites That
@@ -91,12 +103,12 @@ export function WebDevelopmentPopup() {
             Drive Results
           </span>
         </h1>
-        
+
         <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-          Transform your vision into a captivating digital experience that mesmerizes visitors 
-          and converts them into loyal customers.
+          Transform your vision into a captivating digital experience that mesmerizes visitors and
+          converts them into loyal customers.
         </p>
-        
+
         <div className="flex items-center justify-center space-x-8 text-sm">
           <div className="flex items-center space-x-2">
             <CheckCircle className="w-5 h-5 text-green-400" />
@@ -132,12 +144,8 @@ export function WebDevelopmentPopup() {
             <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
               <feature.icon className="w-6 h-6 text-white" />
             </div>
-            <h3 className="font-outfit text-xl font-bold text-white mb-3">
-              {feature.title}
-            </h3>
-            <p className="text-gray-300 leading-relaxed">
-              {feature.description}
-            </p>
+            <h3 className="font-outfit text-xl font-bold text-white mb-3">{feature.title}</h3>
+            <p className="text-gray-300 leading-relaxed">{feature.description}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -150,12 +158,8 @@ export function WebDevelopmentPopup() {
         transition={{ duration: 0.8, delay: 0.4 }}
       >
         <div className="text-center mb-10">
-          <h2 className="font-outfit text-3xl font-bold text-white mb-4">
-            Choose Your Package
-          </h2>
-          <p className="text-gray-300 text-lg">
-            Transparent pricing with no hidden fees
-          </p>
+          <h2 className="font-outfit text-3xl font-bold text-white mb-4">Choose Your Package</h2>
+          <p className="text-gray-300 text-lg">Transparent pricing with no hidden fees</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -163,9 +167,7 @@ export function WebDevelopmentPopup() {
             <motion.div
               key={pkg.name}
               className={`relative glass border rounded-2xl p-8 ${
-                pkg.popular 
-                  ? 'border-purple-500/50 ring-2 ring-purple-500/20' 
-                  : 'border-white/10'
+                pkg.popular ? 'border-purple-500/50 ring-2 ring-purple-500/20' : 'border-white/10'
               } group hover:border-white/30 transition-all duration-300`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -179,14 +181,14 @@ export function WebDevelopmentPopup() {
                   </div>
                 </div>
               )}
-              
+
               <div className="text-center mb-8">
-                <h3 className="font-outfit text-2xl font-bold text-white mb-2">
-                  {pkg.name}
-                </h3>
+                <h3 className="font-outfit text-2xl font-bold text-white mb-2">{pkg.name}</h3>
                 <p className="text-gray-400 mb-4">{pkg.description}</p>
                 <div className="mb-6">
-                  <span className={`text-4xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}>
+                  <span
+                    className={`text-4xl font-bold bg-gradient-to-r ${pkg.gradient} bg-clip-text text-transparent`}
+                  >
                     {pkg.price}
                   </span>
                   <span className="text-gray-400 ml-2">one-time</span>
@@ -230,11 +232,14 @@ export function WebDevelopmentPopup() {
           <Button className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:opacity-90 text-white font-semibold px-8 py-3 rounded-xl">
             Schedule Free Consultation
           </Button>
-          <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-xl">
+          <Button
+            variant="outline"
+            className="border-white/20 text-white hover:bg-white/10 px-8 py-3 rounded-xl"
+          >
             View Portfolio
           </Button>
         </div>
       </motion.div>
     </div>
-  )
+  );
 }

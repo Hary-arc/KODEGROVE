@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import { useState, useRef, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { ImageWithFallback } from '../figma/ImageWithFallback'
+import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 interface VideoBackgroundProps {
-  src: string
-  poster?: string
-  className?: string
-  autoPlay?: boolean
-  muted?: boolean
-  loop?: boolean
-  overlay?: boolean
-  overlayOpacity?: number
+  src: string;
+  poster?: string;
+  className?: string;
+  autoPlay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  overlay?: boolean;
+  overlayOpacity?: number;
 }
 
 export function VideoBackground({
@@ -23,45 +23,45 @@ export function VideoBackground({
   muted = true,
   loop = true,
   overlay = true,
-  overlayOpacity = 0.5
+  overlayOpacity = 0.5,
 }: VideoBackgroundProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [hasError, setHasError] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
+    const video = videoRef.current;
+    if (!video) return;
 
-    const handleLoadedData = () => setIsLoaded(true)
-    const handleError = () => setHasError(true)
+    const handleLoadedData = () => setIsLoaded(true);
+    const handleError = () => setHasError(true);
 
-    video.addEventListener('loadeddata', handleLoadedData)
-    video.addEventListener('error', handleError)
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('error', handleError);
 
     return () => {
-      video.removeEventListener('loadeddata', handleLoadedData)
-      video.removeEventListener('error', handleError)
-    }
-  }, [])
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('error', handleError);
+    };
+  }, []);
 
   // Fallback to image if video fails or isn't supported
   if (hasError || !src) {
     return (
       <div className={`absolute inset-0 w-full h-full overflow-hidden ${className}`}>
         <ImageWithFallback
-          src={poster || "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070"}
+          src={poster || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070'}
           alt="Video background fallback"
           className="absolute inset-0 w-full h-full object-cover"
         />
         {overlay && (
-          <div 
+          <div
             className="absolute inset-0 bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60"
             style={{ opacity: overlayOpacity }}
           />
         )}
       </div>
-    )
+    );
   }
 
   return (
@@ -77,7 +77,7 @@ export function VideoBackground({
         preload="auto"
         initial={{ scale: 1.1, opacity: 0 }}
         animate={{ scale: isLoaded ? 1 : 1.1, opacity: isLoaded ? 1 : 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
         onCanPlayThrough={() => setIsLoaded(true)}
       >
         <source src={src} type="video/mp4" />
@@ -85,7 +85,7 @@ export function VideoBackground({
       </motion.video>
 
       {overlay && (
-        <div 
+        <div
           className="absolute inset-0 bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60 pointer-events-none"
           style={{ opacity: overlayOpacity }}
         />
@@ -97,12 +97,12 @@ export function VideoBackground({
           <motion.div
             className="w-12 h-12 border-4 border-purple-500/30 border-t-purple-500 rounded-full"
             animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
           />
         </div>
       )}
     </div>
-  )
+  );
 }
 
 // Export for case study videos
@@ -110,12 +110,12 @@ export function CaseStudyVideo({
   src,
   poster,
   className = '',
-  controls = true
+  controls = true,
 }: {
-  src: string
-  poster?: string
-  className?: string
-  controls?: boolean
+  src: string;
+  poster?: string;
+  className?: string;
+  controls?: boolean;
 }) {
   return (
     <div className={`relative rounded-2xl overflow-hidden ${className}`}>
@@ -129,5 +129,5 @@ export function CaseStudyVideo({
         Your browser does not support the video tag.
       </video>
     </div>
-  )
+  );
 }

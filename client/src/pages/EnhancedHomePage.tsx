@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { useAnimation } from "framer-motion";
+import { useRef, useEffect, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useAnimation } from 'framer-motion';
 import {
   ArrowRight,
   Sparkles,
@@ -20,53 +20,51 @@ import {
   Monitor,
   Palette,
   Code,
-} from "lucide-react";
-import { ChevronDown } from "lucide-react";
-import { Button } from "../components/ui/button";
-import { Card, CardContent } from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
-import { siteConfig } from "../data/site-config";
-import { services } from "../data/services";
-import { projects, getFeaturedProjects } from "../data/portfolio";
-import { testimonials } from "../data/testimonials";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
-import VideoHoverLift from "../components/VideoHoverLift";
-import { TestimonialMarquee } from "../components/TestimonialMarquee";
-import { ServiceCardsMarquee } from "../components/ServiceCardsMarquee";
-import {
-  ScrollReveal,
-  StaggeredReveal,
-  Parallax,
-} from "../components/animations/ScrollReveal";
+} from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { Card, CardContent } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { siteConfig } from '../data/site-config';
+import { services } from '../data/services';
+import { projects, getFeaturedProjects } from '../data/portfolio';
+import { testimonials } from '../data/testimonials';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import VideoHoverLift from '../components/VideoHoverLift';
+import { TestimonialMarquee } from '../components/TestimonialMarquee';
+import { ServiceCardsMarquee } from '../components/ServiceCardsMarquee';
+import { ScrollReveal, StaggeredReveal, Parallax } from '../components/animations/ScrollReveal';
 import {
   HoverLift,
   MagneticHover,
   RippleButton,
   AnimatedIcon,
   Typewriter,
-} from "../components/animations/MicroInteractions";
-import { VideoBackground } from "../components/animations/VideoBackground";
+} from '../components/animations/MicroInteractions';
+import { VideoBackground } from '../components/animations/VideoBackground';
 import {
   LottieAnimation,
   AnimatedIcon as LottieIcon,
   AnimatedPath,
-} from "../components/animations/LottieAnimation";
+} from '../components/animations/LottieAnimation';
 import {
   usePerformantAnimation,
   useScrollAnimation,
   useViewportAnimation,
-} from "../components/animations/usePerformantAnimation";
+} from '../components/animations/usePerformantAnimation';
 
-import { HeroSection } from "../components/HeroSection";
+import { HeroSection } from '../components/HeroSection';
 
-import CreativeWebAgencySection from "../components/home-sections/CreativeWebAgencySection";
-import ClientsIndustriesSection from "../components/home-sections/ClientsIndustriesSection";
-import CMSPlatformSection from "../components/home-sections/CMSPlatformSection";
-import DesignProcessSection from "../components/home-sections/DesignProcessSection";
-import DigitalTrendsSection from "../components/home-sections/DigitalTrendsSection";
-import CustomWebDesignPricingSection from "../components/home-sections/CustomWebDesignPricingSection";
-import FeaturedWebsiteRedesignsSection from "../components/home-sections/FeaturedWebsiteRedesignsSection";
-import React from "react";
+import CreativeWebAgencySection from '../components/home-sections/CreativeWebAgencySection';
+import ClientsIndustriesSection from '../components/home-sections/ClientsIndustriesSection';
+import CMSPlatformSection from '../components/home-sections/CMSPlatformSection';
+import DesignProcessSection from '../components/home-sections/DesignProcessSection';
+import DigitalTrendsSection from '../components/home-sections/DigitalTrendsSection';
+import CustomWebDesignPricingSection from '../components/home-sections/CustomWebDesignPricingSection';
+import FeaturedWebsiteRedesignsSection from '../components/home-sections/FeaturedWebsiteRedesignsSection';
+import HomeContactSection from '../components/home-sections/HomeContactSection';
+import CtaSection from '../components/home-sections/CtaSection';
+import React from 'react';
 
 export function EnhancedHomePage() {
   const heroRef = useRef(null);
@@ -110,12 +108,12 @@ export function EnhancedHomePage() {
       controls.stop(); // Pause marquee
     } else {
       controls.start({
-        x: ["0%", "-50%"],
+        x: ['0%', '-50%'],
         transition: {
           duration: 10,
-          ease: "linear",
+          ease: 'linear',
           repeat: Infinity,
-          repeatType: "loop",
+          repeatType: 'loop',
         },
       });
     }
@@ -143,26 +141,22 @@ export function EnhancedHomePage() {
   return (
     <div className="enhanced-home-page min-h-screen bg-slate-950 text-white overflow-x-hidden">
       {/* Hero Section with Enhanced Background */}
-      <section
-        ref={heroRef}
-        className="relative min-h-screen flex items-center overflow-hidden"
-      >
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
         {/* Static Background instead of video to avoid issues */}
-         <VideoBackground
-            src="/output2.mp4" // put your video path here
-            poster="/bgfallback.jpg"
-            overlay={true}
-            overlayOpacity={0.5}
-            className=" "
-          />
-          
+        <VideoBackground
+          src="/output2.mp4" // put your video path here
+          poster="/bgfallback.jpg"
+          overlay={true}
+          overlayOpacity={0.5}
+          className=" "
+        />
 
         {/* Animated particles overlay */}
         <Parallax speed={0.3} className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-float" />
           <div
             className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-float"
-            style={{ animationDelay: "2s" }}
+            style={{ animationDelay: '2s' }}
           />
         </Parallax>
 
@@ -191,10 +185,10 @@ export function EnhancedHomePage() {
               {/* Subtitle */}
               <ScrollReveal variant="fadeUp" delay={0.8}>
                 <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-2xl">
-                  We craft{" "}
+                  We craft{' '}
                   <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
                     hypnotic digital experiences
-                  </span>{" "}
+                  </span>{' '}
                   that transform businesses and captivate users worldwide.
                 </p>
               </ScrollReveal>
@@ -208,17 +202,17 @@ export function EnhancedHomePage() {
                 {[
                   {
                     number: siteConfig.stats.projects,
-                    label: "Projects Delivered",
+                    label: 'Projects Delivered',
                     icon: Rocket,
                   },
                   {
                     number: `${siteConfig.stats.satisfaction}%`,
-                    label: "Client Satisfaction",
+                    label: 'Client Satisfaction',
                     icon: Star,
                   },
                   {
                     number: `${siteConfig.stats.avgROI}%`,
-                    label: "Measured Impact",
+                    label: 'Measured Impact',
 
                     icon: TrendingUp,
                   },
@@ -251,7 +245,7 @@ export function EnhancedHomePage() {
               <ScrollReveal variant="fadeUp" delay={1.4}>
                 <div className="flex flex-col sm:flex-row gap-6">
                   <RippleButton
-                    onClick={() => (window.location.hash = "/quotation")}
+                    onClick={() => (window.location.hash = '/quotation')}
                     className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
                     variant="primary"
                     aria-label="Start your project"
@@ -262,7 +256,7 @@ export function EnhancedHomePage() {
                   </RippleButton>
 
                   <RippleButton
-                    onClick={() => (window.location.hash = "/portfolio")}
+                    onClick={() => (window.location.hash = '/portfolio')}
                     className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl border border-white/20 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/30"
                     variant="outline"
                     aria-label="View Portfolio"
@@ -287,7 +281,7 @@ export function EnhancedHomePage() {
               transition={{
                 duration: 2.5,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: 'easeInOut',
               }}
             >
               <ChevronDown className="w-14 h-10 mb-[-1px] text-purple-400 drop-shadow-lg" />
@@ -312,15 +306,13 @@ export function EnhancedHomePage() {
             {/*  Left Content */}
             <ScrollReveal variant="fadeLeft" delay={0.3}>
               <div className="space-y-6">
-                <h2 className="text-4xl font-bold text-white">
-                  Watch Our Creative Process
-                </h2>
+                <h2 className="text-4xl font-bold text-white">Watch Our Creative Process</h2>
                 <p className="text-lg text-gray-300 max-w-md">
-                  Dive behind the scenes and see how we bring ideas to life from
-                  concept to code, and everything in between.
+                  Dive behind the scenes and see how we bring ideas to life from concept to code,
+                  and everything in between.
                 </p>
                 <button
-                  onClick={() => (window.location.hash = "/about")}
+                  onClick={() => (window.location.hash = '/about')}
                   className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/10 text-white font-medium backdrop-blur hover:bg-white/20 transition"
                 >
                   Learn More
@@ -347,12 +339,12 @@ export function EnhancedHomePage() {
                     rotate: {
                       duration: 20,
                       repeat: Infinity,
-                      ease: "linear",
+                      ease: 'linear',
                     },
                     scale: {
                       duration: 2,
                       repeat: Infinity,
-                      ease: "easeInOut",
+                      ease: 'easeInOut',
                     },
                   }}
                 >
@@ -392,17 +384,14 @@ export function EnhancedHomePage() {
           </ScrollReveal>
 
           {/* Interactive Service Cards */}
-          <StaggeredReveal
-            staggerDelay={0.2}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
+          <StaggeredReveal staggerDelay={0.2} className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.slice(0, 3).map((service, index) => (
               <MagneticHover key={service.id} strength={0.2}>
                 <Card
                   className={`glass border transition-all duration-500 h-full cursor-pointer group ${
                     activeService === index
-                      ? "border-purple-400/50 bg-purple-500/10"
-                      : "border-white/10 hover:border-white/30"
+                      ? 'border-purple-400/50 bg-purple-500/10'
+                      : 'border-white/10 hover:border-white/30'
                   }`}
                   onMouseEnter={() => {
                     setActiveService(index);
@@ -428,9 +417,7 @@ export function EnhancedHomePage() {
                     >
                       {(() => {
                         const IconComponent = getServiceIcon(service.icon);
-                        return (
-                          <IconComponent className="w-10 h-10 text-white" />
-                        );
+                        return <IconComponent className="w-10 h-10 text-white" />;
                       })()}
                     </motion.div>
 
@@ -438,9 +425,7 @@ export function EnhancedHomePage() {
                       {service.title}
                     </h3>
 
-                    <p className="text-gray-300 leading-relaxed mb-6">
-                      {service.description}
-                    </p>
+                    <p className="text-gray-300 leading-relaxed mb-6">{service.description}</p>
 
                     {/* Feature List */}
                     <ul className="space-y-2 mb-8">
@@ -450,9 +435,7 @@ export function EnhancedHomePage() {
                           className="flex items-center space-x-2 text-sm text-gray-300"
                           initial={{ opacity: 0, x: -20 }}
                           animate={
-                            activeService === index
-                              ? { opacity: 1, x: 0 }
-                              : { opacity: 0.7, x: 0 }
+                            activeService === index ? { opacity: 1, x: 0 } : { opacity: 0.7, x: 0 }
                           }
                           transition={{ delay: idx * 0.1 }}
                         >
@@ -505,10 +488,7 @@ export function EnhancedHomePage() {
           </ScrollReveal>
 
           {/* Portfolio Grid */}
-          <StaggeredReveal
-            staggerDelay={0.3}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-          >
+          <StaggeredReveal staggerDelay={0.3} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {featuredProjects.map((project, index) => (
               <HoverLift key={project.id} liftDistance={20} scale={1.03}>
                 <Card className="glass border border-white/10 hover:border-purple-400/30 transition-all duration-700 overflow-hidden group cursor-pointer">
@@ -565,7 +545,7 @@ export function EnhancedHomePage() {
                       <div className="flex items-center space-x-1 text-green-400">
                         <TrendingUp className="w-4 h-4" />
                         <span className="text-sm font-bold">
-                          {project.metrics?.increase || "150%"}
+                          {project.metrics?.increase || '150%'}
                         </span>
                       </div>
                     </div>
@@ -587,7 +567,7 @@ export function EnhancedHomePage() {
           <ScrollReveal variant="fadeUp" delay={0.8}>
             <div className="text-center mt-16">
               <RippleButton
-                onClick={() => (window.location.hash = "/portfolio")}
+                onClick={() => (window.location.hash = '/portfolio')}
                 className="group relative inline-flex items-center justify-center px-10 py-5 rounded-2xl font-semibold text-white text-base md:text-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
                 variant="primary"
                 aria-label="View all projects"
@@ -602,7 +582,7 @@ export function EnhancedHomePage() {
 
       {/* Creative Web Agency Section */}
       <CreativeWebAgencySection />
-      
+
       <section>
         <DesignProcessSection />
       </section>
@@ -624,6 +604,8 @@ export function EnhancedHomePage() {
 
       {/* Enhanced Service Cards Marquee */}
       <ServiceCardsMarquee />
+      <CtaSection />
+      <HomeContactSection />
     </div>
   );
 }

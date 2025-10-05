@@ -5,6 +5,7 @@ A comprehensive animation and design system built with Motion (Framer Motion) fo
 ## Overview
 
 The animation system implements five core animation themes across all pages:
+
 1. **Scroll-triggered reveals** (fade, slide, parallax)
 2. **Micro-animations** on hover, focus, click
 3. **Lightweight animations** for enhanced UX
@@ -16,12 +17,14 @@ The animation system implements five core animation themes across all pages:
 ### Core Components
 
 #### `/components/animations/ScrollReveal.tsx`
+
 - `ScrollReveal` - Main scroll-triggered animation component
 - `StaggeredReveal` - Staggers animations for multiple elements
 - `Parallax` - Parallax scrolling effects
 - `useScrollReveal` - Hook for intersection observer
 
 **Variants Available:**
+
 - `fadeUp`, `fadeDown`, `fadeLeft`, `fadeRight`
 - `scale`, `rotate`
 
@@ -36,6 +39,7 @@ The animation system implements five core animation themes across all pages:
 ```
 
 #### `/components/animations/MicroInteractions.tsx`
+
 - `HoverLift` - Hover lift effect with customizable distance and scale
 - `MagneticHover` - Magnetic attraction effect following mouse
 - `RippleButton` - Button with ripple click effect
@@ -57,6 +61,7 @@ The animation system implements five core animation themes across all pages:
 ```
 
 #### `/components/animations/usePerformantAnimation.tsx`
+
 Performance optimization hooks:
 
 - `usePerformantAnimation()` - Checks reduced motion preferences
@@ -68,18 +73,21 @@ Performance optimization hooks:
 - `useGPUAcceleration()` - GPU acceleration utilities
 
 ```tsx
-const { prefersReducedMotion, shouldAnimate } = usePerformantAnimation()
-const { scrollY, scrollDirection } = useScrollAnimation()
-const viewport = useViewportAnimation()
+const { prefersReducedMotion, shouldAnimate } = usePerformantAnimation();
+const { scrollY, scrollDirection } = useScrollAnimation();
+const viewport = useViewportAnimation();
 ```
 
 #### `/components/animations/VideoBackground.tsx`
+
 - `VideoBackground` - Responsive video backgrounds with fallbacks
 - `CaseStudyVideo` - Interactive video components
 - `VideoModal` - Full-screen video modal
 
 #### `/components/animations/LottieAnimation.tsx`
+
 Lightweight animation alternatives:
+
 - `AnimatedIcon` - CSS-based animated icons (star, heart, check, etc.)
 - `AnimatedPath` - SVG path drawing animations
 - `LoadingAnimation` - Various loading states
@@ -91,6 +99,7 @@ Lightweight animation alternatives:
 ### ✅ Enhanced Pages
 
 #### HomePage (EnhancedHomePage.tsx)
+
 - Hero section with parallax background
 - Scroll-triggered reveals for all sections
 - Interactive service cards with hover states
@@ -100,6 +109,7 @@ Lightweight animation alternatives:
 - Comprehensive scroll indicators
 
 #### AboutPage.tsx
+
 - Animated page header with typewriter effect
 - Parallax background elements
 - Scroll-triggered section reveals
@@ -108,6 +118,7 @@ Lightweight animation alternatives:
 - Team member hover effects
 
 #### PortfolioPage.tsx
+
 - Enhanced hero with floating elements
 - Animated statistics grid
 - Project filtering with smooth transitions
@@ -115,23 +126,27 @@ Lightweight animation alternatives:
 - Interactive project cards
 
 #### ServicesPage.tsx
+
 - Already comprehensive with advanced animations
 - Parallax backgrounds
 - Interactive service sections
 - Scroll-triggered reveals
 
 #### ContactPage.tsx
+
 - Already comprehensive with form animations
 - Floating label effects
 - Ripple button interactions
 - Map animations
 
 #### BlogPage.tsx
+
 - Already comprehensive with blog-specific animations
 - Article hover effects
 - Category filtering transitions
 
 #### CareersPage.tsx
+
 - Already comprehensive with career-specific animations
 - Job listing animations
 - Culture section effects
@@ -139,12 +154,14 @@ Lightweight animation alternatives:
 ### ✅ Enhanced Components
 
 #### AboutSection.tsx
+
 - Complete animation system
 - Timeline animations
 - Counter animations
 - Team member effects
 
 #### PortfolioSection.tsx
+
 - Advanced portfolio grid
 - Filter transitions
 - Case study modals
@@ -155,6 +172,7 @@ Lightweight animation alternatives:
 Located in `/styles/globals.css`:
 
 ### Keyframe Animations
+
 - `@keyframes float` - Floating elements
 - `@keyframes pulse-glow` - Glowing effects
 - `@keyframes marquee` - Scrolling text
@@ -164,6 +182,7 @@ Located in `/styles/globals.css`:
 - `@keyframes scaleIn` - Scale in effects
 
 ### Utility Classes
+
 - `.animate-float` - 6s floating animation
 - `.animate-pulse-glow` - 4s glow pulse
 - `.animate-marquee` - 30s marquee scroll
@@ -175,11 +194,13 @@ Located in `/styles/globals.css`:
 ## Performance Optimizations
 
 ### GPU Acceleration
+
 - `transform: translateZ(0)` for hardware acceleration
 - `will-change: transform` for animation optimization
 - `backface-visibility: hidden` for smoother animations
 
 ### Reduced Motion Support
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   /* All animations disabled or reduced */
@@ -187,6 +208,7 @@ Located in `/styles/globals.css`:
 ```
 
 ### Lazy Loading
+
 - Intersection Observer for scroll-triggered animations
 - Performance monitoring with FPS detection
 - Debounced resize and scroll events
@@ -194,17 +216,20 @@ Located in `/styles/globals.css`:
 ## Best Practices
 
 ### Animation Timing
+
 - **Micro-interactions**: 0.2-0.3s
 - **Page transitions**: 0.6-0.8s
 - **Scroll reveals**: 0.8-1.2s
 - **Complex sequences**: 1.5-2.5s
 
 ### Easing Functions
+
 - **Default**: `cubic-bezier(0.25, 0.46, 0.45, 0.94)`
 - **Spring**: `type: "spring", stiffness: 300, damping: 20`
 - **Smooth**: `ease-in-out`
 
 ### Stagger Delays
+
 - **Cards/Grid**: 0.1-0.2s between items
 - **Text words**: 0.05-0.1s between words
 - **Menu items**: 0.05s between items
@@ -212,32 +237,31 @@ Located in `/styles/globals.css`:
 ## Usage Examples
 
 ### Basic Scroll Reveal
+
 ```tsx
-import { ScrollReveal } from './components/animations/ScrollReveal'
+import { ScrollReveal } from './components/animations/ScrollReveal';
 
 <ScrollReveal variant="fadeUp" delay={0.2}>
   <div>Content that fades up when scrolled into view</div>
-</ScrollReveal>
+</ScrollReveal>;
 ```
 
 ### Interactive Button
-```tsx
-import { RippleButton } from './components/animations/MicroInteractions'
 
-<RippleButton 
-  onClick={handleClick} 
-  variant="primary"
-  className="px-8 py-4"
->
+```tsx
+import { RippleButton } from './components/animations/MicroInteractions';
+
+<RippleButton onClick={handleClick} variant="primary" className="px-8 py-4">
   Interactive Button
-</RippleButton>
+</RippleButton>;
 ```
 
 ### Performance-Aware Animation
-```tsx
-import { usePerformantAnimation } from './components/animations/usePerformantAnimation'
 
-const { prefersReducedMotion, shouldAnimate } = usePerformantAnimation()
+```tsx
+import { usePerformantAnimation } from './components/animations/usePerformantAnimation';
+
+const { prefersReducedMotion, shouldAnimate } = usePerformantAnimation();
 
 return (
   <motion.div
@@ -246,7 +270,7 @@ return (
   >
     Content
   </motion.div>
-)
+);
 ```
 
 ## Browser Support

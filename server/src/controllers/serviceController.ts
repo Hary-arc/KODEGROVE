@@ -11,12 +11,12 @@ export const getServices = async (req: Request, res: Response) => {
     res.json({
       success: true,
       count: services.length,
-      data: services
+      data: services,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error retrieving services'
+      message: 'Error retrieving services',
     });
   }
 };
@@ -31,18 +31,18 @@ export const getService = async (req: Request, res: Response) => {
     if (!service) {
       return res.status(404).json({
         success: false,
-        message: 'Service not found'
+        message: 'Service not found',
       });
     }
 
     res.json({
       success: true,
-      data: service
+      data: service,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error retrieving service'
+      message: 'Error retrieving service',
     });
   }
 };
@@ -52,38 +52,38 @@ export const getService = async (req: Request, res: Response) => {
 // @access  Private/Admin
 export const createService = async (req: AuthRequest, res: Response) => {
   try {
-      const service = new Service({
+    const service = new Service({
       id: crypto.randomUUID(),
       title: req.body.title,
       description: req.body.description,
       price: Number(req.body.price),
       features: req.body.features || [],
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
 
     // Validation
     if (!service.title) {
       return res.status(400).json({
         success: false,
-        errors: ['Title is required']
+        errors: ['Title is required'],
       });
     }
     if (!service.description) {
       return res.status(400).json({
         success: false,
-        errors: ['Description is required']
+        errors: ['Description is required'],
       });
     }
     if (isNaN(service.price) || service.price < 0) {
       return res.status(400).json({
         success: false,
-        errors: ['Valid price is required']
+        errors: ['Valid price is required'],
       });
     }
     if (!service.features?.length) {
       return res.status(400).json({
         success: false,
-        errors: ['At least one feature is required']
+        errors: ['At least one feature is required'],
       });
     }
 
@@ -91,12 +91,12 @@ export const createService = async (req: AuthRequest, res: Response) => {
 
     res.status(201).json({
       success: true,
-      data: service
+      data: service,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error creating service'
+      message: 'Error creating service',
     });
   }
 };
@@ -111,43 +111,43 @@ export const updateService = async (req: AuthRequest, res: Response) => {
     if (!service) {
       return res.status(404).json({
         success: false,
-        message: 'Service not found'
+        message: 'Service not found',
       });
     }
 
-    const updatedService = new Service ({
+    const updatedService = new Service({
       ...service,
       title: req.body.title || service.title,
       description: req.body.description || service.description,
       price: req.body.price ? Number(req.body.price) : service.price,
       features: req.body.features || service.features,
       id: service.id,
-      createdAt: service.createdAt
+      createdAt: service.createdAt,
     });
 
     // Validation
     if (!updatedService.title) {
       return res.status(400).json({
         success: false,
-        errors: ['Title is required']
+        errors: ['Title is required'],
       });
     }
     if (!updatedService.description) {
       return res.status(400).json({
         success: false,
-        errors: ['Description is required']
+        errors: ['Description is required'],
       });
     }
     if (isNaN(updatedService.price) || updatedService.price < 0) {
       return res.status(400).json({
         success: false,
-        errors: ['Valid price is required']
+        errors: ['Valid price is required'],
       });
     }
     if (!updatedService.features?.length) {
       return res.status(400).json({
         success: false,
-        errors: ['At least one feature is required']
+        errors: ['At least one feature is required'],
       });
     }
 
@@ -155,12 +155,12 @@ export const updateService = async (req: AuthRequest, res: Response) => {
 
     res.json({
       success: true,
-      data: updatedService
+      data: updatedService,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error updating service'
+      message: 'Error updating service',
     });
   }
 };
@@ -175,7 +175,7 @@ export const deleteService = async (req: Request, res: Response) => {
     if (!service) {
       return res.status(404).json({
         success: false,
-        message: 'Service not found'
+        message: 'Service not found',
       });
     }
 
@@ -183,12 +183,12 @@ export const deleteService = async (req: Request, res: Response) => {
 
     res.json({
       success: true,
-      data: {}
+      data: {},
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error deleting service'
+      message: 'Error deleting service',
     });
   }
 };

@@ -1,24 +1,24 @@
-'use client'
-import React from 'react'
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { Card, CardContent } from './ui/card'
-import { 
-  Globe, 
-  Smartphone, 
-  ShoppingCart, 
-  Database, 
-  Palette, 
+'use client';
+import React from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { Card, CardContent } from './ui/card';
+import {
+  Globe,
+  Smartphone,
+  ShoppingCart,
+  Database,
+  Palette,
   Shield,
   ArrowUpRight,
   Cloud,
   Search,
-  Zap
-} from 'lucide-react'
+  Zap,
+} from 'lucide-react';
 
 export function ServiceCardsMarquee() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   const services = [
     {
@@ -26,71 +26,71 @@ export function ServiceCardsMarquee() {
       title: 'Web Development',
       description: 'Modern, responsive websites that captivate and convert.',
       gradient: 'from-blue-500 to-cyan-500',
-      metrics: { value: '+150%', label: 'Engagement' }
+      metrics: { value: '+150%', label: 'Engagement' },
     },
     {
       icon: Smartphone,
       title: 'Mobile Apps',
       description: 'Native iOS & Android apps with seamless user experiences.',
       gradient: 'from-purple-500 to-pink-500',
-      metrics: { value: '4.9★', label: 'Rating' }
+      metrics: { value: '4.9★', label: 'Rating' },
     },
     {
       icon: ShoppingCart,
       title: 'E-Commerce',
       description: 'High-converting online stores with advanced analytics.',
       gradient: 'from-green-500 to-emerald-500',
-      metrics: { value: '+200%', label: 'Sales' }
+      metrics: { value: '+200%', label: 'Sales' },
     },
     {
       icon: Database,
       title: 'Backend Systems',
       description: 'Scalable cloud infrastructure and robust APIs.',
       gradient: 'from-orange-500 to-red-500',
-      metrics: { value: '99.9%', label: 'Uptime' }
+      metrics: { value: '99.9%', label: 'Uptime' },
     },
     {
       icon: Palette,
       title: 'UI/UX Design',
       description: 'Beautiful interfaces that users love to interact with.',
       gradient: 'from-pink-500 to-rose-500',
-      metrics: { value: '+85%', label: 'Retention' }
+      metrics: { value: '+85%', label: 'Retention' },
     },
     {
       icon: Shield,
       title: 'Security & DevOps',
       description: 'Enterprise-grade security and automated deployments.',
       gradient: 'from-indigo-500 to-purple-500',
-      metrics: { value: '100%', label: 'Secure' }
+      metrics: { value: '100%', label: 'Secure' },
     },
     {
       icon: Cloud,
       title: 'Cloud Solutions',
       description: 'Scalable cloud architecture and migration services.',
       gradient: 'from-sky-500 to-blue-500',
-      metrics: { value: '10x', label: 'Faster' }
+      metrics: { value: '10x', label: 'Faster' },
     },
     {
       icon: Search,
       title: 'SEO Optimization',
       description: 'Data-driven SEO strategies that boost visibility.',
       gradient: 'from-yellow-500 to-orange-500',
-      metrics: { value: '+300%', label: 'Traffic' }
+      metrics: { value: '+300%', label: 'Traffic' },
     },
     {
       icon: Zap,
       title: 'Performance',
       description: 'Lightning-fast optimization for maximum speed.',
       gradient: 'from-cyan-500 to-teal-500',
-      metrics: { value: '<1s', label: 'Load Time' }
-    }
-  ]
+      metrics: { value: '<1s', label: 'Load Time' },
+    },
+  ];
 
   return (
     <section ref={ref} className="py-20 relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
-      
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
@@ -109,7 +109,8 @@ export function ServiceCardsMarquee() {
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Experience our comprehensive services with smooth right-to-left motion that pauses when you want to explore.
+            Experience our comprehensive services with smooth right-to-left motion that pauses when
+            you want to explore.
           </p>
         </motion.div>
 
@@ -125,29 +126,31 @@ export function ServiceCardsMarquee() {
               <div key={`${service.title}-${index}`} className="flex-shrink-0 w-80">
                 <Card className="group h-full glass border border-white/10 hover:border-white/30 transition-all duration-500 overflow-hidden relative">
                   {/* Hover Effect Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-                  
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                  />
+
                   {/* Sliding Effect on Hover */}
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-                    whileHover={{ 
-                      translateX: "200%",
-                      transition: { duration: 0.8, ease: "easeInOut" }
+                    whileHover={{
+                      translateX: '200%',
+                      transition: { duration: 0.8, ease: 'easeInOut' },
                     }}
                   />
-                  
+
                   <CardContent className="p-6 relative z-10 h-full flex flex-col">
                     {/* Icon & Metric */}
                     <div className="flex items-start justify-between mb-4">
                       <motion.div
                         className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.gradient} p-2.5 relative overflow-hidden`}
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        transition={{ type: "spring", stiffness: 300 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
                       >
                         <service.icon className="w-full h-full text-white relative z-10" />
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                       </motion.div>
-                      
+
                       <div className="text-right">
                         <div className="text-lg font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
                           {service.metrics.value}
@@ -181,7 +184,9 @@ export function ServiceCardsMarquee() {
 
                     {/* Magnetic Effect */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} opacity-5`} />
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-r ${service.gradient} opacity-5`}
+                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -214,5 +219,5 @@ export function ServiceCardsMarquee() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

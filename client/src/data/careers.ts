@@ -1,38 +1,38 @@
 export interface JobPosition {
-  id: string
-  title: string
-  department: string
-  type: 'Full-time' | 'Part-time' | 'Contract' | 'Internship'
-  location: string
-  remote: boolean
-  description: string
-  responsibilities: string[]
-  requirements: string[]
-  niceToHave: string[]
+  id: string;
+  title: string;
+  department: string;
+  type: 'Full-time' | 'Part-time' | 'Contract' | 'Internship';
+  location: string;
+  remote: boolean;
+  description: string;
+  responsibilities: string[];
+  requirements: string[];
+  niceToHave: string[];
   salary: {
-    min: number
-    max: number
-    currency: string
-  }
-  benefits: string[]
-  featured: boolean
+    min: number;
+    max: number;
+    currency: string;
+  };
+  benefits: string[];
+  featured: boolean;
 }
 
 export interface CompanyPerk {
-  id: string
-  title: string
-  description: string
-  icon: string
-  category: 'wellness' | 'growth' | 'work-life' | 'financial'
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  category: 'wellness' | 'growth' | 'work-life' | 'financial';
 }
 
 export interface CultureImage {
-  id: string
-  url: string
-  alt: string
-  title: string
-  description: string
-  category: 'office' | 'team' | 'events' | 'workspace'
+  id: string;
+  url: string;
+  alt: string;
+  title: string;
+  description: string;
+  category: 'office' | 'team' | 'events' | 'workspace';
 }
 
 export const jobPositions: JobPosition[] = [
@@ -43,14 +43,15 @@ export const jobPositions: JobPosition[] = [
     type: 'Full-time',
     location: 'San Francisco, CA',
     remote: true,
-    description: 'Join our elite frontend team to create mesmerizing user experiences that captivate and engage. You\'ll work on cutting-edge projects using the latest technologies to build interfaces that are both beautiful and performant.',
+    description:
+      "Join our elite frontend team to create mesmerizing user experiences that captivate and engage. You'll work on cutting-edge projects using the latest technologies to build interfaces that are both beautiful and performant.",
     responsibilities: [
       'Develop and maintain high-quality React applications with TypeScript',
       'Collaborate with design teams to implement pixel-perfect, responsive interfaces',
       'Optimize applications for maximum speed and scalability',
       'Mentor junior developers and contribute to code reviews',
       'Stay up-to-date with emerging frontend technologies and best practices',
-      'Work closely with backend teams to integrate APIs and services'
+      'Work closely with backend teams to integrate APIs and services',
     ],
     requirements: [
       '5+ years of experience in frontend development',
@@ -60,7 +61,7 @@ export const jobPositions: JobPosition[] = [
       'Familiarity with build tools and bundlers (Vite, Webpack)',
       'Strong understanding of web performance optimization',
       'Experience with testing frameworks (Jest, React Testing Library)',
-      'Excellent communication and collaboration skills'
+      'Excellent communication and collaboration skills',
     ],
     niceToHave: [
       'Experience with Next.js and server-side rendering',
@@ -68,12 +69,12 @@ export const jobPositions: JobPosition[] = [
       'Experience with 3D graphics (Three.js, React Three Fiber)',
       'Backend development experience with Node.js',
       'Experience with design tools (Figma, Adobe Creative Suite)',
-      'Contributions to open-source projects'
+      'Contributions to open-source projects',
     ],
     salary: {
       min: 140000,
       max: 180000,
-      currency: 'USD'
+      currency: 'USD',
     },
     benefits: [
       'Competitive salary with equity options',
@@ -81,9 +82,9 @@ export const jobPositions: JobPosition[] = [
       'Unlimited PTO and flexible working hours',
       'Professional development budget ($5,000/year)',
       'Latest MacBook Pro and equipment allowance',
-      'Catered meals and premium coffee'
+      'Catered meals and premium coffee',
     ],
-    featured: true
+    featured: true,
   },
   {
     id: 'ui-ux-designer',
@@ -92,14 +93,15 @@ export const jobPositions: JobPosition[] = [
     type: 'Full-time',
     location: 'San Francisco, CA',
     remote: true,
-    description: 'Create extraordinary digital experiences that push the boundaries of design. You\'ll lead the design of innovative interfaces that not only look stunning but also provide intuitive and delightful user journeys.',
+    description:
+      "Create extraordinary digital experiences that push the boundaries of design. You'll lead the design of innovative interfaces that not only look stunning but also provide intuitive and delightful user journeys.",
     responsibilities: [
       'Design user-centered interfaces for web and mobile applications',
       'Create wireframes, prototypes, and high-fidelity designs',
       'Conduct user research and usability testing',
       'Collaborate with developers to ensure design implementation',
       'Maintain and evolve our design system',
-      'Present design concepts to stakeholders and clients'
+      'Present design concepts to stakeholders and clients',
     ],
     requirements: [
       '4+ years of experience in UI/UX design',
@@ -108,7 +110,7 @@ export const jobPositions: JobPosition[] = [
       'Experience with user research and testing methodologies',
       'Understanding of frontend development principles',
       'Knowledge of accessibility standards and best practices',
-      'Excellent visual design skills with attention to detail'
+      'Excellent visual design skills with attention to detail',
     ],
     niceToHave: [
       'Experience with motion design and micro-interactions',
@@ -116,12 +118,12 @@ export const jobPositions: JobPosition[] = [
       'Experience with design systems and component libraries',
       'Background in branding and identity design',
       'Experience with AR/VR interface design',
-      'Illustration and graphic design skills'
+      'Illustration and graphic design skills',
     ],
     salary: {
       min: 120000,
       max: 160000,
-      currency: 'USD'
+      currency: 'USD',
     },
     benefits: [
       'Competitive salary with equity options',
@@ -129,9 +131,9 @@ export const jobPositions: JobPosition[] = [
       'Unlimited PTO and flexible working hours',
       'Design conference budget ($3,000/year)',
       'Latest design tools and software licenses',
-      'Ergonomic workspace setup allowance'
+      'Ergonomic workspace setup allowance',
     ],
-    featured: true
+    featured: true,
   },
   {
     id: 'backend-engineer',
@@ -140,14 +142,15 @@ export const jobPositions: JobPosition[] = [
     type: 'Full-time',
     location: 'San Francisco, CA',
     remote: true,
-    description: 'Build the robust, scalable infrastructure that powers our innovative digital solutions. You\'ll work on high-performance systems that handle millions of requests while maintaining security and reliability.',
+    description:
+      "Build the robust, scalable infrastructure that powers our innovative digital solutions. You'll work on high-performance systems that handle millions of requests while maintaining security and reliability.",
     responsibilities: [
       'Design and develop scalable backend services and APIs',
       'Optimize database performance and implement caching strategies',
       'Ensure security best practices and data protection',
       'Collaborate with frontend teams on API design and integration',
       'Monitor system performance and troubleshoot issues',
-      'Participate in architecture decisions and technical planning'
+      'Participate in architecture decisions and technical planning',
     ],
     requirements: [
       '3+ years of backend development experience',
@@ -156,7 +159,7 @@ export const jobPositions: JobPosition[] = [
       'Familiarity with cloud platforms (AWS, GCP, Azure)',
       'Understanding of microservices architecture',
       'Experience with containerization (Docker, Kubernetes)',
-      'Knowledge of API design and RESTful services'
+      'Knowledge of API design and RESTful services',
     ],
     niceToHave: [
       'Experience with GraphQL and real-time technologies',
@@ -164,12 +167,12 @@ export const jobPositions: JobPosition[] = [
       'Experience with message queues and event-driven architecture',
       'Understanding of machine learning and AI integration',
       'Experience with blockchain technologies',
-      'Contributions to open-source projects'
+      'Contributions to open-source projects',
     ],
     salary: {
       min: 130000,
       max: 170000,
-      currency: 'USD'
+      currency: 'USD',
     },
     benefits: [
       'Competitive salary with equity options',
@@ -177,9 +180,9 @@ export const jobPositions: JobPosition[] = [
       'Unlimited PTO and flexible working hours',
       'Technical conference budget ($4,000/year)',
       'Home office setup allowance',
-      'Professional development opportunities'
+      'Professional development opportunities',
     ],
-    featured: false
+    featured: false,
   },
   {
     id: 'product-manager',
@@ -188,14 +191,15 @@ export const jobPositions: JobPosition[] = [
     type: 'Full-time',
     location: 'San Francisco, CA',
     remote: false,
-    description: 'Drive product strategy and execution for our most innovative digital solutions. You\'ll work closely with cross-functional teams to bring groundbreaking products to market that delight users and drive business growth.',
+    description:
+      "Drive product strategy and execution for our most innovative digital solutions. You'll work closely with cross-functional teams to bring groundbreaking products to market that delight users and drive business growth.",
     responsibilities: [
       'Define product vision, strategy, and roadmap',
       'Conduct market research and competitive analysis',
       'Gather and prioritize product requirements',
       'Work with engineering and design teams to deliver features',
       'Analyze product metrics and user feedback',
-      'Communicate product updates to stakeholders'
+      'Communicate product updates to stakeholders',
     ],
     requirements: [
       '5+ years of product management experience',
@@ -204,7 +208,7 @@ export const jobPositions: JobPosition[] = [
       'Understanding of software development lifecycle',
       'Excellent communication and leadership skills',
       'Experience with user research and testing',
-      'Bachelor\'s degree in Business, Engineering, or related field'
+      "Bachelor's degree in Business, Engineering, or related field",
     ],
     niceToHave: [
       'MBA or advanced degree',
@@ -212,12 +216,12 @@ export const jobPositions: JobPosition[] = [
       'Technical background with coding experience',
       'Experience with B2B and enterprise products',
       'Knowledge of design thinking methodologies',
-      'Experience with international product launches'
+      'Experience with international product launches',
     ],
     salary: {
       min: 150000,
       max: 200000,
-      currency: 'USD'
+      currency: 'USD',
     },
     benefits: [
       'Competitive salary with equity options',
@@ -225,9 +229,9 @@ export const jobPositions: JobPosition[] = [
       'Unlimited PTO and flexible working hours',
       'Product conference budget ($5,000/year)',
       'Leadership development programs',
-      'Stock option plan'
+      'Stock option plan',
     ],
-    featured: false
+    featured: false,
   },
   {
     id: 'design-intern',
@@ -236,14 +240,15 @@ export const jobPositions: JobPosition[] = [
     type: 'Internship',
     location: 'San Francisco, CA',
     remote: false,
-    description: 'Kickstart your design career at CodeFlow! This internship offers hands-on experience working on real client projects while learning from our senior design team. Perfect for students or recent graduates passionate about digital design.',
+    description:
+      'Kickstart your design career at CodeFlow! This internship offers hands-on experience working on real client projects while learning from our senior design team. Perfect for students or recent graduates passionate about digital design.',
     responsibilities: [
       'Assist in creating wireframes and visual designs',
       'Support user research and testing activities',
       'Help maintain and update design system components',
       'Participate in design critiques and team meetings',
       'Shadow senior designers on client projects',
-      'Create design deliverables under supervision'
+      'Create design deliverables under supervision',
     ],
     requirements: [
       'Currently pursuing or recently completed degree in Design, HCI, or related field',
@@ -251,7 +256,7 @@ export const jobPositions: JobPosition[] = [
       'Strong visual design sense and attention to detail',
       'Eagerness to learn and take feedback',
       'Good communication and collaboration skills',
-      'Portfolio demonstrating design projects and process'
+      'Portfolio demonstrating design projects and process',
     ],
     niceToHave: [
       'Internship or work experience in design',
@@ -259,12 +264,12 @@ export const jobPositions: JobPosition[] = [
       'Experience with user research methods',
       'Understanding of accessibility principles',
       'Motion design or animation skills',
-      'Illustration or graphic design background'
+      'Illustration or graphic design background',
     ],
     salary: {
       min: 25,
       max: 30,
-      currency: 'USD'
+      currency: 'USD',
     },
     benefits: [
       'Hourly compensation',
@@ -272,11 +277,11 @@ export const jobPositions: JobPosition[] = [
       'Access to design tools and resources',
       'Networking opportunities',
       'Potential for full-time offer',
-      'Portfolio development support'
+      'Portfolio development support',
     ],
-    featured: false
-  }
-]
+    featured: false,
+  },
+];
 
 export const companyPerks: CompanyPerk[] = [
   {
@@ -284,86 +289,86 @@ export const companyPerks: CompanyPerk[] = [
     title: 'Premium Health Coverage',
     description: 'Comprehensive health, dental, and vision insurance for you and your family',
     icon: '🏥',
-    category: 'wellness'
+    category: 'wellness',
   },
   {
     id: 'unlimited-pto',
     title: 'Unlimited PTO',
     description: 'Take the time you need to recharge and maintain work-life balance',
     icon: '🏖️',
-    category: 'work-life'
+    category: 'work-life',
   },
   {
     id: 'learning-budget',
     title: 'Learning & Development',
     description: '$5,000 annual budget for courses, conferences, and professional growth',
     icon: '📚',
-    category: 'growth'
+    category: 'growth',
   },
   {
     id: 'equity-options',
     title: 'Equity Participation',
     description: 'Share in our success with stock options and equity programs',
     icon: '📈',
-    category: 'financial'
+    category: 'financial',
   },
   {
     id: 'remote-flexibility',
     title: 'Remote-First Culture',
     description: 'Work from anywhere with flexible hours and modern collaboration tools',
     icon: '🌍',
-    category: 'work-life'
+    category: 'work-life',
   },
   {
     id: 'premium-equipment',
     title: 'Top-Tier Equipment',
     description: 'Latest MacBook Pro, 4K monitors, and any tools you need to excel',
     icon: '💻',
-    category: 'work-life'
+    category: 'work-life',
   },
   {
     id: 'mental-health',
     title: 'Mental Health Support',
     description: 'Access to therapy, meditation apps, and wellness programs',
     icon: '🧠',
-    category: 'wellness'
+    category: 'wellness',
   },
   {
     id: 'team-retreats',
     title: 'Team Retreats',
     description: 'Quarterly team building events and annual company retreats',
     icon: '✈️',
-    category: 'work-life'
+    category: 'work-life',
   },
   {
     id: 'innovation-time',
     title: '20% Innovation Time',
     description: 'Dedicate time to passion projects and experimental ideas',
     icon: '💡',
-    category: 'growth'
+    category: 'growth',
   },
   {
     id: 'parental-leave',
     title: 'Generous Parental Leave',
     description: '16 weeks paid leave for new parents with gradual return options',
     icon: '👶',
-    category: 'wellness'
+    category: 'wellness',
   },
   {
     id: 'commuter-benefits',
     title: 'Commuter Benefits',
     description: 'Pre-tax commuter benefits or home office setup allowance',
     icon: '🚇',
-    category: 'financial'
+    category: 'financial',
   },
   {
     id: 'food-beverages',
     title: 'Catered Meals',
     description: 'Daily catered lunch, premium coffee, and healthy snacks',
     icon: '🍽️',
-    category: 'wellness'
-  }
-]
+    category: 'wellness',
+  },
+];
 
 export const cultureImages: CultureImage[] = [
   {
@@ -372,7 +377,7 @@ export const cultureImages: CultureImage[] = [
     alt: 'Modern office workspace',
     title: 'Our Creative Workspace',
     description: 'A modern, open office designed to inspire creativity and collaboration',
-    category: 'office'
+    category: 'office',
   },
   {
     id: 'team-meeting',
@@ -380,7 +385,7 @@ export const cultureImages: CultureImage[] = [
     alt: 'Team collaboration session',
     title: 'Collaborative Culture',
     description: 'Cross-functional teams working together on innovative solutions',
-    category: 'team'
+    category: 'team',
   },
   {
     id: 'hackathon',
@@ -388,7 +393,7 @@ export const cultureImages: CultureImage[] = [
     alt: 'Company hackathon event',
     title: 'Innovation Events',
     description: 'Quarterly hackathons where creativity meets cutting-edge technology',
-    category: 'events'
+    category: 'events',
   },
   {
     id: 'coffee-chat',
@@ -396,7 +401,7 @@ export const cultureImages: CultureImage[] = [
     alt: 'Casual coffee break',
     title: 'Coffee Connections',
     description: 'Informal conversations that spark the best ideas',
-    category: 'workspace'
+    category: 'workspace',
   },
   {
     id: 'presentation',
@@ -404,7 +409,7 @@ export const cultureImages: CultureImage[] = [
     alt: 'Team presentation',
     title: 'Knowledge Sharing',
     description: 'Regular tech talks and knowledge sharing sessions',
-    category: 'team'
+    category: 'team',
   },
   {
     id: 'outdoor-meeting',
@@ -412,7 +417,7 @@ export const cultureImages: CultureImage[] = [
     alt: 'Outdoor team meeting',
     title: 'Flexible Workspaces',
     description: 'Beautiful outdoor spaces for fresh air and fresh thinking',
-    category: 'workspace'
+    category: 'workspace',
   },
   {
     id: 'celebration',
@@ -420,7 +425,7 @@ export const cultureImages: CultureImage[] = [
     alt: 'Team celebration',
     title: 'Celebrating Success',
     description: 'We celebrate every milestone and achievement together',
-    category: 'events'
+    category: 'events',
   },
   {
     id: 'focus-zone',
@@ -428,9 +433,9 @@ export const cultureImages: CultureImage[] = [
     alt: 'Quiet focus area',
     title: 'Focus Zones',
     description: 'Dedicated quiet spaces for deep work and concentration',
-    category: 'workspace'
-  }
-]
+    category: 'workspace',
+  },
+];
 
 export const careerStats = {
   employeeCount: 127,
@@ -438,29 +443,34 @@ export const careerStats = {
   diversityPercentage: 68,
   remoteEmployees: 85,
   promotionRate: '23%',
-  learningHours: 156
-}
+  learningHours: 156,
+};
 
 export const missionStatement = {
   title: 'Crafting Digital Experiences That Mesmerize',
   subtitle: 'Our Mission',
-  description: 'At CodeFlow, we believe that exceptional digital experiences have the power to transform businesses and captivate users. Our mission is to push the boundaries of what\'s possible in web and mobile development, creating solutions that are not just functional, but truly mesmerizing.',
+  description:
+    "At CodeFlow, we believe that exceptional digital experiences have the power to transform businesses and captivate users. Our mission is to push the boundaries of what's possible in web and mobile development, creating solutions that are not just functional, but truly mesmerizing.",
   values: [
     {
       title: 'Innovation First',
-      description: 'We embrace cutting-edge technologies and creative approaches to solve complex challenges.'
+      description:
+        'We embrace cutting-edge technologies and creative approaches to solve complex challenges.',
     },
     {
       title: 'User-Centric Design',
-      description: 'Every decision we make is driven by creating exceptional experiences for end users.'
+      description:
+        'Every decision we make is driven by creating exceptional experiences for end users.',
     },
     {
       title: 'Collaborative Excellence',
-      description: 'We believe the best solutions emerge from diverse perspectives and collaborative thinking.'
+      description:
+        'We believe the best solutions emerge from diverse perspectives and collaborative thinking.',
     },
     {
       title: 'Continuous Growth',
-      description: 'We invest in our team\'s development and foster a culture of continuous learning.'
-    }
-  ]
-}
+      description:
+        "We invest in our team's development and foster a culture of continuous learning.",
+    },
+  ],
+};

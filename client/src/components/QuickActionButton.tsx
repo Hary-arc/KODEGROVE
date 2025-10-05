@@ -13,15 +13,15 @@ interface QuickActionButtonProps {
   delay?: number;
 }
 
-export function QuickActionButton({ 
-  icon, 
-  Icon, 
-  label, 
-  onClick, 
+export function QuickActionButton({
+  icon,
+  Icon,
+  label,
+  onClick,
   variant = 'primary',
   className,
   color,
-  delay
+  delay,
 }: QuickActionButtonProps) {
   const IconComponent = Icon || icon;
   return (

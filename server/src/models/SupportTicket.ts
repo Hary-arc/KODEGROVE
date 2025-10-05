@@ -1,4 +1,3 @@
-
 export interface ISupportTicket {
   id: string;
   userId: string;
@@ -38,10 +37,12 @@ export class SupportTicket implements ISupportTicket {
   updatedAt: string;
   resolvedAt?: string;
 
-  constructor(data: Partial<ISupportTicket> & { 
-    userId: string; 
-    title: string;
-  }) {
+  constructor(
+    data: Partial<ISupportTicket> & {
+      userId: string;
+      title: string;
+    }
+  ) {
     this.id = data.id || crypto.randomUUID();
     this.userId = data.userId;
     this.projectId = data.projectId;
@@ -69,7 +70,7 @@ export class SupportTicket implements ISupportTicket {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -108,7 +109,7 @@ export class SupportTicket implements ISupportTicket {
       assignedTo: this.assignedTo,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
-      resolvedAt: this.resolvedAt
+      resolvedAt: this.resolvedAt,
     };
   }
 }

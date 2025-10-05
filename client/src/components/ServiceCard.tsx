@@ -1,34 +1,41 @@
-'use client'
-import React from 'react'
-import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardHeader, ResponsiveCardContent, ResponsiveCardFooter, ResponsiveCardTitle, ResponsiveCardDescription } from './ui/responsive-card'
-import { Button } from './ui/button'
-import { Badge } from './ui/badge'
-import { ArrowUpRight, Check, Star, Clock, Users } from 'lucide-react'
+'use client';
+import React from 'react';
+import { motion } from 'framer-motion';
+import {
+  ResponsiveCard,
+  ResponsiveCardHeader,
+  ResponsiveCardContent,
+  ResponsiveCardFooter,
+  ResponsiveCardTitle,
+  ResponsiveCardDescription,
+} from './ui/responsive-card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { ArrowUpRight, Check, Star, Clock, Users } from 'lucide-react';
 
 interface ServiceCardProps {
   service: {
-    id: string
-    title: string
-    description: string
-    icon: React.ComponentType<{ className?: string }>
-    features: string[]
+    id: string;
+    title: string;
+    description: string;
+    icon: React.ComponentType<{ className?: string }>;
+    features: string[];
     price?: {
-      from: number
-      period: string
-    }
-    duration?: string
-    teamSize?: string
-    rating?: number
-    popular?: boolean
-    gradient: string
-  }
-  index: number
-  onLearnMore?: (serviceId: string) => void
+      from: number;
+      period: string;
+    };
+    duration?: string;
+    teamSize?: string;
+    rating?: number;
+    popular?: boolean;
+    gradient: string;
+  };
+  index: number;
+  onLearnMore?: (serviceId: string) => void;
 }
 
 export function ServiceCard({ service, index, onLearnMore }: ServiceCardProps) {
-  const Icon = service.icon
+  const Icon = service.icon;
 
   return (
     <ResponsiveCard
@@ -50,21 +57,28 @@ export function ServiceCard({ service, index, onLearnMore }: ServiceCardProps) {
       )}
 
       {/* Background Gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}
+      />
 
       <ResponsiveCardHeader responsive={true}>
         <div className="flex flex-col sm:flex-row sm:items-start space-y-3 sm:space-y-0 sm:space-x-4">
           {/* Icon */}
-          <div className={`w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500`}>
+          <div
+            className={`w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500`}
+          >
             <Icon className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" />
           </div>
 
           {/* Title & Meta */}
           <div className="flex-1 min-w-0">
-            <ResponsiveCardTitle size="lg" className="text-white group-hover:text-purple-300 transition-colors duration-300">
+            <ResponsiveCardTitle
+              size="lg"
+              className="text-white group-hover:text-purple-300 transition-colors duration-300"
+            >
               {service.title}
             </ResponsiveCardTitle>
-            
+
             {/* Meta Information */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2">
               {service.duration && (
@@ -82,9 +96,9 @@ export function ServiceCard({ service, index, onLearnMore }: ServiceCardProps) {
               {service.rating && (
                 <div className="flex items-center space-x-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className={`w-3 h-3 sm:w-4 sm:h-4 ${i < service.rating! ? 'text-yellow-400 fill-current' : 'text-gray-600'}`} 
+                    <Star
+                      key={i}
+                      className={`w-3 h-3 sm:w-4 sm:h-4 ${i < service.rating! ? 'text-yellow-400 fill-current' : 'text-gray-600'}`}
                     />
                   ))}
                   <span className="text-xs sm:text-sm text-gray-400 ml-1">({service.rating})</span>
@@ -101,9 +115,7 @@ export function ServiceCard({ service, index, onLearnMore }: ServiceCardProps) {
               <div className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
                 From ${service.price.from.toLocaleString()}
               </div>
-              <div className="text-xs sm:text-sm text-gray-400">
-                {service.price.period}
-              </div>
+              <div className="text-xs sm:text-sm text-gray-400">{service.price.period}</div>
             </div>
           </div>
         )}
@@ -127,9 +139,7 @@ export function ServiceCard({ service, index, onLearnMore }: ServiceCardProps) {
                 className="flex items-start space-x-2 sm:space-x-3"
               >
                 <Check className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mt-0.5 flex-shrink-0" />
-                <span className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                  {feature}
-                </span>
+                <span className="text-xs sm:text-sm text-gray-300 leading-relaxed">{feature}</span>
               </motion.div>
             ))}
           </div>
@@ -161,27 +171,24 @@ export function ServiceCard({ service, index, onLearnMore }: ServiceCardProps) {
       {/* Enhanced Hover Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
     </ResponsiveCard>
-  )
+  );
 }
 
 // Service Cards Grid Component
 interface ServiceCardsGridProps {
-  services: ServiceCardProps['service'][]
-  onLearnMore?: (serviceId: string) => void
-  columns?: 1 | 2 | 3 | 4
+  services: ServiceCardProps['service'][];
+  onLearnMore?: (serviceId: string) => void;
+  columns?: 1 | 2 | 3 | 4;
 }
 
 export function ServiceCardsGrid({ services, onLearnMore, columns = 3 }: ServiceCardsGridProps) {
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-2 ${columns >= 3 ? 'lg:grid-cols-3' : ''} ${columns >= 4 ? 'xl:grid-cols-4' : ''} gap-4 sm:gap-6 lg:gap-8`}>
+    <div
+      className={`grid grid-cols-1 md:grid-cols-2 ${columns >= 3 ? 'lg:grid-cols-3' : ''} ${columns >= 4 ? 'xl:grid-cols-4' : ''} gap-4 sm:gap-6 lg:gap-8`}
+    >
       {services.map((service, index) => (
-        <ServiceCard
-          key={service.id}
-          service={service}
-          index={index}
-          onLearnMore={onLearnMore}
-        />
+        <ServiceCard key={service.id} service={service} index={index} onLearnMore={onLearnMore} />
       ))}
     </div>
-  )
+  );
 }

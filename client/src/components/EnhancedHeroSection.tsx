@@ -1,21 +1,15 @@
-'use client'
+'use client';
 
-import { useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { 
-  ArrowRight, 
-  Star, 
-  Award,
-  ExternalLink,
-  Quote
-} from 'lucide-react'
-import { Button } from './ui/button'
-import { Badge } from './ui/badge'
-import { ResponsiveCard } from './ui/responsive-card'
-import { ImageWithFallback } from './figma/ImageWithFallback'
+import { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { ArrowRight, Star, Award, ExternalLink, Quote } from 'lucide-react';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { ResponsiveCard } from './ui/responsive-card';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 // @ts-ignore
-import exampleImage from '../assets/92f6adf529a2baec5efe16194b4955f985619e7a.png'
-import React from 'react'
+import exampleImage from '../assets/92f6adf529a2baec5efe16194b4955f985619e7a.png';
+import React from 'react';
 
 // Client logos
 const clientLogos = [
@@ -26,23 +20,41 @@ const clientLogos = [
   { name: 'P&G', logo: '/logos/pg.svg' },
   { name: 'NYU', logo: '/logos/nyu.svg' },
   { name: 'NFL', logo: '/logos/nfl.svg' },
-  { name: 'HP', logo: '/logos/hp.svg' }
-]
+  { name: 'HP', logo: '/logos/hp.svg' },
+];
 
 // Website mockups
 const websiteMockups = [
-  { title: 'Dog DNA Test', image: '/mockups/dog-dna-test.jpg', category: 'Healthcare', transform: 'rotate-3 translate-y-4' },
-  { title: 'E-commerce Platform', image: '/mockups/ecommerce.jpg', category: 'E-commerce', transform: '-rotate-2 translate-y-8' },
-  { title: 'Corporate Website', image: '/mockups/corporate.jpg', category: 'Corporate', transform: 'rotate-1 translate-y-2' }
-]
+  {
+    title: 'Dog DNA Test',
+    image: '/mockups/dog-dna-test.jpg',
+    category: 'Healthcare',
+    transform: 'rotate-3 translate-y-4',
+  },
+  {
+    title: 'E-commerce Platform',
+    image: '/mockups/ecommerce.jpg',
+    category: 'E-commerce',
+    transform: '-rotate-2 translate-y-8',
+  },
+  {
+    title: 'Corporate Website',
+    image: '/mockups/corporate.jpg',
+    category: 'Corporate',
+    transform: 'rotate-1 translate-y-2',
+  },
+];
 
 export function EnhancedHeroSection() {
-  const heroRef = useRef(null)
-  const isInView = useInView(heroRef, { once: true, amount: 0.2 })
-  const [hoveredMockup, setHoveredMockup] = useState<number | null>(null)
+  const heroRef = useRef(null);
+  const isInView = useInView(heroRef, { once: true, amount: 0.2 });
+  const [hoveredMockup, setHoveredMockup] = useState<number | null>(null);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900">
+    <section
+      ref={heroRef}
+      className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900"
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <ImageWithFallback
@@ -58,12 +70,12 @@ export function EnhancedHeroSection() {
         <motion.div
           className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"
           animate={{ scale: [1.2, 1, 1.2], opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
       </div>
 
@@ -116,8 +128,8 @@ export function EnhancedHeroSection() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button 
-                onClick={() => window.location.hash = '/quotation'}
+              <Button
+                onClick={() => (window.location.hash = '/quotation')}
                 className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white px-8 py-4 rounded-xl font-semibold text-lg group"
               >
                 GET QUOTATION
@@ -133,7 +145,11 @@ export function EnhancedHeroSection() {
               className="flex items-center space-x-8"
             >
               <div className="flex items-center space-x-2">
-                <div className="flex">{[...Array(5)].map((_, i) => (<Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />))}</div>
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
                 <span className="text-white font-medium">5-Star DesignRush Reviews</span>
               </div>
               <div className="hidden lg:block w-px h-8 bg-white/20" />
@@ -172,13 +188,27 @@ export function EnhancedHeroSection() {
                     className="overflow-hidden group cursor-pointer"
                   >
                     <div className="relative h-80 sm:h-96">
-                      <ImageWithFallback src={mockup.image} alt={mockup.title} className="w-full h-full object-cover" />
+                      <ImageWithFallback
+                        src={mockup.image}
+                        alt={mockup.title}
+                        className="w-full h-full object-cover"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <motion.div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100" initial={{ y: 20 }} whileHover={{ y: 0 }} transition={{ duration: 0.3 }}>
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100"
+                        initial={{ y: 20 }}
+                        whileHover={{ y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
                         <div className="text-center text-white">
-                          <Badge className="gradient-electric text-white border-0 mb-3">{mockup.category}</Badge>
+                          <Badge className="gradient-electric text-white border-0 mb-3">
+                            {mockup.category}
+                          </Badge>
                           <h3 className="text-xl font-bold mb-4">{mockup.title}</h3>
-                          <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                          <Button
+                            variant="outline"
+                            className="border-white/20 text-white hover:bg-white/10"
+                          >
                             <ExternalLink className="w-4 h-4 mr-2" /> View Project
                           </Button>
                         </div>
@@ -196,7 +226,12 @@ export function EnhancedHeroSection() {
               transition={{ duration: 0.8, delay: 1.2 }}
               className="absolute -bottom-6 -right-6 lg:-right-12"
             >
-              <ResponsiveCard variant="gradient" size="md" hover={true} className="group cursor-pointer max-w-xs">
+              <ResponsiveCard
+                variant="gradient"
+                size="md"
+                hover={true}
+                className="group cursor-pointer max-w-xs"
+              >
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
                     <Quote className="w-6 h-6 text-white" />
@@ -222,7 +257,7 @@ export function EnhancedHeroSection() {
           className="mt-20 pt-12 border-t border-white/10"
         >
           <div className="grid grid-cols-4 lg:grid-cols-8 gap-8 items-center opacity-60">
-            {clientLogos.map((client) => (
+            {clientLogos.map(client => (
               <motion.div
                 key={client.name}
                 className="flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer"
@@ -230,7 +265,9 @@ export function EnhancedHeroSection() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm">
-                  <span className="text-white font-bold text-sm">{client.name.slice(0, 3).toUpperCase()}</span>
+                  <span className="text-white font-bold text-sm">
+                    {client.name.slice(0, 3).toUpperCase()}
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -245,10 +282,18 @@ export function EnhancedHeroSection() {
         transition={{ duration: 0.8, delay: 2.0 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
-        <motion.div className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center p-2 cursor-pointer" animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
-          <motion.div className="w-1.5 h-4 gradient-electric rounded-full" animate={{ scaleY: [1, 0.3, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div
+          className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center p-2 cursor-pointer"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <motion.div
+            className="w-1.5 h-4 gradient-electric rounded-full"
+            animate={{ scaleY: [1, 0.3, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </motion.div>
       </motion.div>
     </section>
-  )
+  );
 }

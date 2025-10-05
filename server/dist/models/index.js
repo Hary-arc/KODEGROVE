@@ -6,46 +6,46 @@ import { SupportTicket } from './SupportTicket.js';
 import { ClientAnalytics } from './ClientAnalytics.js';
 import { DataStore } from '../utils/dataStore.js';
 class Service {
-    id;
-    title;
-    description;
-    price;
-    features;
-    createdAt;
-    constructor(data) {
-        this.id = data.id || crypto.randomUUID();
-        this.title = data.title;
-        this.description = data.description;
-        this.price = data.price;
-        this.features = data.features || [];
-        this.createdAt = data.createdAt || new Date().toISOString();
+  id;
+  title;
+  description;
+  price;
+  features;
+  createdAt;
+  constructor(data) {
+    this.id = data.id || crypto.randomUUID();
+    this.title = data.title;
+    this.description = data.description;
+    this.price = data.price;
+    this.features = data.features || [];
+    this.createdAt = data.createdAt || new Date().toISOString();
+  }
+  validate() {
+    const errors = [];
+    if (!this.title || this.title.trim().length === 0) {
+      errors.push('Title is required');
     }
-    validate() {
-        const errors = [];
-        if (!this.title || this.title.trim().length === 0) {
-            errors.push('Title is required');
-        }
-        if (!this.description || this.description.trim().length === 0) {
-            errors.push('Description is required');
-        }
-        if (this.price < 0) {
-            errors.push('Price must be non-negative');
-        }
-        return {
-            isValid: errors.length === 0,
-            errors
-        };
+    if (!this.description || this.description.trim().length === 0) {
+      errors.push('Description is required');
     }
-    toJSON() {
-        return {
-            id: this.id,
-            title: this.title,
-            description: this.description,
-            price: this.price,
-            features: this.features,
-            createdAt: this.createdAt
-        };
+    if (this.price < 0) {
+      errors.push('Price must be non-negative');
     }
+    return {
+      isValid: errors.length === 0,
+      errors,
+    };
+  }
+  toJSON() {
+    return {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      price: this.price,
+      features: this.features,
+      createdAt: this.createdAt,
+    };
+  }
 }
 // Initialize data stores
 export const userStore = new DataStore('users');

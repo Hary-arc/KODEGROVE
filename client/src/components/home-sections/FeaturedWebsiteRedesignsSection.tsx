@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useRef, useState, useEffect, useMemo, useCallback } from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import {
   ChevronLeft,
   ChevronRight,
@@ -12,242 +12,269 @@ import {
   Award,
   Users,
   Clock,
-} from "lucide-react";
+} from 'lucide-react';
 import { Button } from '../ui/button';
 
 const clientLogos = [
-  { name: "TechVision", logo: "/logos/blueridge.png", initial: "TV", color: "from-blue-500 to-gray-500" },
-  { name: "HealthFirst", logo: "/logos/integral.png", initial: "HF", color: "from-green-500 to-gray-500" },
-  { name: "EduLearn", logo: "/logos/legacy.png" , initial: "EL", color: "from-purple-500 to-gray-500" },
-  { name: "RetailHub", logo: "/logos/riverchurch.png", initial: "RH", color: "from-orange-500 to-gray-500" },
-  { name: "FinancePro", logo: "/logos/vitech.png", initial: "FP", color: "from-indigo-500 to-gray-500" },
+  {
+    name: 'TechVision',
+    logo: '/logos/blueridge.png',
+    initial: 'TV',
+    color: 'from-blue-500 to-gray-500',
+  },
+  {
+    name: 'HealthFirst',
+    logo: '/logos/integral.png',
+    initial: 'HF',
+    color: 'from-green-500 to-gray-500',
+  },
+  {
+    name: 'EduLearn',
+    logo: '/logos/legacy.png',
+    initial: 'EL',
+    color: 'from-purple-500 to-gray-500',
+  },
+  {
+    name: 'RetailHub',
+    logo: '/logos/riverchurch.png',
+    initial: 'RH',
+    color: 'from-orange-500 to-gray-500',
+  },
+  {
+    name: 'FinancePro',
+    logo: '/logos/vitech.png',
+    initial: 'FP',
+    color: 'from-indigo-500 to-gray-500',
+  },
 ];
 
 const redesignProjects = [
   {
-    before: "https://images.unsplash.com/photo-1649877508777-1554357604eb?w=800&q=80",
-    after: "https://images.unsplash.com/photo-1750056393349-dfaf647f7400?w=800&q=80",
-    title: "Enterprise SaaS Platform Modernization",
+    before: 'https://images.unsplash.com/photo-1649877508777-1554357604eb?w=800&q=80',
+    after: 'https://images.unsplash.com/photo-1750056393349-dfaf647f7400?w=800&q=80',
+    title: 'Enterprise SaaS Platform Modernization',
     description:
-      "Complete UX overhaul for a B2B software platform, introducing intuitive navigation, dark mode, and advanced analytics dashboards that increased user engagement by 285%.",
-    stat: "+285% Engagement",
-    client: "TechVision",
-    category: "SaaS & Technology",
-    duration: "6 months",
+      'Complete UX overhaul for a B2B software platform, introducing intuitive navigation, dark mode, and advanced analytics dashboards that increased user engagement by 285%.',
+    stat: '+285% Engagement',
+    client: 'TechVision',
+    category: 'SaaS & Technology',
+    duration: '6 months',
     metrics: [
-      { label: "User Retention", value: "+157%" },
-      { label: "Page Speed", value: "94/100" },
-      { label: "Conversion Rate", value: "+89%" },
+      { label: 'User Retention', value: '+157%' },
+      { label: 'Page Speed', value: '94/100' },
+      { label: 'Conversion Rate', value: '+89%' },
     ],
     featured: true,
   },
   {
-    before: "https://images.unsplash.com/photo-1566915896913-549d796d2166?w=800&q=80",
-    after: "https://images.unsplash.com/photo-1687524690542-2659f268cde8?w=800&q=80",
-    title: "Healthcare Portal Redesign",
+    before: 'https://images.unsplash.com/photo-1566915896913-549d796d2166?w=800&q=80',
+    after: 'https://images.unsplash.com/photo-1687524690542-2659f268cde8?w=800&q=80',
+    title: 'Healthcare Portal Redesign',
     description:
-      "Patient-focused redesign emphasizing accessibility, HIPAA compliance, and seamless appointment booking. Reduced bounce rate by 62% while improving mobile experience.",
-    stat: "+173% Bookings",
-    client: "HealthFirst",
-    category: "Healthcare",
-    duration: "4 months",
+      'Patient-focused redesign emphasizing accessibility, HIPAA compliance, and seamless appointment booking. Reduced bounce rate by 62% while improving mobile experience.',
+    stat: '+173% Bookings',
+    client: 'HealthFirst',
+    category: 'Healthcare',
+    duration: '4 months',
     metrics: [
-      { label: "Mobile Traffic", value: "+142%" },
-      { label: "Accessibility", value: "WCAG AAA" },
-      { label: "Satisfaction", value: "4.8/5" },
+      { label: 'Mobile Traffic', value: '+142%' },
+      { label: 'Accessibility', value: 'WCAG AAA' },
+      { label: 'Satisfaction', value: '4.8/5' },
     ],
     featured: false,
   },
   {
-    before: "https://images.unsplash.com/photo-1649877508777-1554357604eb?w=800&q=80",
-    after: "https://images.unsplash.com/photo-1542837336-d14bdf342f9b?w=800&q=80",
-    title: "E-Learning Platform Evolution",
+    before: 'https://images.unsplash.com/photo-1649877508777-1554357604eb?w=800&q=80',
+    after: 'https://images.unsplash.com/photo-1542837336-d14bdf342f9b?w=800&q=80',
+    title: 'E-Learning Platform Evolution',
     description:
-      "Transformed an outdated LMS into a modern, gamified learning experience with live collaboration tools, AI recommendations, and seamless course discovery.",
-    stat: "+215% Completion",
-    client: "EduLearn",
-    category: "Education & E-Learning",
-    duration: "5 months",
+      'Transformed an outdated LMS into a modern, gamified learning experience with live collaboration tools, AI recommendations, and seamless course discovery.',
+    stat: '+215% Completion',
+    client: 'EduLearn',
+    category: 'Education & E-Learning',
+    duration: '5 months',
     metrics: [
-      { label: "Course Completion", value: "+215%" },
-      { label: "Student NPS", value: "+78 pts" },
-      { label: "Load Time", value: "-64%" },
+      { label: 'Course Completion', value: '+215%' },
+      { label: 'Student NPS', value: '+78 pts' },
+      { label: 'Load Time', value: '-64%' },
     ],
     featured: false,
   },
   {
-    before: "https://images.unsplash.com/photo-1566915896913-549d796d2166?w=800&q=80",
-    after: "https://images.unsplash.com/photo-1657216328535-e981d223dee3?w=800&q=80",
-    title: "Premium E-Commerce Experience",
+    before: 'https://images.unsplash.com/photo-1566915896913-549d796d2166?w=800&q=80',
+    after: 'https://images.unsplash.com/photo-1657216328535-e981d223dee3?w=800&q=80',
+    title: 'Premium E-Commerce Experience',
     description:
-      "Luxury retail brand transformation featuring immersive product galleries, AR try-on, personalized recommendations, and frictionless checkout that tripled conversions.",
-    stat: "+312% Revenue",
-    client: "RetailHub",
-    category: "E-Commerce & Retail",
-    duration: "7 months",
+      'Luxury retail brand transformation featuring immersive product galleries, AR try-on, personalized recommendations, and frictionless checkout that tripled conversions.',
+    stat: '+312% Revenue',
+    client: 'RetailHub',
+    category: 'E-Commerce & Retail',
+    duration: '7 months',
     metrics: [
-      { label: "Revenue", value: "+312%" },
-      { label: "AOV", value: "+127%" },
-      { label: "Cart Abandonment", value: "-43%" },
+      { label: 'Revenue', value: '+312%' },
+      { label: 'AOV', value: '+127%' },
+      { label: 'Cart Abandonment', value: '-43%' },
     ],
     featured: true,
   },
   {
-    before: "https://images.unsplash.com/photo-1649877508777-1554357604eb?w=800&q=80",
-    after: "https://images.unsplash.com/photo-1553484771-047a44eee27a?w=800&q=80",
-    title: "Financial Dashboard Reimagined",
+    before: 'https://images.unsplash.com/photo-1649877508777-1554357604eb?w=800&q=80',
+    after: 'https://images.unsplash.com/photo-1553484771-047a44eee27a?w=800&q=80',
+    title: 'Financial Dashboard Reimagined',
     description:
-      "Enterprise-grade fintech platform with real-time analytics, advanced security features, and intuitive portfolio management. Achieved 99.9% uptime with enhanced compliance.",
-    stat: "+198% Active Users",
-    client: "FinancePro",
-    category: "Finance & Fintech",
-    duration: "8 months",
+      'Enterprise-grade fintech platform with real-time analytics, advanced security features, and intuitive portfolio management. Achieved 99.9% uptime with enhanced compliance.',
+    stat: '+198% Active Users',
+    client: 'FinancePro',
+    category: 'Finance & Fintech',
+    duration: '8 months',
     metrics: [
-      { label: "Active Users", value: "+198%" },
-      { label: "Transaction Volume", value: "+245%" },
-      { label: "Security Score", value: "A+" },
+      { label: 'Active Users', value: '+198%' },
+      { label: 'Transaction Volume', value: '+245%' },
+      { label: 'Security Score', value: 'A+' },
     ],
     featured: false,
   },
 ];
 
-const ProjectCard = React.memo(({ project, index, isActive }: { project: typeof redesignProjects[0]; index: number; isActive: boolean }) => {
-  return (
-    <div className="snap-center w-full md:w-[90%] lg:w-[85%] flex-shrink-0">
-      <div className="glass rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 hover:border-white/20 transition-all duration-500">
-        {/* Project Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 sm:w-7 h-7 gradient-electric rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/20">
-              <Zap className="w-7 h-7 text-white" />
-            </div>
-            <div>
-              <div className="flex items-center gap-3 mb-1">
-                <h3 className="font-bold text-xl text-white">
-                  {project.client}
-                </h3>
-                {project.featured && (
-                  <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30">
-                    <Award className="w-3 h-3 text-yellow-400" />
-                    <span className="text-xs font-semibold text-yellow-400">Featured</span>
-                  </div>
-                )}
+const ProjectCard = React.memo(
+  ({
+    project,
+    index,
+    isActive,
+  }: {
+    project: (typeof redesignProjects)[0];
+    index: number;
+    isActive: boolean;
+  }) => {
+    return (
+      <div className="snap-center w-full md:w-[90%] lg:w-[85%] flex-shrink-0">
+        <div className="glass rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 hover:border-white/20 transition-all duration-500">
+          {/* Project Header */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 sm:w-7 h-7 gradient-electric rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/20">
+                <Zap className="w-7 h-7 text-white" />
               </div>
-              <p className="text-gray-400 text-sm flex items-center gap-2">
-                <span>{project.category}</span>
-                <span>•</span>
-                <Clock className="w-3 h-3" />
-                <span>{project.duration}</span>
-              </p>
+              <div>
+                <div className="flex items-center gap-3 mb-1">
+                  <h3 className="font-bold text-xl text-white">{project.client}</h3>
+                  {project.featured && (
+                    <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30">
+                      <Award className="w-3 h-3 text-yellow-400" />
+                      <span className="text-xs font-semibold text-yellow-400">Featured</span>
+                    </div>
+                  )}
+                </div>
+                <p className="text-gray-400 text-sm flex items-center gap-2">
+                  <span>{project.category}</span>
+                  <span>•</span>
+                  <Clock className="w-3 h-3" />
+                  <span>{project.duration}</span>
+                </p>
+              </div>
             </div>
-          </div>
-          
-          <div className="gradient-electric text-white px-6 py-3 rounded-full shadow-lg shadow-purple-500/20 flex items-center gap-2 whitespace-nowrap">
-            <TrendingUp className="w-5 h-5" />
-            <span className="font-bold">{project.stat}</span>
-          </div>
-        </div>
 
-        {/* Before/After Images */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Before Image */}
-          <div className="relative group/image overflow-hidden rounded-2xl">
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <img
-                src={project.before}
-                alt="Before redesign"
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover/image:opacity-80 transition-opacity duration-300" />
-              
-              <div className="absolute top-4 left-4 bg-red-500/90 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full border border-red-400/30 shadow-lg">
-                BEFORE
-              </div>
-              
-              <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover/image:translate-y-0">
-                <p className="text-white font-semibold mb-1">Original Design</p>
-                <p className="text-gray-300 text-sm">Legacy Interface</p>
-              </div>
+            <div className="gradient-electric text-white px-6 py-3 rounded-full shadow-lg shadow-purple-500/20 flex items-center gap-2 whitespace-nowrap">
+              <TrendingUp className="w-5 h-5" />
+              <span className="font-bold">{project.stat}</span>
             </div>
           </div>
 
-          {/* After Image */}
-          <div className="relative group/image overflow-hidden rounded-2xl">
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <img
-                src={project.after}
-                alt="After redesign"
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover/image:opacity-80 transition-opacity duration-300" />
-              
-              <div className="absolute top-4 right-4 bg-green-500/90 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full border border-green-400/30 shadow-lg">
-                AFTER
+          {/* Before/After Images */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            {/* Before Image */}
+            <div className="relative group/image overflow-hidden rounded-2xl">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img
+                  src={project.before}
+                  alt="Before redesign"
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover/image:opacity-80 transition-opacity duration-300" />
+
+                <div className="absolute top-4 left-4 bg-red-500/90 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full border border-red-400/30 shadow-lg">
+                  BEFORE
+                </div>
+
+                <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover/image:translate-y-0">
+                  <p className="text-white font-semibold mb-1">Original Design</p>
+                  <p className="text-gray-300 text-sm">Legacy Interface</p>
+                </div>
               </div>
-              
-              <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover/image:translate-y-0">
-                <p className="text-white font-semibold mb-1">Modern Design</p>
-                <p className="text-gray-300 text-sm">Enhanced UX/UI</p>
+            </div>
+
+            {/* After Image */}
+            <div className="relative group/image overflow-hidden rounded-2xl">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img
+                  src={project.after}
+                  alt="After redesign"
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover/image:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover/image:opacity-80 transition-opacity duration-300" />
+
+                <div className="absolute top-4 right-4 bg-green-500/90 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full border border-green-400/30 shadow-lg">
+                  AFTER
+                </div>
+
+                <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover/image:translate-y-0">
+                  <p className="text-white font-semibold mb-1">Modern Design</p>
+                  <p className="text-gray-300 text-sm">Enhanced UX/UI</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Project Details */}
-        <div>
-          <h4 className="text-2xl sm:text-3xl font-bold text-white mb-4 hover:text-cyan-400 transition-colors duration-300">
-            {project.title}
-          </h4>
-          <p className="text-gray-300 text-lg leading-relaxed mb-8">
-            {project.description}
-          </p>
+          {/* Project Details */}
+          <div>
+            <h4 className="text-2xl sm:text-3xl font-bold text-white mb-4 hover:text-cyan-400 transition-colors duration-300">
+              {project.title}
+            </h4>
+            <p className="text-gray-300 text-lg leading-relaxed mb-8">{project.description}</p>
 
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            {project.metrics.map((metric, idx) => (
-              <div
-                key={idx}
-                className="glass rounded-xl p-4 border border-white/10 hover:border-cyan-500/30 transition-all duration-300"
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-3 gap-4 mb-8">
+              {project.metrics.map((metric, idx) => (
+                <div
+                  key={idx}
+                  className="glass rounded-xl p-4 border border-white/10 hover:border-cyan-500/30 transition-all duration-300"
+                >
+                  <p className="text-cyan-400 font-bold text-xl sm:text-2xl mb-1">{metric.value}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">{metric.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Section */}
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+              <Button
+                onClick={() => (window.location.hash = '/portfolio')}
+                className="group/btn gradient-electric text-white shadow-lg shadow-purple-500/25 rounded-full px-8 py-6 font-semibold flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/40"
               >
-                <p className="text-cyan-400 font-bold text-xl sm:text-2xl mb-1">
-                  {metric.value}
-                </p>
-                <p className="text-gray-400 text-xs sm:text-sm">
-                  {metric.label}
-                </p>
+                <span>View Full Case Study</span>
+                <ExternalLink className="w-5 h-5" />
+              </Button>
+
+              <div className="flex items-center gap-4 text-sm text-gray-400">
+                <span className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span>Live Project</span>
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-2">
+                  <Users className="w-4 h-4" />
+                  <span>2024</span>
+                </span>
               </div>
-            ))}
-          </div>
-
-          {/* CTA Section */}
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            <Button
-              onClick={() => window.location.hash = "/portfolio"}
-              className="group/btn gradient-electric text-white shadow-lg shadow-purple-500/25 rounded-full px-8 py-6 font-semibold flex items-center gap-3 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/40"
-            >
-              <span>View Full Case Study</span>
-              <ExternalLink className="w-5 h-5" />
-            </Button>
-
-            <div className="flex items-center gap-4 text-sm text-gray-400">
-              <span className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span>Live Project</span>
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-2">
-                <Users className="w-4 h-4" />
-                <span>2024</span>
-              </span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 ProjectCard.displayName = 'ProjectCard';
 
@@ -266,7 +293,7 @@ export default function FeaturedWebsiteRedesignsSection() {
     if (!mounted || isHovering) return;
 
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % redesignProjects.length);
+      setActiveIndex(prev => (prev + 1) % redesignProjects.length);
     }, 6000);
 
     return () => clearInterval(interval);
@@ -281,7 +308,7 @@ export default function FeaturedWebsiteRedesignsSection() {
 
     const cardEl = card as HTMLElement;
     const left = cardEl.offsetLeft - (slider.clientWidth - cardEl.clientWidth) / 2;
-    slider.scrollTo({ left, behavior: "smooth" });
+    slider.scrollTo({ left, behavior: 'smooth' });
     setActiveIndex(newIndex);
   }, []);
 
@@ -296,7 +323,7 @@ export default function FeaturedWebsiteRedesignsSection() {
       timeoutId = setTimeout(() => {
         const children = Array.from(slider.children);
         const center = slider.scrollLeft + slider.offsetWidth / 2;
-        const newIndex = children.findIndex((child) => {
+        const newIndex = children.findIndex(child => {
           const el = child as HTMLElement;
           return el.offsetLeft <= center && el.offsetLeft + el.offsetWidth > center;
         });
@@ -306,9 +333,9 @@ export default function FeaturedWebsiteRedesignsSection() {
       }, 100);
     };
 
-    slider.addEventListener("scroll", handleScroll, { passive: true });
+    slider.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
-      slider.removeEventListener("scroll", handleScroll);
+      slider.removeEventListener('scroll', handleScroll);
       clearTimeout(timeoutId);
     };
   }, [activeIndex, mounted]);
@@ -357,7 +384,8 @@ export default function FeaturedWebsiteRedesignsSection() {
           </h2>
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-3">
-            Witness the transformation as we reimagine digital experiences for brands across industries
+            Witness the transformation as we reimagine digital experiences for brands across
+            industries
           </p>
 
           <p className="text-cyan-400 font-semibold">
@@ -374,23 +402,27 @@ export default function FeaturedWebsiteRedesignsSection() {
                 onClick={() => scrollToIndex(i % redesignProjects.length)}
                 className={`group relative p-2 sm:p-4 rounded-2xl transition-all duration-300 backdrop-blur-sm border ${
                   activeIndex === i % redesignProjects.length
-                    ? "glass border-cyan-500/50 shadow-lg shadow-cyan-500/20"
-                    : "glass border-white/10 hover:border-white/20"
+                    ? 'glass border-cyan-500/50 shadow-lg shadow-cyan-500/20'
+                    : 'glass border-white/10 hover:border-white/20'
                 }`}
               >
-                <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${client.color} flex items-center justify-center transition-all duration-300 ${
-                  activeIndex === i % redesignProjects.length ? "scale-110" : "group-hover:scale-105"
-                }`}>
+                <div
+                  className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br ${client.color} flex items-center justify-center transition-all duration-300 ${
+                    activeIndex === i % redesignProjects.length
+                      ? 'scale-110'
+                      : 'group-hover:scale-105'
+                  }`}
+                >
                   <img
-                src={client.logo}
-                alt={client.name}
-                className="h-8 md:h-12 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-              />
+                    src={client.logo}
+                    alt={client.name}
+                    className="h-8 md:h-12 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                  />
                   {/* <span className="font-bold text-white text-sm sm:text-lg">
                     {client.initial}
                   </span> */}
                 </div>
-                
+
                 {activeIndex === i % redesignProjects.length && (
                   <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/50" />
                 )}
@@ -409,17 +441,12 @@ export default function FeaturedWebsiteRedesignsSection() {
             ref={sliderRef}
             className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide pb-8"
             style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
             }}
           >
             {redesignProjects.map((project, i) => (
-              <ProjectCard
-                key={i}
-                project={project}
-                index={i}
-                isActive={i === activeIndex}
-              />
+              <ProjectCard key={i} project={project} index={i} isActive={i === activeIndex} />
             ))}
           </div>
 
@@ -448,15 +475,15 @@ export default function FeaturedWebsiteRedesignsSection() {
               key={index}
               onClick={() => scrollToIndex(index)}
               className={`relative transition-all duration-300 ${
-                index === activeIndex ? "w-12 h-3" : "w-3 h-3"
+                index === activeIndex ? 'w-12 h-3' : 'w-3 h-3'
               }`}
               aria-label={`Go to project ${index + 1}`}
             >
               <div
                 className={`w-full h-full rounded-full transition-all duration-300 ${
                   index === activeIndex
-                    ? "gradient-electric shadow-lg shadow-purple-500/50"
-                    : "bg-slate-700 hover:bg-slate-600"
+                    ? 'gradient-electric shadow-lg shadow-purple-500/50'
+                    : 'bg-slate-700 hover:bg-slate-600'
                 }`}
               />
               {project.featured && index === activeIndex && (
@@ -465,7 +492,6 @@ export default function FeaturedWebsiteRedesignsSection() {
             </button>
           ))}
         </div>
-        
       </div>
     </section>
   );

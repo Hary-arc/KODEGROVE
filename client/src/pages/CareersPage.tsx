@@ -1,11 +1,7 @@
-"use client";
-import React from 'react'
-import { useState, useRef } from "react";
-import {
-  motion,
-  useInView,
-  AnimatePresence,
-} from "framer-motion";
+'use client';
+import React from 'react';
+import { useState, useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ChevronDown,
   MapPin,
@@ -21,31 +17,28 @@ import {
   TrendingUp,
   Coffee,
   Calendar,
-} from "lucide-react";
-import { Card, CardContent } from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
-import { Button } from "../components/ui/button";
+} from 'lucide-react';
+import { Card, CardContent } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../components/ui/accordion";
+} from '../components/ui/accordion';
 import {
   jobPositions,
   companyPerks,
   cultureImages,
   careerStats,
   missionStatement,
-} from "../data/careers";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+} from '../data/careers';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 export function CareersPage() {
-  const [selectedDepartment, setSelectedDepartment] =
-    useState<string>("all");
-  const [expandedJob, setExpandedJob] = useState<string | null>(
-    null,
-  );
+  const [selectedDepartment, setSelectedDepartment] = useState<string>('all');
+  const [expandedJob, setExpandedJob] = useState<string | null>(null);
 
   const heroRef = useRef(null);
   const jobsRef = useRef(null);
@@ -69,30 +62,17 @@ export function CareersPage() {
     amount: 0.1,
   });
 
-  const departments = [
-    "all",
-    ...Array.from(
-      new Set(jobPositions.map((job) => job.department)),
-    ),
-  ];
+  const departments = ['all', ...Array.from(new Set(jobPositions.map(job => job.department)))];
 
   const filteredJobs =
-    selectedDepartment === "all"
+    selectedDepartment === 'all'
       ? jobPositions
-      : jobPositions.filter(
-          (job) => job.department === selectedDepartment,
-        );
+      : jobPositions.filter(job => job.department === selectedDepartment);
 
-  const featuredJobs = jobPositions.filter(
-    (job) => job.featured,
-  );
+  const featuredJobs = jobPositions.filter(job => job.featured);
 
-  const formatSalary = (
-    min: number,
-    max: number,
-    currency: string,
-  ) => {
-    if (currency === "USD" && min >= 1000) {
+  const formatSalary = (min: number, max: number, currency: string) => {
+    if (currency === 'USD' && min >= 1000) {
       return `$${min.toLocaleString()} - $${max.toLocaleString()}`;
     }
     return `$${min}/hr - $${max}/hr`;
@@ -101,23 +81,23 @@ export function CareersPage() {
   const perkCategories = {
     wellness: {
       icon: Heart,
-      color: "text-green-400",
-      bg: "bg-green-500/10",
+      color: 'text-green-400',
+      bg: 'bg-green-500/10',
     },
     growth: {
       icon: TrendingUp,
-      color: "text-blue-400",
-      bg: "bg-blue-500/10",
+      color: 'text-blue-400',
+      bg: 'bg-blue-500/10',
     },
-    "work-life": {
+    'work-life': {
       icon: Coffee,
-      color: "text-purple-400",
-      bg: "bg-purple-500/10",
+      color: 'text-purple-400',
+      bg: 'bg-purple-500/10',
     },
     financial: {
       icon: Award,
-      color: "text-yellow-400",
-      bg: "bg-yellow-500/10",
+      color: 'text-yellow-400',
+      bg: 'bg-yellow-500/10',
     },
   };
 
@@ -152,12 +132,12 @@ export function CareersPage() {
 
   // Split text into words for animation
   const animateText = (text: string, delay = 0) => {
-    return text.split(" ").map((word, index) => (
+    return text.split(' ').map((word, index) => (
       <motion.span
         key={index}
         variants={letterVariants}
         initial="hidden"
-        animate={isHeroInView ? "visible" : "hidden"}
+        animate={isHeroInView ? 'visible' : 'hidden'}
         transition={{ delay: delay + index * 0.1 }}
         className="inline-block mr-3"
       >
@@ -169,10 +149,7 @@ export function CareersPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-white pt-20">
       {/* Animated Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative py-20 overflow-hidden"
-      >
+      <section ref={heroRef} className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-slate-900 to-cyan-900/30"></div>
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
@@ -187,7 +164,7 @@ export function CareersPage() {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
         />
         <motion.div
@@ -200,7 +177,7 @@ export function CareersPage() {
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: 2,
           }}
         />
@@ -209,9 +186,7 @@ export function CareersPage() {
           {/* Mission badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 30 }}
-            animate={
-              isHeroInView ? { opacity: 1, scale: 1, y: 0 } : {}
-            }
+            animate={isHeroInView ? { opacity: 1, scale: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="inline-flex items-center space-x-3 glass rounded-full px-8 py-4 mb-12 border border-white/20 hover:border-purple-400/50 transition-all duration-500"
           >
@@ -220,14 +195,12 @@ export function CareersPage() {
               transition={{
                 duration: 8,
                 repeat: Infinity,
-                ease: "linear",
+                ease: 'linear',
               }}
             >
               <Briefcase className="w-5 h-5 text-purple-400" />
             </motion.div>
-            <span className="font-medium text-gray-200">
-              {missionStatement.subtitle}
-            </span>
+            <span className="font-medium text-gray-200">{missionStatement.subtitle}</span>
           </motion.div>
 
           {/* Animated Mission Statement */}
@@ -235,28 +208,28 @@ export function CareersPage() {
             <motion.h1
               className="mb-4"
               initial="hidden"
-              animate={isHeroInView ? "visible" : "hidden"}
+              animate={isHeroInView ? 'visible' : 'hidden'}
             >
               <span className="bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
-                {animateText("Join Our Mission:", 0.3)}
+                {animateText('Join Our Mission:', 0.3)}
               </span>
             </motion.h1>
             <motion.h1
               initial="hidden"
-              animate={isHeroInView ? "visible" : "hidden"}
+              animate={isHeroInView ? 'visible' : 'hidden'}
               transition={{ delay: 0.8 }}
             >
               <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                {animateText("Crafting Digital", 0.6)}
+                {animateText('Crafting Digital', 0.6)}
               </span>
             </motion.h1>
             <motion.h1
               initial="hidden"
-              animate={isHeroInView ? "visible" : "hidden"}
+              animate={isHeroInView ? 'visible' : 'hidden'}
               transition={{ delay: 1.2 }}
             >
               <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                {animateText("Experiences That Mesmerize", 0.9)}
+                {animateText('Experiences That Mesmerize', 0.9)}
               </span>
             </motion.h1>
           </div>
@@ -280,31 +253,29 @@ export function CareersPage() {
             {[
               {
                 icon: Users,
-                label: "Team Members",
+                label: 'Team Members',
                 value: careerStats.employeeCount,
               },
               {
                 icon: Globe,
-                label: "Remote Workers",
+                label: 'Remote Workers',
                 value: `${careerStats.remoteEmployees}%`,
               },
               {
                 icon: Star,
-                label: "Diversity Rate",
+                label: 'Diversity Rate',
                 value: `${careerStats.diversityPercentage}%`,
               },
               {
                 icon: TrendingUp,
-                label: "Avg. Tenure",
+                label: 'Avg. Tenure',
                 value: careerStats.averageTenure,
               },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 30 }}
-                animate={
-                  isHeroInView ? { opacity: 1, y: 0 } : {}
-                }
+                animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
                   duration: 0.6,
                   delay: 2 + index * 0.1,
@@ -314,12 +285,8 @@ export function CareersPage() {
                 <div className="w-12 h-12 mx-auto mb-4 gradient-electric rounded-xl flex items-center justify-center">
                   <stat.icon className="w-6 h-6 text-white" />
                 </div>
-                <div className="font-outfit text-2xl font-bold text-white mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-gray-400 text-sm">
-                  {stat.label}
-                </div>
+                <div className="font-outfit text-2xl font-bold text-white mb-1">{stat.value}</div>
+                <div className="text-gray-400 text-sm">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -335,21 +302,15 @@ export function CareersPage() {
               <motion.div
                 key={value.title}
                 initial={{ opacity: 0, y: 30 }}
-                animate={
-                  isHeroInView ? { opacity: 1, y: 0 } : {}
-                }
+                animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
                   duration: 0.6,
                   delay: 2.7 + index * 0.1,
                 }}
                 className="text-center"
               >
-                <h3 className="font-outfit text-lg font-bold text-white mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  {value.description}
-                </p>
+                <h3 className="font-outfit text-lg font-bold text-white mb-3">{value.title}</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -372,8 +333,7 @@ export function CareersPage() {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Join our team of innovators and help shape the
-              future of digital experiences
+              Join our team of innovators and help shape the future of digital experiences
             </p>
           </motion.div>
 
@@ -384,23 +344,23 @@ export function CareersPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-wrap justify-center gap-3 mb-12"
           >
-            {departments.map((dept) => (
+            {departments.map(dept => (
               <button
                 key={dept}
                 onClick={() => setSelectedDepartment(dept)}
                 className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
                   selectedDepartment === dept
-                    ? "gradient-electric text-white shadow-lg shadow-purple-500/20"
-                    : "glass border border-white/10 text-gray-300 hover:border-white/30 hover:text-white"
+                    ? 'gradient-electric text-white shadow-lg shadow-purple-500/20'
+                    : 'glass border border-white/10 text-gray-300 hover:border-white/30 hover:text-white'
                 }`}
               >
-                {dept === "all" ? "All Departments" : dept}
+                {dept === 'all' ? 'All Departments' : dept}
               </button>
             ))}
           </motion.div>
 
           {/* Featured Jobs */}
-          {selectedDepartment === "all" && (
+          {selectedDepartment === 'all' && (
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={isJobsInView ? { opacity: 1, y: 0 } : {}}
@@ -418,9 +378,7 @@ export function CareersPage() {
                       opacity: 0,
                       x: index % 2 === 0 ? -50 : 50,
                     }}
-                    animate={
-                      isJobsInView ? { opacity: 1, x: 0 } : {}
-                    }
+                    animate={isJobsInView ? { opacity: 1, x: 0 } : {}}
                     transition={{
                       duration: 0.6,
                       delay: 0.6 + index * 0.1,
@@ -467,26 +425,14 @@ export function CareersPage() {
 
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-sm text-gray-400 mb-1">
-                              Salary Range
-                            </p>
+                            <p className="text-sm text-gray-400 mb-1">Salary Range</p>
                             <p className="font-outfit font-bold text-white">
-                              {formatSalary(
-                                job.salary.min,
-                                job.salary.max,
-                                job.salary.currency,
-                              )}
+                              {formatSalary(job.salary.min, job.salary.max, job.salary.currency)}
                             </p>
                           </div>
                           <Button
                             className="gradient-electric hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
-                            onClick={() =>
-                              setExpandedJob(
-                                expandedJob === job.id
-                                  ? null
-                                  : job.id,
-                              )
-                            }
+                            onClick={() => setExpandedJob(expandedJob === job.id ? null : job.id)}
                           >
                             View Details
                             <ArrowRight className="w-4 h-4 ml-2" />
@@ -510,18 +456,12 @@ export function CareersPage() {
               All Open Positions ({filteredJobs.length})
             </h3>
 
-            <Accordion
-              type="single"
-              collapsible
-              className="space-y-4"
-            >
+            <Accordion type="single" collapsible className="space-y-4">
               {filteredJobs.map((job, index) => (
                 <motion.div
                   key={job.id}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={
-                    isJobsInView ? { opacity: 1, y: 0 } : {}
-                  }
+                  animate={isJobsInView ? { opacity: 1, y: 0 } : {}}
                   transition={{
                     duration: 0.5,
                     delay: 0.8 + index * 0.1,
@@ -569,15 +509,9 @@ export function CareersPage() {
                             </Badge>
                           )}
                           <div className="text-right hidden lg:block">
-                            <p className="text-sm text-gray-400">
-                              Salary
-                            </p>
+                            <p className="text-sm text-gray-400">Salary</p>
                             <p className="font-outfit font-bold text-white text-sm">
-                              {formatSalary(
-                                job.salary.min,
-                                job.salary.max,
-                                job.salary.currency,
-                              )}
+                              {formatSalary(job.salary.min, job.salary.max, job.salary.currency)}
                             </p>
                           </div>
                         </div>
@@ -587,11 +521,11 @@ export function CareersPage() {
                     <AccordionContent className="pb-6">
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
+                        animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{
                           duration: 0.3,
-                          ease: "easeInOut",
+                          ease: 'easeInOut',
                         }}
                         className="space-y-8"
                       >
@@ -600,46 +534,30 @@ export function CareersPage() {
                             <h5 className="font-outfit font-bold text-white mb-4">
                               Job Description
                             </h5>
-                            <p className="text-gray-300 leading-relaxed mb-6">
-                              {job.description}
-                            </p>
+                            <p className="text-gray-300 leading-relaxed mb-6">{job.description}</p>
 
                             <h5 className="font-outfit font-bold text-white mb-4">
                               Responsibilities
                             </h5>
                             <ul className="space-y-2 text-gray-300">
-                              {job.responsibilities.map(
-                                (responsibility, idx) => (
-                                  <li
-                                    key={idx}
-                                    className="flex items-start space-x-2"
-                                  >
-                                    <Zap className="w-4 h-4 text-purple-400 mt-1 flex-shrink-0" />
-                                    <span>
-                                      {responsibility}
-                                    </span>
-                                  </li>
-                                ),
-                              )}
+                              {job.responsibilities.map((responsibility, idx) => (
+                                <li key={idx} className="flex items-start space-x-2">
+                                  <Zap className="w-4 h-4 text-purple-400 mt-1 flex-shrink-0" />
+                                  <span>{responsibility}</span>
+                                </li>
+                              ))}
                             </ul>
                           </div>
 
                           <div>
-                            <h5 className="font-outfit font-bold text-white mb-4">
-                              Requirements
-                            </h5>
+                            <h5 className="font-outfit font-bold text-white mb-4">Requirements</h5>
                             <ul className="space-y-2 text-gray-300 mb-6">
-                              {job.requirements.map(
-                                (requirement, idx) => (
-                                  <li
-                                    key={idx}
-                                    className="flex items-start space-x-2"
-                                  >
-                                    <Star className="w-4 h-4 text-cyan-400 mt-1 flex-shrink-0" />
-                                    <span>{requirement}</span>
-                                  </li>
-                                ),
-                              )}
+                              {job.requirements.map((requirement, idx) => (
+                                <li key={idx} className="flex items-start space-x-2">
+                                  <Star className="w-4 h-4 text-cyan-400 mt-1 flex-shrink-0" />
+                                  <span>{requirement}</span>
+                                </li>
+                              ))}
                             </ul>
 
                             {job.niceToHave.length > 0 && (
@@ -648,51 +566,33 @@ export function CareersPage() {
                                   Nice to Have
                                 </h5>
                                 <ul className="space-y-2 text-gray-300 mb-6">
-                                  {job.niceToHave.map(
-                                    (item, idx) => (
-                                      <li
-                                        key={idx}
-                                        className="flex items-start space-x-2"
-                                      >
-                                        <Heart className="w-4 h-4 text-pink-400 mt-1 flex-shrink-0" />
-                                        <span>{item}</span>
-                                      </li>
-                                    ),
-                                  )}
+                                  {job.niceToHave.map((item, idx) => (
+                                    <li key={idx} className="flex items-start space-x-2">
+                                      <Heart className="w-4 h-4 text-pink-400 mt-1 flex-shrink-0" />
+                                      <span>{item}</span>
+                                    </li>
+                                  ))}
                                 </ul>
                               </>
                             )}
 
-                            <h5 className="font-outfit font-bold text-white mb-4">
-                              Benefits
-                            </h5>
+                            <h5 className="font-outfit font-bold text-white mb-4">Benefits</h5>
                             <ul className="space-y-2 text-gray-300">
-                              {job.benefits
-                                .slice(0, 4)
-                                .map((benefit, idx) => (
-                                  <li
-                                    key={idx}
-                                    className="flex items-start space-x-2"
-                                  >
-                                    <Award className="w-4 h-4 text-yellow-400 mt-1 flex-shrink-0" />
-                                    <span>{benefit}</span>
-                                  </li>
-                                ))}
+                              {job.benefits.slice(0, 4).map((benefit, idx) => (
+                                <li key={idx} className="flex items-start space-x-2">
+                                  <Award className="w-4 h-4 text-yellow-400 mt-1 flex-shrink-0" />
+                                  <span>{benefit}</span>
+                                </li>
+                              ))}
                             </ul>
                           </div>
                         </div>
 
                         <div className="flex items-center justify-between pt-6 border-t border-white/10">
                           <div>
-                            <p className="text-sm text-gray-400 mb-1">
-                              Salary Range
-                            </p>
+                            <p className="text-sm text-gray-400 mb-1">Salary Range</p>
                             <p className="font-outfit text-xl font-bold text-white">
-                              {formatSalary(
-                                job.salary.min,
-                                job.salary.max,
-                                job.salary.currency,
-                              )}
+                              {formatSalary(job.salary.min, job.salary.max, job.salary.currency)}
                             </p>
                           </div>
                           <Button
@@ -721,9 +621,7 @@ export function CareersPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
-            animate={
-              isCultureInView ? { opacity: 1, y: 0 } : {}
-            }
+            animate={isCultureInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
@@ -733,9 +631,8 @@ export function CareersPage() {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Experience the energy, creativity, and
-              collaboration that makes CodeFlow an extraordinary
-              place to work
+              Experience the energy, creativity, and collaboration that makes CodeFlow an
+              extraordinary place to work
             </p>
           </motion.div>
 
@@ -743,7 +640,7 @@ export function CareersPage() {
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            animate={isCultureInView ? "visible" : "hidden"}
+            animate={isCultureInView ? 'visible' : 'hidden'}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {cultureImages.map((image, index) => (
@@ -806,8 +703,7 @@ export function CareersPage() {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              We believe that amazing work comes from amazing
-              people in an amazing environment
+              We believe that amazing work comes from amazing people in an amazing environment
             </p>
           </motion.div>
 
@@ -815,20 +711,15 @@ export function CareersPage() {
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            animate={isPerksInView ? "visible" : "hidden"}
+            animate={isPerksInView ? 'visible' : 'hidden'}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             {companyPerks.map((perk, index) => {
-              const categoryConfig =
-                perkCategories[perk.category];
+              const categoryConfig = perkCategories[perk.category];
               const IconComponent = categoryConfig.icon;
 
               return (
-                <motion.div
-                  key={perk.id}
-                  variants={itemVariants}
-                  className="group relative"
-                >
+                <motion.div key={perk.id} variants={itemVariants} className="group relative">
                   <Card className="glass border border-white/10 hover:border-purple-400/30 transition-all duration-500 h-full relative overflow-hidden">
                     <CardContent className="p-6 text-center">
                       {/* Animated Icon */}
@@ -845,7 +736,7 @@ export function CareersPage() {
                           transition={{
                             duration: 2,
                             repeat: Infinity,
-                            ease: "easeInOut",
+                            ease: 'easeInOut',
                             delay: index * 0.2,
                           }}
                         >
@@ -869,7 +760,7 @@ export function CareersPage() {
                         transition={{
                           duration: 3,
                           repeat: Infinity,
-                          ease: "easeInOut",
+                          ease: 'easeInOut',
                           delay: index * 0.3,
                         }}
                       >
@@ -879,9 +770,7 @@ export function CareersPage() {
                       <h3 className="font-outfit text-lg font-bold text-white mb-3 group-hover:text-purple-400 transition-colors duration-300">
                         {perk.title}
                       </h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">
-                        {perk.description}
-                      </p>
+                      <p className="text-gray-300 text-sm leading-relaxed">{perk.description}</p>
 
                       {/* Hover shine effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -903,8 +792,8 @@ export function CareersPage() {
               Ready to Join Our Journey?
             </h3>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Don't see the perfect role? We're always looking
-              for exceptional talent to join our mission.
+              Don't see the perfect role? We're always looking for exceptional talent to join our
+              mission.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button

@@ -1,15 +1,14 @@
-
 import { Request, Response } from 'express';
 import { AuthRequest } from '../middleware/auth.js';
-import { 
-  projectStore, 
-  invoiceStore, 
-  supportTicketStore, 
+import {
+  projectStore,
+  invoiceStore,
+  supportTicketStore,
   clientAnalyticsStore,
   Project,
   Invoice,
   SupportTicket,
-  ClientAnalytics
+  ClientAnalytics,
 } from '../models/index.js';
 
 // @desc    Get user dashboard data
@@ -18,18 +17,20 @@ import {
 export const getDashboardData = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.user?.id;
-    
+
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: 'User not authenticated'
+        message: 'User not authenticated',
       });
     }
 
     // Fetch user's data with proper typing
     const projects = await projectStore.findAll((p: Project) => p.userId === userId);
     const invoices = await invoiceStore.findAll((i: Invoice) => i.userId === userId);
-    const supportTickets = await supportTicketStore.findAll((t: SupportTicket) => t.userId === userId);
+    const supportTickets = await supportTicketStore.findAll(
+      (t: SupportTicket) => t.userId === userId
+    );
 
     // Calculate current stats
     const stats = ClientAnalytics.calculateStats(projects, invoices, []);
@@ -55,15 +56,14 @@ export const getDashboardData = async (req: AuthRequest, res: Response) => {
         projects: recentProjects,
         invoices: recentInvoices,
         supportTickets: openTickets,
-        notifications
-      }
+        notifications,
+      },
     });
-
   } catch (error: any) {
     console.error('Dashboard data error:', error);
     res.status(500).json({
       success: false,
-      message: 'Server error fetching dashboard data'
+      message: 'Server error fetching dashboard data',
     });
   }
 };
@@ -74,11 +74,11 @@ export const getDashboardData = async (req: AuthRequest, res: Response) => {
 export const getUserProjects = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.user?.id;
-    
+
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: 'User not authenticated'
+        message: 'User not authenticated',
       });
     }
     const { status, limit = 10, offset = 0 } = req.query;
@@ -103,15 +103,14 @@ export const getUserProjects = async (req: AuthRequest, res: Response) => {
       data: {
         projects: paginatedProjects,
         total: projects.length,
-        hasMore: startIndex + limitNum < projects.length
-      }
+        hasMore: startIndex + limitNum < projects.length,
+      },
     });
-
   } catch (error: any) {
     console.error('Get projects error:', error);
     res.status(500).json({
       success: false,
-      message: 'Server error fetching projects'
+      message: 'Server error fetching projects',
     });
   }
 };
@@ -122,11 +121,11 @@ export const getUserProjects = async (req: AuthRequest, res: Response) => {
 export const getUserInvoices = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.user?.id;
-    
+
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: 'User not authenticated'
+        message: 'User not authenticated',
       });
     }
     const { status, limit = 10, offset = 0 } = req.query;
@@ -151,15 +150,14 @@ export const getUserInvoices = async (req: AuthRequest, res: Response) => {
       data: {
         invoices: paginatedInvoices,
         total: invoices.length,
-        hasMore: startIndex + limitNum < invoices.length
-      }
+        hasMore: startIndex + limitNum < invoices.length,
+      },
     });
-
   } catch (error: any) {
     console.error('Get invoices error:', error);
     res.status(500).json({
       success: false,
-      message: 'Server error fetching invoices'
+      message: 'Server error fetching invoices',
     });
   }
 };
@@ -170,11 +168,11 @@ export const getUserInvoices = async (req: AuthRequest, res: Response) => {
 export const getUserSupportTickets = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.user?.id;
-    
+
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: 'User not authenticated'
+        message: 'User not authenticated',
       });
     }
     const { status, limit = 10, offset = 0 } = req.query;
@@ -199,15 +197,14 @@ export const getUserSupportTickets = async (req: AuthRequest, res: Response) => 
       data: {
         tickets: paginatedTickets,
         total: tickets.length,
-        hasMore: startIndex + limitNum < tickets.length
-      }
+        hasMore: startIndex + limitNum < tickets.length,
+      },
     });
-
   } catch (error: any) {
     console.error('Get support tickets error:', error);
     res.status(500).json({
       success: false,
-      message: 'Server error fetching support tickets'
+      message: 'Server error fetching support tickets',
     });
   }
 };
@@ -218,11 +215,11 @@ export const getUserSupportTickets = async (req: AuthRequest, res: Response) => 
 export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
   try {
     const userId = req.user?.id;
-    
+
     if (!userId) {
       return res.status(401).json({
         success: false,
-        message: 'User not authenticated'
+        message: 'User not authenticated',
       });
     }
     const { period = '30' } = req.query;
@@ -232,10 +229,11 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
     const startDate = new Date();
     startDate.setDate(endDate.getDate() - days);
 
-    const analytics = await clientAnalyticsStore.findAll((a: ClientAnalytics) => 
-      a.userId === userId && 
-      new Date(a.metricDate) >= startDate && 
-      new Date(a.metricDate) <= endDate
+    const analytics = await clientAnalyticsStore.findAll(
+      (a: ClientAnalytics) =>
+        a.userId === userId &&
+        new Date(a.metricDate) >= startDate &&
+        new Date(a.metricDate) <= endDate
     );
 
     // Sort by date
@@ -249,23 +247,27 @@ export const getUserAnalytics = async (req: AuthRequest, res: Response) => {
       data: {
         analytics,
         trends,
-        period: days
-      }
+        period: days,
+      },
     });
-
   } catch (error: any) {
     console.error('Get analytics error:', error);
     res.status(500).json({
       success: false,
-      message: 'Server error fetching analytics'
+      message: 'Server error fetching analytics',
     });
   }
 };
 
 // Helper function to generate notifications
-async function generateNotifications(userId: string, projects: Project[], invoices: Invoice[], tickets: SupportTicket[]) {
+async function generateNotifications(
+  userId: string,
+  projects: Project[],
+  invoices: Invoice[],
+  tickets: SupportTicket[]
+) {
   const notifications = [];
-  
+
   // Project milestones
   const nearCompletionProjects = projects.filter(p => p.progress >= 75 && p.status !== 'completed');
   for (const project of nearCompletionProjects) {
@@ -278,8 +280,8 @@ async function generateNotifications(userId: string, projects: Project[], invoic
       read: false,
       action: {
         label: 'View Project',
-        url: `/dashboard/projects/${project.id}`
-      }
+        url: `/dashboard/projects/${project.id}`,
+      },
     });
   }
 
@@ -296,18 +298,16 @@ async function generateNotifications(userId: string, projects: Project[], invoic
       read: false,
       action: {
         label: 'Pay Invoice',
-        url: `/dashboard/invoices/${invoice.id}`
-      }
+        url: `/dashboard/invoices/${invoice.id}`,
+      },
     });
   }
 
   // Due soon invoices (3 days)
   const threeDaysFromNow = new Date();
   threeDaysFromNow.setDate(threeDaysFromNow.getDate() + 3);
-  const dueSoonInvoices = invoices.filter(i => 
-    i.status === 'pending' && 
-    new Date(i.dueDate) <= threeDaysFromNow && 
-    i.dueDate >= today
+  const dueSoonInvoices = invoices.filter(
+    i => i.status === 'pending' && new Date(i.dueDate) <= threeDaysFromNow && i.dueDate >= today
   );
   for (const invoice of dueSoonInvoices) {
     notifications.push({
@@ -319,8 +319,8 @@ async function generateNotifications(userId: string, projects: Project[], invoic
       read: false,
       action: {
         label: 'Pay Invoice',
-        url: `/dashboard/invoices/${invoice.id}`
-      }
+        url: `/dashboard/invoices/${invoice.id}`,
+      },
     });
   }
 
@@ -336,8 +336,8 @@ async function generateNotifications(userId: string, projects: Project[], invoic
       read: false,
       action: {
         label: 'View Tickets',
-        url: '/dashboard/support'
-      }
+        url: '/dashboard/support',
+      },
     });
   }
 
@@ -350,7 +350,7 @@ function calculateTrends(analytics: ClientAnalytics[]) {
     return {
       projectGrowth: 0,
       investmentGrowth: 0,
-      satisfactionTrend: 0
+      satisfactionTrend: 0,
     };
   }
 
@@ -358,14 +358,15 @@ function calculateTrends(analytics: ClientAnalytics[]) {
   const previous = analytics[analytics.length - 2];
 
   const projectGrowth = latest.totalProjects - previous.totalProjects;
-  const investmentGrowth = previous.totalInvestment > 0 
-    ? ((latest.totalInvestment - previous.totalInvestment) / previous.totalInvestment) * 100
-    : 0;
+  const investmentGrowth =
+    previous.totalInvestment > 0
+      ? ((latest.totalInvestment - previous.totalInvestment) / previous.totalInvestment) * 100
+      : 0;
   const satisfactionTrend = latest.satisfactionScore - previous.satisfactionScore;
 
   return {
     projectGrowth,
     investmentGrowth: Math.round(investmentGrowth * 100) / 100,
-    satisfactionTrend: Math.round(satisfactionTrend * 100) / 100
+    satisfactionTrend: Math.round(satisfactionTrend * 100) / 100,
   };
 }

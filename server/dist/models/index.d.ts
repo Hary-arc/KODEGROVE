@@ -6,30 +6,32 @@ import { SupportTicket } from './SupportTicket.js';
 import { ClientAnalytics } from './ClientAnalytics.js';
 import { DataStore } from '../utils/dataStore.js';
 interface IService {
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    features: string[];
-    createdAt: string;
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  features: string[];
+  createdAt: string;
 }
 declare class Service implements IService {
-    id: string;
-    title: string;
-    description: string;
-    price: number;
-    features: string[];
-    createdAt: string;
-    constructor(data: Partial<IService> & {
-        title: string;
-        description: string;
-        price: number;
-    });
-    validate(): {
-        isValid: boolean;
-        errors: string[];
-    };
-    toJSON(): IService;
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  features: string[];
+  createdAt: string;
+  constructor(
+    data: Partial<IService> & {
+      title: string;
+      description: string;
+      price: number;
+    }
+  );
+  validate(): {
+    isValid: boolean;
+    errors: string[];
+  };
+  toJSON(): IService;
 }
 export declare const userStore: DataStore<User>;
 export declare const blogStore: DataStore<Blog>;

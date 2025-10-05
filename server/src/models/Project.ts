@@ -1,11 +1,17 @@
-
 export interface IProject {
   id: string;
   userId: string;
   name: string;
   slug: string;
   type: 'website' | 'mobile' | 'ecommerce' | 'saas' | 'consulting' | 'branding';
-  status: 'planning' | 'development' | 'testing' | 'deployment' | 'completed' | 'on-hold' | 'cancelled';
+  status:
+    | 'planning'
+    | 'development'
+    | 'testing'
+    | 'deployment'
+    | 'completed'
+    | 'on-hold'
+    | 'cancelled';
   priority: 'low' | 'medium' | 'high' | 'urgent';
   progress: number;
   budget: number;
@@ -46,7 +52,14 @@ export class Project implements IProject {
   name: string;
   slug: string;
   type: 'website' | 'mobile' | 'ecommerce' | 'saas' | 'consulting' | 'branding';
-  status: 'planning' | 'development' | 'testing' | 'deployment' | 'completed' | 'on-hold' | 'cancelled';
+  status:
+    | 'planning'
+    | 'development'
+    | 'testing'
+    | 'deployment'
+    | 'completed'
+    | 'on-hold'
+    | 'cancelled';
   priority: 'low' | 'medium' | 'high' | 'urgent';
   progress: number;
   budget: number;
@@ -60,13 +73,15 @@ export class Project implements IProject {
   createdAt: string;
   updatedAt: string;
 
-  constructor(data: Partial<IProject> & { 
-    userId: string; 
-    name: string; 
-    type: IProject['type']; 
-    budget: number;
-    startDate: string;
-  }) {
+  constructor(
+    data: Partial<IProject> & {
+      userId: string;
+      name: string;
+      type: IProject['type'];
+      budget: number;
+      startDate: string;
+    }
+  ) {
     this.id = data.id || crypto.randomUUID();
     this.userId = data.userId;
     this.name = data.name;
@@ -88,10 +103,14 @@ export class Project implements IProject {
   }
 
   private generateSlug(name: string): string {
-    return name
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '') + '-' + Date.now();
+    return (
+      name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '') +
+      '-' +
+      Date.now()
+    );
   }
 
   validate(): { isValid: boolean; errors: string[] } {
@@ -123,7 +142,7 @@ export class Project implements IProject {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -131,7 +150,7 @@ export class Project implements IProject {
     if (newProgress >= 0 && newProgress <= 100) {
       this.progress = newProgress;
       this.updatedAt = new Date().toISOString();
-      
+
       if (newProgress === 100 && this.status !== 'completed') {
         this.status = 'completed';
         this.actualCompletion = new Date().toISOString().split('T')[0];
@@ -165,7 +184,7 @@ export class Project implements IProject {
       requirements: this.requirements,
       deliverables: this.deliverables,
       createdAt: this.createdAt,
-      updatedAt: this.updatedAt
+      updatedAt: this.updatedAt,
     };
   }
 }

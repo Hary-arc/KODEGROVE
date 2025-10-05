@@ -1,36 +1,30 @@
+'use client';
 
-'use client'
-
-import React from 'react'
-import { motion } from 'framer-motion'
+import React from 'react';
+import { motion } from 'framer-motion';
 //import { Outlet } from 'react-router-dom'
-import { 
-  Settings, 
-  LogOut, 
-  Crown,
-  User as UserIcon
-} from 'lucide-react'
-import { Button } from '../../components/ui/button'
-import { authUtils } from '../../utils/auth'
+import { Settings, LogOut, Crown, User as UserIcon } from 'lucide-react';
+import { Button } from '../../components/ui/button';
+import { authUtils } from '../../utils/auth';
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
   user?: {
-    name: string
-    email: string
-    avatar?: string
-    tier: string
-    createdAt: string
-  }
+    name: string;
+    email: string;
+    avatar?: string;
+    tier: string;
+    createdAt: string;
+  };
 }
 
 export function DashboardLayout({ children, user }: DashboardLayoutProps) {
   const getGreeting = () => {
-    const hour = new Date().getHours()
-    if (hour < 12) return 'Good morning'
-    if (hour < 18) return 'Good afternoon'
-    return 'Good evening'
-  }
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
 
   if (!user) {
     return (
@@ -40,7 +34,7 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
           <p className="text-gray-400">Loading user data...</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -52,11 +46,7 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center overflow-hidden">
                 {user.avatar ? (
-                  <img 
-                    src={user.avatar} 
-                    alt={user.name} 
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-white text-lg font-bold">
                     {user.name.charAt(0).toUpperCase()}
@@ -65,15 +55,20 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">
-                  {getGreeting()}, {user.name.split(' ')[0]}! 
+                  {getGreeting()}, {user.name.split(' ')[0]}!
                 </h1>
                 <p className="text-sm text-gray-400">
-                  {new Date().toLocaleDateString('en-US', { 
+                  {new Date().toLocaleDateString('en-US', {
                     weekday: 'long',
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                  })} • Member since {new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}{' '}
+                  • Member since{' '}
+                  {new Date(user.createdAt).toLocaleDateString('en-US', {
+                    month: 'long',
+                    year: 'numeric',
+                  })}
                 </p>
               </div>
             </div>
@@ -88,13 +83,13 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
                 <Settings className="w-4 h-4" />
               </Button>
 
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 className="text-gray-400 hover:text-white"
                 onClick={() => {
-                  authUtils.logout()
-                  window.dispatchEvent(new Event('auth-changed'))
+                  authUtils.logout();
+                  window.dispatchEvent(new Event('auth-changed'));
                 }}
               >
                 <LogOut className="w-4 h-4" />
@@ -105,9 +100,7 @@ export function DashboardLayout({ children, user }: DashboardLayoutProps) {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 lg:px-8 py-8 mt-6">
-        {children}
-      </main>
+      <main className="max-w-7xl mx-auto px-6 lg:px-8 py-8 mt-6">{children}</main>
     </div>
-  )
+  );
 }

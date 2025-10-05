@@ -1,64 +1,63 @@
-
 // Dashboard data structure
 export interface Project {
-  id: string
-  name: string
-  type: 'website' | 'mobile' | 'ecommerce' | 'saas' | 'consulting'
-  status: 'planning' | 'development' | 'testing' | 'deployment' | 'completed' | 'on-hold'
-  progress: number
-  startDate: string
-  expectedCompletion: string
-  budget: number
-  spent: number
-  description: string
-  team: string[]
-  lastUpdate: string
-  priority: 'low' | 'medium' | 'high' | 'urgent'
+  id: string;
+  name: string;
+  type: 'website' | 'mobile' | 'ecommerce' | 'saas' | 'consulting';
+  status: 'planning' | 'development' | 'testing' | 'deployment' | 'completed' | 'on-hold';
+  progress: number;
+  startDate: string;
+  expectedCompletion: string;
+  budget: number;
+  spent: number;
+  description: string;
+  team: string[];
+  lastUpdate: string;
+  priority: 'low' | 'medium' | 'high' | 'urgent';
 }
 
 export interface Invoice {
-  id: string
-  projectId: string
-  amount: number
-  status: 'pending' | 'paid' | 'overdue' | 'cancelled'
-  dueDate: string
-  createdDate: string
-  description: string
+  id: string;
+  projectId: string;
+  amount: number;
+  status: 'pending' | 'paid' | 'overdue' | 'cancelled';
+  dueDate: string;
+  createdDate: string;
+  description: string;
 }
 
 export interface SupportTicket {
-  id: string
-  title: string
-  status: 'open' | 'in-progress' | 'resolved' | 'closed'
-  priority: 'low' | 'medium' | 'high' | 'urgent'
-  createdDate: string
-  lastResponse: string
-  category: 'technical' | 'billing' | 'general' | 'feature-request'
-  messages: number
+  id: string;
+  title: string;
+  status: 'open' | 'in-progress' | 'resolved' | 'closed';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  createdDate: string;
+  lastResponse: string;
+  category: 'technical' | 'billing' | 'general' | 'feature-request';
+  messages: number;
 }
 
 export interface Notification {
-  id: string
-  title: string
-  message: string
-  type: 'info' | 'success' | 'warning' | 'error'
-  timestamp: string
-  read: boolean
+  id: string;
+  title: string;
+  message: string;
+  type: 'info' | 'success' | 'warning' | 'error';
+  timestamp: string;
+  read: boolean;
   action?: {
-    label: string
-    url: string
-  }
+    label: string;
+    url: string;
+  };
 }
 
 export interface ClientStats {
-  totalProjects: number
-  activeProjects: number
-  completedProjects: number
-  totalInvestment: number
-  onTimeDelivery: number
-  satisfactionScore: number
-  avgProjectDuration: number
-  nextMilestone: string
+  totalProjects: number;
+  activeProjects: number;
+  completedProjects: number;
+  totalInvestment: number;
+  onTimeDelivery: number;
+  satisfactionScore: number;
+  avgProjectDuration: number;
+  nextMilestone: string;
 }
 
 // Mock data for development
@@ -68,11 +67,12 @@ export const mockUser = {
   email: 'sarah@techcorp.com',
   company: 'TechCorp Solutions',
   phone: '+1 (555) 123-4567',
-  avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+  avatar:
+    'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
   joinDate: '2023-01-15',
   tier: 'Premium' as const,
-  timezone: 'PST'
-}
+  timezone: 'PST',
+};
 
 export const mockProjects: Project[] = [
   {
@@ -85,10 +85,11 @@ export const mockProjects: Project[] = [
     expectedCompletion: '2024-03-15',
     budget: 85000,
     spent: 63750,
-    description: 'Complete redesign of the e-commerce platform with modern UI/UX and enhanced performance.',
+    description:
+      'Complete redesign of the e-commerce platform with modern UI/UX and enhanced performance.',
     team: ['Alex Rivera', 'Jordan Kim', 'Casey Chen'],
     lastUpdate: '2024-02-28',
-    priority: 'high'
+    priority: 'high',
   },
   {
     id: 'proj-2',
@@ -103,7 +104,7 @@ export const mockProjects: Project[] = [
     description: 'Native iOS and Android app for customer engagement and sales.',
     team: ['Taylor Park', 'Morgan Davis'],
     lastUpdate: '2024-01-25',
-    priority: 'urgent'
+    priority: 'urgent',
   },
   {
     id: 'proj-3',
@@ -118,7 +119,7 @@ export const mockProjects: Project[] = [
     description: 'Comprehensive SEO audit and optimization for improved search rankings.',
     team: ['Riley Johnson'],
     lastUpdate: '2023-12-01',
-    priority: 'medium'
+    priority: 'medium',
   },
   {
     id: 'proj-4',
@@ -133,9 +134,9 @@ export const mockProjects: Project[] = [
     description: 'Modern website refresh with improved user experience and mobile optimization.',
     team: ['Avery Wilson'],
     lastUpdate: '2024-02-20',
-    priority: 'low'
-  }
-]
+    priority: 'low',
+  },
+];
 
 export const mockInvoices: Invoice[] = [
   {
@@ -145,7 +146,7 @@ export const mockInvoices: Invoice[] = [
     status: 'paid',
     dueDate: '2024-02-15',
     createdDate: '2024-01-15',
-    description: 'E-Commerce Platform - 50% milestone payment'
+    description: 'E-Commerce Platform - 50% milestone payment',
   },
   {
     id: 'inv-2',
@@ -154,7 +155,7 @@ export const mockInvoices: Invoice[] = [
     status: 'pending',
     dueDate: '2024-03-10',
     createdDate: '2024-02-10',
-    description: 'Mobile App Development - Final payment'
+    description: 'Mobile App Development - Final payment',
   },
   {
     id: 'inv-3',
@@ -163,9 +164,9 @@ export const mockInvoices: Invoice[] = [
     status: 'overdue',
     dueDate: '2024-02-28',
     createdDate: '2024-01-28',
-    description: 'Brand Website - Initial payment'
-  }
-]
+    description: 'Brand Website - Initial payment',
+  },
+];
 
 export const mockSupportTickets: SupportTicket[] = [
   {
@@ -176,7 +177,7 @@ export const mockSupportTickets: SupportTicket[] = [
     createdDate: '2024-02-25',
     lastResponse: '2024-02-26',
     category: 'technical',
-    messages: 4
+    messages: 4,
   },
   {
     id: 'ticket-2',
@@ -186,7 +187,7 @@ export const mockSupportTickets: SupportTicket[] = [
     createdDate: '2024-02-20',
     lastResponse: '2024-02-21',
     category: 'feature-request',
-    messages: 2
+    messages: 2,
   },
   {
     id: 'ticket-3',
@@ -196,9 +197,9 @@ export const mockSupportTickets: SupportTicket[] = [
     createdDate: '2024-02-10',
     lastResponse: '2024-02-12',
     category: 'billing',
-    messages: 6
-  }
-]
+    messages: 6,
+  },
+];
 
 export const mockNotifications: Notification[] = [
   {
@@ -210,8 +211,8 @@ export const mockNotifications: Notification[] = [
     read: false,
     action: {
       label: 'View Project',
-      url: '/dashboard/projects/proj-1'
-    }
+      url: '/dashboard/projects/proj-1',
+    },
   },
   {
     id: 'notif-2',
@@ -222,8 +223,8 @@ export const mockNotifications: Notification[] = [
     read: false,
     action: {
       label: 'Pay Invoice',
-      url: '/dashboard/billing/inv-2'
-    }
+      url: '/dashboard/billing/inv-2',
+    },
   },
   {
     id: 'notif-3',
@@ -234,8 +235,8 @@ export const mockNotifications: Notification[] = [
     read: true,
     action: {
       label: 'View Ticket',
-      url: '/dashboard/support/ticket-1'
-    }
+      url: '/dashboard/support/ticket-1',
+    },
   },
   {
     id: 'notif-4',
@@ -243,9 +244,9 @@ export const mockNotifications: Notification[] = [
     message: 'Your account has been upgraded to Premium with exclusive benefits',
     type: 'success',
     timestamp: '2024-02-25T09:00:00Z',
-    read: true
-  }
-]
+    read: true,
+  },
+];
 
 export const mockStats: ClientStats = {
   totalProjects: 4,
@@ -255,8 +256,8 @@ export const mockStats: ClientStats = {
   onTimeDelivery: 95,
   satisfactionScore: 4.8,
   avgProjectDuration: 4.2,
-  nextMilestone: 'Mobile App Launch - March 5th'
-}
+  nextMilestone: 'Mobile App Launch - March 5th',
+};
 
 // Utility functions
 export const formatCurrency = (amount: number): string => {
@@ -265,43 +266,43 @@ export const formatCurrency = (amount: number): string => {
     currency: 'USD',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(amount)
-}
+  }).format(amount);
+};
 
 export const formatDate = (dateString: string): string => {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
-  })
-}
+    day: 'numeric',
+  });
+};
 
 export const getStatusColor = (status: string): string => {
   const colors: Record<string, string> = {
-    'paid': 'text-green-400',
-    'pending': 'text-yellow-400',
-    'overdue': 'text-red-400',
-    'cancelled': 'text-gray-400',
-    'open': 'text-blue-400',
+    paid: 'text-green-400',
+    pending: 'text-yellow-400',
+    overdue: 'text-red-400',
+    cancelled: 'text-gray-400',
+    open: 'text-blue-400',
     'in-progress': 'text-purple-400',
-    'resolved': 'text-green-400',
-    'closed': 'text-gray-400',
-    'planning': 'text-blue-400',
-    'development': 'text-yellow-400',
-    'testing': 'text-orange-400',
-    'deployment': 'text-purple-400',
-    'completed': 'text-green-400',
-    'on-hold': 'text-gray-400'
-  }
-  return colors[status] || 'text-gray-400'
-}
+    resolved: 'text-green-400',
+    closed: 'text-gray-400',
+    planning: 'text-blue-400',
+    development: 'text-yellow-400',
+    testing: 'text-orange-400',
+    deployment: 'text-purple-400',
+    completed: 'text-green-400',
+    'on-hold': 'text-gray-400',
+  };
+  return colors[status] || 'text-gray-400';
+};
 
 export const getPriorityColor = (priority: string): string => {
   const colors = {
     low: 'text-green-400',
     medium: 'text-yellow-400',
     high: 'text-orange-400',
-    urgent: 'text-red-400'
-  }
-  return colors[priority as keyof typeof colors] || 'text-gray-400'
-}
+    urgent: 'text-red-400',
+  };
+  return colors[priority as keyof typeof colors] || 'text-gray-400';
+};

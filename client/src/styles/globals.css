@@ -133,7 +133,7 @@
  * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
  */
 @layer base {
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
     h1 {
       font-size: var(--text-2xl);
       font-weight: var(--font-weight-medium);
@@ -201,7 +201,6 @@ html {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
@@ -231,7 +230,8 @@ html {
 }
 
 @keyframes serviceIconFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -272,7 +272,6 @@ html {
   left: 100%;
 }
 
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -295,50 +294,52 @@ html {
 
 /* Hypnotic background animations */
 @keyframes float {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg); 
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
   }
-  50% { 
-    transform: translateY(-20px) rotate(180deg); 
+  50% {
+    transform: translateY(-20px) rotate(180deg);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { 
-    opacity: 0.4; 
-    transform: scale(1); 
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
   }
-  50% { 
-    opacity: 0.8; 
-    transform: scale(1.1); 
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
   }
 }
 
 /* Enhanced Marquee animations for different directions */
 @keyframes marquee {
-  0% { 
-    transform: translateX(0%); 
+  0% {
+    transform: translateX(0%);
   }
-  100% { 
-    transform: translateX(-50%); 
+  100% {
+    transform: translateX(-50%);
   }
 }
 
 @keyframes marquee-right-to-left {
-  0% { 
-    transform: translateX(0%); 
+  0% {
+    transform: translateX(0%);
   }
-  100% { 
-    transform: translateX(-100%); 
+  100% {
+    transform: translateX(-100%);
   }
 }
 
 @keyframes marquee-left-to-right {
-  0% { 
-    transform: translateX(-100%); 
+  0% {
+    transform: translateX(-100%);
   }
-  100% { 
-    transform: translateX(100%); 
+  100% {
+    transform: translateX(100%);
   }
 }
 
@@ -574,7 +575,11 @@ body.scroll-lock {
 /* Override base styles for the dark theme */
 @layer base {
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -596,41 +601,50 @@ body.scroll-lock {
 
 /* Portfolio specific animations */
 @keyframes portfolioHover {
-  0% { 
-    transform: translateY(0) scale(1); 
+  0% {
+    transform: translateY(0) scale(1);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
-  100% { 
-    transform: translateY(-8px) scale(1.02); 
+  100% {
+    transform: translateY(-8px) scale(1.02);
     box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
   }
 }
 
 @keyframes imageZoom {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
 }
 
 @keyframes overlayFade {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes badgeFloat {
-  0%, 100% { 
-    transform: translateY(0) rotate(0deg); 
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
   }
-  50% { 
-    transform: translateY(-5px) rotate(2deg); 
+  50% {
+    transform: translateY(-5px) rotate(2deg);
   }
 }
 
 @keyframes shimmer {
-  0% { 
-    background-position: -200px 0; 
+  0% {
+    background-position: -200px 0;
   }
-  100% { 
-    background-position: calc(200px + 100%) 0; 
+  100% {
+    background-position: calc(200px + 100%) 0;
   }
 }
 
@@ -669,7 +683,9 @@ body.scroll-lock {
 
 /* Masonry grid enhancements */
 .masonry-item {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease;
 }
 
 .masonry-item:hover {
@@ -692,14 +708,14 @@ body.scroll-lock {
 
 /* Floating action button pulse */
 @keyframes fabPulse {
-  0% { 
-    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); 
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
   }
-  70% { 
-    box-shadow: 0 0 0 20px rgba(139, 92, 246, 0); 
+  70% {
+    box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
   }
-  100% { 
-    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); 
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
   }
 }
 
@@ -778,15 +794,15 @@ body.scroll-lock {
   .animate-marquee {
     animation-duration: 20s;
   }
-  
+
   .magnetic:hover {
     transform: translateY(-2px);
   }
-  
+
   .team-member:hover {
     transform: translateY(-4px);
   }
-  
+
   .value-card:hover {
     transform: translateY(-4px) scale(1.01);
   }
@@ -909,7 +925,8 @@ body.scroll-lock {
 }
 
 @keyframes floatPin {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
   50% {
@@ -954,7 +971,9 @@ body.scroll-lock {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .btn-ripple:hover::before {
@@ -987,7 +1006,7 @@ body.scroll-lock {
 
 .form-field input:not(:placeholder-shown) + .form-label,
 .form-field textarea:not(:placeholder-shown) + .form-label,
-.form-field select:not([value=""]) + .form-label {
+.form-field select:not([value='']) + .form-label {
   transform: translateY(-1.5rem) scale(0.85);
   color: #a855f7;
   background: #0f172a;
@@ -1032,7 +1051,8 @@ body.scroll-lock {
 }
 
 @keyframes perkFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   25% {
@@ -1047,7 +1067,8 @@ body.scroll-lock {
 }
 
 @keyframes iconBounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1) rotate(0deg);
   }
   50% {
@@ -1089,7 +1110,8 @@ body.scroll-lock {
 }
 
 @keyframes badgeGlow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
   }
   50% {
@@ -1191,7 +1213,7 @@ body.scroll-lock {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.accordion-content[data-state="open"] {
+.accordion-content[data-state='open'] {
   animation: accordionSlide 0.3s ease-out;
 }
 
@@ -1265,21 +1287,20 @@ body.scroll-lock {
 }
 .glow-on-hover {
   position: relative; /* Needed for shadows */
-  z-index: 1;         /* Raise above siblings */
+  z-index: 1; /* Raise above siblings */
   transform-style: flat !important; /* Optional: try to disable 3d for glow layer */
 }
-
 
 /* Responsive adjustments for careers page */
 @media (max-width: 768px) {
   .culture-grid:hover {
     transform: translateY(-4px) scale(1.01);
   }
-  
+
   .perk-card:hover {
     transform: translateY(-4px);
   }
-  
+
   .job-listing:hover {
     transform: translateY(-2px);
   }
@@ -1302,7 +1323,7 @@ body.scroll-lock {
     padding: 0.75rem;
     font-size: 0.875rem;
   }
-  
+
   .responsive-card h3 {
     font-size: 1rem;
     line-height: 1.25;
@@ -1454,7 +1475,7 @@ body.scroll-lock {
   .responsive-card:hover {
     transform: none;
   }
-  
+
   .responsive-card:active {
     transform: scale(0.98);
     transition: transform 0.1s ease;
@@ -1479,7 +1500,7 @@ body.scroll-lock {
     padding: 1rem;
     margin-bottom: 1rem;
   }
-  
+
   .responsive-card * {
     color: black !important;
     background: transparent !important;
@@ -1493,7 +1514,7 @@ body.scroll-lock {
     background: var(--background);
     color: var(--foreground);
   }
-  
+
   .responsive-card:hover {
     border-color: var(--primary);
   }
@@ -1508,7 +1529,7 @@ body.scroll-lock {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .responsive-card:hover {
     transform: none !important;
   }
@@ -1519,7 +1540,7 @@ body.scroll-lock {
   .responsive-card {
     border-color: rgba(255, 255, 255, 0.1);
   }
-  
+
   .responsive-card:hover {
     border-color: rgba(255, 255, 255, 0.3);
     background-color: rgba(255, 255, 255, 0.05);
@@ -1528,16 +1549,20 @@ body.scroll-lock {
 
 /* Universal Floating Nav Enhancements */
 @keyframes fabGlow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6), 0 0 50px rgba(6, 182, 212, 0.3);
+    box-shadow:
+      0 0 30px rgba(139, 92, 246, 0.6),
+      0 0 50px rgba(6, 182, 212, 0.3);
   }
 }
 
 @keyframes floatUpDown {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -1576,10 +1601,7 @@ body.scroll-lock {
 }
 
 .calculator-price-display {
-  background: linear-gradient(135deg, 
-    rgba(139, 92, 246, 0.1) 0%, 
-    rgba(6, 182, 212, 0.1) 100%
-  );
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
   border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
@@ -1615,7 +1637,8 @@ body.scroll-lock {
 
 /* Support button special animation */
 @keyframes supportBounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
   25% {
@@ -1639,12 +1662,12 @@ body.scroll-lock {
     width: 56px;
     height: 56px;
   }
-  
+
   .quick-action-button {
     width: 44px;
     height: 44px;
   }
-  
+
   .calculator-feature-grid {
     grid-template-columns: 1fr;
   }
@@ -1656,7 +1679,6 @@ body.scroll-lock {
     max-height: calc(100vh - 2rem);
   }
 }
-
 
 /* Glass shine effect */
 .glass-shine-wrapper {
@@ -1710,19 +1732,19 @@ body.scroll-lock {
   .badge-glow {
     animation: none;
   }
-  
+
   * {
     transition-duration: 0.01ms !important;
   }
-  
+
   .team-member img {
     filter: grayscale(0%);
   }
-  
+
   .magnetic-strong:hover {
     transform: none;
   }
-  
+
   .culture-grid:hover,
   .perk-card:hover,
   .job-listing:hover {

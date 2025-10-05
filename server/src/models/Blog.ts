@@ -62,7 +62,7 @@ export class Blog implements IBlog {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -75,7 +75,7 @@ export class Blog implements IBlog {
       authorId: this.authorId,
       tags: this.tags,
       published: this.published,
-      createdAt: this.createdAt
+      createdAt: this.createdAt,
     };
   }
 }

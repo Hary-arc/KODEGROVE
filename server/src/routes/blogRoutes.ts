@@ -6,12 +6,13 @@ import {
   getBlog,
   createBlog,
   updateBlog,
-  deleteBlog
+  deleteBlog,
 } from '../controllers/blogController.js';
 
 const router = express.Router();
 
-router.route('/')
+router
+  .route('/')
   .get(getBlogs)
   .post(
     protect,
@@ -19,9 +20,8 @@ router.route('/')
     createBlog as unknown as RequestHandler //  QUICK FIX
   );
 
-
-
-router.route('/:id')
+router
+  .route('/:id')
   .get(getBlog)
   .delete(protect, authorize('admin'), deleteBlog)
   .put(

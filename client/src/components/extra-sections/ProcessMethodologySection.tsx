@@ -1,10 +1,10 @@
-'use client'
-import React from 'react'
-import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card'
-import { Badge } from '../ui/badge'
-import { Button } from '../ui/button'
-import { 
+'use client';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ResponsiveCard, ResponsiveCardGrid } from '../ui/responsive-card';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import {
   Search,
   Lightbulb,
   Palette,
@@ -20,109 +20,131 @@ import {
   Shield,
   TrendingUp,
   ArrowRight,
-  Play
-} from 'lucide-react'
+  Play,
+} from 'lucide-react';
 
 // Development process steps
 const processSteps = [
   {
     phase: '01',
     title: 'Discovery & Research',
-    description: 'We dive deep into your business goals, target audience, and technical requirements to create a comprehensive project roadmap.',
+    description:
+      'We dive deep into your business goals, target audience, and technical requirements to create a comprehensive project roadmap.',
     icon: Search,
     duration: '1-2 weeks',
-    deliverables: ['Project Scope', 'Technical Requirements', 'Timeline & Budget', 'Risk Assessment'],
-    gradient: 'from-blue-500 to-cyan-500'
+    deliverables: [
+      'Project Scope',
+      'Technical Requirements',
+      'Timeline & Budget',
+      'Risk Assessment',
+    ],
+    gradient: 'from-blue-500 to-cyan-500',
   },
   {
     phase: '02',
     title: 'Strategy & Planning',
-    description: 'Our team develops a detailed project plan with clear milestones, resource allocation, and success metrics.',
+    description:
+      'Our team develops a detailed project plan with clear milestones, resource allocation, and success metrics.',
     icon: Lightbulb,
     duration: '1 week',
     deliverables: ['Project Plan', 'Resource Allocation', 'Success Metrics', 'Communication Plan'],
-    gradient: 'from-purple-500 to-pink-500'
+    gradient: 'from-purple-500 to-pink-500',
   },
   {
     phase: '03',
     title: 'Design & Prototyping',
-    description: 'We create intuitive user experiences and stunning visual designs that align with your brand and user needs.',
+    description:
+      'We create intuitive user experiences and stunning visual designs that align with your brand and user needs.',
     icon: Palette,
     duration: '2-3 weeks',
     deliverables: ['Wireframes', 'UI/UX Design', 'Interactive Prototypes', 'Design System'],
-    gradient: 'from-green-500 to-emerald-500'
+    gradient: 'from-green-500 to-emerald-500',
   },
   {
     phase: '04',
     title: 'Development',
-    description: 'Our expert developers bring your vision to life using cutting-edge technologies and best practices.',
+    description:
+      'Our expert developers bring your vision to life using cutting-edge technologies and best practices.',
     icon: Code,
     duration: '4-8 weeks',
     deliverables: ['Clean Code', 'Documentation', 'Version Control', 'Progress Reports'],
-    gradient: 'from-orange-500 to-red-500'
+    gradient: 'from-orange-500 to-red-500',
   },
   {
     phase: '05',
     title: 'Testing & QA',
-    description: 'Rigorous testing ensures your application is bug-free, secure, and performs optimally across all platforms.',
+    description:
+      'Rigorous testing ensures your application is bug-free, secure, and performs optimally across all platforms.',
     icon: TestTube,
     duration: '1-2 weeks',
     deliverables: ['Test Reports', 'Bug Fixes', 'Performance Optimization', 'Security Audit'],
-    gradient: 'from-indigo-500 to-purple-500'
+    gradient: 'from-indigo-500 to-purple-500',
   },
   {
     phase: '06',
     title: 'Launch & Deployment',
-    description: 'We handle the complete deployment process and ensure a smooth launch of your application.',
+    description:
+      'We handle the complete deployment process and ensure a smooth launch of your application.',
     icon: Rocket,
     duration: '1 week',
-    deliverables: ['Live Application', 'Deployment Guide', 'Launch Support', 'Performance Monitoring'],
-    gradient: 'from-pink-500 to-rose-500'
+    deliverables: [
+      'Live Application',
+      'Deployment Guide',
+      'Launch Support',
+      'Performance Monitoring',
+    ],
+    gradient: 'from-pink-500 to-rose-500',
   },
   {
     phase: '07',
     title: 'Support & Maintenance',
-    description: 'Ongoing support and maintenance to keep your application running smoothly and up-to-date.',
+    description:
+      'Ongoing support and maintenance to keep your application running smoothly and up-to-date.',
     icon: LifeBuoy,
     duration: 'Ongoing',
-    deliverables: ['24/7 Support', 'Regular Updates', 'Performance Monitoring', 'Feature Enhancements'],
-    gradient: 'from-teal-500 to-blue-500'
-  }
-]
+    deliverables: [
+      '24/7 Support',
+      'Regular Updates',
+      'Performance Monitoring',
+      'Feature Enhancements',
+    ],
+    gradient: 'from-teal-500 to-blue-500',
+  },
+];
 
 // Methodology principles
 const principles = [
   {
     icon: Target,
     title: 'Goal-Oriented',
-    description: 'Every decision is made with your business objectives in mind'
+    description: 'Every decision is made with your business objectives in mind',
   },
   {
     icon: Users,
     title: 'Collaborative',
-    description: 'We work closely with your team throughout the entire process'
+    description: 'We work closely with your team throughout the entire process',
   },
   {
     icon: Zap,
     title: 'Agile & Iterative',
-    description: 'Flexible approach that adapts to changing requirements'
+    description: 'Flexible approach that adapts to changing requirements',
   },
   {
     icon: Shield,
     title: 'Quality Focused',
-    description: 'Rigorous testing and quality assurance at every stage'
+    description: 'Rigorous testing and quality assurance at every stage',
   },
   {
     icon: Clock,
     title: 'Time Efficient',
-    description: 'Optimized workflows to deliver projects on time'
+    description: 'Optimized workflows to deliver projects on time',
   },
   {
     icon: TrendingUp,
     title: 'Scalable Solutions',
-    description: 'Built to grow with your business needs'
-  }
-]
+    description: 'Built to grow with your business needs',
+  },
+];
 
 // Quality standards
 const qualityStandards = [
@@ -130,27 +152,27 @@ const qualityStandards = [
     standard: 'Code Review',
     description: 'Every line of code is peer-reviewed for quality and security',
     metric: '100%',
-    icon: CheckCircle
+    icon: CheckCircle,
   },
   {
     standard: 'Test Coverage',
     description: 'Comprehensive testing coverage for all critical functionality',
     metric: '95%+',
-    icon: TestTube
+    icon: TestTube,
   },
   {
     standard: 'Performance Score',
     description: 'Optimized for speed and user experience across all devices',
     metric: '90+',
-    icon: Zap
+    icon: Zap,
   },
   {
     standard: 'Security Compliance',
     description: 'Adheres to industry security standards and best practices',
     metric: 'A+',
-    icon: Shield
-  }
-]
+    icon: Shield,
+  },
+];
 
 // Timeline visualization data
 const timelinePhases = [
@@ -158,23 +180,23 @@ const timelinePhases = [
   { name: 'Design', weeks: 3, color: 'bg-purple-500' },
   { name: 'Development', weeks: 6, color: 'bg-green-500' },
   { name: 'Testing', weeks: 2, color: 'bg-orange-500' },
-  { name: 'Launch', weeks: 1, color: 'bg-pink-500' }
-]
+  { name: 'Launch', weeks: 1, color: 'bg-pink-500' },
+];
 
 interface ProcessMethodologySectionProps {
-  variant?: 'full' | 'compact' | 'minimal'
-  showTimeline?: boolean
-  showPrinciples?: boolean
-  showQuality?: boolean
+  variant?: 'full' | 'compact' | 'minimal';
+  showTimeline?: boolean;
+  showPrinciples?: boolean;
+  showQuality?: boolean;
 }
 
-export function ProcessMethodologySection({ 
-  variant = 'full', 
-  showTimeline = true, 
-  showPrinciples = true, 
-  showQuality = true 
+export function ProcessMethodologySection({
+  variant = 'full',
+  showTimeline = true,
+  showPrinciples = true,
+  showQuality = true,
 }: ProcessMethodologySectionProps) {
-  const totalWeeks = timelinePhases.reduce((sum, phase) => sum + phase.weeks, 0)
+  const totalWeeks = timelinePhases.reduce((sum, phase) => sum + phase.weeks, 0);
 
   return (
     <section className="py-16 lg:py-24 relative overflow-hidden">
@@ -185,7 +207,7 @@ export function ProcessMethodologySection({
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-12 lg:mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -199,15 +221,15 @@ export function ProcessMethodologySection({
             From Concept to Launch
           </h2>
           <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Our systematic approach ensures successful project delivery every time. 
-            Here's how we transform your ideas into exceptional digital solutions.
+            Our systematic approach ensures successful project delivery every time. Here's how we
+            transform your ideas into exceptional digital solutions.
           </p>
         </motion.div>
 
         {/* Timeline Overview */}
         {showTimeline && variant !== 'minimal' && (
           <div className="mb-16 lg:mb-20">
-            <motion.h3 
+            <motion.h3
               className="text-2xl sm:text-3xl font-bold text-white text-center mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -215,11 +237,11 @@ export function ProcessMethodologySection({
             >
               Typical Project Timeline ({totalWeeks} weeks)
             </motion.h3>
-            
+
             <ResponsiveCard variant="glass" size="full" className="p-6 lg:p-8">
               <div className="space-y-4">
                 {timelinePhases.map((phase, index) => {
-                  const widthPercentage = (phase.weeks / totalWeeks) * 100
+                  const widthPercentage = (phase.weeks / totalWeeks) * 100;
                   return (
                     <motion.div
                       key={phase.name}
@@ -238,13 +260,11 @@ export function ProcessMethodologySection({
                           transition={{ duration: 1, delay: 0.8 + index * 0.1 }}
                           className={`h-full ${phase.color} rounded-full flex items-center justify-end pr-2`}
                         >
-                          <span className="text-white text-xs font-medium">
-                            {phase.weeks}w
-                          </span>
+                          <span className="text-white text-xs font-medium">{phase.weeks}w</span>
                         </motion.div>
                       </div>
                     </motion.div>
-                  )
+                  );
                 })}
               </div>
             </ResponsiveCard>
@@ -253,7 +273,7 @@ export function ProcessMethodologySection({
 
         {/* Process Steps */}
         <div className="mb-16 lg:mb-20">
-          <motion.h3 
+          <motion.h3
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 lg:mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -261,12 +281,12 @@ export function ProcessMethodologySection({
           >
             Our Development Process
           </motion.h3>
-          
+
           <div className="space-y-8 lg:space-y-12">
             {processSteps.map((step, index) => {
-              const Icon = step.icon
-              const isEven = index % 2 === 0
-              
+              const Icon = step.icon;
+              const isEven = index % 2 === 0;
+
               return (
                 <motion.div
                   key={step.phase}
@@ -277,41 +297,43 @@ export function ProcessMethodologySection({
                 >
                   {/* Phase Number */}
                   <div className="flex-shrink-0">
-                    <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br ${step.gradient} flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-2xl`}>
+                    <div
+                      className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br ${step.gradient} flex items-center justify-center text-white font-bold text-xl sm:text-2xl shadow-2xl`}
+                    >
                       {step.phase}
                     </div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="flex-1 w-full">
-                    <ResponsiveCard
-                      variant="glass"
-                      size="full"
-                      hover={true}
-                      className="group"
-                    >
+                    <ResponsiveCard variant="glass" size="full" hover={true} className="group">
                       <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-6">
                         {/* Main Content */}
                         <div className="flex-1 mb-6 lg:mb-0">
                           <div className="flex items-center space-x-4 mb-4">
-                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+                            <div
+                              className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}
+                            >
                               <Icon className="w-6 h-6 text-white" />
                             </div>
                             <div>
                               <h4 className="text-xl sm:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors duration-300">
                                 {step.title}
                               </h4>
-                              <Badge variant="outline" className="border-purple-400/50 text-purple-400 bg-purple-400/10 text-xs mt-1">
+                              <Badge
+                                variant="outline"
+                                className="border-purple-400/50 text-purple-400 bg-purple-400/10 text-xs mt-1"
+                              >
                                 {step.duration}
                               </Badge>
                             </div>
                           </div>
-                          
+
                           <p className="text-gray-300 leading-relaxed mb-4 group-hover:text-gray-200 transition-colors duration-300">
                             {step.description}
                           </p>
                         </div>
-                        
+
                         {/* Deliverables */}
                         {variant === 'full' && (
                           <div className="lg:w-80">
@@ -330,7 +352,7 @@ export function ProcessMethodologySection({
                     </ResponsiveCard>
                   </div>
                 </motion.div>
-              )
+              );
             })}
           </div>
         </div>
@@ -338,7 +360,7 @@ export function ProcessMethodologySection({
         {/* Methodology Principles */}
         {showPrinciples && variant !== 'minimal' && (
           <div className="mb-16 lg:mb-20">
-            <motion.h3 
+            <motion.h3
               className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 lg:mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -346,10 +368,10 @@ export function ProcessMethodologySection({
             >
               Our Core Principles
             </motion.h3>
-            
+
             <ResponsiveCardGrid columns={3} gap="lg">
               {principles.map((principle, index) => {
-                const Icon = principle.icon
+                const Icon = principle.icon;
                 return (
                   <ResponsiveCard
                     key={principle.title}
@@ -363,16 +385,16 @@ export function ProcessMethodologySection({
                     <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
-                    
+
                     <h4 className="text-lg font-bold text-white mb-3 group-hover:text-purple-300 transition-colors duration-300">
                       {principle.title}
                     </h4>
-                    
+
                     <p className="text-sm text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
                       {principle.description}
                     </p>
                   </ResponsiveCard>
-                )
+                );
               })}
             </ResponsiveCardGrid>
           </div>
@@ -381,7 +403,7 @@ export function ProcessMethodologySection({
         {/* Quality Standards */}
         {showQuality && variant === 'full' && (
           <div className="mb-16 lg:mb-20">
-            <motion.h3 
+            <motion.h3
               className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 lg:mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -389,10 +411,10 @@ export function ProcessMethodologySection({
             >
               Quality Standards
             </motion.h3>
-            
+
             <ResponsiveCardGrid columns={4} gap="md">
               {qualityStandards.map((standard, index) => {
-                const Icon = standard.icon
+                const Icon = standard.icon;
                 return (
                   <ResponsiveCard
                     key={standard.standard}
@@ -406,27 +428,25 @@ export function ProcessMethodologySection({
                     <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
-                    
+
                     <div className="text-2xl font-bold text-white mb-2 group-hover:text-green-300 transition-colors duration-300">
                       {standard.metric}
                     </div>
-                    
-                    <h4 className="font-semibold text-white mb-2">
-                      {standard.standard}
-                    </h4>
-                    
+
+                    <h4 className="font-semibold text-white mb-2">{standard.standard}</h4>
+
                     <p className="text-xs text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
                       {standard.description}
                     </p>
                   </ResponsiveCard>
-                )
+                );
               })}
             </ResponsiveCardGrid>
           </div>
         )}
 
         {/* Call to Action */}
-        <motion.div 
+        <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -437,17 +457,20 @@ export function ProcessMethodologySection({
               Ready to Start Your Project?
             </h3>
             <p className="text-lg text-gray-200 mb-6 max-w-2xl mx-auto">
-              Let's discuss your requirements and create a custom development plan 
-              that fits your timeline and budget.
+              Let's discuss your requirements and create a custom development plan that fits your
+              timeline and budget.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
               <Button className="gradient-electric hover:shadow-2xl hover:shadow-purple-500/30 text-white px-8 py-3 rounded-xl font-semibold group/btn">
                 <span>Start Your Project</span>
                 <ArrowRight className="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" />
               </Button>
-              
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 backdrop-blur-xl px-8 py-3 rounded-xl font-semibold group/btn">
+
+              <Button
+                variant="outline"
+                className="border-white/20 text-white hover:bg-white/10 backdrop-blur-xl px-8 py-3 rounded-xl font-semibold group/btn"
+              >
                 <Play className="w-5 h-5 mr-2" />
                 <span>Watch Process Video</span>
               </Button>
@@ -456,7 +479,7 @@ export function ProcessMethodologySection({
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
 
-export default ProcessMethodologySection 
+export default ProcessMethodologySection;

@@ -1,44 +1,44 @@
 // Pricing data structure
 
 export interface PricingFeature {
-  name: string
-  included: boolean
-  tooltip?: string
+  name: string;
+  included: boolean;
+  tooltip?: string;
 }
 
 export interface PricingPlan {
-  id: string
-  name: string
-  tagline: string
+  id: string;
+  name: string;
+  tagline: string;
   price: {
-    monthly: number
-    annually: number
-  }
+    monthly: number;
+    annually: number;
+  };
   originalPrice?: {
-    monthly: number
-    annually: number
-  }
-  description: string
-  features: PricingFeature[]
-  buttonText: string
-  popular?: boolean
-  enterprise?: boolean
-  gradient: string
-  icon: string
+    monthly: number;
+    annually: number;
+  };
+  description: string;
+  features: PricingFeature[];
+  buttonText: string;
+  popular?: boolean;
+  enterprise?: boolean;
+  gradient: string;
+  icon: string;
 }
 
 export interface PricingAddon {
-  id: string
-  name: string
-  description: string
-  price: number
-  unit: string
-  category: string
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  unit: string;
+  category: string;
 }
 
 export interface FAQ {
-  question: string
-  answer: string
+  question: string;
+  answer: string;
 }
 
 export const pricingPlans: PricingPlan[] = [
@@ -48,9 +48,10 @@ export const pricingPlans: PricingPlan[] = [
     tagline: 'Perfect for small projects',
     price: {
       monthly: 2499,
-      annually: 24990
+      annually: 24990,
     },
-    description: 'Ideal for startups and small businesses looking to establish their digital presence.',
+    description:
+      'Ideal for startups and small businesses looking to establish their digital presence.',
     features: [
       { name: 'Up to 5 pages website', included: true },
       { name: 'Responsive design', included: true },
@@ -63,11 +64,11 @@ export const pricingPlans: PricingPlan[] = [
       { name: 'E-commerce functionality', included: false },
       { name: 'Custom animations', included: false },
       { name: 'Advanced integrations', included: false },
-      { name: 'Priority support', included: false }
+      { name: 'Priority support', included: false },
     ],
     buttonText: 'Get Started',
     gradient: 'from-blue-500 to-purple-500',
-    icon: 'Zap'
+    icon: 'Zap',
   },
   {
     id: 'professional',
@@ -75,11 +76,11 @@ export const pricingPlans: PricingPlan[] = [
     tagline: 'Most popular choice',
     price: {
       monthly: 4999,
-      annually: 49990
+      annually: 49990,
     },
     originalPrice: {
       monthly: 6999,
-      annually: 69990
+      annually: 69990,
     },
     description: 'Perfect for growing businesses that need advanced features and ongoing support.',
     features: [
@@ -96,12 +97,12 @@ export const pricingPlans: PricingPlan[] = [
       { name: 'Social media integration', included: true },
       { name: 'Performance optimization', included: true },
       { name: 'Advanced integrations', included: false },
-      { name: 'Priority support', included: false }
+      { name: 'Priority support', included: false },
     ],
     buttonText: 'Start Free Trial',
     popular: true,
     gradient: 'from-purple-500 to-pink-500',
-    icon: 'Star'
+    icon: 'Star',
   },
   {
     id: 'enterprise',
@@ -109,9 +110,10 @@ export const pricingPlans: PricingPlan[] = [
     tagline: 'For large-scale projects',
     price: {
       monthly: 9999,
-      annually: 99990
+      annually: 99990,
     },
-    description: 'Comprehensive solution for enterprises with complex requirements and high-traffic needs.',
+    description:
+      'Comprehensive solution for enterprises with complex requirements and high-traffic needs.',
     features: [
       { name: 'Unlimited pages', included: true },
       { name: 'Responsive design', included: true },
@@ -127,14 +129,14 @@ export const pricingPlans: PricingPlan[] = [
       { name: 'Priority support', included: true },
       { name: 'Dedicated account manager', included: true },
       { name: 'Custom API development', included: true },
-      { name: 'Performance monitoring', included: true }
+      { name: 'Performance monitoring', included: true },
     ],
     buttonText: 'Contact Sales',
     enterprise: true,
     gradient: 'from-cyan-500 to-blue-600',
-    icon: 'Crown'
-  }
-]
+    icon: 'Crown',
+  },
+];
 
 export const pricingAddons: PricingAddon[] = [
   {
@@ -143,7 +145,7 @@ export const pricingAddons: PricingAddon[] = [
     description: 'Add more pages to your website',
     price: 299,
     unit: 'per page',
-    category: 'content'
+    category: 'content',
   },
   {
     id: 'ecommerce-upgrade',
@@ -151,7 +153,7 @@ export const pricingAddons: PricingAddon[] = [
     description: 'Add full e-commerce functionality',
     price: 1499,
     unit: 'one-time',
-    category: 'functionality'
+    category: 'functionality',
   },
   {
     id: 'mobile-app',
@@ -159,7 +161,7 @@ export const pricingAddons: PricingAddon[] = [
     description: 'Native iOS and Android app',
     price: 4999,
     unit: 'one-time',
-    category: 'platform'
+    category: 'platform',
   },
   {
     id: 'advanced-seo',
@@ -167,7 +169,7 @@ export const pricingAddons: PricingAddon[] = [
     description: 'Comprehensive SEO optimization',
     price: 899,
     unit: 'monthly',
-    category: 'marketing'
+    category: 'marketing',
   },
   {
     id: 'maintenance',
@@ -175,7 +177,7 @@ export const pricingAddons: PricingAddon[] = [
     description: 'Ongoing updates and maintenance',
     price: 199,
     unit: 'monthly',
-    category: 'support'
+    category: 'support',
   },
   {
     id: 'custom-integration',
@@ -183,80 +185,90 @@ export const pricingAddons: PricingAddon[] = [
     description: 'Connect with third-party services',
     price: 799,
     unit: 'per integration',
-    category: 'functionality'
-  }
-]
+    category: 'functionality',
+  },
+];
 
 export const pricingFAQs: FAQ[] = [
   {
-    question: 'What\'s included in the pricing?',
-    answer: 'All plans include responsive design, SSL certificate, basic analytics setup, and ongoing support during the specified period. Higher-tier plans include additional features like e-commerce, advanced animations, and priority support.'
+    question: "What's included in the pricing?",
+    answer:
+      'All plans include responsive design, SSL certificate, basic analytics setup, and ongoing support during the specified period. Higher-tier plans include additional features like e-commerce, advanced animations, and priority support.',
   },
   {
     question: 'Can I upgrade or downgrade my plan?',
-    answer: 'Yes, you can upgrade or downgrade your plan at any time. When upgrading, you\'ll only pay the prorated difference. When downgrading, the change will take effect at your next billing cycle.'
+    answer:
+      "Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll only pay the prorated difference. When downgrading, the change will take effect at your next billing cycle.",
   },
   {
     question: 'Do you offer refunds?',
-    answer: 'We offer a 30-day money-back guarantee for all new projects. If you\'re not completely satisfied with our work within the first 30 days, we\'ll provide a full refund.'
+    answer:
+      "We offer a 30-day money-back guarantee for all new projects. If you're not completely satisfied with our work within the first 30 days, we'll provide a full refund.",
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise clients. All payments are processed securely through Stripe.'
+    answer:
+      'We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for enterprise clients. All payments are processed securely through Stripe.',
   },
   {
     question: 'How long does it take to complete a project?',
-    answer: 'Project timelines vary based on complexity and scope. Starter projects typically take 2-3 weeks, Professional projects take 4-6 weeks, and Enterprise projects can take 8-12 weeks or more depending on requirements.'
+    answer:
+      'Project timelines vary based on complexity and scope. Starter projects typically take 2-3 weeks, Professional projects take 4-6 weeks, and Enterprise projects can take 8-12 weeks or more depending on requirements.',
   },
   {
     question: 'Do you provide ongoing maintenance?',
-    answer: 'Yes, we offer ongoing maintenance and support packages. All plans include initial support (1-6 months depending on the plan), and you can purchase extended maintenance packages as needed.'
+    answer:
+      'Yes, we offer ongoing maintenance and support packages. All plans include initial support (1-6 months depending on the plan), and you can purchase extended maintenance packages as needed.',
   },
   {
     question: 'Can you work with my existing website?',
-    answer: 'Absolutely! We can redesign, rebuild, or enhance your existing website. We\'ll evaluate your current site and recommend the best approach to achieve your goals.'
+    answer:
+      "Absolutely! We can redesign, rebuild, or enhance your existing website. We'll evaluate your current site and recommend the best approach to achieve your goals.",
   },
   {
     question: 'Do you offer custom solutions?',
-    answer: 'Yes, we specialize in custom solutions tailored to your specific needs. Our Enterprise plan includes custom API development, and we can create completely bespoke solutions for unique requirements.'
+    answer:
+      'Yes, we specialize in custom solutions tailored to your specific needs. Our Enterprise plan includes custom API development, and we can create completely bespoke solutions for unique requirements.',
   },
   {
     question: 'What technologies do you use?',
-    answer: 'We use modern, cutting-edge technologies including React, Next.js, Node.js, and various cloud platforms. We always choose the best technology stack for your specific project requirements.'
+    answer:
+      'We use modern, cutting-edge technologies including React, Next.js, Node.js, and various cloud platforms. We always choose the best technology stack for your specific project requirements.',
   },
   {
     question: 'Is there a setup fee?',
-    answer: 'No, there are no hidden setup fees. The price you see is the price you pay. All initial setup, configuration, and deployment costs are included in the quoted price.'
-  }
-]
+    answer:
+      'No, there are no hidden setup fees. The price you see is the price you pay. All initial setup, configuration, and deployment costs are included in the quoted price.',
+  },
+];
 
 export const pricingStats = {
   clientsSaved: '2.5k+',
   avgROI: '320%',
   projectsDelivered: '500+',
-  satisfactionRate: '98%'
-}
+  satisfactionRate: '98%',
+};
 
 export const testimonialHighlights = [
   {
     quote: 'CodeFlow transformed our digital presence and increased our revenue by 300%.',
     author: 'Sarah Chen',
     company: 'TechStart Inc.',
-    rating: 5
+    rating: 5,
   },
   {
-    quote: 'The ROI on our investment was incredible. Best decision we\'ve made for our business.',
+    quote: "The ROI on our investment was incredible. Best decision we've made for our business.",
     author: 'Michael Rodriguez',
     company: 'Growth Ventures',
-    rating: 5
+    rating: 5,
   },
   {
     quote: 'Professional, reliable, and delivered exactly what they promised. Highly recommend!',
     author: 'Jessica Thompson',
     company: 'Bloom Marketing',
-    rating: 5
-  }
-]
+    rating: 5,
+  },
+];
 
 export const comparisonFeatures = [
   'Custom Design',
@@ -272,18 +284,18 @@ export const comparisonFeatures = [
   'API Integrations',
   'Performance Monitoring',
   'Dedicated Manager',
-  'Custom Development'
-]
+  'Custom Development',
+];
 
 export const formatPrice = (price: number): string => {
   if (price < 1000) {
-    return `$${price}`
+    return `$${price}`;
   }
-  return `$${(price / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
-}
+  return `$${(price / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+};
 
 export const calculateSavings = (monthly: number, annually: number): number => {
-  const monthlyTotal = monthly * 12
-  const savings = ((monthlyTotal - annually) / monthlyTotal) * 100
-  return Math.round(savings)
-}
+  const monthlyTotal = monthly * 12;
+  const savings = ((monthlyTotal - annually) / monthlyTotal) * 100;
+  return Math.round(savings);
+};

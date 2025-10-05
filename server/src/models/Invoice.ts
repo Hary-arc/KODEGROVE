@@ -1,4 +1,3 @@
-
 export interface IInvoice {
   id: string;
   userId: string;
@@ -41,11 +40,13 @@ export class Invoice implements IInvoice {
   createdAt: string;
   updatedAt: string;
 
-  constructor(data: Partial<IInvoice> & { 
-    userId: string; 
-    amount: number;
-    dueDate: string;
-  }) {
+  constructor(
+    data: Partial<IInvoice> & {
+      userId: string;
+      amount: number;
+      dueDate: string;
+    }
+  ) {
     this.id = data.id || crypto.randomUUID();
     this.userId = data.userId;
     this.projectId = data.projectId;
@@ -83,7 +84,7 @@ export class Invoice implements IInvoice {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -114,7 +115,7 @@ export class Invoice implements IInvoice {
       description: this.description,
       lineItems: this.lineItems,
       createdAt: this.createdAt,
-      updatedAt: this.updatedAt
+      updatedAt: this.updatedAt,
     };
   }
 }

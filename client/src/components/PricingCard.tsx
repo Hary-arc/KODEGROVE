@@ -1,57 +1,65 @@
-'use client'
-import React from 'react'
-import { motion } from 'framer-motion'
-import { ResponsiveCard, ResponsiveCardHeader, ResponsiveCardContent, ResponsiveCardFooter, ResponsiveCardTitle } from './ui/responsive-card'
-import { Button } from './ui/button'
-import { Badge } from './ui/badge'
-import { Check, X, Star, Zap, Crown, Shield } from 'lucide-react'
+'use client';
+import React from 'react';
+import { motion } from 'framer-motion';
+import {
+  ResponsiveCard,
+  ResponsiveCardHeader,
+  ResponsiveCardContent,
+  ResponsiveCardFooter,
+  ResponsiveCardTitle,
+} from './ui/responsive-card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Check, X, Star, Zap, Crown, Shield } from 'lucide-react';
 
 interface PricingFeature {
-  name: string
-  included: boolean
-  highlight?: boolean
-  description?: string
+  name: string;
+  included: boolean;
+  highlight?: boolean;
+  description?: string;
 }
 
 interface PricingCardProps {
   plan: {
-    id: string
-    name: string
-    description: string
+    id: string;
+    name: string;
+    description: string;
     price: {
-      monthly: number
-      yearly: number
-    }
-    yearlyDiscount?: number
-    icon: 'basic' | 'pro' | 'enterprise'
-    popular?: boolean
-    recommended?: boolean
-    features: PricingFeature[]
+      monthly: number;
+      yearly: number;
+    };
+    yearlyDiscount?: number;
+    icon: 'basic' | 'pro' | 'enterprise';
+    popular?: boolean;
+    recommended?: boolean;
+    features: PricingFeature[];
     limits?: {
-      projects?: number
-      storage?: string
-      users?: number
-      support?: string
-    }
-    cta: string
-    gradient: string
-  }
-  index: number
-  billingCycle: 'monthly' | 'yearly'
-  onSelectPlan?: (planId: string) => void
+      projects?: number;
+      storage?: string;
+      users?: number;
+      support?: string;
+    };
+    cta: string;
+    gradient: string;
+  };
+  index: number;
+  billingCycle: 'monthly' | 'yearly';
+  onSelectPlan?: (planId: string) => void;
 }
 
 const iconMap = {
   basic: Shield,
   pro: Zap,
-  enterprise: Crown
-}
+  enterprise: Crown,
+};
 
 export function PricingCard({ plan, index, billingCycle, onSelectPlan }: PricingCardProps) {
-  const Icon = iconMap[plan.icon]
-  const currentPrice = billingCycle === 'yearly' ? plan.price.yearly : plan.price.monthly
-  const originalYearlyPrice = plan.price.monthly * 12
-  const yearlyDiscount = plan.yearlyDiscount || Math.round(((originalYearlyPrice - plan.price.yearly) / originalYearlyPrice) * 100)
+  const Icon = iconMap[plan.icon];
+  const currentPrice = billingCycle === 'yearly' ? plan.price.yearly : plan.price.monthly;
+  const originalYearlyPrice = plan.price.monthly * 12;
+  const yearlyDiscount =
+    plan.yearlyDiscount ||
+    Math.round(((originalYearlyPrice - plan.price.yearly) / originalYearlyPrice) * 100);
 
   return (
     <ResponsiveCard
@@ -65,7 +73,9 @@ export function PricingCard({ plan, index, billingCycle, onSelectPlan }: Pricing
       {/* Popular/Recommended Badge */}
       {(plan.popular || plan.recommended) && (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
-          <Badge className={`${plan.popular ? 'gradient-electric' : 'bg-gradient-to-r from-cyan-500 to-blue-500'} text-white border-0 shadow-lg px-4 py-1`}>
+          <Badge
+            className={`${plan.popular ? 'gradient-electric' : 'bg-gradient-to-r from-cyan-500 to-blue-500'} text-white border-0 shadow-lg px-4 py-1`}
+          >
             <Star className="w-3 h-3 mr-1" />
             {plan.popular ? 'Most Popular' : 'Recommended'}
           </Badge>
@@ -73,18 +83,25 @@ export function PricingCard({ plan, index, billingCycle, onSelectPlan }: Pricing
       )}
 
       {/* Background Gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}
+      />
 
       <ResponsiveCardHeader responsive={true}>
         <div className="text-center space-y-4">
           {/* Icon */}
-          <div className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-gradient-to-br ${plan.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+          <div
+            className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-2xl bg-gradient-to-br ${plan.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}
+          >
             <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
 
           {/* Plan Name & Description */}
           <div>
-            <ResponsiveCardTitle size="xl" className="text-white group-hover:text-purple-300 transition-colors duration-300 text-center">
+            <ResponsiveCardTitle
+              size="xl"
+              className="text-white group-hover:text-purple-300 transition-colors duration-300 text-center"
+            >
               {plan.name}
             </ResponsiveCardTitle>
             <p className="text-sm sm:text-base text-gray-400 mt-2 leading-relaxed">
@@ -109,7 +126,10 @@ export function PricingCard({ plan, index, billingCycle, onSelectPlan }: Pricing
                 <span className="text-sm text-gray-500 line-through">
                   ${plan.price.monthly}/month
                 </span>
-                <Badge variant="outline" className="border-green-400/50 text-green-400 bg-green-400/10 text-xs">
+                <Badge
+                  variant="outline"
+                  className="border-green-400/50 text-green-400 bg-green-400/10 text-xs"
+                >
                   Save {yearlyDiscount}%
                 </Badge>
               </div>
@@ -145,7 +165,10 @@ export function PricingCard({ plan, index, billingCycle, onSelectPlan }: Pricing
               )}
               {plan.limits.support && (
                 <div className="text-center">
-                  <div className="text-lg sm:text-xl font-bold text-white truncate" title={plan.limits.support}>
+                  <div
+                    className="text-lg sm:text-xl font-bold text-white truncate"
+                    title={plan.limits.support}
+                  >
                     {plan.limits.support}
                   </div>
                   <div className="text-xs text-gray-400">Support</div>
@@ -162,7 +185,7 @@ export function PricingCard({ plan, index, billingCycle, onSelectPlan }: Pricing
           <h4 className="text-base sm:text-lg font-semibold text-white text-center">
             Features Included:
           </h4>
-          
+
           <div className="grid grid-cols-1 gap-2 sm:gap-3">
             {plan.features.map((feature, i) => (
               <motion.div
@@ -181,11 +204,13 @@ export function PricingCard({ plan, index, billingCycle, onSelectPlan }: Pricing
                     <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
                   )}
                 </div>
-                
+
                 <div className="flex-1 min-w-0">
-                  <span className={`text-sm sm:text-base leading-relaxed ${
-                    feature.included ? 'text-gray-300' : 'text-gray-500 line-through'
-                  } ${feature.highlight ? 'font-semibold text-purple-300' : ''}`}>
+                  <span
+                    className={`text-sm sm:text-base leading-relaxed ${
+                      feature.included ? 'text-gray-300' : 'text-gray-500 line-through'
+                    } ${feature.highlight ? 'font-semibold text-purple-300' : ''}`}
+                  >
                     {feature.name}
                   </span>
                   {feature.description && feature.included && (
@@ -204,14 +229,12 @@ export function PricingCard({ plan, index, billingCycle, onSelectPlan }: Pricing
         <Button
           onClick={() => onSelectPlan?.(plan.id)}
           className={`w-full ${
-            plan.popular || plan.recommended 
-              ? 'gradient-electric hover:shadow-2xl hover:shadow-purple-500/30' 
+            plan.popular || plan.recommended
+              ? 'gradient-electric hover:shadow-2xl hover:shadow-purple-500/30'
               : 'bg-white/10 hover:bg-white/20 border border-white/20'
           } text-white px-6 py-3 sm:py-4 rounded-xl font-semibold relative overflow-hidden group/btn magnetic text-sm sm:text-base`}
         >
-          <span className="relative z-10 flex items-center justify-center">
-            {plan.cta}
-          </span>
+          <span className="relative z-10 flex items-center justify-center">{plan.cta}</span>
           {(plan.popular || plan.recommended) && (
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
           )}
@@ -225,14 +248,14 @@ export function PricingCard({ plan, index, billingCycle, onSelectPlan }: Pricing
       {/* Enhanced Hover Effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
     </ResponsiveCard>
-  )
+  );
 }
 
 // Pricing Cards Grid Component
 interface PricingCardsGridProps {
-  plans: PricingCardProps['plan'][]
-  billingCycle: 'monthly' | 'yearly'
-  onSelectPlan?: (planId: string) => void
+  plans: PricingCardProps['plan'][];
+  billingCycle: 'monthly' | 'yearly';
+  onSelectPlan?: (planId: string) => void;
 }
 
 export function PricingCardsGrid({ plans, billingCycle, onSelectPlan }: PricingCardsGridProps) {
@@ -249,5 +272,5 @@ export function PricingCardsGrid({ plans, billingCycle, onSelectPlan }: PricingC
         </div>
       ))}
     </div>
-  )
+  );
 }

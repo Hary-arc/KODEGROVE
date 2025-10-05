@@ -1,44 +1,44 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { motion, useInView, useAnimation } from 'framer-motion'
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
 
 /**
  * Hook: useScrollReveal
  * Handles visibility state based on scroll position
  */
 export function useScrollReveal(threshold = 0.1, once = true) {
-  const ref = useRef(null)
-  const controls = useAnimation()
+  const ref = useRef(null);
+  const controls = useAnimation();
   const isInView = useInView(ref, {
     once,
     margin: '-10% 0px -10% 0px',
-  })
+  });
 
   useEffect(() => {
     if (isInView) {
-      controls.start('visible')
+      controls.start('visible');
     } else if (!once) {
-      controls.start('hidden')
+      controls.start('hidden');
     }
-  }, [isInView, controls, once])
+  }, [isInView, controls, once]);
 
-  return { ref, isInView, controls }
+  return { ref, isInView, controls };
 }
 
 // ===============================
 // ScrollReveal Component
 // ===============================
 
-type Direction = 'up' | 'down' | 'left' | 'right' | 'scale'
-type VariantType = 'fadeUp' | 'fadeLeft' | 'scale'
+type Direction = 'up' | 'down' | 'left' | 'right' | 'scale';
+type VariantType = 'fadeUp' | 'fadeLeft' | 'scale';
 
 interface ScrollRevealProps {
-  children: React.ReactNode
-  className?: string
-  direction?: Direction
-  variant?: VariantType
-  delay?: number
-  duration?: number
-  distance?: number
+  children: React.ReactNode;
+  className?: string;
+  direction?: Direction;
+  variant?: VariantType;
+  delay?: number;
+  duration?: number;
+  distance?: number;
 }
 
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
@@ -50,7 +50,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   duration = 0.6,
   distance = 50,
 }) => {
-  const { ref, controls } = useScrollReveal()
+  const { ref, controls } = useScrollReveal();
 
   const predefinedVariants: Record<VariantType, any> = {
     fadeUp: {
@@ -77,7 +77,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         transition: { duration, delay, ease: [0.25, 0.46, 0.45, 0.94] },
       },
     },
-  }
+  };
 
   const fallbackVariants = {
     hidden: {
@@ -97,9 +97,9 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
-  }
+  };
 
-  const animationVariants = variant ? predefinedVariants[variant] : fallbackVariants
+  const animationVariants = variant ? predefinedVariants[variant] : fallbackVariants;
 
   return (
     <motion.div
@@ -111,18 +111,18 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // ===============================
 // Staggered Reveal
 // ===============================
 
 interface StaggerRevealProps {
-  children: React.ReactNode
-  className?: string
-  staggerDelay?: number
-  direction?: Direction
+  children: React.ReactNode;
+  className?: string;
+  staggerDelay?: number;
+  direction?: Direction;
 }
 
 export const StaggerReveal: React.FC<StaggerRevealProps> = ({
@@ -131,7 +131,7 @@ export const StaggerReveal: React.FC<StaggerRevealProps> = ({
   staggerDelay = 0.1,
   direction = 'up',
 }) => {
-  const { ref, controls } = useScrollReveal()
+  const { ref, controls } = useScrollReveal();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -141,7 +141,7 @@ export const StaggerReveal: React.FC<StaggerRevealProps> = ({
         staggerChildren: staggerDelay,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: {
@@ -158,7 +158,7 @@ export const StaggerReveal: React.FC<StaggerRevealProps> = ({
         ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
-  }
+  };
 
   return (
     <motion.div
@@ -174,50 +174,42 @@ export const StaggerReveal: React.FC<StaggerRevealProps> = ({
         </motion.div>
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
-export const StaggeredReveal = StaggerReveal
+export const StaggeredReveal = StaggerReveal;
 
 // ===============================
 // Parallax Component
 // ===============================
 
 interface ParallaxProps {
-  children: React.ReactNode
-  className?: string
-  speed?: number
+  children: React.ReactNode;
+  className?: string;
+  speed?: number;
 }
 
-export const Parallax: React.FC<ParallaxProps> = ({
-  children,
-  className = '',
-  speed = 0.5,
-}) => {
-  const { ref, isInView } = useScrollReveal()
-  const [offset, setOffset] = useState(0)
+export const Parallax: React.FC<ParallaxProps> = ({ children, className = '', speed = 0.5 }) => {
+  const { ref, isInView } = useScrollReveal();
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       if (isInView) {
-        setOffset(window.scrollY * speed)
+        setOffset(window.scrollY * speed);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [isInView, speed])
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isInView, speed]);
 
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      style={{ transform: `translateY(${offset}px)` }}
-    >
+    <motion.div ref={ref} className={className} style={{ transform: `translateY(${offset}px)` }}>
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // ===============================
 // Default Export
@@ -229,4 +221,4 @@ export default {
   StaggeredReveal,
   Parallax,
   useScrollReveal,
-}
+};

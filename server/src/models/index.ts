@@ -50,7 +50,7 @@ class Service implements IService {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -61,7 +61,7 @@ class Service implements IService {
       description: this.description,
       price: this.price,
       features: this.features,
-      createdAt: this.createdAt
+      createdAt: this.createdAt,
     };
   }
 }
@@ -79,11 +79,7 @@ export const clientAnalyticsStore = new DataStore<ClientAnalytics>('client_analy
 export { User, Blog, Service, Project, Invoice, SupportTicket, ClientAnalytics };
 
 // Export interfaces for TypeScript (avoid duplicates)
-export type { 
-  IProject, 
-  IProjectTeam, 
-  IProjectMilestone
-} from './Project.js';
+export type { IProject, IProjectTeam, IProjectMilestone } from './Project.js';
 export type { IInvoice, IPayment } from './Invoice.js';
 export type { ISupportTicket, ITicketMessage } from './SupportTicket.js';
 export type { IClientAnalytics, IDashboardStats } from './ClientAnalytics.js';

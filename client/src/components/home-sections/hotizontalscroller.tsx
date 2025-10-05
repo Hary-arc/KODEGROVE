@@ -1,16 +1,16 @@
 // Import stylesheets
-import "./style.css";
+import './style.css';
 
 // get all horizontalScroll elements and add listeners to them
 
 const horizontalScrollEls: Array<HTMLElement> = Array.from(
-  document.querySelectorAll(".horizontalScroll")
+  document.querySelectorAll('.horizontalScroll')
 );
 
 horizontalScrollEls.forEach(horizontalScrollEl => {
-  horizontalScrollEl.addEventListener("wheel", scrollHorizontally, false);
+  horizontalScrollEl.addEventListener('wheel', scrollHorizontally, false);
 
-  horizontalScrollEl.addEventListener("mousemove", autoScroll);
+  horizontalScrollEl.addEventListener('mousemove', autoScroll);
 });
 
 /** BASIC SCROLLING FUNCTIONALLITY */
@@ -18,7 +18,7 @@ horizontalScrollEls.forEach(horizontalScrollEl => {
 function scrollHorizontally(e: WheelEvent) {
   const element = e.currentTarget as HTMLElement;
   if (elementBorderReached(e)) {
-    console.log("scrolling reached border of element");
+    console.log('scrolling reached border of element');
     return;
   }
 
@@ -32,15 +32,13 @@ function elementBorderReached(e: WheelEvent) {
   const direction = getWheelYDirection(e);
   console.log(`scrolling to the`, direction);
 
-  if (direction === "left" && element.scrollLeft === 0) {
+  if (direction === 'left' && element.scrollLeft === 0) {
     return true;
   }
 
-  if (direction === "right") {
+  if (direction === 'right') {
     const elementWidth = element.scrollWidth;
-    const rightBorderPosition = Math.ceil(
-      element.scrollLeft + element.clientWidth
-    );
+    const rightBorderPosition = Math.ceil(element.scrollLeft + element.clientWidth);
     if (rightBorderPosition >= elementWidth) {
       return true;
     }
@@ -49,9 +47,9 @@ function elementBorderReached(e: WheelEvent) {
   return false;
 }
 
-function getWheelYDirection(e: WheelEvent): "left" | "right" {
+function getWheelYDirection(e: WheelEvent): 'left' | 'right' {
   const change = Math.sign(e.deltaY);
-  return change > 0 ? "right" : "left";
+  return change > 0 ? 'right' : 'left';
 }
 
 /** AUTO SCROLL WHEN MOUSE IS NEAR THE VISIBLE BORDER */

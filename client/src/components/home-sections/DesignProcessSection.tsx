@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import {
   CheckCircle2,
   Target,
@@ -12,9 +12,9 @@ import {
   Rocket,
   ArrowRight,
   Sparkles,
-} from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+} from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,88 +29,88 @@ type Step = {
 
 const designProcess: Step[] = [
   {
-    step: "01",
-    title: "Web Strategy",
+    step: '01',
+    title: 'Web Strategy',
     description:
-      "We use in-depth research and data analysis to understand your business goals, target audience, and market position. Our strategic foundation ensures every decision aligns with your vision.",
+      'We use in-depth research and data analysis to understand your business goals, target audience, and market position. Our strategic foundation ensures every decision aligns with your vision.',
     details: [
-      "Identify your target audiences & personas",
-      "Analyze user pain points & define UVPs",
-      "Define KPIs & business objectives",
-      "Create a roadmap to brand growth",
+      'Identify your target audiences & personas',
+      'Analyze user pain points & define UVPs',
+      'Define KPIs & business objectives',
+      'Create a roadmap to brand growth',
     ],
     icon: Target,
-    gradient: "from-cyan-500 to-blue-600",
+    gradient: 'from-cyan-500 to-blue-600',
   },
   {
-    step: "02",
-    title: "Planning & Information Architecture",
+    step: '02',
+    title: 'Planning & Information Architecture',
     description:
-      "We map your content structure and user journeys to create intuitive navigation paths. Strategic planning ensures users find what they need effortlessly.",
+      'We map your content structure and user journeys to create intuitive navigation paths. Strategic planning ensures users find what they need effortlessly.',
     details: [
-      "User flow & sitemap creation",
-      "Wireframes for seamless conversion funnels",
-      "On-brand messaging structure",
-      "Content hierarchy optimization",
+      'User flow & sitemap creation',
+      'Wireframes for seamless conversion funnels',
+      'On-brand messaging structure',
+      'Content hierarchy optimization',
     ],
     icon: Layout,
-    gradient: "from-blue-500 to-purple-600",
+    gradient: 'from-blue-500 to-purple-600',
   },
   {
-    step: "03",
-    title: "Visual Design",
+    step: '03',
+    title: 'Visual Design',
     description:
-      "Where your site comes alive with stunning visuals, brand-aligned aesthetics, and engaging interactions that captivate your audience and reinforce your identity.",
+      'Where your site comes alive with stunning visuals, brand-aligned aesthetics, and engaging interactions that captivate your audience and reinforce your identity.',
     details: [
-      "User-centered design features",
-      "Interactive videos & animations",
-      "Custom illustrations & branding",
-      "Accessibility & SEO in design",
+      'User-centered design features',
+      'Interactive videos & animations',
+      'Custom illustrations & branding',
+      'Accessibility & SEO in design',
     ],
     icon: Palette,
-    gradient: "from-purple-500 to-pink-600",
+    gradient: 'from-purple-500 to-pink-600',
   },
   {
-    step: "04",
-    title: "Responsive Development",
+    step: '04',
+    title: 'Responsive Development',
     description:
-      "A responsive site adapts seamlessly across all devices. We build with cutting-edge technologies to ensure peak performance, speed, and scalability.",
+      'A responsive site adapts seamlessly across all devices. We build with cutting-edge technologies to ensure peak performance, speed, and scalability.',
     details: [
-      "Touchpoint & channel insights",
-      "Flexible UI development with modern frameworks",
-      "Cross-device testing & validation",
-      "Performance optimization & caching",
+      'Touchpoint & channel insights',
+      'Flexible UI development with modern frameworks',
+      'Cross-device testing & validation',
+      'Performance optimization & caching',
     ],
     icon: Code,
-    gradient: "from-pink-500 to-rose-600",
+    gradient: 'from-pink-500 to-rose-600',
   },
   {
-    step: "05",
-    title: "Quality Assurance",
+    step: '05',
+    title: 'Quality Assurance',
     description:
-      "We follow a strict QA process to ensure every element works flawlessly. Rigorous testing guarantees a bug-free, secure, and polished final product.",
+      'We follow a strict QA process to ensure every element works flawlessly. Rigorous testing guarantees a bug-free, secure, and polished final product.',
     details: [
-      "Client collaboration in testing phases",
-      "Rigorous bug/error checks & fixes",
-      "Launch-ready QA tools & audits",
-      "Security & compliance verification",
+      'Client collaboration in testing phases',
+      'Rigorous bug/error checks & fixes',
+      'Launch-ready QA tools & audits',
+      'Security & compliance verification',
     ],
     icon: ShieldCheck,
-    gradient: "from-rose-500 to-orange-600",
+    gradient: 'from-rose-500 to-orange-600',
   },
   {
-    step: "06",
-    title: "Launch & Optimization",
+    step: '06',
+    title: 'Launch & Optimization',
     description:
-      "From launch to ongoing optimization, we ensure smooth deployment and continuous improvement. Your success is measured by real-world performance and growth.",
+      'From launch to ongoing optimization, we ensure smooth deployment and continuous improvement. Your success is measured by real-world performance and growth.',
     details: [
-      "Structured launch protocol & checklist",
-      "Post-launch maintenance & support",
-      "Digital marketing integration",
-      "Analytics setup & performance monitoring",
+      'Structured launch protocol & checklist',
+      'Post-launch maintenance & support',
+      'Digital marketing integration',
+      'Analytics setup & performance monitoring',
     ],
     icon: Rocket,
-    gradient: "from-orange-500 to-cyan-600",
+    gradient: 'from-orange-500 to-cyan-600',
   },
 ];
 
@@ -121,7 +121,7 @@ const TimelineStep = React.memo(({ step, index }: { step: Step; index: number })
     <div className="timeline-card flex-shrink-0 group">
       <div className="relative h-full glass rounded-3xl border border-white/10 hover:border-cyan-500/40 transition-all duration-500 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-purple-500/0 to-transparent group-hover:from-cyan-500/5 group-hover:via-purple-500/5 transition-all duration-700 pointer-events-none" />
-        
+
         <div className="absolute -inset-[1px] bg-gradient-to-r from-cyan-500 to-purple-500 rounded-3xl opacity-0 group-hover:opacity-10 blur-lg transition-all duration-700 pointer-events-none" />
 
         <div className="relative z-10 p-6 sm:p-8 h-full flex flex-col">
@@ -136,7 +136,7 @@ const TimelineStep = React.memo(({ step, index }: { step: Step; index: number })
 
             <motion.div
               whileHover={{ scale: 1.15, rotate: 10 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
               className="flex-shrink-0 w-12 h-12 rounded-xl glass border border-white/20 flex items-center justify-center group-hover:border-cyan-500/40 transition-colors duration-500"
             >
               <Icon className="w-6 h-6 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300" />
@@ -163,9 +163,7 @@ const TimelineStep = React.memo(({ step, index }: { step: Step; index: number })
           </ul>
 
           <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
-            <span className="text-xs text-gray-400 font-medium">
-              Step {step.step} of 06
-            </span>
+            <span className="text-xs text-gray-400 font-medium">Step {step.step} of 06</span>
             <motion.div
               whileHover={{ x: 4 }}
               transition={{ duration: 0.3 }}
@@ -184,7 +182,7 @@ const TimelineStep = React.memo(({ step, index }: { step: Step; index: number })
   );
 });
 
-TimelineStep.displayName = "TimelineStep";
+TimelineStep.displayName = 'TimelineStep';
 
 export default function DesignProcessSection() {
   const [mounted, setMounted] = useState(false);
@@ -200,7 +198,7 @@ export default function DesignProcessSection() {
 
     const wrapper = wrapperRef.current;
     const container = containerRef.current;
-    const cards = gsap.utils.toArray<HTMLElement>(".timeline-card");
+    const cards = gsap.utils.toArray<HTMLElement>('.timeline-card');
 
     if (cards.length === 0) return;
 
@@ -215,22 +213,22 @@ export default function DesignProcessSection() {
 
       const isMobile = window.innerWidth < 768;
       const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-      
+
       const gap = isMobile ? 16 : 24;
       const padding = isMobile ? 20 : 40;
       const cardWidth = isMobile ? 360 : isTablet ? 360 : 400;
 
       // Set card dimensions
-      cards.forEach((card) => {
+      cards.forEach(card => {
         gsap.set(card, {
           width: cardWidth,
-          minHeight: "540px",
+          minHeight: '540px',
         });
       });
 
       // Set container layout
       gsap.set(container, {
-        display: "flex",
+        display: 'flex',
         gap: `${gap}px`,
         paddingLeft: `${padding}px`,
         paddingRight: `${padding}px`,
@@ -243,7 +241,7 @@ export default function DesignProcessSection() {
       if (scrollDistance > 0) {
         st = ScrollTrigger.create({
           trigger: wrapper,
-          start: "top top+=100",
+          start: 'top top+=100',
           end: `+=${scrollDistance}`,
           pin: true,
           scrub: 1.5,
@@ -251,13 +249,13 @@ export default function DesignProcessSection() {
           snap: {
             snapTo: 1 / (cards.length - 1),
             duration: 0.3,
-            ease: "power2.inOut",
+            ease: 'power2.inOut',
           },
-          onUpdate: (self) => {
+          onUpdate: self => {
             gsap.to(container, {
               x: -scrollDistance * self.progress,
               duration: 0,
-              ease: "none",
+              ease: 'none',
             });
           },
         });
@@ -273,15 +271,15 @@ export default function DesignProcessSection() {
     // Initialize
     const timer = setTimeout(setupScroll, 300);
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
       if (st) {
         st.kill();
       }
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, [mounted]);
 
@@ -290,9 +288,9 @@ export default function DesignProcessSection() {
       <section className="relative py-20 sm:py-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="h-96 flex items-center justify-center">
-            <motion.div 
+            <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
               className="w-12 h-12 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full"
             />
           </div>
@@ -313,7 +311,7 @@ export default function DesignProcessSection() {
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
           className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl"
         />
@@ -325,7 +323,7 @@ export default function DesignProcessSection() {
           transition={{
             duration: 12,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: 1,
           }}
           className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl"
@@ -343,13 +341,11 @@ export default function DesignProcessSection() {
         >
           <motion.div
             animate={{ rotate: [0, 360] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
           >
             <Sparkles className="w-4 h-4 text-cyan-400" />
           </motion.div>
-          <span className="text-sm font-semibold text-cyan-400">
-            OUR PROVEN PROCESS
-          </span>
+          <span className="text-sm font-semibold text-cyan-400">OUR PROVEN PROCESS</span>
         </motion.div>
 
         <motion.h2
@@ -369,8 +365,8 @@ export default function DesignProcessSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto"
         >
-          A step-by-step approach to build and launch high-performing websites
-          that drive real business results
+          A step-by-step approach to build and launch high-performing websites that drive real
+          business results
         </motion.p>
       </div>
 
@@ -396,8 +392,8 @@ export default function DesignProcessSection() {
             Ready to Start Your Project?
           </h3>
           <p className="text-gray-300 text-sm mb-2">
-            From strategy to launch, we handle it all to ensure your success and
-            exceed your expectations
+            From strategy to launch, we handle it all to ensure your success and exceed your
+            expectations
           </p>
         </motion.div>
       </div>
