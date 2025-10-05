@@ -1,12 +1,6 @@
 import express from 'express';
 import { protect } from '../middleware/auth.js';
-import {
-  getDashboardData,
-  getUserProjects,
-  getUserInvoices,
-  getUserSupportTickets,
-  getUserAnalytics,
-} from '../controllers/dashboardController.js';
+import { getDashboardData, getUserProjects, getUserInvoices, getUserSupportTickets, getUserAnalytics, } from '../controllers/dashboardController.js';
 const router = express.Router();
 // All dashboard routes require authentication
 router.use(protect);
