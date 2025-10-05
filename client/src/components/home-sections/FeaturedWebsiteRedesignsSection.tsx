@@ -147,7 +147,7 @@ const ProjectCard = React.memo(
     isActive: boolean;
   }) => {
     return (
-      <div className="snap-center w-full md:w-[90%] lg:w-[85%] flex-shrink-0">
+      <div className="snap-center w-full flex-shrink-0">
         <div className="glass rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 hover:border-white/20 transition-all duration-500">
           {/* Project Header */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
@@ -175,7 +175,7 @@ const ProjectCard = React.memo(
             </div>
 
             <div className="gradient-electric text-white px-6 py-3 rounded-full shadow-lg shadow-purple-500/20 flex items-center gap-2 whitespace-nowrap">
-              <TrendingUp className="w-5 h-5" />
+              <TrendingUp className="w-5 h-3" />
               <span className="font-bold">{project.stat}</span>
             </div>
           </div>
@@ -361,7 +361,7 @@ export default function FeaturedWebsiteRedesignsSection() {
   }
 
   return (
-    <section className="relative py-20 sm:py-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
+    <section className="relative py-20  bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl opacity-50" />
@@ -379,7 +379,7 @@ export default function FeaturedWebsiteRedesignsSection() {
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-cyan-200 to-blue-400 bg-clip-text text-transparent mb-6 font-outfit">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-cyan-200 to-blue-400 bg-clip-text text-transparent leading-relaxed mb-6 font-outfit">
             Featured Website Redesigns
           </h2>
 
@@ -394,7 +394,7 @@ export default function FeaturedWebsiteRedesignsSection() {
         </div>
 
         {/* Client Selection */}
-        <div className="mb-16 md:mb-20">
+        <div className="mb-8 md:mb-16">
           <div className="flex justify-center items-center gap-3 md:gap-6 flex-wrap">
             {clientLogos.map((client, i) => (
               <button
@@ -416,7 +416,7 @@ export default function FeaturedWebsiteRedesignsSection() {
                   <img
                     src={client.logo}
                     alt={client.name}
-                    className="h-8 md:h-12 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                    className="h-8 md:h-12 rounded-xl object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                   />
                   {/* <span className="font-bold text-white text-sm sm:text-lg">
                     {client.initial}
@@ -439,7 +439,7 @@ export default function FeaturedWebsiteRedesignsSection() {
         >
           <div
             ref={sliderRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide pb-8"
+            className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide pb-8"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',

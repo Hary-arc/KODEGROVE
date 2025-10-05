@@ -54,7 +54,7 @@ const designProcess: Step[] = [
       'Content hierarchy optimization',
     ],
     icon: Layout,
-    gradient: 'from-blue-500 to-purple-600',
+    gradient: 'from-cyan-500 to-blue-600',
   },
   {
     step: '03',
@@ -68,7 +68,7 @@ const designProcess: Step[] = [
       'Accessibility & SEO in design',
     ],
     icon: Palette,
-    gradient: 'from-purple-500 to-pink-600',
+    gradient: 'from-cyan-500 to-blue-600',
   },
   {
     step: '04',
@@ -82,7 +82,7 @@ const designProcess: Step[] = [
       'Performance optimization & caching',
     ],
     icon: Code,
-    gradient: 'from-pink-500 to-rose-600',
+    gradient: 'from-cyan-500 to-blue-600',
   },
   {
     step: '05',
@@ -96,7 +96,7 @@ const designProcess: Step[] = [
       'Security & compliance verification',
     ],
     icon: ShieldCheck,
-    gradient: 'from-rose-500 to-orange-600',
+    gradient: 'from-cyan-500 to-blue-600',
   },
   {
     step: '06',
@@ -110,7 +110,7 @@ const designProcess: Step[] = [
       'Analytics setup & performance monitoring',
     ],
     icon: Rocket,
-    gradient: 'from-orange-500 to-cyan-600',
+    gradient: 'from-cyan-500 to-blue-600',
   },
 ];
 
@@ -241,7 +241,7 @@ export default function DesignProcessSection() {
       if (scrollDistance > 0) {
         st = ScrollTrigger.create({
           trigger: wrapper,
-          start: 'top top+=100',
+          start: 'top top+=150',
           end: `+=${scrollDistance}`,
           pin: true,
           scrub: 1.5,
@@ -386,7 +386,7 @@ export default function DesignProcessSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto glass rounded-3xl p-8 sm:p-12 border border-white/10 hover:border-cyan-500/30 transition-all duration-500"
+          className="max-w-full mx-auto glass rounded-3xl p-8 sm:p-12 border border-white/10 hover:border-cyan-500/30 transition-all duration-500"
         >
           <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Ready to Start Your Project?

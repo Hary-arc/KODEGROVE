@@ -11,7 +11,7 @@ import {
   MessageSquare,
   Instagram,
   Linkedin,
-  ArrowRight,
+  ChevronRight,
   Send,
   CheckCircle,
   Loader2,
@@ -55,7 +55,7 @@ export default function HomeContactSection() {
     setIsSubmitting(true);
     try {
       await SendEmail({
-        to: 'hello@digitalcraft.com', // Your receiving email
+        to: 'harysoftware@gmail.com', // Your receiving email
         subject: `New Message from ${formData.name}`,
         body: `
           Name: ${formData.name}
@@ -93,7 +93,11 @@ export default function HomeContactSection() {
   }
 
   return (
-    <section className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 py-20">
+    <section className="bg-gradient-to-r from-fuchsia-900 via-blue-600 to-blue-500
+
+
+
+ py-16 lg:py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -105,14 +109,12 @@ export default function HomeContactSection() {
           {/* Left Column */}
           <div className="text-center lg:text-left">
             <p className="text-sm font-semibold text-gray-300 uppercase tracking-widest mb-4">
-              TAKE THE SILK ROAD TO
+               STEP INTO THE FUTURE WITH
             </p>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-              Digitizing Your
-              <br />
-              <span className="text-cyan-400">Business Growth</span>
+              <span className="text-cyan-400">Next-Gen Solutions</span> That Drive Results
             </h2>
-            <div className="flex items-center justify-center lg:justify-start gap-6">
+            <div className="flex items-center justify-right lg:justify-start gap-6">
               <span className="text-gray-300 font-semibold">Follow Us</span>
               <div className="w-10 h-px bg-cyan-400"></div>
               <div className="flex gap-4">
@@ -192,7 +194,7 @@ export default function HomeContactSection() {
                   disabled={isSubmitting}
                   className="group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-slate-800 px-8 py-3 font-bold text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-900"
                 >
-                  <span className="absolute inset-0 h-full w-full bg-gradient-to-r from-purple-600 to-cyan-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
+                  <span className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-600 to-fuchsia-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></span>
                   <span className="relative flex items-center">
                     {isSubmitting ? (
                       <>
@@ -202,7 +204,7 @@ export default function HomeContactSection() {
                     ) : (
                       <>
                         SUBMIT
-                        <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                        <ChevronRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                       </>
                     )}
                   </span>

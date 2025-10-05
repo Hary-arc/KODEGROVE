@@ -22,6 +22,7 @@ import { ImageWithFallback } from '../figma/ImageWithFallback';
 const cmsFeatures = [
   {
     icon: Settings,
+    image: 'https://images.unsplash.com/photo-1698210806453-5ec74b8e08be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbXMlMjBjb250ZW50JTIwbWFuYWdlbWVudCUyMHBsYXRmb3JtfGVufDF8fHx8MTc1NzM2OTg2Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     title: 'Intuitive Management',
     description: 'User-friendly interface that makes content management effortless',
     details: ['Drag & Drop Builder', 'WYSIWYG Editor', 'Media Library', 'Version Control'],
@@ -29,6 +30,7 @@ const cmsFeatures = [
   },
   {
     icon: Shield,
+    image: 'https://tse1.mm.bing.net/th/id/OIP.nGYbtELOSknTB3bWmbLdggHaE7?cb=12&w=626&h=417&rs=1&pid=ImgDetMain&o=7&rm=3',
     title: 'Enterprise Security',
     description: 'Bank-level security with advanced user permissions and data protection',
     details: ['Role-based Access', 'SSL Encryption', 'Backup Systems', 'Audit Logs'],
@@ -36,6 +38,7 @@ const cmsFeatures = [
   },
   {
     icon: Zap,
+    image: 'https://assets.mycast.io/posters/the-flash-fan-casting-poster-288994-medium.jpg?1676325099',
     title: 'Lightning Performance',
     description: 'Optimized for speed with CDN integration and caching strategies',
     details: ['Global CDN', 'Smart Caching', 'Image Optimization', 'Lazy Loading'],
@@ -43,6 +46,7 @@ const cmsFeatures = [
   },
   {
     icon: Smartphone,
+    image: 'https://www.convergine.com/images/_1015x450_crop_center-center_none/what-is-mobile-first-design-and-why-is-it-foundation-of-modern-web.png',
     title: 'Mobile-First Design',
     description: 'Responsive admin panel that works perfectly on all devices',
     details: ['Touch Optimized', 'Native Apps', 'Offline Mode', 'Push Notifications'],
@@ -226,7 +230,7 @@ export default function CMSPlatformSection() {
             <div className="glass rounded-2xl p-8 border border-white/10 h-full">
               <div className="relative aspect-square rounded-xl overflow-hidden mb-6">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1698210806453-5ec74b8e08be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbXMlMjBjb250ZW50JTIwbWFuYWdlbWVudCUyMHBsYXRmb3JtfGVufDF8fHx8MTc1NzM2OTg2Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  src={cmsFeatures[activeFeature].image}
                   alt="CMS Platform Interface"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />

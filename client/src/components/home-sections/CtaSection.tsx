@@ -38,7 +38,7 @@ export default function CtaSection() {
   const [errorMsg, setErrorMsg] = useState('');
 
   return (
-    <section className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 py-20">
+    <section className="bg-gradient-to-r from-fuchsia-900 via-purple-900 to-slate-600 py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ export default function CtaSection() {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center justify-center text-center p-4 bg-green-500/20 text-green-300 rounded-lg"
+                className="flex items-center justify-center text-center p-4 bg-gradient-to-r from-fuchsia-900 via-purple-900 to-slate-600 text-green-300 rounded-lg"
               >
                 <CheckCircle className="w-6 h-6 mr-3" />
                 <p className="font-semibold">Thank you for subscribing!</p>
