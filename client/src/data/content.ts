@@ -28,7 +28,7 @@ export const heroContent: HeroContent = {
 
 export const pageHeaders = {
   about: {
-    badge: 'About CodeFlow',
+    badge: 'About KodeGrove',
     title: 'We Are Digital Innovators',
     description:
       'A passionate team of designers, developers, and strategists dedicated to creating digital experiences that mesmerize users and transform businesses into industry leaders.',
@@ -109,7 +109,7 @@ export const featuresContent = {
     ],
   },
   benefits: {
-    title: 'Why Choose CodeFlow',
+    title: 'Why Choose KodeGrove',
     description: 'The advantages that set us apart from the competition.',
     items: [
       {

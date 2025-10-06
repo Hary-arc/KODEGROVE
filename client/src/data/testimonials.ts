@@ -41,7 +41,7 @@ export const testimonials: Testimonial[] = [
     avatar:
       'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMG1hbiUyMCUyMENUT3xlbnwxfHx8fDE3NTYzMjkyOTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     content:
-      "The mobile banking app CodeFlow created for us has revolutionized our customer experience. With 2M+ downloads and 99.9% security compliance, they've proven their expertise in fintech.",
+      "The mobile banking app KodeGrove created for us has revolutionized our customer experience. With 2M+ downloads and 99.9% security compliance, they've proven their expertise in fintech.",
     rating: 5,
     project: 'FinTech Mobile Revolution',
     industry: 'Financial Technology',
@@ -55,7 +55,7 @@ export const testimonials: Testimonial[] = [
     avatar:
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXJrZXRpbmclMjBkaXJlY3RvciUyMHdvbWFufGVufDF8fHx8MTc1NjMyOTMwMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     content:
-      "Our enterprise analytics platform increased decision-making efficiency by 400%. CodeFlow's data visualization expertise helped us unlock insights we never knew existed.",
+      "Our enterprise analytics platform increased decision-making efficiency by 400%. KodeGrove's data visualization expertise helped us unlock insights we never knew existed.",
     rating: 5,
     project: 'Enterprise Analytics Hub',
     industry: 'Data & Analytics',
@@ -69,7 +69,7 @@ export const testimonials: Testimonial[] = [
     avatar:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGZvdW5kZXIlMjBtYW58ZW58MXx8fHwxNzU2MzI5MzAwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     content:
-      'The social commerce app they built achieved 500% increase in user engagement. CodeFlow understands how to create addictive user experiences that drive real business results.',
+      'The social commerce app they built achieved 500% increase in user engagement. KodeGrove understands how to create addictive user experiences that drive real business results.',
     rating: 5,
     project: 'Social Commerce App',
     industry: 'Social Commerce',
@@ -82,7 +82,7 @@ export const testimonials: Testimonial[] = [
     avatar:
       'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHhicmFuZCUyMG1hbmFnZXIlMjB3b21hbnxlbnwxfHx8fDE3NTYzMjkzMDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     content:
-      'CodeFlow elevated our luxury brand presence with a 180% increase in average order value. Their understanding of premium user experience is unmatched.',
+      'KodeGrove elevated our luxury brand presence with a 180% increase in average order value. Their understanding of premium user experience is unmatched.',
     rating: 5,
     project: 'Luxury Lifestyle Platform',
     industry: 'Luxury Retail',
@@ -95,7 +95,7 @@ export const testimonials: Testimonial[] = [
     avatar:
       'https://images.unsplash.com/photo-1600486913747-55e5470d6f40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwZXhlY3V0aXZlfGVufDF8fHx8MTc1NjMyOTMwMXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     content:
-      'Our HIPAA-compliant telemedicine platform reached 250% more patients while maintaining 98% satisfaction. CodeFlow delivered beyond our wildest expectations.',
+      'Our HIPAA-compliant telemedicine platform reached 250% more patients while maintaining 98% satisfaction. KodeGrove delivered beyond our wildest expectations.',
     rating: 5,
     project: 'Healthcare Platform Revolution',
     industry: 'Healthcare Technology',
@@ -108,7 +108,7 @@ export const testimonials: Testimonial[] = [
     avatar:
       'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjBleGVjdXRpdmUlMjB3b21hbnxlbnwxfHx8fDE3NTYzMjkzMDF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     content:
-      "The interactive learning platform achieved 600% higher completion rates. CodeFlow's gamification approach made learning truly engaging for our students.",
+      "The interactive learning platform achieved 600% higher completion rates. KodeGrove's gamification approach made learning truly engaging for our students.",
     rating: 5,
     project: 'EdTech Learning Platform',
     industry: 'Education Technology',
@@ -121,7 +121,7 @@ export const testimonials: Testimonial[] = [
     avatar:
       'https://images.unsplash.com/photo-1556157382-97eda2d62296?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGZhc2hpb24lMjBDRU98ZW58MXx8fHwxNzU2MzI5MzAxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     content:
-      'CodeFlow created our sustainable fashion marketplace with innovative carbon tracking. We saw 300% brand awareness growth and 70% repeat customer rate.',
+      'KodeGrove created our sustainable fashion marketplace with innovative carbon tracking. We saw 300% brand awareness growth and 70% repeat customer rate.',
     rating: 5,
     project: 'Sustainable Fashion Marketplace',
     industry: 'Sustainable Fashion',

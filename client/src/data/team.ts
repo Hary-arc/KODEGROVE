@@ -155,7 +155,7 @@ export const companyTimeline: TimelineItem[] = [
 export const companyStats: CompanyStat[] = [
   {
     icon: 'Rocket',
-    value: 500,
+    value: 50,
     suffix: '+',
     label: 'Projects Completed',
     description: 'Successful digital transformations',

@@ -30,7 +30,7 @@ const clientLogos = [
   },
   {
     name: 'EduLearn',
-    logo: '/logos/legacy.png',
+    logo: '/logos/tlc.png',
     initial: 'EL',
     color: 'from-purple-500 to-gray-500',
   },

@@ -41,7 +41,7 @@ export const jobPositions: JobPosition[] = [
     title: 'Senior Frontend Developer',
     department: 'Engineering',
     type: 'Full-time',
-    location: 'San Francisco, CA',
+    location: 'India, UK',
     remote: true,
     description:
       "Join our elite frontend team to create mesmerizing user experiences that captivate and engage. You'll work on cutting-edge projects using the latest technologies to build interfaces that are both beautiful and performant.",
@@ -72,8 +72,8 @@ export const jobPositions: JobPosition[] = [
       'Contributions to open-source projects',
     ],
     salary: {
-      min: 140000,
-      max: 180000,
+      min: 14000,
+      max: 18000,
       currency: 'USD',
     },
     benefits: [
@@ -121,8 +121,8 @@ export const jobPositions: JobPosition[] = [
       'Illustration and graphic design skills',
     ],
     salary: {
-      min: 120000,
-      max: 160000,
+      min: 12000,
+      max: 16000,
       currency: 'USD',
     },
     benefits: [
@@ -170,8 +170,8 @@ export const jobPositions: JobPosition[] = [
       'Contributions to open-source projects',
     ],
     salary: {
-      min: 130000,
-      max: 170000,
+      min: 13000,
+      max: 17000,
       currency: 'USD',
     },
     benefits: [
@@ -219,8 +219,8 @@ export const jobPositions: JobPosition[] = [
       'Experience with international product launches',
     ],
     salary: {
-      min: 150000,
-      max: 200000,
+      min: 15000,
+      max: 20000,
       currency: 'USD',
     },
     benefits: [

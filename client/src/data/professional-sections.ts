@@ -126,7 +126,7 @@ export const pressMentions = [
     type: 'Industry Ranking',
   },
   {
-    title: 'CodeFlow Announces Series A Funding Round',
+    title: 'KodeGrove Announces Series A Funding Round',
     publication: 'VentureBeat',
     date: '2023-11-10',
     url: 'https://venturebeat.com/codeflow-series-a',

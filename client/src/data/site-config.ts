@@ -5,7 +5,7 @@ export const siteConfig = {
   tagline: 'Where Smart Code Grows',
   description:
     "Cultivating innovative digital solutions that flourish and evolve. Where technology meets nature's wisdom.",
-  url: 'https://kodegrove.dev',
+  url: 'https://kodegrove.render.com',
   contact: {
     email: 'hello@kodegrove.dev',
     phone: '+91 (781) 123-4567',
