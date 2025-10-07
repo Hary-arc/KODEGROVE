@@ -237,7 +237,12 @@ interface NavigationLinkProps {
 
 const NavigationLink = memo<NavigationLinkProps>(({ item, isActive, onClick }) => (
   <motion.button
-    onClick={() => onClick(item.path)}
+    onClick={() => {
+      onClick(item.path);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }}
+    
+    
     className={`relative text-sm font-medium transition-colors duration-300 focus:outline-none ${
       isActive ? 'text-white' : 'text-gray-300 hover:text-white'
     }`}

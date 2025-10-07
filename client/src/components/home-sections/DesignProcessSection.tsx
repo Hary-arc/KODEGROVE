@@ -190,98 +190,142 @@ export default function DesignProcessSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+  setMounted(true);
+}, []);
 
-  useEffect(() => {
-    if (!mounted || !wrapperRef.current || !containerRef.current) return;
+useEffect(() => {
+  if (!mounted || !wrapperRef.current || !containerRef.current) return;
+  console.log("✅ Design Process Section Mounted");
 
-    const wrapper = wrapperRef.current;
-    const container = containerRef.current;
-    const cards = gsap.utils.toArray<HTMLElement>('.timeline-card');
+  const wrapper = wrapperRef.current;
+  const container = containerRef.current;
+  const cards = gsap.utils.toArray<HTMLElement>(".timeline-card");
+  // ---- MATCH HEIGHTS ----
+  let maxHeight = 0;
+  cards.forEach(card => {
+    maxHeight = Math.max(maxHeight, card.offsetHeight);
+  });
 
-    if (cards.length === 0) return;
+  // Apply uniform height to all cards
+  cards.forEach(card => {
+    gsap.set(card, { height: maxHeight });
+  });
 
-    let st: ScrollTrigger | null = null;
+  // Also make the container match that height
+  gsap.set(container, { height: maxHeight });
 
-    const setupScroll = () => {
-      // Kill existing ScrollTrigger
-      if (st) {
-        st.kill();
-        st = null;
-      }
+  if (cards.length === 0) return;
+  console.log("🃏 Cards found:", cards.length);
 
-      const isMobile = window.innerWidth < 768;
-      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+  // ---- INITIAL CARD SIZING ----
+  const isMobile = window.innerWidth < 768;
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
 
-      const gap = isMobile ? 16 : 24;
-      const padding = isMobile ? 20 : 40;
-      const cardWidth = isMobile ? 360 : isTablet ? 360 : 400;
+  const gap = isMobile ? 16 : 24;
+  const padding = isMobile ? 20 : 40;
+  const cardWidth = isMobile ? 360 : isTablet ? 360 : 400;
 
-      // Set card dimensions
-      cards.forEach(card => {
-        gsap.set(card, {
-          width: cardWidth,
-          minHeight: '540px',
-        });
-      });
+  cards.forEach((card) => {
+    gsap.set(card, {
+      width: cardWidth,
+      minHeight: "540px",
+      opacity: 0, // start hidden for fade-in
+      y: 50,
+    });
+  });
 
-      // Set container layout
-      gsap.set(container, {
-        display: 'flex',
-        gap: `${gap}px`,
-        paddingLeft: `${padding}px`,
-        paddingRight: `${padding}px`,
-      });
+  gsap.set(container, {
+    x: 0,
+    display: "flex",
+    gap: `${gap}px`,
+    paddingLeft: `${padding}px`,
+    paddingRight: `${padding}px`,
+  });
 
-      // Calculate scroll distance
-      const totalWidth = cards.length * (cardWidth + gap);
-      const scrollDistance = totalWidth - window.innerWidth + padding;
+  // ---- DIMENSIONS ----
+  const totalWidth = cards.length * cardWidth + (cards.length - 1) * gap;
+  const visibleWidth = window.innerWidth - padding * 2;
+  const scrollDistance = Math.max(0, totalWidth - visibleWidth);
 
-      if (scrollDistance > 0) {
-        st = ScrollTrigger.create({
-          trigger: wrapper,
-          start: 'top top+=150',
-          end: `+=${scrollDistance}`,
-          pin: true,
-          scrub: 1.5,
-          anticipatePin: 1,
-          snap: {
-            snapTo: 1 / (cards.length - 1),
-            duration: 0.3,
-            ease: 'power2.inOut',
-          },
-          onUpdate: self => {
-            gsap.to(container, {
-              x: -scrollDistance * self.progress,
-              duration: 0,
-              ease: 'none',
-            });
-          },
-        });
-      }
+  console.log({
+    totalWidth,
+    visibleWidth,
+    scrollDistance,
+  });
 
-      ScrollTrigger.refresh();
-    };
+  // ---- QUICKSETTER FOR SMOOTHNESS ----
+  const quickX = gsap.quickSetter(container, "x", "px");
 
-    const handleResize = () => {
-      setupScroll();
-    };
+  // ---- FADE-IN ANIMATION ----
+  gsap.to(cards, {
+    opacity: 1,
+    y: 0,
+    stagger: 0.1,
+    duration: 0.6,
+    ease: "power2.out",
+    delay: 0.3,
+  });
 
-    // Initialize
-    const timer = setTimeout(setupScroll, 300);
+  // ---- SCROLLTRIGGER SETUP ----
+  const st = ScrollTrigger.create({
+    trigger: wrapper,
+    start: "top top+=50",
+    end: `+=${scrollDistance}`,
+    pin: true,
+    scrub: 0.5, // smoother response
+    anticipatePin: 1,
+    snap: {
+      snapTo: 1 / (cards.length - 1),
+      duration: 0.4,
+      ease: "power2.inOut",
+    },
+    onEnter: () => console.log("📍 Pin started"),
+    onLeave: () => {
+      console.log("📤 Pin ended");
+      gsap.to(container, { x: -scrollDistance, duration: 0.4, ease: "power1.out" });
+    },
+    onEnterBack: () => console.log("⬅️ Pin re-entered"),
+    onLeaveBack: () => console.log("⬆️ Pin left back"),
+    onUpdate: (self) => {
+      const progress = self.progress;
+      const xTarget = -scrollDistance * progress;
+      quickX(xTarget);
+    },
+  });
 
-    window.addEventListener('resize', handleResize);
+  // ---- SMOOTH WRAPPER FADE ON EXIT ----
+  ScrollTrigger.create({
+    trigger: wrapper,
+    start: "bottom center",
+    end: "bottom top",
+    scrub: true,
+    onUpdate: (self) => {
+      gsap.to(wrapper, { opacity: 1 - self.progress, duration: 0.2, ease: "power1.out" });
+    },
+  });
 
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', handleResize);
-      if (st) {
-        st.kill();
-      }
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
-  }, [mounted]);
+  // ---- REFRESH CONTROL ----
+  const delayedRefresh = gsap.delayedCall(0.5, () => ScrollTrigger.refresh());
+  const resizeHandler = () => delayedRefresh.restart();
+
+// add & remove the exact same handler (so removeEventListener works)
+window.addEventListener('resize', resizeHandler);
+
+
+  // ---- CLEANUP ----
+  return () => {
+    st.kill();
+    delayedRefresh.kill();
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+    window.removeEventListener('resize', resizeHandler);
+    delayedRefresh.kill();
+    console.log("🧹 Cleaned up ScrollTrigger");
+  };
+}, [mounted]);
+
+
+
+
 
   if (!mounted) {
     return (
@@ -370,9 +414,14 @@ export default function DesignProcessSection() {
         </motion.p>
       </div>
 
+      
+
       {/* Horizontal Scroll Section */}
-      <div ref={wrapperRef} className="relative overflow-hidden" style={{ minHeight: 'auto' }}>
-        <div ref={containerRef} className="relative">
+      <div ref={wrapperRef} className="relative w-full h-screen flex items-center overflow-hidden bg-transparent"
+       >
+        <div ref={containerRef} className="relative flex items-center will-change-transform"
+          >
+      
           {designProcess.map((step, index) => (
             <TimelineStep key={step.step} step={step} index={index} />
           ))}

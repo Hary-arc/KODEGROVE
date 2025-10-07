@@ -18,7 +18,7 @@ export const siteConfig = {
     dribbble: '#',
   },
   stats: {
-    projects: 500,
+    projects: 50,
     clients: 250,
     satisfaction: 98,
     avgROI: 250,

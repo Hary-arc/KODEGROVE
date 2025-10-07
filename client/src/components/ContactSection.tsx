@@ -39,7 +39,7 @@ export function ContactSection() {
     {
       icon: Mail,
       title: 'Email',
-      info: 'hello@codeflow.dev',
+      info: 'kodegrove@gmail.com',
       description: 'Drop us a line anytime',
       gradient: 'from-purple-500 to-pink-500',
     },
@@ -53,7 +53,7 @@ export function ContactSection() {
     {
       icon: MapPin,
       title: 'Studio',
-      info: 'San Francisco, CA',
+      info: 'India, UK',
       description: 'Where magic happens',
       gradient: 'from-green-500 to-emerald-500',
     },
@@ -229,7 +229,7 @@ export function ContactSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1, delay: 0.8 }}
             >
-              <h4 className="font-semibold text-white mb-4">Why Choose CodeFlow?</h4>
+              <h4 className="font-semibold text-white mb-4">Why Choose KodeGrove?</h4>
               <div className="space-y-3">
                 {[
                   'Free strategy consultation',

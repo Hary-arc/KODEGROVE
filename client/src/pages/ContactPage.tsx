@@ -216,12 +216,12 @@ export function ContactPage() {
           </motion.div>
 
           {/* Animated headline */}
-          <div className="font-outfit text-5xl lg:text-7xl font-bold mb-8 leading-tight">
+          <div className="font-outfit text-4xl lg:text-7xl font-bold mb-8 leading-tight">
             <motion.h1
               variants={headlineVariants}
               initial="hidden"
               animate={isHeroInView ? 'visible' : 'hidden'}
-              className="mb-4"
+              className="mb-2"
             >
               <span className="bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
                 {animateText('Ready to', 0.3)}
@@ -271,7 +271,7 @@ export function ContactPage() {
                 icon: Mail,
                 title: 'Email Us',
                 info: siteConfig.contact.email,
-                description: 'hello@codeflow.dev',
+                description: 'kodegrove@gmail.com',
                 action: `mailto:${siteConfig.contact.email}`,
                 gradient: 'from-purple-500 to-pink-500',
               },
@@ -287,7 +287,7 @@ export function ContactPage() {
                 icon: MapPin,
                 title: 'Visit Us',
                 info: siteConfig.contact.address,
-                description: 'San Francisco, CA',
+                description: 'INDIA, UK',
                 action: '#map-section',
                 gradient: 'from-green-500 to-emerald-500',
               },
@@ -335,16 +335,16 @@ export function ContactPage() {
                 <h3 className="font-outfit text-3xl font-bold text-white mb-8">
                   Why{' '}
                   <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                    CodeFlow?
+                    KodeGrove?
                   </span>
                 </h3>
 
                 <div className="grid grid-cols-2 gap-6">
                   {[
                     { icon: Users, number: '250+', label: 'Happy Clients' },
-                    { icon: Award, number: '500+', label: 'Projects Done' },
+                    { icon: Award, number: '10+', label: 'Projects Done' },
                     { icon: Star, number: '98%', label: 'Satisfaction' },
-                    { icon: Globe, number: '6+', label: 'Years Experience' },
+                    { icon: Globe, number: '5+', label: 'Years Experience' },
                   ].map((stat, index) => (
                     <motion.div
                       key={stat.label}
@@ -398,7 +398,7 @@ export function ContactPage() {
                         <MapPin className="w-8 h-8 text-white" />
                       </motion.div>
                       <h4 className="font-outfit text-xl font-bold text-white mb-2">
-                        San Francisco, CA
+                        INDIA, UK
                       </h4>
                       <p className="text-gray-300">Where Innovation Meets Design</p>
                     </div>
@@ -600,6 +600,7 @@ export function ContactPage() {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="relative">
                               <select
+                                aria-label="Service"
                                 id="service"
                                 name="service"
                                 value={formData.service}
@@ -632,6 +633,7 @@ export function ContactPage() {
 
                             <div className="relative">
                               <select
+                                aria-label="Budget"
                                 id="budget"
                                 name="budget"
                                 value={formData.budget}
@@ -665,6 +667,7 @@ export function ContactPage() {
 
                           <div className="relative">
                             <select
+                              aria-label="Timeline"
                               id="timeline"
                               name="timeline"
                               value={formData.timeline}
