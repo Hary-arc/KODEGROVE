@@ -25,6 +25,7 @@
     "validate": "npm run lint && npm run build"
   },
   "dependencies": {
+    "@radix-ui/react-toast": "^1.2.15",
     "clsx": "^2.1.1",
     "compression": "^1.8.1",
     "framer-motion": "^12.23.20",
