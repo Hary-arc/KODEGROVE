@@ -1,0 +1,27 @@
+/**
+ * Contact Page Components
+ * Form fields, labels, and contact-specific styles
+ */
+
+/* Form Field Focus Animations */
+.form-field {
+  position: relative;
+}
+
+.form-field input:focus + .form-label,
+.form-field textarea:focus + .form-label,
+.form-field select:focus + .form-label {
+  transform: translateY(-1.5rem) scale(0.85);
+  color: #a855f7;
+  background: #0f172a;
+  padding: 0 0.5rem;
+}
+
+.form-field input:not(:placeholder-shown) + .form-label,
+.form-field textarea:not(:placeholder-shown) + .form-label,
+.form-field select:not([value=""]) + .form-label {
+  transform: translateY(-1.5rem) scale(0.85);
+  color: #a855f7;
+  background: #0f172a;
+  padding: 0 0.5rem;
+}

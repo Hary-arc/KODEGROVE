@@ -1,0 +1,50 @@
+/**
+ * Careers Page Components
+ * Job listings, culture grid, perks, and career-specific styles
+ */
+
+/* Enhanced Job Listing Styles */
+.job-listing {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.job-listing:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+}
+
+/* Culture Grid Masonry Effect */
+.culture-grid {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.culture-grid:hover {
+  transform: translateY(-8px) scale(1.02);
+  z-index: 10;
+}
+
+/* Perk Card 3D Effect */
+.perk-card {
+  perspective: 1000px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.perk-card:hover {
+  transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+}
+
+/* Value Cards Hover Effect */
+.value-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.value-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
+}
+
+@media (max-width: 768px) {
+  .value-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+}

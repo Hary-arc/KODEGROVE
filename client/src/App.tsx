@@ -6,6 +6,8 @@ import { SEOHead, generateWebsiteSchema } from './components/SEOHead';
 import { CriticalCSS } from './components/CriticalCSS';
 import { Navigation } from './components/Navigation';
 import { Router } from './components/Router';
+import { MarketingPopupManager, triggerMarketingPopup } from './components/MarketingPopupManager'
+import { PopupTriggerButtons } from './components/PopupTriggerButtons'
 import { UniversalFloatingNav } from './components/UniversalFloatingNav';
 import { siteConfig, navigation, footerLinks } from './data/site-config';
 
@@ -283,6 +285,12 @@ export default function App() {
 
         {/* Conditionally render floating nav */}
         {isLoaded && <UniversalFloatingNav currentPage={currentPage} />}
+
+        {/* Marketing Popup Manager */}
+        {isLoaded && <MarketingPopupManager />}
+
+        {/* Popup Trigger Buttons (Demo) */}
+        {isLoaded && <PopupTriggerButtons onTrigger={triggerMarketingPopup} />}
 
         {/* Optimized Footer */}
         <footer className="relative z-10 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 border-t border-white/10">

@@ -1,0 +1,391 @@
+/**
+ * Scroll-Jacking Performance Optimizations
+ * Ultra-smooth horizontal scrolling with GPU acceleration
+ */
+
+/* ============================================
+   GPU ACCELERATION & PERFORMANCE
+   ============================================ */
+
+/* Parent container for scroll-jacking - MUST have overflow: visible for sticky to work */
+.scroll-jacking-container {
+  position: relative;
+  width: 100%;
+  overflow: visible !important; /* CRITICAL: Required for sticky positioning */
+  will-change: scroll-position;
+  /* DO NOT add transform here - breaks sticky positioning */
+}
+
+/* Horizontal scroll wrapper - CRITICAL FOR SMOOTH SCROLLING */
+.horizontal-scroll-wrapper {
+  will-change: transform;
+  transform: translateZ(0);
+  
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+/* Process cards - Optimized rendering */
+.process-card {
+  will-change: opacity, transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+/* ============================================
+   SMOOTH TRANSFORM TRANSITIONS
+   ============================================ */
+
+/* Ultra-smooth transform with hardware acceleration */
+.smooth-transform {
+  transition: transform 0.05s linear;
+  transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Remove transition conflicts during active scrolling */
+.scrolling .horizontal-scroll-wrapper {
+  transition: none !important;
+}
+
+/* ============================================
+   ANTI-STUTTER UTILITIES
+   ============================================ */
+
+/* Prevent layout shift during scroll */
+.prevent-layout-shift {
+  contain: layout;
+  will-change: transform;
+}
+
+/* Optimize repainting */
+.optimize-repaint {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Hardware-accelerated opacity */
+.hw-accelerated-opacity {
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ============================================
+   PROGRESS INDICATOR OPTIMIZATIONS
+   ============================================ */
+
+.progress-bar {
+  will-change: width;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+.progress-container {
+  will-change: contents;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ============================================
+   CARD INTERACTION OPTIMIZATIONS
+   ============================================ */
+
+/* Smooth hover effects without layout shifts */
+.process-card-inner {
+  transition:
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.process-card:hover .process-card-inner {
+  transform: translateZ(0) scale(1.02);
+}
+
+/* Optimize icon rotations */
+.rotating-icon {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Reduce complexity on mobile */
+  .process-card {
+    will-change: transform;
+    contain: layout;
+  }
+
+  /* Faster transitions on mobile */
+  .horizontal-scroll-wrapper {
+    transition: transform 0.1s linear;
+  }
+
+  /* Disable hover effects on touch devices */
+  @media (hover: none) {
+    .process-card:hover .process-card-inner {
+      transform: translateZ(0);
+    }
+  }
+}
+
+/* ============================================
+   SCROLL PERFORMANCE BOOST
+   ============================================ */
+
+/* Passive event listener hint (for browsers that support it) */
+.scroll-passive {
+  touch-action: pan-y;
+  overscroll-behavior-x: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent scroll chaining */
+.no-scroll-chain {
+  overscroll-behavior: contain;
+}
+
+/* Smooth momentum scrolling on iOS */
+.ios-smooth-scroll {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+/* ============================================
+   BACKGROUND ANIMATION OPTIMIZATIONS
+   ============================================ */
+
+/* Reduce background animation complexity during scroll */
+.background-gradient-orb {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout style paint;
+}
+
+/* Pause animations during rapid scroll */
+@media (prefers-reduced-motion: no-preference) {
+  .scrolling .background-gradient-orb {
+    animation-play-state: paused;
+  }
+}
+
+.scroll-section {
+  position: relative;
+  min-height: 200vh;
+  overflow: visible;
+}
+
+/* ============================================
+   STICKY POSITION OPTIMIZATIONS
+   ============================================ */
+
+.sticky-scroll-container {
+  position: sticky;
+  top: 0;
+  z-index: 10; /* make sure it stays above content */
+  transform: none; /* ❌ remove translateZ(0) — it breaks sticky */
+  will-change: auto; /* don’t hint transform for sticky */
+  backface-visibility: hidden;
+  contain: paint; /* layout containment breaks sticky — restrict to paint only */
+}
+
+/* Optional: Add smoother visuals without breaking stickiness */
+.sticky-scroll-container.is-active {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  /* Avoid transitions on sticky container */
+}
+
+/* ============================================
+   REQUESTANIMATIONFRAME OPTIMIZATION HINTS
+   ============================================ */
+
+/* These classes hint to the browser to use RAF for smoother animations */
+.raf-optimized {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* ============================================
+   COMPOSITE LAYER PROMOTION
+   ============================================ */
+
+/* Force composite layer for smooth transforms */
+.composite-layer {
+  transform: translateZ(0);
+  will-change: transform;
+  isolation: isolate;
+}
+
+/* ============================================
+   CRITICAL RENDERING PATH
+   ============================================ */
+
+/* Optimize critical rendering path */
+.critical-render {
+  contain: layout style paint;
+  content-visibility: auto;
+  will-change: transform;
+}
+
+/* ============================================
+   ANTI-JANK UTILITIES
+   ============================================ */
+
+/* Prevent janky animations - only use on non-sticky elements */
+.no-jank {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  /* Note: Don't apply this class to sticky elements */
+}
+
+/* Smooth text rendering during transforms */
+.smooth-text-transform {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================
+   BLUR BACKDROP OPTIMIZATIONS
+   ============================================ */
+
+/* Optimize backdrop-blur during scroll */
+.optimized-backdrop {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  will-change: backdrop-filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Disable backdrop-filter during active scroll for better performance */
+.scrolling .optimized-backdrop {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ============================================
+   GRADIENT BORDER OPTIMIZATIONS
+   ============================================ */
+
+/* Optimize gradient border animations */
+.gradient-border-animated {
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   SCROLL SNAP (OPTIONAL ENHANCEMENT)
+   ============================================ */
+
+/* Optional: Enable scroll snap for better card alignment */
+.scroll-snap-container {
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-item {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .horizontal-scroll-wrapper,
+  .process-card,
+  .smooth-transform,
+  .rotating-icon {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .process-card:hover .process-card-inner {
+    transform: none !important;
+  }
+}
+
+/* ============================================
+   HIGH REFRESH RATE DISPLAYS
+   ============================================ */
+
+@media (min-resolution: 120dpi) {
+  /* Smoother transitions on high refresh rate displays */
+  .horizontal-scroll-wrapper {
+    transition-duration: 0.033s; /* ~30fps */
+  }
+}
+
+@media (min-resolution: 144dpi) {
+  /* Ultra-smooth on 144Hz+ displays */
+  .horizontal-scroll-wrapper {
+    transition-duration: 0.016s; /* ~60fps */
+  }
+}
+
+/* ============================================
+   FIREFOX-SPECIFIC OPTIMIZATIONS
+   ============================================ */
+
+@-moz-document url-prefix() {
+  .horizontal-scroll-wrapper {
+    transform: translateX(0);
+    will-change: transform;
+  }
+}
+
+/* ============================================
+   SAFARI-SPECIFIC OPTIMIZATIONS
+   ============================================ */
+
+@supports (-webkit-touch-callout: none) {
+  .horizontal-scroll-wrapper {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+
+  .process-card {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+/* ============================================
+   CHROME-SPECIFIC OPTIMIZATIONS
+   ============================================ */
+
+@supports (not (-webkit-touch-callout: none)) and
+  (-webkit-appearance: none) {
+  .horizontal-scroll-wrapper {
+    transform: translateZ(0) translateX(0);
+  }
+}

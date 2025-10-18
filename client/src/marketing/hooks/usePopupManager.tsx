@@ -1,56 +1,61 @@
-'use client';
+'use client'
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react'
 
-export type PopupType =
+export type PopupType = 
   | 'web-development'
-  | 'mobile-app'
+  | 'mobile-app' 
   | 'ecommerce'
   | 'backend-systems'
   | 'ui-ux-design'
   | 'security-devops'
-  | null;
+  | 'signup'
+  | 'contact'
+  | 'newsletter'
+  | 'free-consultation'
+  | 'special-offer'
+  | null
 
 interface PopupState {
-  isOpen: boolean;
-  type: PopupType;
+  isOpen: boolean
+  type: PopupType
 }
 
 export function usePopupManager() {
   const [popup, setPopup] = useState<PopupState>({
     isOpen: false,
-    type: null,
-  });
+    type: null
+  })
 
   const openPopup = useCallback((type: PopupType) => {
     setPopup({
       isOpen: true,
-      type,
-    });
-
+      type
+    })
+    
     // Prevent body scroll when popup is open
-    document.body.style.overflow = 'hidden';
-  }, []);
+    document.body.style.overflow = 'hidden'
+  }, [])
 
   const closePopup = useCallback(() => {
     setPopup({
       isOpen: false,
-      type: null,
-    });
-
+      type: null
+    })
+    
     // Restore body scroll
-    document.body.style.overflow = 'unset';
-  }, []);
+    document.body.style.overflow = 'unset'
+  }, [])
 
   const isPopupOpen = (type: PopupType) => {
-    return popup.isOpen && popup.type === type;
-  };
+    return popup.isOpen && popup.type === type
+  }
 
   return {
     popup,
     openPopup,
     closePopup,
     isPopupOpen,
-    isAnyPopupOpen: popup.isOpen,
-  };
+    isAnyPopupOpen: popup.isOpen
+  }
 }

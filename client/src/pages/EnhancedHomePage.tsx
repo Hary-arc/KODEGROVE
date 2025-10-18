@@ -64,6 +64,11 @@ import CustomWebDesignPricingSection from '../components/home-sections/CustomWeb
 import FeaturedWebsiteRedesignsSection from '../components/home-sections/FeaturedWebsiteRedesignsSection';
 import HomeContactSection from '../components/home-sections/HomeContactSection';
 import CtaSection from '../components/home-sections/CtaSection';
+
+import { FAQSection } from "../components/FAQSection";
+import { homeFAQs } from "../data/faqs";
+import ModernServicesSection from "../components/ModernServicesSection";
+import {ProcessSection} from '../components/ProcessSection';
 import React from 'react';
 
 export function EnhancedHomePage() {
@@ -586,6 +591,7 @@ export function EnhancedHomePage() {
       <section>
         <DesignProcessSection />
       </section>
+      
       {/* Clients Across Industries Section */}
       <ClientsIndustriesSection />
 
@@ -605,6 +611,11 @@ export function EnhancedHomePage() {
       {/* Enhanced Service Cards Marquee */}
       <ServiceCardsMarquee />
       <CtaSection />
+      <FAQSection
+        title={homeFAQs.title}
+        subtitle={homeFAQs.subtitle}
+        faqs={homeFAQs.faqs}
+      />
       <HomeContactSection />
     </div>
   );

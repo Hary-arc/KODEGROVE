@@ -1,0 +1,229 @@
+/**
+ * Animation Utility Classes
+ * Apply keyframe animations with these helper classes
+ */
+
+/* Core Animation Classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* Marquee Classes */
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-rtl {
+  animation: marquee-right-to-left 40s linear infinite;
+  animation-play-state: running;
+}
+
+.animate-marquee-ltr {
+  animation: marquee-left-to-right 50s linear infinite;
+  animation-play-state: running;
+}
+
+/* Hover pause functionality */
+.marquee-container:hover .animate-marquee-rtl,
+.marquee-container:hover .animate-marquee-ltr,
+.marquee-container:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Smooth transition for pause/resume */
+.animate-marquee-rtl,
+.animate-marquee-ltr,
+.animate-marquee {
+  transition: animation-play-state 0.3s ease;
+}
+
+/* Scroll Reveal Classes */
+.animate-fade-up {
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.8s ease-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.8s ease-out;
+}
+
+/* Timeline Classes */
+.animate-draw-line {
+  animation: drawLine 2s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-count-up {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+.stat-counter {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+/* Timeline line drawing effect */
+.timeline-line {
+  position: relative;
+  height: 0;
+}
+
+.timeline-line.animate {
+  animation: drawLine 2s ease-out forwards;
+}
+
+/* Portfolio Classes */
+.portfolio-badge {
+  animation: badgeFloat 3s ease-in-out infinite;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Contact Page Classes */
+.form-input-focused {
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+.floating-label {
+  animation: labelFloat 0.3s ease-out forwards;
+}
+
+.ripple-effect {
+  animation: ripple 0.6s ease-out;
+}
+
+.map-zoom {
+  animation: mapZoom 1.2s ease-out;
+}
+
+.floating-pin {
+  animation: floatPin 2s ease-in-out infinite;
+}
+
+/* Careers Page Classes */
+.accordion-slide {
+  animation: accordionSlide 0.3s ease-out;
+}
+
+.culture-image-zoom {
+  animation: cultureImageZoom 0.7s ease-out forwards;
+}
+
+.overlay-slide {
+  animation: overlaySlide 0.5s ease-out;
+}
+
+.perk-float {
+  animation: perkFloat 2s ease-in-out infinite;
+}
+
+.icon-bounce {
+  animation: iconBounce 0.3s ease-out;
+}
+
+.job-card-hover {
+  animation: jobCardHover 0.4s ease-out forwards;
+}
+
+.department-filter {
+  animation: departmentFilter 0.3s ease-out;
+}
+
+.badge-glow {
+  animation: badgeGlow 2s ease-in-out infinite;
+}
+
+.featured-pulse {
+  animation: fabPulse 3s infinite;
+}
+
+/* Accordion content transitions */
+.accordion-content {
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-content[data-state="open"] {
+  animation: accordionSlide 0.3s ease-out;
+}
+
+/* Floating Nav Classes */
+.fab-main {
+  animation: floatUpDown 3s ease-in-out infinite;
+}
+
+.fab-main:hover {
+  animation: fabGlow 2s ease-in-out infinite;
+}
+
+.quick-action-enter {
+  animation: quickActionSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.fab-pulse {
+  animation: fabPulse 2s infinite;
+}
+
+.notification-pulse {
+  animation: fabPulse 2s infinite;
+}
+
+.support-active {
+  animation: supportBounce 1s ease-in-out infinite;
+}
+
+/* Mission statement word animations */
+.mission-word {
+  display: inline-block;
+  margin-right: 0.5rem;
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+/* Filter transition effects */
+.filter-transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Department filter active state */
+.filter-active {
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  animation: badgeGlow 2s ease-in-out infinite;
+}

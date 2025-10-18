@@ -1,0 +1,246 @@
+/**
+ * Responsive Utilities
+ * Grid systems, spacing, images, and responsive patterns
+ */
+
+/* Responsive Card System */
+.responsive-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Container Queries Support */
+@container (max-width: 320px) {
+  .responsive-card {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .responsive-card h3 {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+
+@container (min-width: 480px) {
+  .responsive-card {
+    padding: 1.5rem;
+  }
+}
+
+/* Responsive Spacing */
+.responsive-padding {
+  padding: clamp(0.5rem, 2.5vw, 1.5rem);
+}
+
+.responsive-margin {
+  margin: clamp(0.5rem, 2.5vw, 1.5rem);
+}
+
+.responsive-gap {
+  gap: clamp(0.5rem, 2.5vw, 1.5rem);
+}
+
+/* Enhanced Responsive Grid Utilities */
+.grid-responsive-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.grid-responsive-md {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.grid-responsive-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+/* Masonry Responsive Utilities */
+.masonry-responsive {
+  column-count: 1;
+  column-gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-responsive {
+    column-count: 2;
+    column-gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-responsive {
+    column-count: 3;
+    column-gap: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .masonry-responsive {
+    column-count: 4;
+    column-gap: 2rem;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.masonry-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .masonry-item {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-item {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Responsive Image Containers */
+.responsive-image-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+}
+
+.responsive-image-container.aspect-square {
+  padding-bottom: 100%;
+}
+
+.responsive-image-container.aspect-video {
+  padding-bottom: 56.25%;
+}
+
+.responsive-image-container.aspect-4-3 {
+  padding-bottom: 75%;
+}
+
+.responsive-image-container.aspect-3-2 {
+  padding-bottom: 66.67%;
+}
+
+.responsive-image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Enhanced Card Hover Effects for Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+  .responsive-card:hover {
+    transform: none;
+  }
+  
+  .responsive-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Improved Focus States for Accessibility */
+.responsive-card:focus-within {
+  outline: 2px solid rgba(139, 92, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation-duration: 20s;
+  }
+  
+  .magnetic:hover {
+    transform: translateY(-2px);
+  }
+  
+  .culture-grid:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+  
+  .perk-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .job-listing:hover {
+    transform: translateY(-2px);
+  }
+  
+  .value-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+  
+  .fab-main {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .quick-action-button {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .calculator-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .calculator-modal {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .responsive-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    background: white !important;
+    color: black !important;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .responsive-card * {
+    color: black !important;
+    background: transparent !important;
+  }
+}
+
+/* Dark Mode Specific Responsive Card Styles */
+@media (prefers-color-scheme: dark) {
+  .responsive-card {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .responsive-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}

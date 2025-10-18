@@ -1,0 +1,20 @@
+/**
+ * Portfolio Components
+ * Portfolio card styles and interactions
+ */
+
+.portfolio-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-card:hover {
+  animation: portfolioHover 0.4s ease-out forwards;
+}
+
+.portfolio-card:hover .portfolio-image {
+  animation: imageZoom 0.7s ease-out forwards;
+}
+
+.portfolio-card:hover .portfolio-overlay {
+  animation: overlayFade 0.3s ease-out forwards;
+}
