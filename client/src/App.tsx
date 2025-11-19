@@ -7,7 +7,7 @@ import { CriticalCSS } from './components/CriticalCSS';
 import { Navigation } from './components/Navigation';
 import { Router } from './components/Router';
 import { MarketingPopupManager, triggerMarketingPopup } from './components/MarketingPopupManager'
-import { PopupTriggerButtons } from './components/PopupTriggerButtons'
+//import { PopupTriggerButtons } from './components/PopupTriggerButtons'
 import { UniversalFloatingNav } from './components/UniversalFloatingNav';
 import { siteConfig, navigation, footerLinks } from './data/site-config';
 
@@ -123,6 +123,14 @@ export default function App() {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
+  useEffect(() => {
+  if (isLoaded) {
+    triggerMarketingPopup('special-offer');
+    console.log('MarketingPopupManager mounted');
+  }
+}, [isLoaded]);
+
+
 
   type RouteConfig = {
     path: string;
@@ -274,7 +282,7 @@ export default function App() {
           ></div>
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] will-change-transform"></div>
         </div>
-
+<MarketingPopupManager />
         {/* Navigation */}
         <Navigation />
 
@@ -282,15 +290,16 @@ export default function App() {
         <main className="relative z-10" style={{ position: 'relative' }}>
           <Router routes={routes} defaultRoute="/" />
         </main>
-
+        
         {/* Conditionally render floating nav */}
         {isLoaded && <UniversalFloatingNav currentPage={currentPage} />}
 
         {/* Marketing Popup Manager */}
-        {isLoaded && <MarketingPopupManager />}
+        
+         <MarketingPopupManager />
 
         {/* Popup Trigger Buttons (Demo) */}
-        {isLoaded && <PopupTriggerButtons onTrigger={triggerMarketingPopup} />}
+        {/* {isLoaded && <PopupTriggerButtons onTrigger={triggerMarketingPopup} />} */}
 
         {/* Optimized Footer */}
         <footer className="relative z-10 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 border-t border-white/10">

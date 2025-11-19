@@ -32,7 +32,7 @@ import { testimonials } from '../data/testimonials';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import VideoHoverLift from '../components/VideoHoverLift';
 import { TestimonialMarquee } from '../components/TestimonialMarquee';
-import { ServiceCardsMarquee } from '../components/ServiceCardsMarquee';
+//import { ServiceCardsMarquee } from '../components/ServiceCardsMarquee';
 import { ScrollReveal, StaggeredReveal, Parallax } from '../components/animations/ScrollReveal';
 import {
   HoverLift,
@@ -42,11 +42,11 @@ import {
   Typewriter,
 } from '../components/animations/MicroInteractions';
 import { VideoBackground } from '../components/animations/VideoBackground';
-import {
-  LottieAnimation,
-  AnimatedIcon as LottieIcon,
-  AnimatedPath,
-} from '../components/animations/LottieAnimation';
+// import {
+//   LottieAnimation,
+//   AnimatedIcon as LottieIcon,
+//   AnimatedPath,
+// } from '../components/animations/LottieAnimation';
 import {
   usePerformantAnimation,
   useScrollAnimation,
@@ -67,9 +67,9 @@ import CtaSection from '../components/home-sections/CtaSection';
 
 import { FAQSection } from "../components/FAQSection";
 import { homeFAQs } from "../data/faqs";
-import ModernServicesSection from "../components/ModernServicesSection";
-import {ProcessSection} from '../components/ProcessSection';
-import React from 'react';
+//import ModernServicesSection from "../components/ModernServicesSection";
+//import {ProcessSection} from '../components/ProcessSection';
+//import React from 'react';
 
 export function EnhancedHomePage() {
   const heroRef = useRef(null);
@@ -609,7 +609,7 @@ export function EnhancedHomePage() {
       <TestimonialMarquee featuredTestimonials={featuredTestimonials} />
 
       {/* Enhanced Service Cards Marquee */}
-      <ServiceCardsMarquee />
+      {/* <ServiceCardsMarquee /> */}
       <CtaSection />
       <FAQSection
         title={homeFAQs.title}

@@ -30,7 +30,7 @@ import {
   ChevronRight,
   ArrowUpRight,
 } from 'lucide-react';
-import { ServicesSection } from '@/components/ServicesSection';
+// import { ServicesSection } from '@/components/ServicesSection';
 import { services, serviceStats } from '../data/services';
 import { pageHeaders } from '../data/content';
 import { siteConfig } from '../data/site-config';
@@ -250,7 +250,7 @@ export function ServicesPage() {
         </div>
       </section>
       {/* ServicesSection */}
-      <ServicesSection />
+      {/* <ServicesSection /> */}
 
       {/* Sticky Navigation */}
       <nav className="sticky top-20 z-30 bg-slate-900/95 backdrop-blur-xl border-b border-white/10">

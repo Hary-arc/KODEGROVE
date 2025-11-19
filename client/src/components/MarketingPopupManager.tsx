@@ -26,6 +26,7 @@ export function MarketingPopupManager() {
     if (!hasSeenNewsletter) {
       const timer = setTimeout(() => {
         openPopup('newsletter')
+        console.log('Opening newsletter popup...')
         localStorage.setItem('newsletter-popup-seen', 'true')
       }, 30000) // 30 seconds
 

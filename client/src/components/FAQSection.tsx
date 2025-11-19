@@ -224,7 +224,7 @@ export function FAQSection({
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 sm:mt-20 text-center"
         >
-          <div className="relative group inline-block">
+          <div className="relative group w-full">
             {/* Glow Effect */}
             <div className="absolute -inset-[1px] bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700" />
 
@@ -261,7 +261,7 @@ export function FAQSection({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() =>
-                    (window.location.href = `mailto:hello@codeflow.com`)
+                    (window.location.href = `mailto:kodegrove@gmail.com`)
                   }
                   className="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
                 >

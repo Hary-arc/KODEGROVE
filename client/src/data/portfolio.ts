@@ -59,6 +59,7 @@ export const projects: Project[] = [
     title: 'Hypnotic E-Commerce Platform',
     category: 'Featured',
     description: 'Revolutionary shopping experience with AI-powered recommendations',
+    demoLink: 'https://www.shopify.com/examples',
     image:
       'https://images.unsplash.com/photo-1642132652860-471b4228023e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjB3ZWJzaXRlJTIwZGFzaGJvYXJkfGVufDF8fHx8MTc1NjI0MDQ4NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     technologies: ['Next.js', 'Three.js', 'Shopify Plus', 'AI/ML', 'WebGL', 'Stripe'],
@@ -115,6 +116,7 @@ export const projects: Project[] = [
     title: 'FinTech Mobile Revolution',
     category: 'Featured',
     description: 'Next-gen banking with biometric security and fluid UX',
+    demoLink: 'https://www.shopify.com/examples',
     image:
       'https://images.unsplash.com/photo-1678667720699-5c0fc04ac166?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXNpZ24lMjBtb2NrdXB8ZW58MXx8fHwxNzU2MjcyODk2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     technologies: ['React Native', 'Blockchain', 'ML', 'Biometrics API', 'Node.js', 'PostgreSQL'],
@@ -169,6 +171,7 @@ export const projects: Project[] = [
     title: 'Enterprise Analytics Hub',
     category: 'B2B',
     description: 'Real-time business intelligence with stunning visualizations',
+    demoLink: 'https://www.shopify.com/examples',
     image:
       'https://images.unsplash.com/photo-1728598909887-2d983a8889b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3ZWIlMjBkZXZlbG9wbWVudCUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NTYzMTg0MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     technologies: ['React', 'D3.js', 'Python', 'Apache Kafka', 'PostgreSQL', 'Docker', 'AWS'],
@@ -223,6 +226,7 @@ export const projects: Project[] = [
     title: 'Healthcare Platform Revolution',
     category: 'B2B',
     description: 'HIPAA-compliant telemedicine platform with AI diagnostics',
+    demoLink: 'https://www.shopify.com/examples',
     image:
       'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NTYzMjkzMDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     technologies: [
@@ -285,6 +289,7 @@ export const projects: Project[] = [
     title: 'Social Commerce App',
     category: 'B2C',
     description: 'Instagram-style shopping experience with social features',
+    demoLink: 'https://www.shopify.com/examples',
     image:
       'https://images.unsplash.com/photo-1611078176655-91d4c7b3a589?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2NpYWwlMjBtZWRpYSUyMGFwcHxlbnwxfHx8fDE3NTYzMjkyOTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     technologies: [
@@ -344,6 +349,7 @@ export const projects: Project[] = [
     title: 'Luxury Lifestyle Platform',
     category: 'eCommerce',
     description: 'Premium e-commerce experience for luxury brands',
+    demoLink: 'https://www.shopify.com/examples',
     image:
       'https://images.unsplash.com/photo-1590735213920-68192a487bc8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBlY29tbWVyY2V8ZW58MXx8fHwxNzU2MzI5Mjk4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     technologies: [
@@ -404,6 +410,7 @@ export const projects: Project[] = [
     title: 'EdTech Learning Platform',
     category: 'B2C',
     description: 'Interactive learning platform with gamification',
+    demoLink: 'https://www.shopify.com/examples',
     image:
       'https://images.unsplash.com/photo-1544717297-fa95b6ee9643?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb24lMjB0ZWNobm9sb2d5fGVufDF8fHx8MTc1NjMyOTI5OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     technologies: ['React', 'WebGL', 'Node.js', 'Three.js', 'AI/ML', 'WebRTC', 'MongoDB'],
@@ -458,6 +465,8 @@ export const projects: Project[] = [
     title: 'Sustainable Fashion Marketplace',
     category: 'eCommerce',
     description: 'Eco-friendly fashion platform with sustainability tracking',
+
+    demoLink: 'https://www.shopify.com/examples',
     image:
       'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwZWNvbW1lcmNlfGVufDF8fHx8MTc1NjMyOTI5OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     technologies: ['Svelte', 'Supabase', 'Sustainability APIs'],

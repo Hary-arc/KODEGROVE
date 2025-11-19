@@ -657,6 +657,7 @@ export function CaseStudyDetail({ project, onBack }: CaseStudyDetailProps) {
                   <div className="flex justify-center space-x-3 mt-8">
                     {caseStudyData.gallery.map((_, index) => (
                       <button
+                        aria-label={`Gallery image ${index + 1}`}
                         key={index}
                         onClick={() => setCurrentGalleryIndex(index)}
                         className={`w-4 h-4 rounded-full transition-all duration-300 ${
@@ -799,6 +800,7 @@ export function CaseStudyDetail({ project, onBack }: CaseStudyDetailProps) {
               onClick={e => e.stopPropagation()}
             >
               <button
+                aria-label="Close Gallery"
                 onClick={() => setIsGalleryOpen(false)}
                 className="absolute -top-16 right-0 w-12 h-12 glass rounded-full flex items-center justify-center text-white hover:bg-white/10 z-10 text-xl"
               >
@@ -815,6 +817,7 @@ export function CaseStudyDetail({ project, onBack }: CaseStudyDetailProps) {
                 {caseStudyData.gallery.length > 1 && (
                   <>
                     <button
+                      aria-label="Previous Image"
                       onClick={() =>
                         setCurrentGalleryIndex(prev =>
                           prev === 0 ? caseStudyData.gallery!.length - 1 : prev - 1
@@ -826,6 +829,7 @@ export function CaseStudyDetail({ project, onBack }: CaseStudyDetailProps) {
                     </button>
 
                     <button
+                      aria-label="Next Image"
                       onClick={() =>
                         setCurrentGalleryIndex(prev =>
                           prev === caseStudyData.gallery!.length - 1 ? 0 : prev + 1
@@ -843,6 +847,7 @@ export function CaseStudyDetail({ project, onBack }: CaseStudyDetailProps) {
                 <div className="flex justify-center space-x-3 mt-8">
                   {caseStudyData.gallery.map((_, index) => (
                     <button
+                      aria-label="button"
                       key={index}
                       onClick={() => setCurrentGalleryIndex(index)}
                       className={`w-4 h-4 rounded-full transition-all duration-300 ${

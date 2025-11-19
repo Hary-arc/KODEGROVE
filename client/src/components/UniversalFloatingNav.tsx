@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/button';
 import { WebsiteCalculator } from './WebsiteCalculator';
+import { triggerMarketingPopup } from '../components/MarketingPopupManager'
 import {
   ArrowUp,
   Calculator,
@@ -18,7 +19,7 @@ import {
   ExternalLink,
   Sparkles,
   Zap,
-  User,
+  UserPlus,
   CreditCard,
 } from 'lucide-react';
 import React from 'react';
@@ -33,6 +34,14 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showCalculator, setShowCalculator] = useState(false);
+
+  const [tooltipText, setTooltipText] = useState('');
+  const [showIntentTooltip, setShowIntentTooltip] = useState(false);
+  const [idleTimer, setIdleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+
+  const [incompleteCalculator, setIncompleteCalculator] = useState(false);
+  const [incompleteSignup, setIncompleteSignup] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +65,69 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+    // --- Adaptive CTA Prioritization (Psychology Based) ---
+  // useEffect(() => {
+  //   const usedCalculator = localStorage.getItem('usedCalculator');
+
+  //   if (usedCalculator) {
+  //     // Move calculator higher if user has interacted before
+  //     const calculator = quickActions.find(a => a.id === 'calculator');
+  //     if (calculator) calculator.priority = 1;
+  //   }
+
+  //   // Example: If user came from pricing page
+  //   if (document.referrer?.includes('pricing')) {
+  //     const quote = quickActions.find(a => a.id === 'quote');
+  //     if (quote) quote.priority = 1;
+  //   }
+  // }, []);
+
+  // --- Intent Detection: Idle User ---
+  useEffect(() => {
+    const handleUserActivity = () => {
+      if (idleTimer) clearTimeout(idleTimer);
+
+      const timer = setTimeout(() => {
+        setTooltipText('Need help?');
+        setShowIntentTooltip(true);
+      }, 5000); // 5 seconds idle
+
+      setIdleTimer(timer);
+    };
+
+    window.addEventListener('mousemove', handleUserActivity);
+    window.addEventListener('scroll', handleUserActivity);
+    window.addEventListener('keydown', handleUserActivity);
+
+    return () => {
+      if (idleTimer) clearTimeout(idleTimer);
+
+      window.removeEventListener('mousemove', handleUserActivity);
+      window.removeEventListener('scroll', handleUserActivity);
+      window.removeEventListener('keydown', handleUserActivity);
+    };
+  }, []);
+
+  // --- Intent Detection: Page Context ---
+  useEffect(() => {
+    const url = window.location.pathname.toLowerCase();
+
+    if (url.includes('pricing')) {
+      setTooltipText('Get a custom quote?');
+      setShowIntentTooltip(true);
+    } else if (url.includes('blog')) {
+      setTooltipText('Boost your website for free?');
+      setShowIntentTooltip(true);
+    }
+  }, [currentPage]);
+
+  // --- Detect user closed signup popup ---
+  useEffect(() => {
+  const handler = () => setIncompleteSignup(true);
+  window.addEventListener('signup-popup-closed', handler);
+  return () => window.removeEventListener('signup-popup-closed', handler);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -64,10 +136,16 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
     setIsExpanded(false);
   };
 
+  const openOffer = () => {
+  triggerMarketingPopup('special-offer')
+  setIsExpanded(false)
+}
+
   const openCalculator = () => {
-    setShowCalculator(true);
-    setIsExpanded(false);
-  };
+  setShowCalculator(true);
+  setIncompleteCalculator(false); // user resumes
+  setIsExpanded(false);
+};
 
   const openSupport = () => {
     // Open support chat or contact
@@ -75,24 +153,20 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
     setIsExpanded(false);
   };
 
-  const scheduleCall = () => {
-    // Open calendar booking
-    window.open('https://calendly.com/codeflow-consultation', '_blank');
-    setIsExpanded(false);
-  };
+  const openSignup = () => {
+  triggerMarketingPopup('signup');
+  setIncompleteSignup(false); // user resumed
+  setIsExpanded(false);
+};
 
-  const sendEmail = () => {
-    window.location.href = 'mailto:hello@codeflow.dev?subject=Project Inquiry';
+
+  const subscribe = () => {
+    triggerMarketingPopup('newsletter')
     setIsExpanded(false);
   };
 
   const callUs = () => {
-    window.location.href = 'tel:+15551234567';
-    setIsExpanded(false);
-  };
-
-  const viewDashboard = () => {
-    window.location.hash = '/dashboard';
+    triggerMarketingPopup('free-consultation')
     setIsExpanded(false);
   };
 
@@ -102,7 +176,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
     setIsExpanded(false);
   };
 
-  const quickActions = [
+  const quickActions = useMemo(() => [
     {
       id: 'scroll-top',
       icon: ArrowUp,
@@ -110,81 +184,106 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
       action: scrollToTop,
       color: 'from-purple-500 to-pink-500',
       show: showScrollTop,
+      priority: 8,
+    },
+    {
+      id: 'special-offer',
+      icon: Sparkles,
+      label: 'Unlock Limited-Time Deal',
+      action: openOffer,
+      color: 'from-amber-700 to-rose-500',
+      show: true,
       priority: 1,
+      pulse: true,
     },
     {
       id: 'calculator',
       icon: Calculator,
-      label: 'Website Calculator',
+      label: incompleteCalculator ? 'Continue Estimate' : 'Estimate My Website Cost',
       action: openCalculator,
-      color: 'from-blue-500 to-cyan-500',
+      color: 'from-blue-700 via-cyan-400 to-blue-400',
       show: true,
       priority: 2,
-      badge: 'New',
+      badge: incompleteCalculator ? 'Pending' : 'New',
     },
+    
     {
       id: 'support',
       icon: MessageCircle,
-      label: 'Live Support',
+      label: 'Talk to a Human',
       action: openSupport,
-      color: 'from-green-500 to-emerald-500',
-      show: true,
-      priority: 3,
-      pulse: true,
-    },
-    {
-      id: 'schedule',
-      icon: Calendar,
-      label: 'Schedule Call',
-      action: scheduleCall,
-      color: 'from-orange-500 to-red-500',
+      color: 'from-green-800 to-emerald-400',
       show: true,
       priority: 4,
+      pulse: true,
     },
     {
       id: 'email',
       icon: Mail,
-      label: 'Send Email',
-      action: sendEmail,
-      color: 'from-indigo-500 to-purple-500',
+      label: 'Get Free Weekly Tips',
+      action: subscribe,
+      color: 'from-rose-700 to-orange-400',
       show: true,
-      priority: 5,
+      priority: 7,
     },
     {
       id: 'call',
       icon: Phone,
-      label: 'Call Now',
+      label: 'Book Free Strategy Call',
       action: callUs,
-      color: 'from-teal-500 to-cyan-500',
+      color: 'from-fuchsia-500 via-purple-500 to-purple-600',
       show: true,
-      priority: 6,
+      priority: 5,
     },
     {
-      id: 'dashboard',
-      icon: User,
-      label: 'Client Portal',
-      action: viewDashboard,
-      color: 'from-violet-500 to-purple-500',
+      id: 'opensignup',
+      icon: UserPlus,
+      label: incompleteSignup ? 'Complete Your Free Account' : 'Create My Free Account',
+      action: openSignup,
+      color: 'from-sky-700 to-indigo-500',
       show: currentPage !== 'dashboard',
-      priority: 7,
+      priority: 6,
+      badge: incompleteSignup ? 'Pending' : undefined,
     },
     {
       id: 'quote',
       icon: FileText,
-      label: 'Get Quotation',
+      label: 'Get Custom Quotation',
       action: viewQuote,
-      color: 'from-pink-500 to-rose-500',
+      color: 'from-pink-700 via-pink-500 to-rose-500',
       show: currentPage !== 'pricing',
-      priority: 8,
+      priority: 3,
     },
-  ];
+  ], [showScrollTop, incompleteCalculator, incompleteSignup, currentPage]);
 
-  const visibleActions = quickActions
-    .filter(action => action.show)
-    .sort((a, b) => a.priority - b.priority)
-    .slice(0, 6); // Show maximum 6 actions
+  // --- CTA GROUPING (Psychology Optimized) ---
+  const primaryActionIDs = ['special-offer', 'calculator', 'support', 'call'];
+  const [isMExpanded, setIsMExpanded] = useState(false);
+  const primaryActions = useMemo(
+    () => quickActions.filter(a => primaryActionIDs.includes(a.id) && a.show),
+    [quickActions]
+  );
 
-  if (!isVisible) return null;
+  const secondaryActions = useMemo(
+    () => quickActions.filter(a => !primaryActionIDs.includes(a.id) && a.show),
+    [quickActions]
+  );
+
+  const visibleActions = useMemo(() => {
+  if (isMExpanded) {
+    // Show all primary + secondary actions
+    return [...primaryActions, ...secondaryActions.sort((a, b) => a.priority - b.priority)];
+  } else {
+    // Collapsed: show only top 3 primary actions
+    return primaryActions.slice(0, 4);
+  }
+}, [isMExpanded, primaryActions, secondaryActions]);
+
+
+const showMoreButton = !isMExpanded && secondaryActions.length > 0;
+
+
+  // if (!isVisible) return null;
 
   return (
     <>
@@ -221,6 +320,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
               transition={{ duration: 0.3, staggerChildren: 0.05 }}
             >
+              <div className="space-y-3">
               {visibleActions.map((action, index) => (
                 <motion.div
                   key={action.id}
@@ -244,6 +344,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
                       )}
                     </span>
                   </motion.div>
+                  
 
                   {/* Action Button */}
                   <motion.button
@@ -257,38 +358,68 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
 
                     {/* Pulse ring for support */}
                     {action.pulse && (
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-400 to-emerald-400 opacity-75 animate-ping" />
-                    )}
+                      <span className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-blue-600 animate-ping" />
+                )}
+                
                   </motion.button>
                 </motion.div>
               ))}
+             {/* More / See Less Actions Button */}
+            <AnimatePresence>
+              {(!isMExpanded && showMoreButton) || isExpanded ? (
+                <motion.button
+                  onClick={() => setIsMExpanded(!isMExpanded)}
+                  className="relative w-full py-2 px-4 rounded-xl text-white font-medium backdrop-blur-xl bg-white/10 border border-white/20 shadow-lg overflow-hidden flex items-center justify-center space-x-2 group"
+                  initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 20, scale: 0.8 }}
+                  transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+                >
+                  <motion.span
+                    className="relative z-10 text-white font-semibold text-sm tracking-wide"
+                    animate={{ textShadow: [
+                      '0 0 4px rgba(255,192,203,0.5), 0 0 8px rgba(255,192,203,0.3)',
+                      '0 0 8px rgba(255,192,203,0.8), 0 0 16px rgba(255,192,203,0.5)',
+                      '0 0 4px rgba(255,192,203,0.5), 0 0 8px rgba(255,192,203,0.3)'
+                    ]}}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                  >
+                    {isMExpanded ? 'See Less Actions' : 'More Actions'}
+                  </motion.span>
+
+                  {/* Arrow */}
+                  <motion.span
+                    className="relative z-10"
+                    animate={{ rotate: isMExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    ▼
+                  </motion.span>
+
+                  {/* Glow / pulse effect */}
+                  {/* <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 opacity-20 animate-pulse"></span> */}
+                </motion.button>
+              ) : null}
+            </AnimatePresence>
+
+              </div>
 
               {/* Quick Stats */}
               <motion.div
-                className="mt-6 glass rounded-xl p-4 border border-white/20 backdrop-blur-xl max-w-xs"
+                className=" glass rounded-xl p-4 border border-white/20 backdrop-blur-xl max-w-xs"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
                 <div className="text-sm text-white space-y-2">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <Sparkles className="w-4 h-4 text-yellow-400" />
-                    <span className="font-semibold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                      Quick Actions
-                    </span>
-                  </div>
-
+                  
                   <div className="space-y-1 text-xs text-gray-300">
+                    
                     <div className="flex justify-between">
-                      <span>Response Time:</span>
-                      <span className="text-green-400 font-semibold">&lt; 2 hours</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Support Status:</span>
-                      <span className="text-green-400 font-semibold">Online</span>
-                    </div>
-                    <div className="flex justify-between">
+                      <div className="flex items-center space-x-2">
+                      <Sparkles className="w-4 h-4 text-yellow-400" />
                       <span>Free Consultation:</span>
+                      </div>
                       <span className="text-cyan-400 font-semibold">Available</span>
                     </div>
                   </div>
@@ -296,7 +427,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
                   <div className="mt-3 pt-2 border-t border-white/10">
                     <div className="flex items-center justify-center space-x-2 text-xs text-purple-300">
                       <Zap className="w-3 h-3" />
-                      <span>Powered by CodeFlow</span>
+                      <span>Powered by KODEGROVE</span>
                     </div>
                   </div>
                 </div>
@@ -314,6 +445,7 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
           animate={{ rotate: isExpanded ? 135 : 0 }}
           transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
         >
+          
           {/* Animated background */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -345,34 +477,39 @@ export function UniversalFloatingNav({ currentPage = 'home' }: UniversalFloating
         </motion.button>
 
         {/* Helper tooltip on first visit */}
+        {/* Intent-Based Tooltip */}
         <AnimatePresence>
-          {!isExpanded && currentPage === 'home' && (
+          {!isExpanded && showIntentTooltip && (
             <motion.div
               className="absolute -top-16 right-0 glass rounded-lg px-3 py-2 border border-white/20 backdrop-blur-xl min-w-max"
               initial={{ opacity: 0, scale: 0.8, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 10 }}
-              transition={{ delay: 2, duration: 0.3 }}
+              transition={{ duration: 0.3 }}
             >
               <div className="text-xs text-white text-center">
-                <div className="flex items-center space-x-2">
-                  <Calculator className="w-3 h-3 text-cyan-400" />
-                  <span>Get instant quote & support</span>
-                </div>
-                <div className="text-purple-300 mt-1">Click to explore</div>
+                <span>{tooltipText}</span>
               </div>
-
-              {/* Arrow pointer */}
+              {/* Arrow pointing down */}
               <div className="absolute top-full left-1/2 transform -translate-x-1/2">
                 <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20"></div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
+
+        
       </motion.div>
 
       {/* Website Calculator Modal */}
-      <WebsiteCalculator isOpen={showCalculator} onClose={() => setShowCalculator(false)} />
+      <WebsiteCalculator
+        isOpen={showCalculator}
+        onClose={() => {
+          setShowCalculator(false);
+          setIncompleteCalculator(true); // user left mid-process
+        }}
+      />
+
     </>
   );
 }

@@ -15,12 +15,12 @@ export type FAQData = {
 // Home Page FAQs
 export const homeFAQs: FAQData = {
   title: "Frequently Asked Questions",
-  subtitle: "Everything you need to know about working with CodeFlow",
+  subtitle: "Everything you need to know about working with KodeGrove",
   faqs: [
     {
       id: "01",
-      question: "What services does CodeFlow offer?",
-      answer: "CodeFlow specializes in web design and development, brand strategy, digital marketing, e-commerce solutions, mobile app development, and custom software solutions. We provide end-to-end digital services to transform your business and enhance your online presence.",
+      question: "What services does KodeGrove offer?",
+      answer: "KodeGrove specializes in web design and development, brand strategy, digital marketing, e-commerce solutions, mobile app development, and custom software solutions. We provide end-to-end digital services to transform your business and enhance your online presence.",
     },
     {
       id: "02",
@@ -59,8 +59,8 @@ export const homeFAQs: FAQData = {
     },
     {
       id: "09",
-      question: "What makes CodeFlow different from other agencies?",
-      answer: "CodeFlow combines creative excellence with technical expertise. We focus on delivering measurable results, not just beautiful designs. Our team stays ahead of industry trends, provides strategic guidance, and builds long-term partnerships with clients. We're committed to your success.",
+      question: "What makes KodeGrove different from other agencies?",
+      answer: "KodeGrove combines creative excellence with technical expertise. We focus on delivering measurable results, not just beautiful designs. Our team stays ahead of industry trends, provides strategic guidance, and builds long-term partnerships with clients. We're committed to your success.",
     },
   ],
 };
@@ -159,7 +159,7 @@ export const pricingFAQs: FAQData = {
     {
       id: "02",
       question: "Do you require a deposit or upfront payment?",
-      answer: "Yes, we typically require a 50% deposit to begin work, with the remaining balance due upon project completion. For larger projects, we offer milestone-based payment plans to spread costs throughout the project timeline.",
+      answer: "Yes, we typically require a 30% deposit to begin work, with the remaining balance due upon project completion. For larger projects, we offer milestone-based payment plans to spread costs throughout the project timeline.",
     },
     {
       id: "03",
