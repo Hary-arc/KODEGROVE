@@ -457,13 +457,14 @@ export function PortfolioSection() {
                                     project.id,
                                   );
                                 }}
+                                variant="outline"
                                 className="glass border border-white/30 text-white hover:bg-white/10 backdrop-blur-xl shadow-2xl"
                                 size="lg"
                               >
                                 <Eye className="w-5 h-5 mr-2" />
                                 Case Study
                               </Button>
-                              {project.demoLink && (
+                              {/* {project.demoLink && (
                                 <Button
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -475,7 +476,7 @@ export function PortfolioSection() {
                                   <Play className="w-5 h-5 mr-2" />
                                   Live View
                                 </Button>
-                              )}
+                              )} */}
                               <Button
                                 aria-label="View Project"
                                 onClick={(e) => {
