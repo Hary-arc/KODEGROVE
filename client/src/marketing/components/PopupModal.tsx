@@ -65,12 +65,12 @@ export function PopupModal({
               {/* Modal Content */}
               <div className="glass border border-white/20 rounded-2xl shadow-2xl relative">
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-white/10">
+                {/* <div className="flex items-center justify-between p-6 border-b border-white/10">
                   {title && (
                     <h2 className="font-outfit text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                       {title}
                     </h2>
-                  )}
+                  )} */}
                   <motion.button
                     onClick={onClose}
                     className="ml-auto p-2 hover:bg-white/10 rounded-xl transition-colors duration-300"
@@ -79,7 +79,7 @@ export function PopupModal({
                   >
                     <X className="w-6 h-6 text-gray-400 hover:text-white" />
                   </motion.button>
-                </div>
+                {/* </div> */}
 
                 {/* Content */}
                 <div className="max-h-[70vh] overflow-y-auto">{children}</div>

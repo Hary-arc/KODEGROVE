@@ -282,7 +282,7 @@ export default function App() {
           ></div>
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] will-change-transform"></div>
         </div>
-<MarketingPopupManager />
+
         {/* Navigation */}
         <Navigation />
 
@@ -290,13 +290,15 @@ export default function App() {
         <main className="relative z-10" style={{ position: 'relative' }}>
           <Router routes={routes} defaultRoute="/" />
         </main>
+        {/* Marketing Popup Manager */}
         
+        {isLoaded && <MarketingPopupManager />}
+
         {/* Conditionally render floating nav */}
         {isLoaded && <UniversalFloatingNav currentPage={currentPage} />}
 
         {/* Marketing Popup Manager */}
         
-         <MarketingPopupManager />
 
         {/* Popup Trigger Buttons (Demo) */}
         {/* {isLoaded && <PopupTriggerButtons onTrigger={triggerMarketingPopup} />} */}

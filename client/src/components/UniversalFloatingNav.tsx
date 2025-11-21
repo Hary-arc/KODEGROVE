@@ -369,7 +369,7 @@ const showMoreButton = !isMExpanded && secondaryActions.length > 0;
               {(!isMExpanded && showMoreButton) || isExpanded ? (
                 <motion.button
                   onClick={() => setIsMExpanded(!isMExpanded)}
-                  className="relative w-full py-2 px-4 rounded-xl text-white font-medium backdrop-blur-xl bg-white/10 border border-white/20 shadow-lg overflow-hidden flex items-center justify-center space-x-2 group"
+                  className="relative w-full py-2 px-4 rounded-xl text-white font-medium backdrop-blur-xl bg-white/100 border border-white/100 shadow-lg overflow-hidden flex items-center justify-center space-x-2 group"
                   initial={{ opacity: 0, y: 20, scale: 0.8 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 20, scale: 0.8 }}

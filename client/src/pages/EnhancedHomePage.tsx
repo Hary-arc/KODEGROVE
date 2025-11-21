@@ -289,7 +289,7 @@ export function EnhancedHomePage() {
                 ease: 'easeInOut',
               }}
             >
-              <ChevronDown className="w-14 h-10 mb-[-1px] text-purple-400 drop-shadow-lg" />
+              <ChevronDown className="w-14 h-10 mb-[-1px] text-orange-600 drop-shadow-lg" />
               <ChevronDown className="w-14 h-7 text-cyan-400 drop-shadow-md" />
             </motion.div>
           </div>

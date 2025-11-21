@@ -59,10 +59,10 @@ export function SpecialOfferPopup() {
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-pink-500/20 to-orange-500/20 rounded-2xl blur-3xl" />
       
-      <div className="relative p-8">
+      <div className="relative p-16">
         {/* Badge */}
         <motion.div
-          className="absolute -top-4 left-1/2 transform -translate-x-1/2"
+          className="absolute -top-1 left-1/2 transform -translate-x-1/2"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
@@ -133,6 +133,8 @@ export function SpecialOfferPopup() {
             </span>
           </motion.div>
         </div>
+
+        
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
