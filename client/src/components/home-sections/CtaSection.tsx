@@ -79,7 +79,7 @@ export default function CtaSection() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="absolute top-1/2 right-2 transform -translate-y-1/2 h-10 px-6 bg-cyan-400 hover:bg-cyan-500 text-black font-bold rounded-md transition-all duration-300 hover:scale-105"
+                  className="absolute top-1/2 right-2 transform -translate-y-1/2 h-10 px-6 bg-gradient-to-r from-purple-600 to-cyan-400 hover:from-purple-500 hover:to-cyan-500 text-black font-bold rounded-md transition-all duration-300 hover:scale-105"
                 >
                   {isSubmitting ? 'Signing Up...' : 'SIGN UP'}
                 </Button>
