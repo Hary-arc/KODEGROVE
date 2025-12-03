@@ -42,7 +42,6 @@ export function SpecialOfferPopup() {
     console.log('Special offer claimed:', email)
     setIsSubmitting(false)
     
-    // Redirect or show success
     alert('Offer claimed! Check your email for details.')
   }
 
@@ -55,14 +54,29 @@ export function SpecialOfferPopup() {
   ]
 
   return (
-    <div className="relative">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-pink-500/20 to-orange-500/20 rounded-2xl blur-3xl" />
-      
-      <div className="relative p-16">
+    <div className="relative mx-auto max-w-3xl overflow-hidden rounded-3xl shadow-2xl">
+
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center scale-105 brightness-[0.85]"
+        style={{
+          backgroundImage: "url('/your-image.jpg')"  // <--- change image here
+        }}
+      />
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+
+      {/* Soft atmospheric colored glow */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-orange-500/20 blur-3xl" />
+
+      {/* CONTENT WRAPPER */}
+      <div className="relative p-10 lg:p-16">
+
         {/* Badge */}
         <motion.div
-          className="absolute -top-1 left-1/2 transform -translate-x-1/2"
+          className="absolute top-4 left-1/2 -translate-x-1/2"
+
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
@@ -74,12 +88,13 @@ export function SpecialOfferPopup() {
           </div>
         </motion.div>
 
+        {/* HEADER */}
         <div className="text-center mt-6 mb-8">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full mb-6"
+            className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-orange-500 to-pink-500 rounded-full mb-8"
           >
             <Gift className="w-10 h-10 text-white" />
           </motion.div>
@@ -98,7 +113,7 @@ export function SpecialOfferPopup() {
             Transform your digital presence with our premium services. Limited spots available!
           </p>
 
-          {/* Countdown Timer */}
+          {/* COUNTDOWN */}
           <div className="flex items-center justify-center space-x-4 mb-8">
             <div className="glass border border-white/20 rounded-xl p-4 min-w-[80px]">
               <div className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
@@ -134,9 +149,7 @@ export function SpecialOfferPopup() {
           </motion.div>
         </div>
 
-        
-
-        {/* Features Grid */}
+        {/* FEATURES */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
           <div className="md:col-span-2">
             <h3 className="text-white font-semibold mb-4 text-center">
@@ -159,7 +172,7 @@ export function SpecialOfferPopup() {
           ))}
         </div>
 
-        {/* Price Comparison */}
+        {/* PRICE */}
         <div className="glass border border-white/10 rounded-2xl p-6 mb-8">
           <div className="flex items-center justify-center space-x-8">
             <div className="text-center">
@@ -176,7 +189,7 @@ export function SpecialOfferPopup() {
           </div>
         </div>
 
-        {/* CTA Form */}
+        {/* FORM */}
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <Input
@@ -211,7 +224,7 @@ export function SpecialOfferPopup() {
           </p>
         </form>
 
-        {/* Social Proof */}
+        {/* SOCIAL PROOF */}
         <div className="flex items-center justify-center space-x-8 pt-6 border-t border-white/10">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-1 mb-1">
@@ -233,7 +246,7 @@ export function SpecialOfferPopup() {
           </div>
         </div>
 
-        {/* Urgency Badge */}
+        {/* URGENCY */}
         <motion.div
           className="mt-6 text-center"
           animate={{ y: [0, -5, 0] }}
@@ -246,6 +259,7 @@ export function SpecialOfferPopup() {
             </span>
           </div>
         </motion.div>
+
       </div>
     </div>
   )
