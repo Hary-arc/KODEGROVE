@@ -11,6 +11,14 @@ import { MarketingPopupManager, triggerMarketingPopup } from './components/Marke
 import { UniversalFloatingNav } from './components/UniversalFloatingNav';
 import { siteConfig, navigation, footerLinks } from './data/site-config';
 
+import { PrivacyPolicyPage } from './pages/policypages/PrivacyPolicyPage'
+
+import { CookiePolicyPage } from './pages/policypages/CookiePolicyPage'
+import { ContentPolicyPage } from './pages/policypages/ContentPolicyPage'
+import { AcceptableUsePolicyPage } from './pages/policypages/AcceptableUsePolicyPage'
+import { RefundPolicyPage } from './pages/policypages/RefundPolicyPage'
+import { LegalPage } from './pages/policypages/LegalPage'
+
 // Lazy load page components for better performance
 const EnhancedHomePage = React.lazy(() =>
   import('./pages/EnhancedHomePage.js').then(module => ({ default: module.EnhancedHomePage }))
@@ -235,6 +243,12 @@ export default function App() {
         </Suspense>
       ),
     },
+    { path: '/privacy-policy', component: <PrivacyPolicyPage /> },
+    { path: '/cookie-policy', component: <CookiePolicyPage /> },
+    { path: '/content-policy', component: <ContentPolicyPage /> },
+    { path: '/acceptable-use-policy', component: <AcceptableUsePolicyPage /> },
+    { path: '/refund-policy', component: <RefundPolicyPage /> },
+    { path: '/legal', component: <LegalPage /> }
   ];
 
   return (
@@ -467,15 +481,28 @@ export default function App() {
                 © 2025 {siteConfig.name}. All rights reserved.
               </p>
               <div className="flex flex-wrap gap-6 text-gray-400 text-sm">
-                <a href="/privacy-policy" className="hover:text-white transition">
+                <button  onClick={() => {
+                    window.location.hash = '/privacy-policy';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="hover:text-white transition"
+                >
                   Privacy Policy
-                </a>
-                <a href="/consent" className="hover:text-white transition">
+                </button>
+                <button onClick={() => {
+                  window.location.hash = '/cookie-policy';
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }} className="hover:text-white transition"
+                >
                   Manage Your Consent
-                </a>
-                <a href="/accessibility" className="hover:text-white transition">
+                </button>
+                <button onClick={() => {
+                  window.location.hash = '/refund-policy';
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }} className="hover:text-white transition"
+                >
                   Accessibility
-                </a>
+                </button>
                 <a href="tel:+91 7817942713" className="hover:text-white transition">
                   Call us at (781) 794-2713
                 </a>
