@@ -20,23 +20,23 @@ export function HeroSection() {
 
   // Client logos data
   const clientLogos = [
-    'Google',
-    'Microsoft',
-    'Apple',
-    'Amazon',
-    'Meta',
-    'Netflix',
-    'Spotify',
-    'Adobe',
-    'Uber',
-    'Airbnb',
-    'Stripe',
-    'Slack',
-    'Zoom',
-    'Tesla',
-    'Twitter',
-    'LinkedIn',
-  ];
+  'Nimbus Solutions',
+  'Apexbyte Labs',
+  'Velora Systems',
+  'Crestwave Media',
+  'BlueOak Technologies',
+  'Northbridge Digital',
+  'Silverline Innovations',
+  'Evercrest Software',
+  'Peakstone Ventures',
+  'Brightleaf Studios',
+  'Modularis Tech',
+  'HorizonPath Analytics',
+  'UrbanEcho Creative',
+  'Novaplex Networks',
+  'Zenford Consulting',
+  'Atomis Cloud'
+];
 
   // Animated headline text
   const headlineText = 'Digital Mastery Unleashed';
@@ -179,14 +179,14 @@ export function HeroSection() {
       <div className="relative z-10 w-full">
         {/* Client Logo Marquee */}
         <motion.div
-          className="mt-32 pb-16"
+          className=" mt-8 pb-4"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 1.8 }}
         >
-          <div className="text-center mb-12">
+          {/* <div className="text-center mb-12">
             <p className="text-gray-400 font-medium mb-8">Trusted by industry leaders</p>
-          </div>
+          </div> */}
 
           {/* Marquee Container */}
           <div className="relative overflow-hidden">
@@ -195,12 +195,13 @@ export function HeroSection() {
               {clientLogos.map((logo, index) => (
                 <motion.div
                   key={`first-${index}`}
-                  className="mx-8 flex-shrink-0"
+                  className="mx-4 sm:mx-8 flex-shrink-0"
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  <div className="glass rounded-2xl px-8 py-4 border border-white/10 hover:border-white/30 transition-all duration-300">
-                    <span className="text-2xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
+                  <div className="glass rounded-xl px-4 py-2 sm:px-8 sm:py-4 border border-white/10 hover:border-white/30 transition-all duration-300">
+
+                    <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
                       {logo}
                     </span>
                   </div>
@@ -211,7 +212,7 @@ export function HeroSection() {
               {clientLogos.map((logo, index) => (
                 <motion.div
                   key={`second-${index}`}
-                  className="mx-8 flex-shrink-0"
+                  className="mx-4 sm:mx-8 flex-shrink-0"
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >

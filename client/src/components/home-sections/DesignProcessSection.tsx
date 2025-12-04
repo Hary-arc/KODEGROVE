@@ -269,7 +269,7 @@ useEffect(() => {
   // ---- SCROLLTRIGGER SETUP ----
   const st = ScrollTrigger.create({
     trigger: wrapper,
-    start: "top top+=50",
+    start: "top top+=100",
     end: `+=${scrollDistance}`,
     pin: true,
     scrub: 0.5, // smoother response
@@ -417,8 +417,8 @@ window.addEventListener('resize', resizeHandler);
       
 
       {/* Horizontal Scroll Section */}
-      <div ref={wrapperRef} className="relative w-full h-screen flex items-center overflow-hidden bg-transparent"
-       >
+      <div ref={wrapperRef} className="relative w-full min-h-[80vh] flex items-center overflow-hidden bg-transparent">
+
         <div ref={containerRef} className="relative flex items-center will-change-transform"
           >
       

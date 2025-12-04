@@ -81,11 +81,12 @@ export function SpecialOfferPopup() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
         >
-          <div className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg flex items-center space-x-2">
+          <div className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg flex items-center space-x-2 whitespace-nowrap">
             <Sparkles className="w-4 h-4" />
             <span>LIMITED TIME OFFER</span>
             <Sparkles className="w-4 h-4" />
           </div>
+
         </motion.div>
 
         {/* HEADER */}
