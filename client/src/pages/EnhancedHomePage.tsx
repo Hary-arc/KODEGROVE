@@ -361,6 +361,10 @@ export function EnhancedHomePage() {
         </div>
       </section>
 
+      <section>
+        <HeroSection direction="right" />
+      </section>
+
       {/* Interactive Services Section */}
       <section ref={servicesRef} className="py-12  relative overflow-hidden">
         <Parallax speed={0.2} className="absolute inset-0">
@@ -393,11 +397,10 @@ export function EnhancedHomePage() {
             {services.slice(0, 3).map((service, index) => (
               <MagneticHover key={service.id} strength={0.2}>
                 <Card
-                  className={`glass border transition-all duration-500 h-full cursor-pointer group ${
-                    activeService === index
-                      ? 'border-purple-400/50 bg-purple-500/10'
-                      : 'border-white/10 hover:border-white/30'
-                  }`}
+                  className={`glass border transition-all duration-500 h-full cursor-pointer group ${activeService === index
+                    ? 'border-purple-400/50 bg-purple-500/10'
+                    : 'border-white/10 hover:border-white/30'
+                    }`}
                   onMouseEnter={() => {
                     setActiveService(index);
                     setIsHovered(true);
@@ -413,9 +416,9 @@ export function EnhancedHomePage() {
                       animate={
                         activeService === index
                           ? {
-                              scale: [1, 1.1, 1],
-                              rotate: [0, 5, 0],
-                            }
+                            scale: [1, 1.1, 1],
+                            rotate: [0, 5, 0],
+                          }
                           : {}
                       }
                       transition={{ duration: 0.5 }}
@@ -591,7 +594,7 @@ export function EnhancedHomePage() {
       <section>
         <DesignProcessSection />
       </section>
-      
+
       {/* Clients Across Industries Section */}
       <ClientsIndustriesSection />
 

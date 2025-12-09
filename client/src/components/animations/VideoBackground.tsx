@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { useVideoInViewPause } from '../../hooks/useInViewPause';
 
 interface VideoBackgroundProps {
   src: string;
@@ -28,6 +29,9 @@ export function VideoBackground({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+
+  // Automatically pause/play video based on viewport visibility
+  useVideoInViewPause(videoRef, { amount: 0.2 });
 
   useEffect(() => {
     const video = videoRef.current;
@@ -117,9 +121,15 @@ export function CaseStudyVideo({
   className?: string;
   controls?: boolean;
 }) {
+  const caseStudyVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Automatically pause/play video based on viewport visibility
+  useVideoInViewPause(caseStudyVideoRef, { amount: 0.3 });
+
   return (
     <div className={`relative rounded-2xl overflow-hidden ${className}`}>
       <video
+        ref={caseStudyVideoRef}
         className="w-full h-full rounded-2xl"
         controls={controls}
         poster={poster}

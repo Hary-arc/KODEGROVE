@@ -4,9 +4,19 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import React from 'react';
 // Button component imported from UI components
-import { Eye, ArrowRight, Sparkles } from 'lucide-react';
 
-export function HeroSection() {
+
+interface HeroSectionProps {
+  direction?: 'left' | 'right';
+  logos?: string[];
+  speed?: number;
+}
+
+export function HeroSection({
+  direction = 'left',
+  logos,
+  speed = 50
+}: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isInView = useInView(containerRef, { once: true });
@@ -18,25 +28,27 @@ export function HeroSection() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  // Client logos data
-  const clientLogos = [
-  'Nimbus Solutions',
-  'Apexbyte Labs',
-  'Velora Systems',
-  'Crestwave Media',
-  'BlueOak Technologies',
-  'Northbridge Digital',
-  'Silverline Innovations',
-  'Evercrest Software',
-  'Peakstone Ventures',
-  'Brightleaf Studios',
-  'Modularis Tech',
-  'HorizonPath Analytics',
-  'UrbanEcho Creative',
-  'Novaplex Networks',
-  'Zenford Consulting',
-  'Atomis Cloud'
-];
+  // Default logos if none provided
+  const defaultLogos = [
+    'Nimbus Solutions',
+    'Apexbyte Labs',
+    'Velora Systems',
+    'Crestwave Media',
+    'BlueOak Technologies',
+    'Northbridge Digital',
+    'Silverline Innovations',
+    'Evercrest Software',
+    'Peakstone Ventures',
+    'Brightleaf Studios',
+    'Modularis Tech',
+    'HorizonPath Analytics',
+    'UrbanEcho Creative',
+    'Novaplex Networks',
+    'Zenford Consulting',
+    'Atomis Cloud'
+  ];
+
+  const currentLogos = logos || defaultLogos;
 
   // Animated headline text
   const headlineText = 'Digital Mastery Unleashed';
@@ -190,9 +202,14 @@ export function HeroSection() {
 
           {/* Marquee Container */}
           <div className="relative overflow-hidden">
-            <div className="flex animate-marquee whitespace-nowrap">
+            <div
+              className={`flex whitespace-nowrap ${direction === 'right' ? 'animate-marquee-ltr' : 'animate-marquee'}`}
+              style={{
+                animationDuration: `${speed}s`
+              }}
+            >
               {/* First set of logos */}
-              {clientLogos.map((logo, index) => (
+              {currentLogos.map((logo, index) => (
                 <motion.div
                   key={`first-${index}`}
                   className="mx-4 sm:mx-8 flex-shrink-0"
@@ -209,7 +226,7 @@ export function HeroSection() {
               ))}
 
               {/* Duplicate set for seamless loop */}
-              {clientLogos.map((logo, index) => (
+              {currentLogos.map((logo, index) => (
                 <motion.div
                   key={`second-${index}`}
                   className="mx-4 sm:mx-8 flex-shrink-0"
