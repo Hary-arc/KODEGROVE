@@ -296,7 +296,7 @@ export function EnhancedHomePage() {
         </ScrollReveal>
       </section>
       <section>
-        <HeroSection />
+        <HeroSection direction="left" />
       </section>
 
       {/* Video Section */}

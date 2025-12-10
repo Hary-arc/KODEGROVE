@@ -217,7 +217,6 @@ export function HeroSection({
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <div className="glass rounded-xl px-4 py-2 sm:px-8 sm:py-4 border border-white/10 hover:border-white/30 transition-all duration-300">
-
                     <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
                       {logo}
                     </span>
@@ -233,8 +232,8 @@ export function HeroSection({
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  <div className="glass rounded-2xl px-8 py-4 border border-white/10 hover:border-white/30 transition-all duration-300">
-                    <span className="text-2xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
+                  <div className="glass rounded-xl px-4 py-2 sm:px-8 sm:py-4 border border-white/10 hover:border-white/30 transition-all duration-300">
+                    <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
                       {logo}
                     </span>
                   </div>
