@@ -148,16 +148,20 @@ export const MagneticHover = ({
 export const AnimatedIcon = ({
   children,
   className = '',
+  hoverScale = 1.1,
+  hoverRotation = 5,
   ...props
 }: {
   children: ReactNode;
   className?: string;
+  hoverScale?: number;
+  hoverRotation?: number;
   [key: string]: any;
 }) => {
   return (
     <motion.div
       className={className}
-      whileHover={{ scale: 1.1, rotate: 5 }}
+      whileHover={{ scale: hoverScale, rotate: hoverRotation }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       {...props}
