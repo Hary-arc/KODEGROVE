@@ -35,8 +35,10 @@ export function useInViewPause(
     return isInView;
 }
 
+
 /**
  * Hook to pause/resume video when element is in/out of view
+ * Includes logic to handle Play() promises and prevent interruption errors
  * @param videoRef - Reference to the video element
  * @param options - IntersectionObserver options
  * @returns isInView - Boolean indicating if element is in view
@@ -59,16 +61,41 @@ export function useVideoInViewPause(
         if (!videoRef.current) return;
 
         const video = videoRef.current;
+        let playPromise: Promise<void> | undefined;
 
-        if (isInView) {
-            // Play video when in view
-            video.play().catch((error) => {
-                console.warn('Video play failed:', error);
-            });
-        } else {
-            // Pause video when out of view
-            video.pause();
-        }
+        // Small debounce to prevent rapid toggling
+        const timeoutId = setTimeout(() => {
+            if (isInView) {
+                // Play video when in view
+                // Check if video is paused to avoid redundant calls
+                if (video.paused) {
+                    playPromise = video.play();
+
+                    if (playPromise !== undefined) {
+                        playPromise.catch((error) => {
+                            // Auto-play was prevented or interrupted
+                            // This is common and usually safe to ignore for background videos
+                            if (error.name !== 'AbortError') {
+                                console.warn('Video play failed:', error);
+                            }
+                        });
+                    }
+                }
+            } else {
+                // Pause video when out of view
+                // Only pause if not already paused
+                if (!video.paused) {
+                    // If a play promise is pending, we should wait for it (though we can't await here easily)
+                    // or just pause which might reject the play promise.
+                    // The catch block above handles the rejection.
+                    video.pause();
+                }
+            }
+        }, 100);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
     }, [isInView, videoRef]);
 
     return isInView;

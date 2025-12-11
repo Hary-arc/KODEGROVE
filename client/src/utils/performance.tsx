@@ -101,7 +101,6 @@ export class PerformanceMonitor {
         href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
         as: 'style',
       },
-      { href: '/src/index.css', as: 'style' },
     ];
 
     criticalResources.forEach(({ href, as }) => {
@@ -151,7 +150,7 @@ export class PerformanceMonitor {
   private setupPassiveListeners(): void {
     const events = ['scroll', 'touchstart', 'touchmove', 'wheel'];
     events.forEach(event => {
-      document.addEventListener(event, () => {}, { passive: true });
+      document.addEventListener(event, () => { }, { passive: true });
     });
   }
 

@@ -4,7 +4,7 @@ import { Play, X } from 'lucide-react';
 import React from 'react';
 import { HoverLift, MagneticHover } from '../components/animations/MicroInteractions';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
-import { useVideoInViewPause } from '../hooks/useInViewPause';
+//import { useVideoInViewPause } from '../hooks/useInViewPause';
 
 function VideoHoverLift() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -12,10 +12,10 @@ function VideoHoverLift() {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
 
   // Automatically pause/play main video when in/out of view
-  useVideoInViewPause(videoRef, { amount: 0.3 });
+  //useVideoInViewPause(videoRef, { amount: 0.3 });
 
   // Automatically pause/play preview video when in/out of view
-  useVideoInViewPause(previewVideoRef, { amount: 0.3 });
+  //useVideoInViewPause(previewVideoRef, { amount: 0.3 });
 
   // Prevent body scroll when video is playing
   useEffect(() => {
