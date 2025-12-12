@@ -12,7 +12,8 @@ function VideoHoverLift() {
   const previewVideoRef = useRef<HTMLVideoElement>(null);
 
   // Automatically pause/play main video when in/out of view
-  //useVideoInViewPause(videoRef, { amount: 0.3 });
+  // Disabled for modal video - it's controlled by user interaction
+  // useVideoInViewPause(videoRef, { amount: 0.3 });
 
   // Automatically pause/play preview video when in/out of view
   //useVideoInViewPause(previewVideoRef, { amount: 0.3 });
@@ -39,10 +40,17 @@ function VideoHoverLift() {
             ref={previewVideoRef}
             src="/output2.mp4"
             className="w-full aspect-[16/9] object-cover rounded-3xl blur-sm"
+            style={{
+              willChange: 'transform',
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+            }}
             autoPlay
             muted
             loop
             playsInline
+            preload="auto"
             poster="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070"
           />
 
