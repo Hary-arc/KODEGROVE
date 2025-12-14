@@ -53,7 +53,7 @@ import {
   useViewportAnimation,
 } from '../components/animations/usePerformantAnimation';
 
-import { HeroSection } from '../components/HeroSection';
+import { ClientLogosSection } from '../components/ClientLogosSection';
 
 import CreativeWebAgencySection from '../components/home-sections/CreativeWebAgencySection';
 import ClientsIndustriesSection from '../components/home-sections/ClientsIndustriesSection';
@@ -67,6 +67,7 @@ import CtaSection from '../components/home-sections/CtaSection';
 
 import { FAQSection } from "../components/FAQSection";
 import { homeFAQs } from "../data/faqs";
+import { HeroSection } from '../components/HeroSection';
 //import ModernServicesSection from "../components/ModernServicesSection";
 //import {ProcessSection} from '../components/ProcessSection';
 //import React from 'react';
@@ -155,7 +156,8 @@ export function EnhancedHomePage() {
           overlayOpacity={0.5}
           className=" "
         />
-
+        {/* The black fade/gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
         {/* Animated particles overlay */}
         <Parallax speed={0.3} className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl animate-float" />
@@ -296,6 +298,7 @@ export function EnhancedHomePage() {
         </ScrollReveal>
       </section>
       <section>
+
         <HeroSection direction="left" />
       </section>
 
@@ -597,6 +600,8 @@ export function EnhancedHomePage() {
 
       {/* Clients Across Industries Section */}
       <ClientsIndustriesSection />
+      {/* Client Logos Section */}
+      <ClientLogosSection />
 
       {/* CMS Platform Section */}
       <CMSPlatformSection />

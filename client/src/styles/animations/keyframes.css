@@ -41,6 +41,16 @@
   }
 }
 
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 @keyframes marquee-right-to-left {
   0% {
     transform: translateX(0);

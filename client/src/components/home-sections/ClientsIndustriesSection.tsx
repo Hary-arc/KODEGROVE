@@ -88,7 +88,7 @@ const clientLogos = [
 ];
 
 const successMetrics = [
-  { metric: '500+', label: 'Global Clients', icon: Globe },
+  { metric: '100+', label: 'Global Clients', icon: Globe },
   { metric: '50+', label: 'Industries Served', icon: Building2 },
   { metric: '98%', label: 'Client Retention', icon: Star },
   { metric: '$2M+', label: 'Revenue Generated', icon: TrendingUp },
@@ -246,14 +246,14 @@ export default function ClientsIndustriesSection() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 1.6 }}
         >
-          <div className="text-center mb-12">
+          {/* <div className="text-center mb-12">
             <h3 className="font-outfit text-2xl font-bold text-white mb-4">
               Trusted by Industry Leaders
             </h3>
             <p className="text-gray-300">
               Join hundreds of companies that have transformed their digital presence with us
             </p>
-          </div>
+          </div> */}
 
           <div className="marquee-container relative overflow-hidden">
             <div className="animate-marquee flex space-x-12" style={{ animationDuration: '30s' }}>
