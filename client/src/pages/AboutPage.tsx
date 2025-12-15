@@ -44,12 +44,12 @@ export function AboutPage() {
                     />
                   </svg>
                 </AnimatedIcon>
-                <span className="font-medium text-gray-200">About CodeFlow</span>
+                <span className="font-medium text-gray-200">About KodeGrove</span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal variant="fadeUp" delay={0.4}>
-              <h1 className="font-outfit text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+              <h1 className="font-outfit text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   We Are
                 </span>
@@ -73,6 +73,7 @@ export function AboutPage() {
             </ScrollReveal>
 
             <ScrollReveal variant="fadeUp" delay={1.0}>
+
               <Button
                 onClick={() => (window.location.hash = '/quotation')}
                 size="lg"
@@ -86,7 +87,7 @@ export function AboutPage() {
         </div>
 
         {/* Scroll Indicator */}
-        <ScrollReveal variant="fadeUp" delay={1.2}>
+        {/* <ScrollReveal variant="fadeUp" delay={1.2}>
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
             <motion.div
               className="w-8 h-12 border-2 border-white/40 rounded-full flex justify-center p-2 cursor-pointer"
@@ -100,7 +101,7 @@ export function AboutPage() {
               />
             </motion.div>
           </div>
-        </ScrollReveal>
+        </ScrollReveal> */}
       </section>
 
       {/* About Content - Removed the motion wrapper that was causing issues */}

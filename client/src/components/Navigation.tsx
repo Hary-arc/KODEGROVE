@@ -241,11 +241,10 @@ const NavigationLink = memo<NavigationLinkProps>(({ item, isActive, onClick }) =
       onClick(item.path);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }}
-    
-    
-    className={`relative text-sm font-medium transition-colors duration-300 focus:outline-none ${
-      isActive ? 'text-white' : 'text-gray-300 hover:text-white'
-    }`}
+
+
+    className={`relative text-sm font-medium transition-colors duration-300 focus:outline-none ${isActive ? 'text-white' : 'text-gray-300 hover:text-white'
+      }`}
     whileHover={{ y: -1 }}
   >
     {item.name}
@@ -277,9 +276,8 @@ const ServicesDropdown = memo<ServicesDropdownProps>(
     <div className="relative services-dropdown">
       <motion.button
         onClick={onToggle}
-        className={`relative flex items-center space-x-1 text-sm font-medium transition-colors duration-300 focus:outline-none ${
-          currentRoute === '/services' ? 'text-white' : 'text-gray-300 hover:text-white'
-        }`}
+        className={`relative flex items-center space-x-1 text-sm font-medium transition-colors duration-300 focus:outline-none ${currentRoute === '/services' ? 'text-white' : 'text-gray-300 hover:text-white'
+          }`}
         whileHover={{ y: -1 }}
       >
         <span>Services</span>
@@ -535,11 +533,10 @@ export function Navigation() {
               <motion.button
                 key={item.path}
                 onClick={() => handleNavigation(item.path)}
-                className={`relative px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 focus:outline-none ${
-                  isActive(item.path)
-                    ? 'text-white bg-gradient-to-r from-purple-600 to-cyan-600 shadow-lg'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
-                }`}
+                className={`relative px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 focus:outline-none ${isActive(item.path)
+                  ? 'text-white bg-gradient-to-r from-purple-600 to-cyan-600 shadow-lg'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10'
+                  }`}
                 whileHover={{ y: -1, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 10 }}
@@ -565,11 +562,10 @@ export function Navigation() {
             {/* Mobile Services Button */}
             <motion.button
               onClick={() => handleNavigation('/services')}
-              className={`relative px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 focus:outline-none ${
-                currentRoute === '/services'
-                  ? 'text-white bg-gradient-to-r from-purple-600 to-cyan-600 shadow-lg'
-                  : 'text-gray-300 hover:text-white hover:bg-white/10'
-              }`}
+              className={`relative px-3 py-2 rounded-xl text-xs font-medium transition-all duration-300 focus:outline-none ${currentRoute === '/services'
+                ? 'text-white bg-gradient-to-r from-purple-600 to-cyan-600 shadow-lg'
+                : 'text-gray-300 hover:text-white hover:bg-white/10'
+                }`}
               whileHover={{ y: -1, scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 10 }}
@@ -674,7 +670,7 @@ export function Navigation() {
           <div className="hidden lg:flex items-center gap-4">
             <Button
               onClick={() => handleNavigation('/quotation')}
-              className="flex items-center px-6 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-blue-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50 group "
+              className="flex items-center px-6 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50 group "
             >
               GET QUOTATION
               <ArrowRight className="w-4 h-4 ml-2" />
@@ -692,6 +688,7 @@ export function Navigation() {
                 <Button
                   size="sm"
                   className="flex items-center px-6 py-2 rounded-xl font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 hover:shadow-lg hover:shadow-pink-500/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400/50 group"
+
                   aria-label="Login"
                 >
                   <User className="w-4 h-4 mr-2 -mt-0.5 transition-transform group-hover:rotate-6" />

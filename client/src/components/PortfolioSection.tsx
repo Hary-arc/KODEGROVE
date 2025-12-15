@@ -224,7 +224,7 @@ export function PortfolioSection() {
         >
           {/* Section Header */}
           <motion.div
-            className="text-center mb-20"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 60 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1 }}
@@ -252,7 +252,7 @@ export function PortfolioSection() {
             </h2>
 
             <motion.p
-              className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed text-justify"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -284,21 +284,19 @@ export function PortfolioSection() {
             <div className="flex items-center space-x-2 glass rounded-2xl p-2 border border-white/20">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`p-3 rounded-xl transition-all duration-300 ${
-                  viewMode === "grid"
-                    ? "gradient-electric text-white"
-                    : "text-gray-400 hover:text-white"
-                }`}
+                className={`p-3 rounded-xl transition-all duration-300 ${viewMode === "grid"
+                  ? "gradient-electric text-white"
+                  : "text-gray-400 hover:text-white"
+                  }`}
               >
                 <Grid3X3 className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setViewMode("masonry")}
-                className={`p-3 rounded-xl transition-all duration-300 ${
-                  viewMode === "masonry"
-                    ? "gradient-electric text-white"
-                    : "text-gray-400 hover:text-white"
-                }`}
+                className={`p-3 rounded-xl transition-all duration-300 ${viewMode === "masonry"
+                  ? "gradient-electric text-white"
+                  : "text-gray-400 hover:text-white"
+                  }`}
               >
                 <LayoutGrid className="w-5 h-5" />
               </button>
@@ -318,11 +316,10 @@ export function PortfolioSection() {
                 <motion.button
                   key={tab.name}
                   onClick={() => setActiveTab(tab.name)}
-                  className={`relative px-4 sm:px-8 py-3 sm:py-4 rounded-2xl transition-all duration-500 overflow-hidden group ${
-                    activeTab === tab.name
-                      ? "gradient-electric text-white shadow-2xl shadow-purple-500/25"
-                      : "glass text-gray-300 hover:text-white border border-white/20 hover:border-white/40"
-                  }`}
+                  className={`relative px-4 sm:px-8 py-3 sm:py-4 rounded-2xl transition-all duration-500 overflow-hidden group ${activeTab === tab.name
+                    ? "gradient-electric text-white shadow-2xl shadow-purple-500/25"
+                    : "glass text-gray-300 hover:text-white border border-white/20 hover:border-white/40"
+                    }`}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   initial={{ opacity: 0, y: 30 }}
@@ -338,11 +335,10 @@ export function PortfolioSection() {
                       {tab.name}
                     </span>
                     <span
-                      className={`text-xs px-2 py-1 rounded-full ${
-                        activeTab === tab.name
-                          ? "bg-white/20 text-white"
-                          : "bg-purple-500/20 text-purple-300"
-                      }`}
+                      className={`text-xs px-2 py-1 rounded-full ${activeTab === tab.name
+                        ? "bg-white/20 text-white"
+                        : "bg-purple-500/20 text-purple-300"
+                        }`}
                     >
                       {tab.count}
                     </span>
@@ -357,13 +353,12 @@ export function PortfolioSection() {
 
           {/* Projects Grid */}
           <div
-            className={`mb-20 ${
-              viewMode === "grid"
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8"
-                : "columns-1 md:columns-2 xl:columns-3 gap-8 space-y-8"
-            }`}
+            className={`mb-20 ${viewMode === "grid"
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8"
+              : "columns-1 md:columns-2 xl:columns-3 gap-8 space-y-8"
+              }`}
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {filteredProjects.map((project, index) => {
                 const gridClass =
                   viewMode === "grid"
@@ -399,13 +394,12 @@ export function PortfolioSection() {
                       {/* Image Container */}
                       <div className="relative overflow-hidden">
                         <motion.div
-                          className={`relative ${
-                            viewMode === "grid"
-                              ? project.size === "large"
-                                ? "h-80"
-                                : "h-64"
+                          className={`relative ${viewMode === "grid"
+                            ? project.size === "large"
+                              ? "h-80"
                               : "h-64"
-                          }`}
+                            : "h-64"
+                            }`}
                           whileHover={{ scale: 1.02 }}
                           transition={{ duration: 0.7 }}
                         >
@@ -797,7 +791,7 @@ export function PortfolioSection() {
           )}
         </AnimatePresence>
 
-        
+
       </section>
 
       {/* Case Study Detail Modal */}

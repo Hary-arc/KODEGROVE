@@ -162,7 +162,7 @@ export function ServicesPage() {
 
             {/* Animated Headline */}
             <motion.h1
-              className="font-outfit text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 leading-[0.9]"
+              className="font-outfit text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 leading-[0.9]"
               initial={{ opacity: 0, y: 50 }}
               animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.2, delay: 0.4 }}
@@ -262,11 +262,10 @@ export function ServicesPage() {
                 <button
                   key={service.id}
                   onClick={() => scrollToSection(service.id)}
-                  className={`flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 whitespace-nowrap ${
-                    activeSection === service.id
+                  className={`flex items-center space-x-3 px-6 py-3 rounded-xl font-semibold transition-all duration-300 whitespace-nowrap ${activeSection === service.id
                       ? 'gradient-electric text-white shadow-lg'
                       : 'text-gray-300 hover:text-white hover:bg-white/10'
-                  }`}
+                    }`}
                 >
                   <ServiceIcon className="w-5 h-5" />
                   <span>{service.shortTitle || service.title.split(' & ')[0]}</span>
@@ -358,11 +357,10 @@ function ServiceSection({ service, index }: { service: any; index: number }) {
     <section id={service.id} className="py-32 relative overflow-hidden" ref={sectionRef}>
       {/* Background */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${
-          index % 2 === 0
+        className={`absolute inset-0 bg-gradient-to-br ${index % 2 === 0
             ? 'from-slate-950 via-purple-950/10 to-slate-950'
             : 'from-slate-950 via-cyan-950/10 to-slate-950'
-        }`}
+          }`}
       />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">

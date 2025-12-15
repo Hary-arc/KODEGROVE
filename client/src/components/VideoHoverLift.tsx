@@ -65,13 +65,13 @@ function VideoHoverLift() {
 
           {/* Play Button */}
           <motion.button
-            className="absolute inset-0 flex items-center justify-center group z-10"
+            className="absolute inset-0 flex items-center justify-center group z-20"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsPlaying(true)}
             aria-label="Play video"
           >
-            <div className="w-20 h-20 bg-white/90 backdrop-blur rounded-full flex items-center justify-center group-hover:bg-white transition duration-300 shadow-2xl">
+            <div className="w-20 h-20 bg-white/90 backdrop-blur rounded-full flex items-center justify-center border-2 border-black group-hover:bg-white transition duration-300 shadow-2xl">
               <Play className="w-8 h-8 text-slate-900 ml-1" />
             </div>
           </motion.button>

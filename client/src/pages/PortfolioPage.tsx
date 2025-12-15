@@ -62,7 +62,7 @@ export function PortfolioPage() {
             </ScrollReveal>
 
             <ScrollReveal variant="fadeUp" delay={0.4}>
-              <h1 className="font-outfit text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+              <h1 className="font-outfit text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   Transformative
                 </span>

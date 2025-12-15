@@ -194,7 +194,7 @@ export function HeroSection({
                     className=" mt-8 pb-4"
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 1, delay: 1.8 }}
+                    transition={{ duration: 1, delay: 0.3 }}
                 >
                     {/* <div className="text-center mb-12">
             <p className="text-gray-400 font-medium mb-8">Trusted by industry leaders</p>

@@ -110,7 +110,7 @@ export const companyTimeline: TimelineItem[] = [
   {
     year: '2019',
     title: 'The Genesis',
-    description: 'CodeFlow was born from a vision to revolutionize digital experiences.',
+    description: 'KodeGrove was born from a vision to revolutionize digital experiences.',
     icon: 'Sparkles',
     achievements: ['Founded in San Francisco', 'First 5 team members', 'Mission defined'],
   },
@@ -155,7 +155,7 @@ export const companyTimeline: TimelineItem[] = [
 export const companyStats: CompanyStat[] = [
   {
     icon: 'Rocket',
-    value: 50,
+    value: 100,
     suffix: '+',
     label: 'Projects Completed',
     description: 'Successful digital transformations',
@@ -186,5 +186,5 @@ export const companyStats: CompanyStat[] = [
 export const companyMission = {
   title: 'Our Mission',
   description:
-    "To create mesmerizing digital experiences that don't just meet expectations—they shatter them. We believe every interaction should feel magical, every interface should tell a story, and every project should transform businesses into digital powerhouses.",
+    "To create mesmerizing digital experiences that don't just meet expectations they shatter them. We believe every interaction should feel magical, every interface should tell a story, and every project should transform businesses into digital powerhouses.",
 };

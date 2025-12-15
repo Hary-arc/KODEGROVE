@@ -253,7 +253,7 @@ export function EnhancedHomePage() {
                 <div className="flex flex-col sm:flex-row gap-6">
                   <RippleButton
                     onClick={() => (window.location.hash = '/quotation')}
-                    className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
+                    className="group inline-flex items-center gap-3 px-10 py-3 text-white text-base md:text-lg font-semibold rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
                     variant="primary"
                     aria-label="Start your project"
                   >
@@ -264,7 +264,7 @@ export function EnhancedHomePage() {
 
                   <RippleButton
                     onClick={() => (window.location.hash = '/portfolio')}
-                    className="group inline-flex items-center gap-3 px-10 py-5 text-white text-base md:text-lg font-semibold rounded-xl border border-white/20 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/30"
+                    className="group inline-flex items-center gap-3 px-10 py-3 text-white text-base md:text-lg font-semibold rounded-xl border border-white/20 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white/30"
                     variant="outline"
                     aria-label="View Portfolio"
                   >
@@ -314,8 +314,9 @@ export function EnhancedHomePage() {
             {/*  Left Content */}
             <ScrollReveal variant="fadeLeft" delay={0.3}>
               <div className="space-y-6">
-                <h2 className="text-4xl font-bold text-white">Watch Our Creative Process</h2>
-                <p className="text-lg text-gray-300 max-w-md">
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                  Watch Our Creative Process</h2>
+                <p className="text-lg text-gray-400 max-w-md">
                   Dive behind the scenes and see how we bring ideas to life from concept to code,
                   and everything in between.
                 </p>
@@ -579,7 +580,7 @@ export function EnhancedHomePage() {
             <div className="text-center mt-16">
               <RippleButton
                 onClick={() => (window.location.hash = '/portfolio')}
-                className="group relative inline-flex items-center justify-center px-10 py-5 rounded-2xl font-semibold text-white text-base md:text-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
+                className="group relative inline-flex items-center justify-center px-10 py-3 rounded-2xl font-semibold text-white text-base md:text-lg bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400"
                 variant="primary"
                 aria-label="View all projects"
               >

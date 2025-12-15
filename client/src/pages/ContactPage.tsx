@@ -253,7 +253,7 @@ export function ContactPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={isHeroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 1.5 }}
-            className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12"
+            className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8"
           >
             Let's collaborate to create extraordinary experiences that captivate your audience,
             revolutionize your business, and leave your competition mesmerized.
@@ -494,11 +494,10 @@ export function ContactPage() {
                             <div className="relative">
                               <label
                                 htmlFor="name"
-                                className={`absolute left-4 transition-all duration-300 pointer-events-none ${
-                                  focusedField === 'name' || formData.name
+                                className={`absolute left-4 transition-all duration-300 pointer-events-none ${focusedField === 'name' || formData.name
                                     ? '-top-2 text-sm bg-slate-950 px-2 text-purple-400'
                                     : 'top-4 text-gray-400'
-                                }`}
+                                  }`}
                               >
                                 Full Name *
                               </label>
@@ -511,11 +510,10 @@ export function ContactPage() {
                                 onChange={handleInputChange}
                                 onFocus={() => handleFocus('name')}
                                 onBlur={handleBlur}
-                                className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${
-                                  focusedField === 'name'
+                                className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${focusedField === 'name'
                                     ? 'border-purple-400 shadow-lg shadow-purple-400/20'
                                     : 'border-white/20 hover:border-white/40'
-                                }`}
+                                  }`}
                               />
                               {focusedField === 'name' && (
                                 <motion.div
@@ -529,11 +527,10 @@ export function ContactPage() {
                             <div className="relative">
                               <label
                                 htmlFor="email"
-                                className={`absolute left-4 transition-all duration-300 pointer-events-none ${
-                                  focusedField === 'email' || formData.email
+                                className={`absolute left-4 transition-all duration-300 pointer-events-none ${focusedField === 'email' || formData.email
                                     ? '-top-2 text-sm bg-slate-950 px-2 text-purple-400'
                                     : 'top-4 text-gray-400'
-                                }`}
+                                  }`}
                               >
                                 Email Address *
                               </label>
@@ -546,11 +543,10 @@ export function ContactPage() {
                                 onChange={handleInputChange}
                                 onFocus={() => handleFocus('email')}
                                 onBlur={handleBlur}
-                                className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${
-                                  focusedField === 'email'
+                                className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${focusedField === 'email'
                                     ? 'border-purple-400 shadow-lg shadow-purple-400/20'
                                     : 'border-white/20 hover:border-white/40'
-                                }`}
+                                  }`}
                               />
                               {focusedField === 'email' && (
                                 <motion.div
@@ -565,11 +561,10 @@ export function ContactPage() {
                           <div className="relative">
                             <label
                               htmlFor="company"
-                              className={`absolute left-4 transition-all duration-300 pointer-events-none ${
-                                focusedField === 'company' || formData.company
+                              className={`absolute left-4 transition-all duration-300 pointer-events-none ${focusedField === 'company' || formData.company
                                   ? '-top-2 text-sm bg-slate-950 px-2 text-purple-400'
                                   : 'top-4 text-gray-400'
-                              }`}
+                                }`}
                             >
                               Company
                             </label>
@@ -581,11 +576,10 @@ export function ContactPage() {
                               onChange={handleInputChange}
                               onFocus={() => handleFocus('company')}
                               onBlur={handleBlur}
-                              className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${
-                                focusedField === 'company'
+                              className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${focusedField === 'company'
                                   ? 'border-purple-400 shadow-lg shadow-purple-400/20'
                                   : 'border-white/20 hover:border-white/40'
-                              }`}
+                                }`}
                             />
                             {focusedField === 'company' && (
                               <motion.div
@@ -607,11 +601,10 @@ export function ContactPage() {
                                 onChange={handleInputChange}
                                 onFocus={() => handleFocus('service')}
                                 onBlur={handleBlur}
-                                className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${
-                                  focusedField === 'service'
+                                className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${focusedField === 'service'
                                     ? 'border-purple-400 shadow-lg shadow-purple-400/20'
                                     : 'border-white/20 hover:border-white/40'
-                                }`}
+                                  }`}
                               >
                                 <option value="" className="bg-slate-900">
                                   Select a service
@@ -640,11 +633,10 @@ export function ContactPage() {
                                 onChange={handleInputChange}
                                 onFocus={() => handleFocus('budget')}
                                 onBlur={handleBlur}
-                                className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${
-                                  focusedField === 'budget'
+                                className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${focusedField === 'budget'
                                     ? 'border-purple-400 shadow-lg shadow-purple-400/20'
                                     : 'border-white/20 hover:border-white/40'
-                                }`}
+                                  }`}
                               >
                                 <option value="" className="bg-slate-900">
                                   Select budget range
@@ -674,11 +666,10 @@ export function ContactPage() {
                               onChange={handleInputChange}
                               onFocus={() => handleFocus('timeline')}
                               onBlur={handleBlur}
-                              className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${
-                                focusedField === 'timeline'
+                              className={`w-full h-14 px-4 bg-transparent border-2 rounded-xl text-white transition-all duration-300 focus:outline-none ${focusedField === 'timeline'
                                   ? 'border-purple-400 shadow-lg shadow-purple-400/20'
                                   : 'border-white/20 hover:border-white/40'
-                              }`}
+                                }`}
                             >
                               <option value="" className="bg-slate-900">
                                 Timeline expectation
@@ -701,11 +692,10 @@ export function ContactPage() {
                           <div className="relative">
                             <label
                               htmlFor="message"
-                              className={`absolute left-4 transition-all duration-300 pointer-events-none ${
-                                focusedField === 'message' || formData.message
+                              className={`absolute left-4 transition-all duration-300 pointer-events-none ${focusedField === 'message' || formData.message
                                   ? '-top-2 text-sm bg-slate-950 px-2 text-purple-400'
                                   : 'top-4 text-gray-400'
-                              }`}
+                                }`}
                             >
                               Project Vision *
                             </label>
@@ -718,11 +708,10 @@ export function ContactPage() {
                               onChange={handleInputChange}
                               onFocus={() => handleFocus('message')}
                               onBlur={handleBlur}
-                              className={`w-full p-4 bg-transparent border-2 rounded-xl text-white resize-none transition-all duration-300 focus:outline-none ${
-                                focusedField === 'message'
+                              className={`w-full p-4 bg-transparent border-2 rounded-xl text-white resize-none transition-all duration-300 focus:outline-none ${focusedField === 'message'
                                   ? 'border-purple-400 shadow-lg shadow-purple-400/20'
                                   : 'border-white/20 hover:border-white/40'
-                              }`}
+                                }`}
                               placeholder={
                                 focusedField === 'message'
                                   ? 'Describe your vision, goals, target audience, and what makes your project special. The more details, the better we can craft your digital magic...'
